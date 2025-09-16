@@ -13,14 +13,10 @@ import svelte from "@astrojs/svelte";
 // https://astro.build/config
 export default defineConfig({
   site: "https://plei99.github.io",
+  base: "/",
   integrations: [
     sitemap(),
-    robotsTxt({
-      sitemap: [
-        "https://gianmarcocavallo.com/sitemap-index.xml",
-        "https://gianmarcocavallo.com/sitemap-0.xml",
-      ],
-    }),
+    robotsTxt(),
     solidJs(),
     UnoCSS({ injectReset: true }),
     icon(),
