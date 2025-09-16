@@ -27,51 +27,23 @@ In the remaining part of the semester, we will explore some related work, for ex
 
 - **[CIJ]** Tom Coates, Hiroshi Iritani, and Yunfeng Jiang, _[The crepant transformation conjecture for toric complete intersections](https://www.sciencedirect.com/science/article/pii/S0001870817303420)_
 
-##### Schedule
+# Schedule
 
 
-- **01/18:** Organizational meeting
-
-- **01/25:** No seminar (Miami conference)
-
-- **02/01:** Patrick Lei--*Givental formalism*  
-    I will explain how to package Gromov-Witten invariants into structures that are amenable to systematic study.  
-    _References: **[G]**, [Coates's thesis](https://math.berkeley.edu/~giventh/coates_thesis.pdf), [Dubrovin](https://link.springer.com/chapter/10.1007/BFb0094793)_
-
-- **02/08:** Shaoyun Bai--*Quantum Riemann-Roch*  
-    _Reference: **[CG]**_
-
-- **02/15:** Melissa Liu--*Shift operators*  
-    _Reference: **[I1]**_
-
-- **02/22:** Che Shen--*Quantum cohomology of projective bundles I--a mirror theorem*  
-    We will follow **[IK]** to talk about a mirror theorem for projective bundles. More precisely, the I-function of a projective bundle can be constructed from the J-function of the underlying vector bundle by exploiting Givental's Lagrangian cone formalism and the quantum Riemann-Roch theorem of Coates-Givental.  
-    _Reference: **[IK]**_
-
-- **02/29:** Konstantin Aleshkin--*Quantum cohomology of projective bundles II: Fourier aspects*  
-    _Reference: **[IK]**_
-
-- **03/07:** Konstantin Aleshkin--*Quantum cohomology of blowups I*  
-    _Reference: **[I]**_
-
-- **03/14:** No Seminar (spring break)
-
-- **03/21:** Sam Dehority--*Quantum cohomology of blowups II*  
-    _Reference: **[I]**_
-    
-- **03/28:** Sam Dehority--*Quantum cohomology of blowups III*  
-    _Reference: **[I]**_
-
-- **04/04:** Patrick Lei--*Generalities on orbifold cohomology and toric DM stacks*  
-    I will explain various technicalities in Gromov-Witten theory for Deligne-Mumford stacks and how to construct toric Deligne-Mumford stacks from (extended) stacky fans.  
-    _References: **[CIJ]**, [Abramovich-Graber-Vistoli](https://www.jstor.org/stable/40068158), [Tseng](https://projecteuclid.org/journals/geometry-and-topology/volume-14/issue-1/Orbifold-quantum-RiemannRoch-Lefschetz-and-Serre/10.2140/gt.2010.14.1.full), [Borisov-Chen-Smith](https://www.ams.org/journals/jams/2005-18-01/S0894-0347-04-00471-0/), [Jiang](https://projecteuclid.org/journals/illinois-journal-of-mathematics/volume-52/issue-2/The-orbifold-cohomology-ring-of-simplicial-toric-stack-bundles/10.1215/ijm/1248355346.full)_
-
-- **04/11:** Davis Lazowski--*Crepant transformation conjecture for toric complete intersections I*  
-    _Reference: **[CIJ]**_
-
-- **04/18:** Davis Lazowski--*Crepant transformation conjecture for toric complete intersections II*  
-    _Reference: **[CIJ]**_
-    
-- **04/25:** Konstantin Aleshkin--*Wall-crossing for Grassmannian flops*  
-    I will talk about a couple of papers that just appeared on arXiv. Two groups of people independently generalize CIJ wall-crossing to a simple non-abelian quotient using abelianization ideas. I plan to talk about the results and the role that CIJ's proof of the crepant transformation conjecture plays in these constructions.  
-    _References: [Lutz-Shafi-Webb](https://arxiv.org/abs/2404.12302), [Priddis-Shoemaker-Wen](https://arxiv.org/abs/2404.12303)_
+| Date      | Speaker                | Title and Abstract |
+|-----------|------------------------|------------------|
+| 01/18     | —                      | Organizational meeting |
+| 01/25     | —                      | No seminar (Miami conference) |
+| 02/01     | Patrick Lei            | **Givental formalism**<br>I will explain how to package Gromov-Witten invariants into structures that are amenable to systematic study.<br>_References: **[G]**, [Coates's thesis](https://math.berkeley.edu/~giventh/coates_thesis.pdf), [Dubrovin](https://link.springer.com/chapter/10.1007/BFb0094793)_ |
+| 02/08     | Shaoyun Bai            | **Quantum Riemann-Roch**<br>_Reference: **[CG]**_ |
+| 02/15     | Melissa Liu            | **Shift operators**<br>_Reference: **[I1]**_ |
+| 02/22     | Che Shen               | **Quantum cohomology of projective bundles I—A mirror theorem**<br>We will follow **[IK]** to talk about a mirror theorem for projective bundles. More precisely, the I-function of a projective bundle can be constructed from the J-function of the underlying vector bundle by exploiting Givental's Lagrangian cone formalism and the quantum Riemann-Roch theorem of Coates-Givental.<br>_Reference: **[IK]**_ |
+| 02/29     | Konstantin Aleshkin    | **Quantum cohomology of projective bundles II: Fourier aspects**<br>_Reference: **[IK]**_ |
+| 03/07     | Konstantin Aleshkin    | **Quantum cohomology of blowups I**<br>_Reference: **[I]**_ |
+| 03/14     | —                      | No seminar (spring break) |
+| 03/21     | Sam Dehority           | **Quantum cohomology of blowups II**<br>_Reference: **[I]**_ |
+| 03/28     | Sam Dehority           | **Quantum cohomology of blowups III**<br>_Reference: **[I]**_ |
+| 04/04     | Patrick Lei            | **Generalities on orbifold cohomology and toric DM stacks**<br>I will explain various technicalities in Gromov-Witten theory for Deligne-Mumford stacks and how to construct toric Deligne-Mumford stacks from (extended) stacky fans.<br>_References: **[CIJ]**, [Abramovich-Graber-Vistoli](https://www.jstor.org/stable/40068158), [Tseng](https://projecteuclid.org/journals/geometry-and-topology/volume-14/issue-1/Orbifold-quantum-RiemannRoch-Lefschetz-and-Serre/10.2140/gt.2010.14.1.full), [Borisov-Chen-Smith](https://www.ams.org/journals/jams/2005-18-01/S0894-0347-04-00471-0/), [Jiang](https://projecteuclid.org/journals/illinois-journal-of-mathematics/volume-52/issue-2/The-orbifold-cohomology-ring-of-simplicial-toric-stack-bundles/10.1215/ijm/1248355346.full)_ |
+| 04/11     | Davis Lazowski         | **Crepant transformation conjecture for toric complete intersections I**<br>_Reference: **[CIJ]**_ |
+| 04/18     | Davis Lazowski         | **Crepant transformation conjecture for toric complete intersections II**<br>_Reference: **[CIJ]**_ |
+| 04/25     | Konstantin Aleshkin    | **Wall-crossing for Grassmannian flops**<br>I will talk about a couple of papers that just appeared on arXiv. Two groups of people independently generalize CIJ wall-crossing to a simple non-abelian quotient using abelianization ideas. I plan to talk about the results and the role that CIJ's proof of the crepant transformation conjecture plays in these constructions.<br>_References: [Lutz-Shafi-Webb](https://arxiv.org/abs/2404.12302), [Priddis-Shoemaker-Wen](https://arxiv.org/abs/2404.12303)_ |
