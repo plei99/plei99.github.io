@@ -72,4 +72,12 @@ export default defineConfig({
       },
     }),
   ],
+  preflights: [
+    {
+      getCSS: () => `
+        /* Custom preflight styles */
+        li { list-style-type: disc; }
+      `,
+    },
+  ],
 });
