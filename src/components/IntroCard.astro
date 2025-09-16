@@ -13,9 +13,7 @@ import { Image } from "astro:assets";
       <div class="flex flex-col h-full">
         <h6 class="text-sm font-light m-0 text-gray-500">welcome</h6>
         <p class="m-0 font-light text-xl">
-          Hi, I'm <b class="font-bold">Gianmarco Cavallo</b>, a software
-          developer with strong focus on the user experience, animations and
-          micro interactions
+          Hi, I'm <b class="font-bold">Patrick Lei</b>, a Visiting Assistant Professor (postdoc) at <a class="text-primary-600" href="https://www.bc.edu/bc-web/schools/morrissey/departments/math.html">Boston College</a>, where I am mentored by <a class="text-primary-600" href="https://sites.google.com/bc.edu/qile-chen/">Qile Chen</a>. My research focuses on enumerative geometry.
         </p>
       </div>
       <div class="flex gap-4">
@@ -25,16 +23,16 @@ import { Image } from "astro:assets";
             <span class="sr-only">GitHub Profile</span>
           </Button>
         </a>
-        <a aria-label="linkedin profile" href={LINKS.linkedin} target="_blank">
-          <Button aria-label="linkedin profile">
-            <Icon class="h-6" name="ri:linkedin-box-fill" />
-            <span class="sr-only">Linkedin Profile</span>
+        <a aria-label="arxiv profile" href={LINKS.arxiv} target="_blank">
+          <Button aria-label="arxiv profile">
+            <Icon class="h-6" name="arxiv-logo" />
+            <span class="sr-only">Papers on arXiv</span>
           </Button>
         </a>
-        <a aria-label="dribble profile" href={LINKS.dribble} target="_blank">
+        <a aria-label="dribble profile" href={LINKS.notes} target="_blank">
           <Button aria-label="dribble profile">
-            <Icon class="h-6" name="ri:dribbble-fill" />
-            <span class="sr-only">Dribble Profile</span>
+            <Icon class="h-6" name="ri:booklet-fill" />
+            <span class="sr-only">Notes</span>
           </Button>
         </a>
         <Tooltip client:visible>
@@ -46,7 +44,7 @@ import { Image } from "astro:assets";
       </div>
     </div>
     <Image
-      alt="memoji of gianmarco"       class="w-auto max-h-[300px] select-none absolute right-[-110px] bottom-[-20px] z-[-1] opacity-50 md:opacity-100 md:relative md:right-auto md:bottom-auto md:z-auto pointer-events-none"       height="300"       src="/me.webp"       width="300"
+      alt="photo of patrick"       class="w-auto max-h-[300px] select-none absolute right-[-110px] bottom-[-20px] z-[-1] opacity-50 md:opacity-100 md:relative md:right-auto md:bottom-auto md:z-auto pointer-events-none"       height="300"       src="/me.webp"       width="300"
     />
   </div>
 </Card>
