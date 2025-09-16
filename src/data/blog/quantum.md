@@ -30,21 +30,21 @@ Each talk will last approximately 50 minutes. The schedule is subject to change 
 | Date   | Speakers | Topic | Notes/References |
 |--------|----------|-------|------------------|
 | 1/22   | Patrick Lei | **Organizational meeting** | |
-| 1/29   | Liz Radway, Peri Kay | **Chapter 1** | [Liz's notes](docs/quantum/liz.pdf), [Peri's notes](docs/quantum/peri.pdf) |
-| 2/05   | Nathan Raghavan, Rimas Chacar-Palubinskas | **Chapter 2** | [Nathan's notes](docs/quantum/nathan.pdf), [Rimas's notes](docs/quantum/rimas.pdf) |
-| 2/12   | Akshay Nambudiripad, Ella Roselli | **Chapter 3** | [Akshay's notes](docs/quantum/akshay.pdf), [Ella's notes](docs/quantum/ella.pdf) |
-| 2/19   | Raunak Lally, Tabitha Wan | **Chapter 4** | [Raunak's notes](docs/quantum/raunak.pdf), [Tabitha's notes](docs/quantum/tabitha.pdf) |
-| 2/26   | Naomi Jiang, Francesco Stern | **Chapter 5** | [Naomi's notes](docs/quantum/naomi.pdf), [Francesco's notes](docs/quantum/francesco.pdf) |
-| 3/04   | Chloe Lambert, Tasmim Rahman | **Chapter 6** | [Chloe's notes](docs/quantum/chloe.pdf), [Tasmim's notes](docs/quantum/tasmim.pdf) |
+| 1/29   | Liz Radway, Peri Kay | **Chapter 1** | [Liz's notes](https://plei99.github.io/notes/docs/quantum/liz.pdf), [Peri's notes](https://plei99.github.io/notes/docs/quantum/peri.pdf) |
+| 2/05   | Nathan Raghavan, Rimas Chacar-Palubinskas | **Chapter 2** | [Nathan's notes](https://plei99.github.io/notes/docs/quantum/nathan.pdf), [Rimas's notes](https://plei99.github.io/notes/docs/quantum/rimas.pdf) |
+| 2/12   | Akshay Nambudiripad, Ella Roselli | **Chapter 3** | [Akshay's notes](https://plei99.github.io/notes/docs/quantum/akshay.pdf), [Ella's notes](https://plei99.github.io/notes/docs/quantum/ella.pdf) |
+| 2/19   | Raunak Lally, Tabitha Wan | **Chapter 4** | [Raunak's notes](https://plei99.github.io/notes/docs/quantum/raunak.pdf), [Tabitha's notes](https://plei99.github.io/notes/docs/quantum/tabitha.pdf) |
+| 2/26   | Naomi Jiang, Francesco Stern | **Chapter 5** | [Naomi's notes](https://plei99.github.io/notes/docs/quantum/naomi.pdf), [Francesco's notes](https://plei99.github.io/notes/docs/quantum/francesco.pdf) |
+| 3/04   | Chloe Lambert, Tasmim Rahman | **Chapter 6** | [Chloe's notes](https://plei99.github.io/notes/docs/quantum/chloe.pdf), [Tasmim's notes](https://plei99.github.io/notes/docs/quantum/tasmim.pdf) |
 | 3/11   |  | **Spring break** | |
-| 3/18   | Erica Choi, Sam Kim | **Chapter 7** | [Erica's notes](docs/quantum/erica.pdf), [Sam's notes](docs/quantum/sam.pdf) |
-| 3/25   | Jane Meenaghan, Erica Choi | **Chapter 8** | [Jane's notes](docs/quantum/jane.pdf), [Erica's notes](docs/quantum/erica2.pdf) |
-| 4/01   | Nick Evgenidze, Cara Zhu | **Chapter 9** | [Nick's notes](docs/quantum/nick.pdf), [Cara's notes](docs/quantum/cara.pdf) |
-| 4/08   | Nathan Raghavan | **Decoherence and recoherence**<br/>Reference: Ch 13 | [Notes](docs/quantum/nathan2.pdf) |
+| 3/18   | Erica Choi, Sam Kim | **Chapter 7** | [Erica's notes](https://plei99.github.io/notes/docs/quantum/erica.pdf), [Sam's notes](https://plei99.github.io/notes/docs/quantum/sam.pdf) |
+| 3/25   | Jane Meenaghan, Erica Choi | **Chapter 8** | [Jane's notes](https://plei99.github.io/notes/docs/quantum/jane.pdf), [Erica's notes](https://plei99.github.io/notes/docs/quantum/erica2.pdf) |
+| 4/01   | Nick Evgenidze, Cara Zhu | **Chapter 9** | [Nick's notes](https://plei99.github.io/notes/docs/quantum/nick.pdf), [Cara's notes](https://plei99.github.io/notes/docs/quantum/cara.pdf) |
+| 4/08   | Nathan Raghavan | **Decoherence and recoherence**<br/>Reference: Ch 13 | [Notes](https://plei99.github.io/notes/docs/quantum/nathan2.pdf) |
 |        | Cara Zhu | **Quantum error correction**<br/>Reference: Ch 14 | see below |
-| 4/15   | Cara Zhu | **Quantum error correction (continued, see above)** | [Notes](docs/quantum/cara2.pdf) |
-|        | Mark Chen | **Quantum cryptography as interactive proof system**<br/>Reference: [Kalai-Lombardi-Vaikuntanathan-Yang](https://eprint.iacr.org/2022/400.pdf), [Natarajan-Zhang](https://arxiv.org/pdf/2303.01545.pdf) | [Notes](docs/quantum/mark.pdf) |
-| 4/22   | ~~Ella Roselli~~ | ~~**A theory of quantum error-correcting codes**~~<br/>~~Reference: [Knill-Laflamme](https://arxiv.org/abs/quant-ph/9604034)~~ | [Notes](docs/quantum/ella2.pdf) |
-|        | ~~Naomi Jiang~~ | ~~**Quantum Arthur-Merlin games**~~<br/>~~Reference: [Marriott-Watrous](https://arxiv.org/abs/cs/0506068)~~ | [Notes](docs/quantum/naomi2.pdf) |
-| 4/29   | ~~Tabitha Wan~~ | ~~**On random and hard-to-describe numbers**~~<br/>~~Reference: [Bennett](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=4c74302bcc8a8db2de218f04dbcdb5977344df7c)~~ | [Notes](docs/quantum/tabitha2.pdf) |
-|        | ~~Francesco Stern~~ | ~~**Quantum key distribution**~~<br/>~~Reference: [Shor-Preskill](https://arxiv.org/abs/quant-ph/0003004), [Ekert](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.67.661), [Bennett](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.68.3121), [Bruß-Macchiavello](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.88.127901)~~ | [Notes](docs/quantum/francesco2.pdf) |
+| 4/15   | Cara Zhu | **Quantum error correction (continued, see above)** | [Notes](https://plei99.github.io/notes/docs/quantum/cara2.pdf) |
+|        | Mark Chen | **Quantum cryptography as interactive proof system**<br/>Reference: [Kalai-Lombardi-Vaikuntanathan-Yang](https://eprint.iacr.org/2022/400.pdf), [Natarajan-Zhang](https://arxiv.org/pdf/2303.01545.pdf) | [Notes](https://plei99.github.io/notes/docs/quantum/mark.pdf) |
+| 4/22   | ~~Ella Roselli~~ | ~~**A theory of quantum error-correcting codes**~~<br/>~~Reference: [Knill-Laflamme](https://arxiv.org/abs/quant-ph/9604034)~~ | [Notes](https://plei99.github.io/notes/docs/quantum/ella2.pdf) |
+|        | ~~Naomi Jiang~~ | ~~**Quantum Arthur-Merlin games**~~<br/>~~Reference: [Marriott-Watrous](https://arxiv.org/abs/cs/0506068)~~ | [Notes](https://plei99.github.io/notes/docs/quantum/naomi2.pdf) |
+| 4/29   | ~~Tabitha Wan~~ | ~~**On random and hard-to-describe numbers**~~<br/>~~Reference: [Bennett](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=4c74302bcc8a8db2de218f04dbcdb5977344df7c)~~ | [Notes](https://plei99.github.io/notes/docs/quantum/tabitha2.pdf) |
+|        | ~~Francesco Stern~~ | ~~**Quantum key distribution**~~<br/>~~Reference: [Shor-Preskill](https://arxiv.org/abs/quant-ph/0003004), [Ekert](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.67.661), [Bennett](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.68.3121), [Bruß-Macchiavello](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.88.127901)~~ | [Notes](https://plei99.github.io/notes/docs/quantum/francesco2.pdf) |
