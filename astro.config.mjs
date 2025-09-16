@@ -28,7 +28,7 @@ export default defineConfig({
     remarkPlugins: [remarkReadingTime, remarkMath],
     rehypePlugins: [rehypeKatex],
   },
-  output: "server",
+  output: "static",
   adapter: netlify({ edgeMiddleware: true }),
   vite: {
     assetsInclude: "**/*.riv",
