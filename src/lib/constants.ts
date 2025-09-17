@@ -5,7 +5,7 @@ export const LINKS = {
   email: "patrick.lei@bc.edu<",
   cv: "https://github.com/plei99/cv/releases/latest/download/Patrick_Lei_CV.pdf",
   seminar: "https://sites.google.com/bc.edu/bcags-fall2025/home",
-  bilibili: "https://space.bilibili.com/3546599313640115",
+  code: "https://github.com/plei99/plei99.github.io",
 };
 
 export const loaderAnimation = [
