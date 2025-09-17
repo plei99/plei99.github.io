@@ -3,7 +3,7 @@ export const LINKS = {
   arxiv: "https://arxiv.org/a/0000-0003-1977-1596.html",
   notes: "https://plei99.github.io/notes/",
   email: "patrick.lei@bc.edu<",
-  cv: "https://github.com/plei99/cv/releases/download/2025-09-16/Patrick_Lei_CV.pdf",
+  cv: "https://github.com/plei99/cv/releases/latest/download/Patrick_Lei_CV.pdf",
 };
 
 export const loaderAnimation = [
