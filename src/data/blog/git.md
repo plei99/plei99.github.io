@@ -7,7 +7,7 @@ description: This is a seminar on geometric invariant theory.
 - **Organizers:** [Patrick Lei](index.html), Anna Abasheva  
 - **When:** Friday 11am-12:30pm EDT  
 - **Where:** math building or email Patrick for the link  
-- [notes from the seminar](https://plei99.github.io/notes/seminars/GIT/notes.pdf)
+- [notes from the seminar](https://github.com/plei99/notes/raw/master/seminars/GIT/notes.pdf)
 
 Geometric invariant theory is an important tool in the study of moduli spaces in algebraic geometry. In particular, GIT is used to construct coarse moduli spaces. Some classical references are:
 

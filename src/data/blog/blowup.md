@@ -9,7 +9,7 @@ description: This is a seminar on the blowup formula in Gromov-Witten theory.
 - Organizers: Shaoyun Bai, Patrick Lei  
 - **When:** Thursdays, 2:30–4PM  
 - **Where:** Room 622  
-- [Notes from the seminar](notes/seminars/blowup/BIR.pdf)
+- [Notes from the seminar](https://github.com/plei99/notes/raw/master/seminars/blowup/BIR.pdf)
 
 The goal of this seminar is to understand the behavior of enumerative invariants under birational transformations. In the case of the Gromov-Witten theory of smooth projective varieties, the weak factorization theorem ([see this paper](https://arxiv.org/abs/math/9904135)) tells us that it suffices to consider blowups along smooth centers. In this case, a correspondence between quantum D-modules was proven by Iritani **[I]**, which has applications in the announced proof by Katzarkov-Kontsevich-Pantev-Yu of the irrationality of the cubic fourfold. In our journey to understanding this work, we will learn about many important tools in enumerative geometry. First, we will need to understand some foundational tools like the Givental formalism and shift operators:
 
