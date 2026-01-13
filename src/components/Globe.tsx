@@ -10,6 +10,7 @@ const GlobeComponent = () => {
     "Canada",
     "China",
     "Japan",
+    "England",
   ];
 
   onMount(() => {
