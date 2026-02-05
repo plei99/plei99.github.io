@@ -23,13 +23,14 @@ const posts = (await getCollection("blog"))?.sort(
   description="Mathematician interested in higher-genus enumerative invariants"   title="Patrick Lei - Seminars"
 >
   <main
-    class="w-screen h-screen flex flex-col justify-start items-start max-w-3xl mx-auto p-8"
+    class="theme-text w-screen h-screen flex flex-col justify-start items-start max-w-3xl mx-auto p-8"
   >
     <a
-      class="text-white bg-neutral-900 hover:bg-neutral-800 px-4 py-2 mb-8 border-1 border-solid border-neutral-600 rounded-lg"       href="/"
+      class="theme-button theme-border-strong border-1 border-solid px-4 py-2 mb-8 rounded-lg"
+      href="/"
       >Back</a
     >
-    <h1 class="text-4xl font-bold mb-4 text-neutral-100">Seminars I have organized</h1>
+    <h1 class="text-4xl font-bold mb-4">Seminars I have organized</h1>
     <ul class="w-full">
       {
         posts?.map((post) => (

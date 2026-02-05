@@ -43,7 +43,7 @@ const posts = (await getCollection("blog"))?.sort(
   title="Patrick Lei"
 >
   <main
-    class="text-white m-auto p-2 grid gap-2 max-w-6xl overflow-hidden relative w-full sm:p-4 sm:gap-2 md:grid-cols-2 md:gap-3 md:p-6 lg:h-screen lg:grid-rows-8 lg:grid-cols-4 lg:gap-4 lg:max-h-[800px]"
+    class="theme-text m-auto p-2 grid gap-2 max-w-6xl overflow-hidden relative w-full sm:p-4 sm:gap-2 md:grid-cols-2 md:gap-3 md:p-6 lg:h-screen lg:grid-rows-8 lg:grid-cols-4 lg:gap-4 lg:max-h-[800px]"
   >
     <IntroCard />
     <AboutMe />
@@ -51,7 +51,7 @@ const posts = (await getCollection("blog"))?.sort(
     <TimeZone />
     <Now />
     <Card
-      colorText="text-neutral-900"
+      colorText="theme-text"
       colSpan="md:col-span-1"
       href="travel"
       rowSpan="md:row-span-1"
@@ -74,7 +74,7 @@ const posts = (await getCollection("blog"))?.sort(
             //   class="text-sm md:text-base decoration-none flex justify-between"
             //   href={`/blog/${post.id}`}
             // >
-            <div class="list-none w-full text-neutral-100 hover:text-neutral-400 ease-in-out transition-colors border-b-neutral-400 border-dashed border-b-1 my-0">
+            <div class="list-none w-full theme-text hover:opacity-70 ease-in-out transition-opacity border-dashed border-b-1 theme-border-strong my-0">
               <p class="inline-block whitespace-nowrap text-xs">
                 {post.data.title}
               </p>
