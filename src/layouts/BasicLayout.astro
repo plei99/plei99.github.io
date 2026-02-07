@@ -1,5 +1,6 @@
 ---
 import { LINKS } from "../lib/constants";
+import { defaultLocale, getStrings, type Locale } from "../lib/i18n";
 
 interface Props {
   title: string;
@@ -7,9 +8,19 @@ interface Props {
   page?: "travel" | "blog";
   slug?: string | undefined;
   pubDate?: string;
+  locale?: Locale;
 }
 
-const { title, description, page, pubDate } = Astro.props;
+const {
+  title,
+  description,
+  page,
+  pubDate,
+  locale = defaultLocale,
+} = Astro.props;
+const t = getStrings(locale);
+const isChinese = locale === "zh-CN";
+const languageSwitchHref = isChinese ? "/" : "/zh";
 const image =
   page === "travel"
     ? `${Astro.url.origin}/globe_preview.webp"`
@@ -69,7 +80,7 @@ const schema =
 ---
 
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang={t.lang} data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta content="width=device-width" name="viewport" />
@@ -125,11 +136,19 @@ const schema =
       class="theme-button theme-border-strong theme-toggle border-1 border-solid rounded-full px-3 py-2 text-xs font-semibold uppercase tracking-wide fixed top-4 right-4 z-40"
       type="button"
       aria-pressed="false"
-      aria-label="Toggle theme"
-      title="Toggle theme"
+      aria-label={t.actions.themeToggle}
+      title={t.actions.themeToggle}
     >
       <span id="theme-toggle-label" aria-hidden="true">☾</span>
     </button>
+    <a
+      class="theme-button theme-border-strong border-1 border-solid rounded-full px-3 py-2 text-xs font-semibold uppercase tracking-wide fixed top-4 right-16 z-40"
+      href={languageSwitchHref}
+      aria-label={t.actions.languageSwitchTitle}
+      title={t.actions.languageSwitchTitle}
+    >
+      {t.actions.languageSwitch}
+    </a>
     <slot name="loader" />
     <slot />
     <script is:inline>

@@ -1,36 +1,44 @@
 ---
 import Card from "./Card/index.astro";
 import { LINKS } from "../lib/constants";
+import { defaultLocale, getStrings, type Locale } from "../lib/i18n";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = defaultLocale } = Astro.props;
+const t = getStrings(locale);
 ---
 
 <Card colSpan="md:col-span-1" rowSpan="md:row-span-4">
   <div class="h-full">
     <header class="flex items-center">
       <h1 class="text-xl font-bold">
-        Contact me
+        {t.contact.title}
       </h1>
     </header>
     <address class="flex flex-col mt-4">
-      <h2 class="theme-muted">Contact Details</h2>
+      <h2 class="theme-muted">{t.contact.details}</h2>
       <p>patrick.lei@bc.edu</p>
       <p>Maloney Hall, Room 571</p>
       <p>140 Commonwealth Avenue</p>
       <p>Chestnut Hill, MA 02467</p>
     </address>
     <div class="flex flex-col mt-4 w-fit">
-      <h2 class="theme-muted">Links</h2>
+      <h2 class="theme-muted">{t.contact.links}</h2>
       <ul>
         <li class="list-none">
-          <a href={LINKS.notes} target="_blank">Notes</a>
+          <a href={LINKS.notes} target="_blank">{t.contact.notes}</a>
         </li>
         <li class="list-none">
           <a href={LINKS.ag} target="_blank">math.AG</a>
         </li>
         <li class="list-none">
-          <a href={LINKS.seminar} target="_blank">AG Seminar</a>
-        </li class="list-none">
+          <a href={LINKS.seminar} target="_blank">{t.contact.seminar}</a>
+        </li>
         <li class="list-none">
-          <a href={LINKS.cv} target="_blank">CV</a>
+          <a href={LINKS.cv} target="_blank">{t.contact.cv}</a>
         </li>
       </ul>
     </div>

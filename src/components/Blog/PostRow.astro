@@ -1,13 +1,16 @@
 ---
 import { formatDate } from "../../lib/helpers";
+import { defaultLocale, getStrings, type Locale } from "../../lib/i18n";
 
 interface Props {
   title: string;
   date: Date;
   id: string;
+  locale?: Locale;
 }
 
-const { title, date, id } = Astro.props;
+const { title, date, id, locale = defaultLocale } = Astro.props;
+const t = getStrings(locale);
 ---
 
 <li
@@ -24,7 +27,7 @@ const { title, date, id } = Astro.props;
       class="text-right tabular-nums"
       data-date={date.toISOString()}       datetime={date.toISOString()}
     >
-      {formatDate(date)}
+      {formatDate(date, t.dateLocale)}
     </time>
   </a>
 </li>

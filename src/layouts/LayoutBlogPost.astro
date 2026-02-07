@@ -1,6 +1,7 @@
 ---
 import { formatDate } from "../lib/helpers";
 import BasicLayout from "./BasicLayout.astro";
+import { defaultLocale, getStrings, type Locale } from "../lib/i18n";
 
 type Props = {
   title: string;
@@ -8,23 +9,39 @@ type Props = {
   pubDate: Date;
   minutesRead: string;
   url: string;
+  locale?: Locale;
 };
 
-const { title, description, pubDate, minutesRead, url } = Astro.props;
+const {
+  title,
+  description,
+  pubDate,
+  minutesRead,
+  url,
+  locale = defaultLocale,
+} = Astro.props;
+const t = getStrings(locale);
+const backHref = locale === "zh-CN" ? "/zh/seminars" : "/seminars";
 ---
 
 
-<BasicLayout description={description} page="blog" slug={url} title={title}>
+<BasicLayout
+  description={description}
+  locale={locale}
+  page="blog"
+  slug={url}
+  title={title}
+>
   <main class="mx-auto max-w-3xl w-full h-screen p-8 theme-text">
     <a
       class="theme-button theme-border-strong border-1 border-solid px-4 py-2 rounded-lg mb-8"
-      href="/seminars"
-      >Back</a
+      href={backHref}
+      >{t.actions.back}</a
     >
     <div class="my-10">
       <h1 class="text-5xl font-semibold">{title}</h1>
       <div class="flex justify-between pt-4 theme-muted text-sm">
-        <p>{formatDate(pubDate)}</p>
+        <p>{formatDate(pubDate, t.dateLocale)}</p>
         <p>{minutesRead}</p>
       </div>
     </div>

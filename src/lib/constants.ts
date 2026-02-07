@@ -5,7 +5,7 @@ export const LINKS = {
   notes: "https://plei99.github.io/livetex/",
   email: "patrick.lei@bc.edu<",
   cv: "https://github.com/plei99/cv/releases/latest/download/Patrick_Lei_CV.pdf",
-  seminar: "https://sites.google.com/bc.edu/bcags-fall2025/home",
+  seminar: "https://sites.google.com/bc.edu/bcags-spring2026/home",
 };
 
 export const loaderAnimation = [

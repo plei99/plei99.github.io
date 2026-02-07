@@ -31,8 +31,8 @@ export function formatTimeForBoston(date: Date): string {
   return formattedTime;
 }
 
-export function formatDate(date: Date): string {
-  return date.toLocaleDateString("en-US", {
+export function formatDate(date: Date, locale: string = "en-US"): string {
+  return date.toLocaleDateString(locale, {
     year: "numeric",
     month: "short",
   });

@@ -1,17 +1,19 @@
 ---
 import BasicLayout from "./BasicLayout.astro";
+import { defaultLocale, type Locale } from "../lib/i18n";
 
 interface Props {
   title: string;
   description: string;
   page?: "travel";
   fullScreen?: string;
+  locale?: Locale;
 }
 
-const { title, description } = Astro.props;
+const { title, description, locale = defaultLocale } = Astro.props;
 ---
 
-<BasicLayout description={description} title={title}>
+<BasicLayout description={description} locale={locale} title={title}>
   <div
     class="loader theme-bg theme-text text-3xl font-black uppercase flex justify-center items-center w-screen h-screen z-50 fixed top-0 bottom-0 right-0 left-0"
     slot="loader"

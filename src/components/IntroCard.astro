@@ -2,43 +2,86 @@
 import Card from "./Card/index.astro";
 import Button from "./Button.astro";
 import { LINKS } from "../lib/constants";
-import { Icon } from 'astro-icon/components'
+import { Icon } from "astro-icon/components";
 import Tooltip from "./Tooltip/index";
 import { Image } from "astro:assets";
+import { defaultLocale, getStrings, type Locale } from "../lib/i18n";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = defaultLocale } = Astro.props;
+const t = getStrings(locale);
 ---
 
 <Card colSpan="md:col-span-3" rowSpan="md:row-span-4">
   <div class="flex w-full h-full">
     <div class="flex flex-col justify-between md:max-h-[300px] gap-4">
       <div class="flex flex-col h-full">
-        <h6 class="text-sm font-light m-0 theme-muted">welcome</h6>
+        <h6 class="text-sm font-light m-0 theme-muted">{t.intro.welcome}</h6>
         <p class="m-0 font-light text-xl">
-          Hi, I'm <b class="font-bold">Patrick Lei</b>, a Visiting Assistant Professor (postdoc) in mathematics at <a class="text-primary-300" href="https://www.bc.edu/bc-web/schools/morrissey/departments/math.html">Boston College</a>, where I am mentored by <a class="text-primary-300" href="https://sites.google.com/bc.edu/qile-chen/">Qile Chen</a>. Previously, I completed my PhD at <a class="text-primary-300" href="https://math.columbia.edu/">Columbia University</a>, where I was advised by <a class="text-primary-300" href="https://math.columbia.edu/~ccliu">Melissa Liu</a>. My research is in algebraic geometry. Please click on the arXiv logo below to see my papers.
+          {t.intro.line1.beforeName}
+          <b class="font-bold">Patrick Lei</b>
+          {t.intro.line1.afterName}
+          <a
+            class="text-primary-300"
+            href="https://www.bc.edu/bc-web/schools/morrissey/departments/math.html"
+          >
+            {t.intro.line1.school}
+          </a>
+          {t.intro.line1.afterSchool}
+          <a
+            class="text-primary-300"
+            href="https://sites.google.com/bc.edu/qile-chen/"
+          >
+            {t.intro.line1.mentor}
+          </a>
+          {t.intro.line1.afterMentor}
+          {t.intro.line2.beforeSchool}
+          <a class="text-primary-300" href="https://math.columbia.edu/">
+            {t.intro.line2.school}
+          </a>
+          {t.intro.line2.afterSchool}
+          <a class="text-primary-300" href="https://math.columbia.edu/~ccliu">
+            {t.intro.line2.advisor}
+          </a>
+          {t.intro.line2.afterAdvisor}
+          {t.intro.research}
+          {t.intro.arxiv}
         </p>
       </div>
       <div class="flex gap-4">
-        <a aria-label="github profile" href={LINKS.github} target="_blank">
-          <Button aria-label="github profile">
+        <a
+          aria-label={t.intro.a11y.github}
+          href={LINKS.github}
+          target="_blank"
+        >
+          <Button aria-label={t.intro.a11y.github}>
             <Icon class="h-6" name="ri:github-fill" />
-            <span class="sr-only">GitHub Profile</span>
+            <span class="sr-only">{t.intro.a11y.github}</span>
           </Button>
         </a>
-        <a aria-label="arxiv profile" href={LINKS.arxiv} target="_blank">
-          <Button aria-label="arxiv profile">
+        <a
+          aria-label={t.intro.a11y.arxiv}
+          href={LINKS.arxiv}
+          target="_blank"
+        >
+          <Button aria-label={t.intro.a11y.arxiv}>
             <Icon class="h-6" name="arxiv-logo" />
-            <span class="sr-only">Papers on arXiv</span>
+            <span class="sr-only">{t.intro.a11y.arxiv}</span>
           </Button>
         </a>
-        <a aria-label="dribble profile" href={LINKS.notes} target="_blank">
-          <Button aria-label="dribble profile">
+        <a aria-label={t.intro.a11y.notes} href={LINKS.notes} target="_blank">
+          <Button aria-label={t.intro.a11y.notes}>
             <Icon class="h-6" name="ri:booklet-line" />
-            <span class="sr-only">Notes</span>
+            <span class="sr-only">{t.intro.a11y.notes}</span>
           </Button>
         </a>
-        <Tooltip client:visible>
-          <Button aria-label="easter egg btn">
+        <Tooltip client:visible locale={locale}>
+          <Button aria-label={t.intro.a11y.easterEgg}>
             <Icon class="h-6" name="ri:emotion-laugh-line" />
-            <span class="sr-only">Easter egg button</span>
+            <span class="sr-only">{t.intro.a11y.easterEgg}</span>
           </Button>
         </Tooltip>
       </div>

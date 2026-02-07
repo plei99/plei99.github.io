@@ -1,20 +1,29 @@
 ---
 import Card from "./Card/index.astro";
 import Pulse from "./Pulse.astro";
+import { defaultLocale, getStrings, type Locale } from "../lib/i18n";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = defaultLocale } = Astro.props;
+const t = getStrings(locale);
 ---
 
 <Card colSpan="md:col-span-1" rowSpan="md:row-span-2">
   <div class="flex justify-between w-full items-start mb-2">
     <div class="flex flex-col">
-      <h2>Now</h2>
+      <h2>{t.now.title}</h2>
       <a href="https://sive.rs/nowff" target="_blank">
-        <span class="text-xs theme-muted cursor-pointer">what's that ?</span>
+        <span class="text-xs theme-muted cursor-pointer">
+          {t.now.whatsThat}
+        </span>
       </a>
     </div>
     <Pulse />
   </div>
-  <p class="text-xs">K-theory, allegedly</p>
-  <p class="text-xs">Am I a good moduli space?</p>
-  <p class="text-xs">Teaching multivariable calculus</p>
-  <p class="text-xs">Marathon training</p>
+  {t.now.items.map((item) => (
+    <p class="text-xs">{item}</p>
+  ))}
 </Card>
