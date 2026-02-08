@@ -79,7 +79,7 @@ export const strings = {
     },
     now: {
       title: "Now",
-      whatsThat: "what's that ?",
+      whatsThat: "what's that?",
       items: [
         "K-theory, allegedly",
         "Am I a good moduli space?",
