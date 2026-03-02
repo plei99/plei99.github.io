@@ -124,9 +124,15 @@ const schema =
     <script is:inline>
       (() => {
         const storedTheme = localStorage.getItem("theme");
-        if (storedTheme === "light" || storedTheme === "dark") {
-          document.documentElement.setAttribute("data-theme", storedTheme);
-        }
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+          .matches
+          ? "dark"
+          : "light";
+        const theme =
+          storedTheme === "light" || storedTheme === "dark"
+            ? storedTheme
+            : systemTheme;
+        document.documentElement.setAttribute("data-theme", theme);
       })();
     </script>
   </head>
@@ -156,26 +162,47 @@ const schema =
         const toggleButton = document.getElementById("theme-toggle");
         const toggleLabel = document.getElementById("theme-toggle-label");
         if (!toggleButton || !toggleLabel) return;
+        const systemThemeQuery = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        );
 
-        const applyTheme = (theme) => {
+        const getStoredTheme = () => {
+          const storedTheme = localStorage.getItem("theme");
+          return storedTheme === "light" || storedTheme === "dark"
+            ? storedTheme
+            : null;
+        };
+
+        const getSystemTheme = () => (systemThemeQuery.matches ? "dark" : "light");
+
+        const applyTheme = (theme, persist = false) => {
           document.documentElement.setAttribute("data-theme", theme);
-          localStorage.setItem("theme", theme);
+          if (persist) {
+            localStorage.setItem("theme", theme);
+          }
           const isDark = theme === "dark";
           toggleButton.setAttribute("aria-pressed", String(isDark));
           toggleLabel.textContent = isDark ? "☀︎" : "☾";
         };
 
-        const currentTheme =
-          document.documentElement.getAttribute("data-theme") || "light";
-        applyTheme(currentTheme);
+        const initialTheme = getStoredTheme() || getSystemTheme();
+        applyTheme(initialTheme);
 
         toggleButton.addEventListener("click", () => {
           const nextTheme =
             document.documentElement.getAttribute("data-theme") === "dark"
               ? "light"
               : "dark";
-          applyTheme(nextTheme);
+          applyTheme(nextTheme, true);
         });
+
+        const followSystemTheme = () => {
+          if (!getStoredTheme()) {
+            applyTheme(getSystemTheme());
+          }
+        };
+
+        systemThemeQuery.addEventListener("change", followSystemTheme);
       })();
     </script>
   </body>
