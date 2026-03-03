@@ -261,7 +261,7 @@ export const strings = {
 } as const;
 
 export type Locale = keyof typeof strings;
-export type Strings = (typeof strings)["en"];
+export type Strings = (typeof strings)[Locale];
 
 export const defaultLocale: Locale = "en";
 
