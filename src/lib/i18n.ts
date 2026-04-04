@@ -84,7 +84,7 @@ export const strings = {
         "K-theory, allegedly",
         "Am I a good moduli space?",
         "Teaching multivariable calculus",
-        "Marathon training",
+        "broke 3 on the first try",
       ],
     },
     contact: {
@@ -213,7 +213,7 @@ export const strings = {
         "K-理论（据说）",
         "我到底是不是一个好模空间？",
         "在教多元微积分",
-        "马拉松训练",
+        "首马破三",
       ],
     },
     contact: {
