@@ -174,6 +174,20 @@ let render_home locale =
     | Some yaml -> I18n.string_of_yaml locale yaml
     | None -> ""
   in
+  let about_title =
+    match field "about" home with
+    | Some yaml -> (match field "title" yaml with
+      | Some t -> I18n.string_of_yaml locale t
+      | None -> "")
+    | None -> ""
+  in
+  let about_body =
+    match field "about" home with
+    | Some yaml -> (match field "body" yaml with
+      | Some b -> I18n.string_of_yaml locale b
+      | None -> "")
+    | None -> ""
+  in
   let content =
     Template.render "templates/home.html"
       [
@@ -183,7 +197,9 @@ let render_home locale =
           (if locale = I18n.En then "Contact" else "联系");
         Template.str "email" (contact site "email");
         Template.str "github" (contact site "github");
-      Template.str "arxiv" (contact site "arxiv");
+        Template.str "arxiv" (contact site "arxiv");
+        Template.str "about_title" about_title;
+        Template.safe "about_body" about_body;
       ]
   in
   let switch_href = if locale = I18n.En then "/zh/" else "/en/" in
@@ -277,6 +293,7 @@ let render_now locale =
     Template.render "templates/now.html"
       [
         Template.str "label" (if locale = I18n.En then "Now" else "最近");
+        Template.str "now_whats_that" (if locale = I18n.En then "What is this?" else "这是什么？");
         Template.str "section_title" (if locale = I18n.En then "Currently" else "最近");
         Template.list "items"
           (List.map (fun item -> Jingoo.Jg_types.Tstr item) now_items);

@@ -8,7 +8,7 @@ nav:
         href: /papers.html
       - label: { en: Notes, zh: 笔记 }
         href: /notes.html
-      - label: { en: Seminars, zh: 研讨班 }
+      - label: { en: Seminars, zh: 讨论班 }
         href: /seminars/
   - section:
       en: About

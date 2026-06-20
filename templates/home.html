@@ -20,7 +20,17 @@
     </div>
     <div class="contact-item">
       <span class="contact-label">arXiv</span>
-      <a href="{{ arxiv }}" class="contact-value">arxiv.org/a/lei_p</a>
+      <a href="{{ arxiv }}" class="contact-value">my papers on arXiv</a>
     </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <span class="section-title">{{ about_title }}</span>
+    <span class="section-rule"></span>
+  </div>
+  <div class="about-body">
+    {{ about_body | safe }}
   </div>
 </section>
