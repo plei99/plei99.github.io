@@ -1,0 +1,3 @@
+(executable
+ (name main)
+ (libraries plei99_site yaml yaml.unix jingoo fpath cmark unix))
