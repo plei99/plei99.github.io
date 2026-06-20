@@ -87,6 +87,14 @@
       color: var(--sidebar-hdr-text);
       line-height: 1.2;
     }
+    .sidebar-logo a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .sidebar-logo a:hover {
+      color: inherit;
+      text-decoration: none;
+    }
     .sidebar-logo span {
       display: block;
       font-weight: 500;
@@ -110,20 +118,6 @@
       padding: 1rem 0;
       flex: 1;
       position: relative;
-    }
-    .sidebar-nav::before {
-      content: 'NAV';
-      position: absolute;
-      bottom: 1rem;
-      left: -0.5rem;
-      font-family: var(--f-ui);
-      font-weight: 700;
-      font-size: 5.5rem;
-      color: var(--wm-color);
-      pointer-events: none;
-      letter-spacing: -0.02em;
-      line-height: 1;
-      user-select: none;
     }
     .nav-section-label {
       display: block;
@@ -152,10 +146,6 @@
     }
     .nav-link:hover { color: var(--accent); background: var(--accent-light); text-decoration: none; }
     .nav-link.active { color: var(--accent); background: var(--accent-light); }
-    .sidebar-home-link {
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 0.4rem;
-    }
     .sidebar-footer {
       padding: 1rem 1.5rem;
       border-top: 1px solid var(--border);
@@ -178,22 +168,6 @@
       padding: 3rem 3rem 4rem;
       position: relative;
       overflow: hidden;
-    }
-    .main::before {
-      content: 'WELCOME';
-      position: fixed;
-      top: 50%;
-      left: calc(var(--fw-sidebar) + 2%);
-      transform: translateY(-50%);
-      font-family: var(--f-ui);
-      font-weight: 700;
-      font-size: 14vw;
-      color: rgba(170,168,160,0.09);
-      pointer-events: none;
-      letter-spacing: -0.04em;
-      line-height: 1;
-      user-select: none;
-      white-space: nowrap;
     }
 
     /* ─── CARD ───────────────────────────────────────────── */
@@ -344,6 +318,15 @@
       line-height: 1.4;
     }
     .post-title:hover { color: var(--accent); }
+    .now-list {
+      list-style: disc;
+      padding-left: 1.5rem;
+      font-family: var(--f-body);
+      font-size: var(--body-size);
+      line-height: 1.8;
+      color: var(--ink);
+    }
+    .now-list li { margin-bottom: 0.25rem; }
 
     /* ─── CONTACT ────────────────────────────────────────── */
     .contact-row { display: flex; gap: 1.5rem; flex-wrap: wrap; }
@@ -458,23 +441,42 @@
       border-color: rgba(255,255,255,0.35);
       text-decoration: none;
     }
+    @media (max-width: 768px) {
+      body { flex-direction: column; }
+      .sidebar { display: none; width: 100%; height: auto; position: static; min-height: unset; border-right: none; border-bottom: 1px solid var(--border); }
+      .sidebar.open { display: flex; }
+      .mobile-bar { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; background: var(--sidebar-hdr); color: var(--sidebar-hdr-text); }
+      .mobile-bar-logo { font-family: var(--f-ui); font-weight: 700; font-size: 1rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sidebar-hdr-text); }
+      .mobile-bar-logo:hover { text-decoration: none; color: var(--sidebar-hdr-text); }
+      .hamburger { background: none; border: 1px solid rgba(255,255,255,0.2); color: rgba(240,238,232,0.8); font-size: 1.1rem; padding: 0.25rem 0.5rem; border-radius: 3px; cursor: pointer; }
+      .main { padding: 1rem; }
+      .card { padding: 1.25rem; }
+      .papers-grid { grid-template-columns: 1fr; }
+      .notes-grid { grid-template-columns: 1fr; }
+    }
+    @media (min-width: 769px) {
+      .mobile-bar { display: none; }
+    }
   </style>
 </head>
 <body>
+  <div class="mobile-bar">
+    <a href="{% if lang == 'zh' %}/zh/{% else %}/en/{% endif %}" class="mobile-bar-logo">{{ site_name }}</a>
+    <button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+  </div>
 
   <!-- ══ SIDEBAR ══ -->
   <aside class="sidebar">
     <div class="sidebar-header">
       <div class="sidebar-logo">
-        {{ site_name }}
-        <span>{{ site_subtitle }}</span>
+        <a href="{% if lang == 'zh' %}/zh/{% else %}/en/{% endif %}">
+          {{ site_name }}
+          <span>{{ site_subtitle }}</span>
+        </a>
       </div>
       {{ language_switch_html }}
     </div>
     <nav class="sidebar-nav">
-      {% if not is_home %}
-      <a href="/en/" class="nav-link sidebar-home-link">← Home</a>
-      {% endif %}
       {{ nav_html }}
     </nav>
     <footer class="sidebar-footer">

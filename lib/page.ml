@@ -149,13 +149,11 @@ let language_switch_html current target =
     (html_escape target)
     (html_escape (I18n.switch_label current))
 
-let render_base ?(card_modifier = "") ?(is_home = false) ~site ~locale ~title
-    ~switch_href content =
+let render_base ?(card_modifier = "") ~site ~locale ~title ~switch_href content =
   Template.render "templates/base.html"
     [
-      Template.str "lang" (I18n.html_lang locale);
+      Template.str "lang" (I18n.code locale);
       Template.str "title" title;
-      Template.bool "is_home" is_home;
       Template.str "site_name" (string_field "name" site);
       Template.str "site_subtitle" "Mathematician";
       Template.safe "language_switch_html"
@@ -180,11 +178,7 @@ let render_home locale =
     Template.render "templates/home.html"
       [
         Template.str "welcome" (if locale = I18n.En then "Welcome" else "你好");
-        Template.safe "headline"
-          (if locale = I18n.En then
-             "<strong>Hi, I'm Patrick.</strong><br>I do mathematics."
-           else "<strong>你好，我是 Patrick。</strong><br>我做数学。");
-        Template.str "bio" bio;
+        Template.safe "bio" bio;
         Template.str "contact_title"
           (if locale = I18n.En then "Contact" else "联系");
         Template.str "email" (contact site "email");
@@ -194,8 +188,8 @@ let render_home locale =
   in
   let switch_href = if locale = I18n.En then "/zh/" else "/en/" in
   let html =
-    render_base ~is_home:true ~site ~locale ~title:"Patrick Lei"
-      ~switch_href:(Some switch_href) content
+    render_base ~site ~locale ~title:"Patrick Lei" ~switch_href:(Some switch_href)
+      content
   in
   match locale with
   | I18n.En -> write_file "public/en/index.html" html
@@ -283,13 +277,6 @@ let render_now locale =
     Template.render "templates/now.html"
       [
         Template.str "label" (if locale = I18n.En then "Now" else "最近");
-        Template.safe "headline"
-          (if locale = I18n.En then "<strong>Now.</strong><br>What I am doing."
-           else "<strong>最近。</strong><br>我在忙什么。");
-        Template.str "intro"
-          (if locale = I18n.En then "A short status page in the spirit of "
-           else "一个简短的近况页面，参考 ");
-        Template.str "whats_that" (if locale = I18n.En then "nownownow.com." else "nownownow.com。");
         Template.str "section_title" (if locale = I18n.En then "Currently" else "最近");
         Template.list "items"
           (List.map (fun item -> Jingoo.Jg_types.Tstr item) now_items);
