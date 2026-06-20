@@ -2,7 +2,7 @@ type page =
   | Home of I18n.locale
   | Notes
   | Papers
-  | Travel
+  | Travel of I18n.locale
   | SeminarIndex
   | SeminarPage of string
   | Now of I18n.locale
@@ -94,6 +94,8 @@ let local_href locale href =
   match (locale, href) with
   | I18n.En, "/now.html" -> "/en/now.html"
   | I18n.Zh, "/now.html" -> "/zh/now.html"
+  | I18n.En, "/travel.html" -> "/en/travel.html"
+  | I18n.Zh, "/travel.html" -> "/zh/travel.html"
   | _ -> href
 
 let nav_html site locale =
@@ -308,14 +310,25 @@ let render_now locale =
   | I18n.En -> write_file "public/en/now.html" html
   | I18n.Zh -> write_file "public/zh/now.html" html
 
-let render_travel () =
+let render_travel locale =
   let site = read_yaml "data/site.yaml" in
-  let content = Template.render "templates/travel.html" [] in
-  let html =
-    render_base ~card_modifier:"wide-card" ~site ~locale:I18n.En
-      ~title:"Patrick Lei | Travel" ~switch_href:None content
+  let label, title_main, switch_href, out_path =
+    match locale with
+    | I18n.En -> "Travel", "Visited countries.", "/zh/travel.html", "public/en/travel.html"
+    | I18n.Zh -> "旅行", "去过的国家。", "/en/travel.html", "public/zh/travel.html"
   in
-  write_file "public/travel.html" html
+  let content =
+    Template.render "templates/travel.html"
+      [
+        Template.str "label" label;
+        Template.str "title_main" title_main;
+      ]
+  in
+  let html =
+    render_base ~card_modifier:"wide-card" ~site ~locale
+      ~title:"Patrick Lei | Travel" ~switch_href:(Some switch_href) content
+  in
+  write_file out_path html
 
 let starts_with text prefix =
   let text_len = String.length text and prefix_len = String.length prefix in
@@ -446,7 +459,7 @@ let render = function
   | Home locale -> render_home locale
   | Notes -> render_notes ()
   | Papers -> render_papers ()
-  | Travel -> render_travel ()
+  | Travel locale -> render_travel locale
   | SeminarIndex -> render_seminar_index ()
   | SeminarPage slug -> render_seminar_page slug
   | Now locale -> render_now locale
@@ -456,7 +469,8 @@ let render_all () =
   render (Home I18n.Zh);
   render Notes;
   render Papers;
-  render Travel;
+  render (Travel I18n.En);
+  render (Travel I18n.Zh);
   render (Now I18n.En);
   render (Now I18n.Zh);
   render SeminarIndex;
