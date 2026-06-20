@@ -1,2 +1,29 @@
 name: Patrick Lei
-subtitle: Mathematician
+nav:
+  - section:
+      en: Research
+      zh: 研究
+    links:
+      - label: { en: Papers, zh: 论文 }
+        href: /papers.html
+      - label: { en: Notes, zh: 笔记 }
+        href: /notes.html
+      - label: { en: Seminars, zh: 研讨班 }
+        href: /seminars/
+  - section:
+      en: About
+      zh: 关于
+    links:
+      - label: { en: CV, zh: 简历 }
+        href: https://github.com/plei99/cv/releases/latest/download/Patrick_Lei_CV.pdf
+      - label: { en: Now, zh: 最近 }
+        href: /now.html
+contact:
+  email: patrick.lei@bc.edu
+  github: https://github.com/plei99
+  arxiv: https://arxiv.org/a/0000-0003-1977-1596
+footer:
+  copyright: "© 2026 Patrick Lei"
+  links:
+    - label: Source
+      href: https://github.com/plei99/plei99.github.io

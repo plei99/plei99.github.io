@@ -444,6 +444,23 @@
       color: var(--ink-subtle);
     }
     .contact-value { font-family: var(--f-body); font-size: 0.95rem; color: var(--accent); }
+    .language-switch {
+      font-family: var(--f-ui);
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(240,238,232,0.72);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 999px;
+      padding: 0.2rem 0.48rem;
+      flex-shrink: 0;
+    }
+    .language-switch:hover {
+      color: var(--sidebar-hdr-text);
+      border-color: rgba(255,255,255,0.35);
+      text-decoration: none;
+    }
   </style>
 </head>
 <body data-font="garamond">
@@ -466,7 +483,7 @@
         {{ site_name }}
         <span>{{ site_subtitle }}</span>
       </div>
-      <div class="dark-toggle" title="Toggle dark mode">☾</div>
+      {{ language_switch_html }}
     </div>
     <nav class="sidebar-nav">
       {{ nav_html }}

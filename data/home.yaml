@@ -1,0 +1,21 @@
+bio:
+  en: |
+    I am a Visiting Assistant Professor (postdoc) in mathematics at
+    Boston College, mentored by Qile Chen. Previously I completed my
+    PhD at Columbia University, advised by Melissa Liu. My research
+    is in algebraic geometry, particularly higher-genus Gromov-Witten theory.
+  zh: |
+    我目前在波士顿学院担任数学方向的访问助理教授（博士后），导师是陈琪乐。
+    此前我在哥伦比亚大学完成了博士学位，导师是刘秋菊。
+    我的研究方向是代数几何，尤其是高亏格 Gromov-Witten 理论。
+now:
+  en:
+    - "K-theory, allegedly"
+    - "Am I a good moduli space?"
+    - "Teaching multivariable calculus"
+    - "broke 3 on the first try"
+  zh:
+    - "K-理论（据说）"
+    - "我到底是不是一个好模空间？"
+    - "在教多元微积分"
+    - "首马破三"
