@@ -22,6 +22,12 @@ let list_field key yaml =
   | Some (`A values) -> values
   | _ -> []
 
+let int_field key yaml =
+  match field key yaml with
+  | Some (`Float value) -> Some (int_of_float value)
+  | Some (`String value) -> int_of_string_opt value
+  | _ -> None
+
 let mkdir_p dir =
   let rec loop path =
     if path = "." || path = "/" || Sys.file_exists path then ()
@@ -110,7 +116,7 @@ let language_switch_html current target =
     (html_escape target)
     (html_escape (I18n.switch_label current))
 
-let render_base ~site ~locale ~title ~switch_href content =
+let render_base ?(card_modifier = "") ~site ~locale ~title ~switch_href content =
   Template.render "templates/base.html"
     [
       Template.str "lang" (I18n.html_lang locale);
@@ -123,6 +129,7 @@ let render_base ~site ~locale ~title ~switch_href content =
         | None -> "<div class=\"dark-toggle\" title=\"Toggle dark mode\">☾</div>");
       Template.safe "nav_html" (nav_html site locale);
       Template.safe "footer_html" (footer_html site);
+      Template.str "card_modifier" card_modifier;
       Template.safe "content" content;
     ]
 
@@ -161,7 +168,7 @@ let render_home locale =
           (if locale = I18n.En then "Contact" else "联系");
         Template.str "email" (contact site "email");
         Template.str "github" (contact site "github");
-        Template.str "arxiv" (contact site "arxiv");
+      Template.str "arxiv" (contact site "arxiv");
       ]
   in
   let switch_href = if locale = I18n.En then "/zh/" else "/en/" in
@@ -172,6 +179,76 @@ let render_home locale =
   match locale with
   | I18n.En -> write_file "public/en/index.html" html
   | I18n.Zh -> write_file "public/zh/index.html" html
+
+let yaml_string_list = function
+  | `A values ->
+      values
+      |> List.filter_map (function `String value -> Some value | _ -> None)
+      |> List.map (fun value -> Jingoo.Jg_types.Tstr value)
+  | _ -> []
+
+let render_notes () =
+  let site = read_yaml "data/site.yaml" in
+  let notes =
+    match read_yaml "data/notes.yaml" with
+    | `A values ->
+        values
+        |> List.map (fun note ->
+               Template.obj
+                 [
+                   ("name", Jingoo.Jg_types.Tstr (string_field "name" note));
+                   ( "description",
+                     Jingoo.Jg_types.Tstr (string_field "description" note) );
+                   ("date", Jingoo.Jg_types.Tstr (string_field "date" note));
+                   ("place", Jingoo.Jg_types.Tstr (string_field "place" note));
+                   ("url", Jingoo.Jg_types.Tstr (string_field "url" note));
+                 ])
+    | _ -> []
+  in
+  let content =
+    Template.render "templates/notes.html" [ Template.list "notes" notes ]
+  in
+  let html =
+    render_base ~card_modifier:"wide-card" ~site ~locale:I18n.En
+      ~title:"Patrick Lei | Notes" ~switch_href:None content
+  in
+  write_file "public/notes.html" html
+
+let render_papers () =
+  let site = read_yaml "data/site.yaml" in
+  let papers =
+    match read_yaml "data/papers.yaml" with
+    | `A values ->
+        values
+        |> List.map (fun paper ->
+               let pages =
+                 match int_field "pages" paper with
+                 | Some value -> Jingoo.Jg_types.Tint value
+                 | None -> Jingoo.Jg_types.Tnull
+               in
+               let categories =
+                 match field "categories" paper with
+                 | Some yaml -> yaml_string_list yaml
+                 | None -> []
+               in
+               Template.obj
+                 [
+                   ("title", Jingoo.Jg_types.Tstr (string_field "title" paper));
+                   ("date", Jingoo.Jg_types.Tstr (string_field "date" paper));
+                   ("arxiv", Jingoo.Jg_types.Tstr (string_field "arxiv" paper));
+                   ("pages", pages);
+                   ("categories", Jingoo.Jg_types.Tlist categories);
+                 ])
+    | _ -> []
+  in
+  let content =
+    Template.render "templates/papers.html" [ Template.list "papers" papers ]
+  in
+  let html =
+    render_base ~card_modifier:"wide-card" ~site ~locale:I18n.En
+      ~title:"Patrick Lei | Papers" ~switch_href:None content
+  in
+  write_file "public/papers.html" html
 
 let render_root_redirect () =
   write_file "public/index.html"
@@ -194,8 +271,8 @@ let render_root_redirect () =
 
 let render = function
   | Home locale -> render_home locale
-  | Notes -> failwith "Notes page is implemented in Phase 3"
-  | Papers -> failwith "Papers page is implemented in Phase 3"
+  | Notes -> render_notes ()
+  | Papers -> render_papers ()
   | SeminarIndex -> failwith "Seminar index is implemented in Phase 4"
   | SeminarPage slug -> failwith ("Seminar page is implemented in Phase 4: " ^ slug)
   | Now _ -> failwith "Now page is implemented in Phase 4"
@@ -203,4 +280,6 @@ let render = function
 let render_all () =
   render (Home I18n.En);
   render (Home I18n.Zh);
+  render Notes;
+  render Papers;
   render_root_redirect ()

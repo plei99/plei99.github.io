@@ -444,6 +444,68 @@
       color: var(--ink-subtle);
     }
     .contact-value { font-family: var(--f-body); font-size: 0.95rem; color: var(--accent); }
+    .wide-card { max-width: 980px; }
+    .notes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .note-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      min-height: 12rem;
+      transition: border-color 0.12s, box-shadow 0.12s;
+    }
+    .note-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 1px 6px rgba(43,74,128,0.09);
+      text-decoration: none;
+    }
+    .note-meta {
+      font-family: var(--f-ui);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-subtle);
+      margin-bottom: 0.55rem;
+    }
+    .note-description {
+      color: var(--ink-muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+    .paper-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 0.7rem;
+      font-family: var(--f-ui);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.65rem;
+    }
+    .tag {
+      background: var(--accent-light);
+      color: var(--accent);
+      border-radius: var(--radius);
+      padding: 0.12rem 0.38rem;
+      font-family: var(--f-ui);
+      font-weight: 600;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
     .language-switch {
       font-family: var(--f-ui);
       font-weight: 700;
@@ -495,7 +557,7 @@
 
   <!-- ══ MAIN ══ -->
   <main class="main">
-    <div class="card">
+    <div class="card {{ card_modifier }}">
       {{ content }}
     </div>
   </main>

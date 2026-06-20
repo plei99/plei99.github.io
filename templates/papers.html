@@ -1,0 +1,32 @@
+<div class="hero">
+  <p class="hero-label">Research</p>
+  <h1 class="hero-name"><strong>Papers.</strong><br>Preprints and manuscripts.</h1>
+  <p class="hero-sub">
+    Research papers in algebraic geometry and higher-genus Gromov-Witten theory.
+  </p>
+</div>
+
+<section class="section">
+  <div class="section-head">
+    <span class="section-title">Papers</span>
+    <span class="section-rule"></span>
+  </div>
+  <div class="papers-grid">
+    {% for paper in papers %}
+    <article class="paper-card">
+      <span class="paper-tag">Preprint · {{ paper.date }}</span>
+      <h2 class="paper-title">{{ paper.title }}</h2>
+      <p class="paper-meta">arXiv:{{ paper.arxiv }}{% if paper.pages %} · {{ paper.pages }} pages{% endif %}</p>
+      <div class="tag-row">
+        {% for category in paper.categories %}
+        <span class="tag">{{ category }}</span>
+        {% endfor %}
+      </div>
+      <div class="paper-actions">
+        <a href="https://arxiv.org/abs/{{ paper.arxiv }}">Abstract</a>
+        <a href="https://arxiv.org/pdf/{{ paper.arxiv }}">PDF</a>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
