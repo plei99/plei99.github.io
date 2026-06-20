@@ -1,0 +1,23 @@
+<div class="hero">
+  <p class="hero-label">{{ label }}</p>
+  <h1 class="hero-name">{{ headline }}</h1>
+  <p class="hero-sub">
+    {{ intro }}
+    <a href="https://sive.rs/now">{{ whats_that }}</a>
+  </p>
+</div>
+
+<section class="section">
+  <div class="section-head">
+    <span class="section-title">{{ section_title }}</span>
+    <span class="section-rule"></span>
+  </div>
+  <ul class="posts-list">
+    {% for item in items %}
+    <li class="post-item">
+      <span class="post-date">Now</span>
+      <span class="post-title">{{ item }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+</section>

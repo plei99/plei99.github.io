@@ -2,11 +2,18 @@ type page =
   | Home of I18n.locale
   | Notes
   | Papers
+  | Travel
   | SeminarIndex
   | SeminarPage of string
   | Now of I18n.locale
 
 let read_yaml path = Yaml_unix.of_file_exn (Fpath.v path)
+
+let read_file path =
+  let input = open_in path in
+  Fun.protect
+    ~finally:(fun () -> close_in input)
+    (fun () -> really_input_string input (in_channel_length input))
 
 let field key = function
   | `O fields -> List.assoc_opt key fields
@@ -43,6 +50,32 @@ let write_file path contents =
   Fun.protect
     ~finally:(fun () -> close_out output)
     (fun () -> output_string output contents)
+
+let copy_file src dst =
+  mkdir_p (Filename.dirname dst);
+  let ic = open_in_bin src in
+  let oc = open_out_bin dst in
+  let buffer = Bytes.create 16384 in
+  Fun.protect
+    ~finally:(fun () ->
+      close_in_noerr ic;
+      close_out_noerr oc)
+    (fun () ->
+      let rec loop () =
+        let read = input ic buffer 0 (Bytes.length buffer) in
+        if read > 0 then (
+          output oc buffer 0 read;
+          loop ())
+      in
+      loop ())
+
+let rec copy_tree src dst =
+  if Sys.file_exists src && Sys.is_directory src then (
+    mkdir_p dst;
+    Sys.readdir src
+    |> Array.iter (fun name ->
+           copy_tree (Filename.concat src name) (Filename.concat dst name)))
+  else copy_file src dst
 
 let html_escape text =
   let buffer = Buffer.create (String.length text) in
@@ -250,6 +283,126 @@ let render_papers () =
   in
   write_file "public/papers.html" html
 
+let render_now locale =
+  let site = read_yaml "data/site.yaml" in
+  let home = read_yaml "data/home.yaml" in
+  let now_items =
+    match field "now" home with
+    | Some yaml -> I18n.strings_of_yaml locale yaml
+    | None -> []
+  in
+  let content =
+    Template.render "templates/now.html"
+      [
+        Template.str "label" (if locale = I18n.En then "Now" else "最近");
+        Template.safe "headline"
+          (if locale = I18n.En then "<strong>Now.</strong><br>What I am doing."
+           else "<strong>最近。</strong><br>我在忙什么。");
+        Template.str "intro"
+          (if locale = I18n.En then "A short status page in the spirit of "
+           else "一个简短的近况页面，参考 ");
+        Template.str "whats_that" (if locale = I18n.En then "nownownow.com." else "nownownow.com。");
+        Template.str "section_title" (if locale = I18n.En then "Currently" else "最近");
+        Template.list "items"
+          (List.map (fun item -> Jingoo.Jg_types.Tstr item) now_items);
+      ]
+  in
+  let switch_href = if locale = I18n.En then "/zh/now.html" else "/en/now.html" in
+  let html =
+    render_base ~site ~locale ~title:"Patrick Lei | Now"
+      ~switch_href:(Some switch_href) content
+  in
+  match locale with
+  | I18n.En -> write_file "public/en/now.html" html
+  | I18n.Zh -> write_file "public/zh/now.html" html
+
+let render_travel () =
+  let site = read_yaml "data/site.yaml" in
+  let content = Template.render "templates/travel.html" [] in
+  let html =
+    render_base ~card_modifier:"wide-card" ~site ~locale:I18n.En
+      ~title:"Patrick Lei | Travel" ~switch_href:None content
+  in
+  write_file "public/travel.html" html
+
+let seminar_values () =
+  match read_yaml "data/seminars/index.yaml" with
+  | `A values -> values
+  | _ -> []
+
+let seminar_obj seminar =
+  Template.obj
+    [
+      ("title", Jingoo.Jg_types.Tstr (string_field "title" seminar));
+      ("date", Jingoo.Jg_types.Tstr (string_field "date" seminar));
+      ("url", Jingoo.Jg_types.Tstr (string_field "url" seminar));
+      ("slug", Jingoo.Jg_types.Tstr (string_field "slug" seminar));
+      ( "description",
+        Jingoo.Jg_types.Tstr (string_field "description" seminar) );
+    ]
+
+let render_seminar_index () =
+  let site = read_yaml "data/site.yaml" in
+  let seminars = seminar_values () |> List.map seminar_obj in
+  let content =
+    Template.render "templates/seminar-index.html"
+      [ Template.list "seminars" seminars ]
+  in
+  let html =
+    render_base ~site ~locale:I18n.En ~title:"Patrick Lei | Seminars"
+      ~switch_href:None content
+  in
+  write_file "public/seminars/index.html" html
+
+let starts_with text prefix =
+  let text_len = String.length text and prefix_len = String.length prefix in
+  text_len >= prefix_len && String.sub text 0 prefix_len = prefix
+
+let find_sub text sub start =
+  let text_len = String.length text and sub_len = String.length sub in
+  let rec loop index =
+    if index + sub_len > text_len then None
+    else if String.sub text index sub_len = sub then Some index
+    else loop (index + 1)
+  in
+  loop start
+
+let markdown_with_frontmatter path =
+  let raw = read_file path in
+  if starts_with raw "---\n" then
+    match find_sub raw "\n---\n" 4 with
+    | Some index ->
+        let frontmatter = String.sub raw 4 (index - 4) |> Yaml.of_string_exn in
+        let body_start = index + 5 in
+        let body = String.sub raw body_start (String.length raw - body_start) in
+        (frontmatter, body)
+    | None -> (`O [], raw)
+  else (`O [], raw)
+
+let render_seminar_page slug =
+  let site = read_yaml "data/site.yaml" in
+  let frontmatter, markdown =
+    markdown_with_frontmatter ("data/seminars/" ^ slug ^ ".md")
+  in
+  let body = Markdown.to_html markdown in
+  let content =
+    Template.render "templates/seminar-page.html"
+      [
+        Template.str "title" (string_field "title" frontmatter);
+        Template.str "date" (string_field "date" frontmatter);
+        Template.str "url" (string_field "url" frontmatter);
+        Template.safe "body" body;
+      ]
+  in
+  let html =
+    render_base ~site ~locale:I18n.En ~title:(string_field "title" frontmatter)
+      ~switch_href:None content
+  in
+  write_file ("public/seminars/" ^ slug ^ "/index.html") html
+
+let copy_static () =
+  if Sys.file_exists "static" then copy_tree "static" "public" else ()
+
 let render_root_redirect () =
   write_file "public/index.html"
     {|<!DOCTYPE html>
@@ -273,13 +426,21 @@ let render = function
   | Home locale -> render_home locale
   | Notes -> render_notes ()
   | Papers -> render_papers ()
-  | SeminarIndex -> failwith "Seminar index is implemented in Phase 4"
-  | SeminarPage slug -> failwith ("Seminar page is implemented in Phase 4: " ^ slug)
-  | Now _ -> failwith "Now page is implemented in Phase 4"
+  | Travel -> render_travel ()
+  | SeminarIndex -> render_seminar_index ()
+  | SeminarPage slug -> render_seminar_page slug
+  | Now locale -> render_now locale
 
 let render_all () =
   render (Home I18n.En);
   render (Home I18n.Zh);
   render Notes;
   render Papers;
+  render Travel;
+  render (Now I18n.En);
+  render (Now I18n.Zh);
+  render SeminarIndex;
+  seminar_values ()
+  |> List.iter (fun seminar -> render (SeminarPage (string_field "slug" seminar)));
+  copy_static ();
   render_root_redirect ()
