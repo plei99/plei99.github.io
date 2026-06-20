@@ -1,0 +1,59 @@
+bio:
+  en: |
+    I am a Visiting Assistant Professor (postdoc) in mathematics at
+    Boston College, mentored by <a href="https://sites.google.com/bc.edu/qile-chen/">Qile Chen</a>.
+    Previously I completed my PhD at Columbia University, advised by
+    <a href="https://math.columbia.edu/~ccliu">Melissa Liu</a>.
+    My research is in algebraic geometry, particularly higher-genus Gromov-Witten theory.
+  zh: |
+    我目前在波士顿学院担任数学方向的访问助理教授（博士后），导师是
+    <a href="https://sites.google.com/bc.edu/qile-chen/">陈琪乐</a>。
+    此前我在哥伦比亚大学完成了博士学位，导师是
+    <a href="https://math.columbia.edu/~ccliu">刘秋菊</a>。
+    我的研究方向是代数几何，尤其是高亏格 Gromov-Witten 理论。
+about:
+  title:
+    en: About me
+    zh: 关于我
+  body:
+    en: |
+      You may also know me from:
+      <ul>
+        <li><a href="https://www.umass.edu/mathematics-statistics/">UMass Amherst</a>,
+        where I was advised by <a href="https://paulhacking.github.io/">Paul Hacking</a>
+        and also majored in <a href="https://www.cics.umass.edu/">computer science</a>.</li>
+        <li>We may have met at a conference or a seminar.</li>
+      </ul>
+      <p>I study both geometric and computational aspects of enumerative geometry,
+      particularly in higher genus. See
+      <a href="https://github.com/plei99/notes/raw/master/misc/simons25/hg.pdf">these notes</a>
+      or <a href="https://scgp.stonybrook.edu/archives/42649">this SCGP program</a>
+      for an introduction to some themes in enumerative geometry.</p>
+      <p>Besides doing math, I also enjoy running and playing the piano.
+      I also like to learn about the historical evolution of Chinese dialects.
+      I'm always open to suggestions for affordable but legitimately high-quality Sichuan cuisine.</p>
+    zh: |
+      你也可能在这些地方认识我：
+      <ul>
+        <li><a href="https://www.umass.edu/mathematics-statistics/">马萨诸塞大学阿默斯特分校</a>，
+        我在那里师从 <a href="https://paulhacking.github.io/">Paul Hacking</a>，
+        同时主修了<a href="https://www.cics.umass.edu/">计算机科学</a>。</li>
+        <li>我们也可能在会议或研讨会上见过面。</li>
+      </ul>
+      <p>我的研究涵盖计数几何中的几何与计算问题，重点在高亏格情形。可以参考
+      <a href="https://github.com/plei99/notes/raw/master/misc/simons25/hg.pdf">这些笔记</a>，或
+      <a href="https://scgp.stonybrook.edu/archives/42649">这个 SCGP 项目</a>，
+      了解我正在关注的一些主题。</p>
+      <p>除了做数学，我平时也喜欢跑步和弹钢琴，也很喜欢了解汉语方言的历史演变。
+      若你知道价格合适又地道的川菜，欢迎推荐。</p>
+now:
+  en:
+    - "K-theory, allegedly"
+    - "Am I a good moduli space?"
+    - "Teaching multivariable calculus"
+    - "broke 3 on the first try"
+  zh:
+    - "K-理论（据说）"
+    - "我到底是不是一个好模空间？"
+    - "在教多元微积分"
+    - "首马破三"

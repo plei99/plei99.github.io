@@ -1,0 +1,10 @@
+opam-version: "2.0"
+synopsis: "Static site generator for plei99.github.io"
+depends: [
+  "ocaml" {>= "4.14.0"}
+  "dune" {>= "3.16"}
+  "yaml"
+  "jingoo"
+  "cmark"
+  "fpath"
+]

@@ -1,0 +1,16 @@
+<div class="hero">
+  <p class="hero-label">{{ label }}</p>
+  <p class="hero-sub"><a href="https://sive.rs/now">{{ now_whats_that }}</a></p>
+</div>
+
+<section class="section">
+  <div class="section-head">
+    <span class="section-title">{{ section_title }}</span>
+    <span class="section-rule"></span>
+  </div>
+  <ul class="now-list">
+    {% for item in items %}
+    <li>{{ item }}</li>
+    {% endfor %}
+  </ul>
+</section>

@@ -1,0 +1,4 @@
+(executable
+ (name main)
+ (libraries plei99_site yaml yaml.unix jingoo fpath cmark unix)
+ (link_flags (:standard -cclib -L/opt/homebrew/lib -cclib -lcmark)))
