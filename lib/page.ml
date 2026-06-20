@@ -159,7 +159,7 @@ let render_base ?(card_modifier = "") ~site ~locale ~title ~switch_href content 
       Template.safe "language_switch_html"
         (match switch_href with
         | Some href -> language_switch_html locale href
-        | None -> "<div class=\"dark-toggle\" title=\"Toggle dark mode\">☾</div>");
+        | None -> "");
       Template.safe "nav_html" (nav_html site locale);
       Template.safe "footer_html" (footer_html site);
       Template.str "card_modifier" card_modifier;
