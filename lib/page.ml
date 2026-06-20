@@ -149,11 +149,13 @@ let language_switch_html current target =
     (html_escape target)
     (html_escape (I18n.switch_label current))
 
-let render_base ?(card_modifier = "") ~site ~locale ~title ~switch_href content =
+let render_base ?(card_modifier = "") ?(is_home = false) ~site ~locale ~title
+    ~switch_href content =
   Template.render "templates/base.html"
     [
       Template.str "lang" (I18n.html_lang locale);
       Template.str "title" title;
+      Template.bool "is_home" is_home;
       Template.str "site_name" (string_field "name" site);
       Template.str "site_subtitle" "Mathematician";
       Template.safe "language_switch_html"
@@ -174,15 +176,6 @@ let render_home locale =
     | Some yaml -> I18n.string_of_yaml locale yaml
     | None -> ""
   in
-  let now_items =
-    match field "now" home with
-    | Some yaml -> I18n.strings_of_yaml locale yaml
-    | None -> []
-  in
-  let now_values =
-    now_items
-    |> List.map (fun item -> Jingoo.Jg_types.Tstr item)
-  in
   let content =
     Template.render "templates/home.html"
       [
@@ -192,11 +185,6 @@ let render_home locale =
              "<strong>Hi, I'm Patrick.</strong><br>I do mathematics."
            else "<strong>你好，我是 Patrick。</strong><br>我做数学。");
         Template.str "bio" bio;
-        Template.str "now_title" (if locale = I18n.En then "Now" else "最近");
-        Template.str "now_more" (if locale = I18n.En then "More →" else "更多 →");
-        Template.str "now_href"
-          (if locale = I18n.En then "/en/now.html" else "/zh/now.html");
-        Template.list "now_items" now_values;
         Template.str "contact_title"
           (if locale = I18n.En then "Contact" else "联系");
         Template.str "email" (contact site "email");
@@ -206,8 +194,8 @@ let render_home locale =
   in
   let switch_href = if locale = I18n.En then "/zh/" else "/en/" in
   let html =
-    render_base ~site ~locale ~title:"Patrick Lei" ~switch_href:(Some switch_href)
-      content
+    render_base ~is_home:true ~site ~locale ~title:"Patrick Lei"
+      ~switch_href:(Some switch_href) content
   in
   match locale with
   | I18n.En -> write_file "public/en/index.html" html
@@ -325,35 +313,6 @@ let render_travel () =
   in
   write_file "public/travel.html" html
 
-let seminar_values () =
-  match read_yaml "data/seminars/index.yaml" with
-  | `A values -> values
-  | _ -> []
-
-let seminar_obj seminar =
-  Template.obj
-    [
-      ("title", Jingoo.Jg_types.Tstr (string_field "title" seminar));
-      ("date", Jingoo.Jg_types.Tstr (string_field "date" seminar));
-      ("url", Jingoo.Jg_types.Tstr (string_field "url" seminar));
-      ("slug", Jingoo.Jg_types.Tstr (string_field "slug" seminar));
-      ( "description",
-        Jingoo.Jg_types.Tstr (string_field "description" seminar) );
-    ]
-
-let render_seminar_index () =
-  let site = read_yaml "data/site.yaml" in
-  let seminars = seminar_values () |> List.map seminar_obj in
-  let content =
-    Template.render "templates/seminar-index.html"
-      [ Template.list "seminars" seminars ]
-  in
-  let html =
-    render_base ~site ~locale:I18n.En ~title:"Patrick Lei | Seminars"
-      ~switch_href:None content
-  in
-  write_file "public/seminars/index.html" html
-
 let starts_with text prefix =
   let text_len = String.length text and prefix_len = String.length prefix in
   text_len >= prefix_len && String.sub text 0 prefix_len = prefix
@@ -379,24 +338,81 @@ let markdown_with_frontmatter path =
     | None -> (`O [], raw)
   else (`O [], raw)
 
+type seminar = {
+  slug : string;
+  title : string;
+  date : string;
+  description : string;
+  markdown : string;
+}
+
+let slug_of_markdown_filename filename =
+  String.sub filename 0 (String.length filename - String.length ".md")
+
+let seminar_files () =
+  Sys.readdir "data/seminars"
+  |> Array.to_list
+  |> List.filter (fun filename -> Filename.check_suffix filename ".md")
+  |> List.sort String.compare
+
+let read_seminar filename =
+  let slug = slug_of_markdown_filename filename in
+  let frontmatter, markdown =
+    markdown_with_frontmatter (Filename.concat "data/seminars" filename)
+  in
+  {
+    slug;
+    title = string_field "title" frontmatter;
+    date = string_field "pubDate" frontmatter;
+    description = string_field "description" frontmatter;
+    markdown;
+  }
+
+let seminars () =
+  seminar_files ()
+  |> List.map read_seminar
+  |> List.sort (fun left right -> compare right.date left.date)
+
+let seminar_obj seminar =
+  Template.obj
+    [
+      ("title", Jingoo.Jg_types.Tstr seminar.title);
+      ("date", Jingoo.Jg_types.Tstr seminar.date);
+      ("slug", Jingoo.Jg_types.Tstr seminar.slug);
+      ("description", Jingoo.Jg_types.Tstr seminar.description);
+    ]
+
+let render_seminar_index () =
+  let site = read_yaml "data/site.yaml" in
+  let content =
+    Template.render "templates/seminar-index.html"
+      [ Template.list "seminars" (seminars () |> List.map seminar_obj) ]
+  in
+  let html =
+    render_base ~site ~locale:I18n.En ~title:"Patrick Lei | Seminars"
+      ~switch_href:None content
+  in
+  write_file "public/seminars/index.html" html
+
+let find_seminar slug =
+  seminars () |> List.find (fun seminar -> seminar.slug = slug)
+
 let render_seminar_page slug =
   let site = read_yaml "data/site.yaml" in
-  let frontmatter, markdown =
-    markdown_with_frontmatter ("data/seminars/" ^ slug ^ ".md")
-  in
-  let body = Markdown.to_html markdown in
+  let seminar = find_seminar slug in
+  let body = Markdown.to_html seminar.markdown in
   let content =
     Template.render "templates/seminar-page.html"
       [
-        Template.str "title" (string_field "title" frontmatter);
-        Template.str "date" (string_field "date" frontmatter);
-        Template.str "url" (string_field "url" frontmatter);
+        Template.str "title" seminar.title;
+        Template.str "date" seminar.date;
+        Template.str "description" seminar.description;
         Template.safe "body" body;
       ]
   in
   let html =
-    render_base ~site ~locale:I18n.En ~title:(string_field "title" frontmatter)
-      ~switch_href:None content
+    render_base ~site ~locale:I18n.En ~title:seminar.title ~switch_href:None
+      content
   in
   write_file ("public/seminars/" ^ slug ^ "/index.html") html
 
@@ -440,7 +456,6 @@ let render_all () =
   render (Now I18n.En);
   render (Now I18n.Zh);
   render SeminarIndex;
-  seminar_values ()
-  |> List.iter (fun seminar -> render (SeminarPage (string_field "slug" seminar)));
+  seminars () |> List.iter (fun seminar -> render (SeminarPage seminar.slug));
   copy_static ();
   render_root_redirect ()

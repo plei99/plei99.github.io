@@ -6,48 +6,18 @@
   <title>{{ title }}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,300;1,500;1,600&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Cardo:ital,wght@0,400;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,300;1,500;1,600&display=swap" rel="stylesheet">
 
   <style>
-    /* ─── FONT COMBOS ────────────────────────────────────
-       Each combo defines three CSS variables:
-         --f-body     — main reading text
-         --f-display  — hero heading
-         --f-ui       — nav, labels, tags (always Barlow Condensed)
-    ─────────────────────────────────────────────────── */
-
-    /* Combo A: EB Garamond + Cormorant (original) */
-    [data-font="garamond"] {
-      --f-body:    'EB Garamond', Georgia, serif;
-      --f-display: 'Cormorant Garamond', Georgia, serif;
-      --f-ui:      'Barlow Condensed', sans-serif;
-      --body-size: 1.08rem;
-      --hero-size: 3.2rem;
-      --hero-weight: 300;
-    }
-
-    /* Combo B: Palatino (system) + Spectral fallback */
-    [data-font="palatino"] {
-      --f-body:    'Palatino Linotype', Palatino, 'Book Antiqua', 'Spectral', Georgia, serif;
-      --f-display: 'Palatino Linotype', Palatino, 'Book Antiqua', 'Lora', Georgia, serif;
-      --f-ui:      'Barlow Condensed', sans-serif;
-      --body-size: 1.02rem;     /* Palatino runs slightly larger optically */
-      --hero-size: 3rem;
-      --hero-weight: 400;       /* Palatino's light weight isn't as extreme */
-    }
-
-    /* Combo C: Hoefler Text (system) + Cardo fallback */
-    [data-font="hoefler"] {
-      --f-body:    'Hoefler Text', 'Hoefler', Cardo, 'Libre Baskerville', Georgia, serif;
-      --f-display: 'Hoefler Text', 'Hoefler', Cardo, Georgia, serif;
-      --f-ui:      'Barlow Condensed', sans-serif;
-      --body-size: 1.02rem;
-      --hero-size: 3.1rem;
-      --hero-weight: 400;
-    }
-
     /* ─── TOKENS ─────────────────────────────────────────── */
     :root {
+      --f-body:           'EB Garamond', Georgia, serif;
+      --f-display:        'Cormorant Garamond', Georgia, serif;
+      --f-ui:             'Barlow Condensed', sans-serif;
+      --body-size:        1.08rem;
+      --hero-size:        3.2rem;
+      --hero-weight:      300;
+
       --bg:               #e9ecf2;
       --card:             #fefcf7;
       --sidebar-bg:       #f0eee8;
@@ -80,70 +50,9 @@
       min-height: 100vh;
       display: flex;
       line-height: 1.6;
-      transition: font-family 0.2s;
     }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
-
-    /* ─── TWEAKS PANEL ───────────────────────────────────── */
-    .tweaks {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      z-index: 100;
-      background: var(--sidebar-hdr);
-      color: var(--sidebar-hdr-text);
-      border-radius: 6px;
-      padding: 0.75rem 1rem;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      min-width: 200px;
-    }
-    .tweaks-label {
-      color: rgba(240,238,232,0.45);
-      margin-bottom: 0.6rem;
-      display: block;
-      font-weight: 600;
-    }
-    .tweaks-options {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-    }
-    .tweaks-btn {
-      background: none;
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 3px;
-      color: rgba(240,238,232,0.7);
-      padding: 0.35rem 0.6rem;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: inherit;
-      letter-spacing: inherit;
-      text-transform: inherit;
-      font-weight: 600;
-      text-align: left;
-      transition: background 0.12s, color 0.12s, border-color 0.12s;
-    }
-    .tweaks-btn:hover {
-      background: rgba(255,255,255,0.07);
-      color: rgba(240,238,232,0.95);
-      border-color: rgba(255,255,255,0.25);
-    }
-    .tweaks-btn.active {
-      background: rgba(255,255,255,0.12);
-      color: #fefcf7;
-      border-color: rgba(255,255,255,0.35);
-    }
-    .tweaks-note {
-      margin-top: 0.6rem;
-      color: rgba(240,238,232,0.3);
-      font-size: 0.62rem;
-      line-height: 1.5;
-    }
 
     /* ─── SIDEBAR ────────────────────────────────────────── */
     .sidebar {
@@ -243,6 +152,10 @@
     }
     .nav-link:hover { color: var(--accent); background: var(--accent-light); text-decoration: none; }
     .nav-link.active { color: var(--accent); background: var(--accent-light); }
+    .sidebar-home-link {
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0.4rem;
+    }
     .sidebar-footer {
       padding: 1rem 1.5rem;
       border-top: 1px solid var(--border);
@@ -547,18 +460,7 @@
     }
   </style>
 </head>
-<body data-font="garamond">
-
-  <!-- ══ TWEAKS PANEL ══ -->
-  <div class="tweaks">
-    <span class="tweaks-label">Font combination</span>
-    <div class="tweaks-options">
-      <button class="tweaks-btn active" data-set="garamond">A — EB Garamond + Cormorant</button>
-      <button class="tweaks-btn" data-set="palatino">B — Palatino (system)</button>
-      <button class="tweaks-btn" data-set="hoefler">C — Hoefler Text (system)</button>
-    </div>
-    <p class="tweaks-note">B &amp; C use system fonts.<br>Results vary by OS.</p>
-  </div>
+<body>
 
   <!-- ══ SIDEBAR ══ -->
   <aside class="sidebar">
@@ -570,6 +472,9 @@
       {{ language_switch_html }}
     </div>
     <nav class="sidebar-nav">
+      {% if not is_home %}
+      <a href="/en/" class="nav-link sidebar-home-link">← Home</a>
+      {% endif %}
       {{ nav_html }}
     </nav>
     <footer class="sidebar-footer">
@@ -584,23 +489,5 @@
     </div>
   </main>
 
-  <script>
-    const body = document.body;
-    const btns = document.querySelectorAll('.tweaks-btn');
-    btns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        body.dataset.font = btn.dataset.set;
-        btns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        localStorage.setItem('font-combo', btn.dataset.set);
-      });
-    });
-    // restore last choice
-    const saved = localStorage.getItem('font-combo');
-    if (saved) {
-      body.dataset.font = saved;
-      btns.forEach(b => b.classList.toggle('active', b.dataset.set === saved));
-    }
-  </script>
 </body>
 </html>
