@@ -1,3 +1,11 @@
+- name: Log GLSM and related topics
+  description: >
+    These are notes from the summer school "Log GLSM and advances in enumerative
+    geometry" at Sichuan University, Meishan campus in July 2026.
+  date: Summer 2026
+  place: Sichuan University
+  url: https://github.com/plei99/notes/raw/master/misc/sichuan/notes.pdf
+
 - name: Good moduli spaces, positivity, and rationality
   description: >
     When does an Artin stack admit a "reasonable" moduli space and when does
