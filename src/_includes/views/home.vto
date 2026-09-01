@@ -1,0 +1,77 @@
+<div class="wrap">
+  <section class="hero">
+    <h1 class="hero-name">
+      <span class="hero-line"><span class="hero-word">Patrick</span></span><span class="hero-line hero-line--indent"><span class="hero-disc" aria-hidden="true"></span><span class="hero-word">Lei</span></span>
+    </h1>
+
+    <div class="portrait" aria-hidden="true">portrait</div>
+
+    <p class="hero-intro">{{ home.intro[lang] }}</p>
+    <p class="hero-lede">{{ home.lede[lang] }}</p>
+  </section>
+
+  {{ include "views/bow.vto" }}
+
+  <section class="section" aria-labelledby="papers-heading">
+    <div class="section-head">
+      <h2 class="section-title" id="papers-heading">
+        <span class="marker marker--apricot" aria-hidden="true"></span>
+        {{ ui[lang].selected_papers }}
+      </h2>
+      <a class="section-more" href="{{ lang === "zh" ? "/zh/papers.html" : "/papers.html" }}">{{ ui[lang].all_papers }} &rarr;</a>
+    </div>
+
+    {{ include "views/paper-rows.vto" { list: papers, featured: true } }}
+  </section>
+
+  <section class="section section--home-notes" aria-labelledby="notes-heading">
+    <div class="section-head">
+      <h2 class="section-title" id="notes-heading">
+        <span class="marker marker--lilac" aria-hidden="true"></span>
+        {{ ui[lang].notes }}
+      </h2>
+      <a class="section-more" href="{{ lang === "zh" ? "/zh/notes.html" : "/notes.html" }}">{{ ui[lang].all_notes }} &rarr;</a>
+    </div>
+
+    <ul class="rows rows--home-notes">
+      {{ for note of notes.slice(0, 3) }}
+      <li class="row row--notes">
+        <div class="row-date"><span>{{ note.date }}</span></div>
+        <h3 class="row-title"><a href="{{ note.url }}">{{ note.name }}</a></h3>
+        <div class="row-meta"><span>{{ note.place }}</span></div>
+        <div class="row-links"><a href="{{ note.url }}">{{ ui[lang].pdf }} &darr;</a></div>
+      </li>
+      {{ /for }}
+    </ul>
+  </section>
+
+  {{ include "views/bow.vto" }}
+
+  <section class="section section--about" aria-labelledby="about-heading">
+    <div class="section-head section-head--about">
+      <h2 class="section-title" id="about-heading">
+        {{ home.about.title[lang] }}
+      </h2>
+    </div>
+
+    <div class="prose">
+      <p>{{ home.bio[lang] }}</p>
+      {{ home.about.body[lang] }}
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="contact-heading">
+    <div class="section-head">
+      <h2 class="section-title" id="contact-heading">
+        <span class="marker marker--ink" aria-hidden="true"></span>
+        {{ ui[lang].contact }}
+      </h2>
+    </div>
+
+    <div class="contact-row">
+      <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a>
+      <a href="{{ site.contact.github }}">{{ site.contact.github_label }}</a>
+      <a href="{{ site.contact.arxiv }}">{{ site.contact.arxiv_label }}</a>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,24 @@
+---
+layout: layouts/base.vto
+---
+<div class="wrap">
+  <header class="page-head">
+    <p class="page-eyebrow">{{ pubDate |> date("MMMM yyyy") }}</p>
+    <h1 class="page-title page-title--sm">
+      <span class="marker marker--ink" aria-hidden="true"></span>
+      {{ title }}
+    </h1>
+    <p class="page-lede">{{ description }}</p>
+  </header>
+
+  {{ include "views/bow.vto" }}
+
+  <section class="section section--tight">
+    <div class="prose prose--wide">
+      {{ content }}
+    </div>
+    <p class="page-lede">
+      <a href="/seminars/">&larr; {{ ui[lang].seminars }}</a>
+    </p>
+  </section>
+</div>

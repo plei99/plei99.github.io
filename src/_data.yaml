@@ -1,0 +1,3 @@
+# Defaults for every page. The Chinese tree overrides `lang` in src/zh/_data.yaml.
+lang: en
+layout: layouts/base.vto

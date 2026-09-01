@@ -1,0 +1,29 @@
+{
+  "imports": {
+    "lume/": "https://deno.land/x/lume@v3.2.5/"
+  },
+  "tasks": {
+    "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
+    "build": "deno task lume",
+    "dev": "deno task lume -s",
+    "check": "deno fmt --check && deno lint && deno check _config.ts"
+  },
+  "compilerOptions": {
+    "types": [
+      "lume/types.ts"
+    ]
+  },
+  "fmt": {
+    "exclude": [
+      "_site",
+      "src/js/world.json",
+      "src/seminars"
+    ]
+  },
+  "lint": {
+    "exclude": [
+      "_site",
+      "src/js"
+    ]
+  }
+}

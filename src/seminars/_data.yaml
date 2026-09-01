@@ -1,0 +1,6 @@
+# Applies to the seminar markdown pages in this directory. The index page
+# overrides `type` and `layout` in its own front matter.
+type: seminar
+layout: layouts/seminar.vto
+section: seminars
+altUrl: /zh/seminars/

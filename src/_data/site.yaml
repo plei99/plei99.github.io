@@ -1,0 +1,61 @@
+name: Patrick Lei
+wordmark: Patrick Lei
+description:
+  en: >-
+    Patrick Lei is a Visiting Assistant Professor of mathematics at Boston
+    College, working in algebraic geometry and higher-genus Gromov-Witten
+    theory.
+  zh: >-
+    Patrick Lei 是波士顿学院数学系访问助理教授，研究代数几何与高亏格 Gromov-Witten 理论。
+
+# The two nav groups mirror the site's real information architecture:
+# "Research" items are things I produce (filled markers), "About" items are
+# things about me (hollow markers). Tones are only assigned to the first group.
+nav:
+  - section:
+      en: Research
+      zh: 研究
+    marker: filled
+    links:
+      - id: papers
+        tone: apricot
+        label: { en: Papers, zh: 论文 }
+        href: { en: /papers.html, zh: /zh/papers.html }
+      - id: notes
+        tone: lilac
+        label: { en: Notes, zh: 笔记 }
+        href: { en: /notes.html, zh: /zh/notes.html }
+      - id: seminars
+        tone: ink
+        label: { en: Seminars, zh: 讨论班 }
+        href: { en: /seminars/, zh: /zh/seminars/ }
+  - section:
+      en: About
+      zh: 关于
+    marker: hollow
+    links:
+      - id: travel
+        label: { en: Travel, zh: 旅行 }
+        href: { en: /en/travel.html, zh: /zh/travel.html }
+      - id: cv
+        label: { en: CV, zh: 简历 }
+        external: true
+        href:
+          en: https://github.com/plei99/cv/releases/latest/download/Patrick_Lei_CV.pdf
+          zh: https://github.com/plei99/cv/releases/latest/download/Patrick_Lei_CV.pdf
+      - id: now
+        label: { en: Now, zh: 最近 }
+        href: { en: /en/now.html, zh: /zh/now.html }
+
+contact:
+  email: patrick.lei@bc.edu
+  github: https://github.com/plei99
+  github_label: gh/plei99
+  arxiv: https://arxiv.org/a/0000-0003-1977-1596
+  arxiv_label: arXiv
+
+footer:
+  copyright: "© 2026 Patrick Lei"
+  links:
+    - label: Source
+      href: https://github.com/plei99/plei99.github.io

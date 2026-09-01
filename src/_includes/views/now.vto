@@ -1,0 +1,26 @@
+<div class="wrap">
+  <header class="page-head">
+    <h1 class="page-title">
+      <span class="marker marker--apricot" aria-hidden="true"></span>
+      {{ ui[lang].now }}
+    </h1>
+    <p class="page-lede">{{ ui[lang].now_lede }}</p>
+  </header>
+
+  {{ include "views/bow.vto" }}
+
+  <section class="section section--tight">
+    <ul class="now-list">
+      {{ for item of home.now[lang] }}
+      <li>
+        <span class="marker marker--lilac" aria-hidden="true"></span>
+        <span>{{ item }}</span>
+      </li>
+      {{ /for }}
+    </ul>
+
+    <p class="page-lede">
+      <a href="https://sive.rs/now">{{ ui[lang].now_what }}</a>
+    </p>
+  </section>
+</div>

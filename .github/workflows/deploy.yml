@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   workflow_dispatch:
 
 permissions:
@@ -21,28 +21,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install system dependencies
-        run: sudo apt-get update && sudo apt-get install -y libcmark-dev pkg-config
-
-      - name: Set up OCaml
-        uses: ocaml/setup-ocaml@v3
+      - name: Set up Deno
+        uses: denoland/setup-deno@v2
         with:
-          ocaml-compiler: 4.14.x
-          dune-cache: true
+          deno-version: "2.9.5"
 
-      - name: Install dependencies
-        run: opam install --deps-only . --yes
+      - name: Check formatting, lint, and types
+        run: deno task check
 
-      - name: Build generator
-        run: opam exec -- dune build
-
-      - name: Generate site
-        run: opam exec -- dune exec bin/main.exe
+      - name: Build site
+        run: deno task build
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: public/
+          path: _site/
 
   deploy:
     needs: build

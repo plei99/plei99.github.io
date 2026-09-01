@@ -1,0 +1,25 @@
+<div class="wrap">
+  <header class="page-head">
+    <h1 class="page-title">
+      <span class="marker marker--hollow" aria-hidden="true"></span>
+      {{ ui[lang].travel }}
+    </h1>
+    <p class="page-lede">{{ ui[lang].travel_lede }}</p>
+  </header>
+
+  {{ include "views/bow.vto" }}
+
+  <section class="section section--tight">
+    <div id="globe-container"></div>
+    <button
+      id="globe-motion-toggle"
+      class="globe-motion-toggle"
+      type="button"
+      data-start-label="{{ ui[lang].globe_start }}"
+      data-pause-label="{{ ui[lang].globe_pause }}"
+    >{{ ui[lang].globe_pause }}</button>
+  </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7" defer></script>
+<script src="/js/globe.js" defer></script>

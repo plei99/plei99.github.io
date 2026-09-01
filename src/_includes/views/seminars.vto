@@ -1,0 +1,25 @@
+<div class="wrap">
+  <header class="page-head">
+    <h1 class="page-title">
+      <span class="marker marker--ink" aria-hidden="true"></span>
+      {{ ui[lang].seminars }}
+    </h1>
+    <p class="page-lede">{{ ui[lang].seminars_lede }}</p>
+  </header>
+
+  {{ include "views/bow.vto" }}
+
+  <section class="section section--tight">
+    <ul class="rows">
+      {{ for seminar of search.pages("type=seminar", "pubDate=desc") }}
+      <li class="row row--pair">
+        <div class="row-date"><span>{{ seminar.pubDate |> date("MMM yyyy") }}</span></div>
+        <div>
+          <h2 class="row-title"><a href="{{ seminar.url }}">{{ seminar.title }}</a></h2>
+          <p class="row-body">{{ seminar.description }}</p>
+        </div>
+      </li>
+      {{ /for }}
+    </ul>
+  </section>
+</div>

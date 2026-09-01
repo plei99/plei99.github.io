@@ -1,0 +1,26 @@
+<div class="wrap">
+  <header class="page-head">
+    <h1 class="page-title">
+      <span class="marker marker--lilac" aria-hidden="true"></span>
+      {{ ui[lang].notes }}
+    </h1>
+    <p class="page-lede">{{ ui[lang].notes_lede }}</p>
+  </header>
+
+  {{ include "views/bow.vto" }}
+
+  <section class="section section--tight">
+    <ul class="rows">
+      {{ for note of notes }}
+      <li class="row row--notes">
+        <div class="row-date"><span>{{ note.date }}</span></div>
+        <div>
+          <h2 class="row-title"><a href="{{ note.url }}">{{ note.name }}</a></h2>
+          <p class="row-body">{{ note.description.trim() }}</p>
+        </div>
+        <div class="row-meta"><span>{{ note.place }}</span></div>
+      </li>
+      {{ /for }}
+    </ul>
+  </section>
+</div>

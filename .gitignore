@@ -1,4 +1,2 @@
-public/
-_opam/
-_build/
+_site/
 .DS_Store

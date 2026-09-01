@@ -1,0 +1,15 @@
+<div class="wrap">
+  <header class="page-head">
+    <h1 class="page-title">
+      <span class="marker marker--apricot" aria-hidden="true"></span>
+      {{ ui[lang].papers }}
+    </h1>
+    <p class="page-lede">{{ ui[lang].papers_lede }}</p>
+  </header>
+
+  {{ include "views/bow.vto" }}
+
+  <section class="section section--tight">
+    {{ include "views/paper-rows.vto" { list: papers } }}
+  </section>
+</div>

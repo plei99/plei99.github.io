@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="{{ lang === "zh" ? "zh-CN" : "en" }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ title }}{{ if title !== site.name }} · {{ site.name }}{{ /if }}</title>
+<meta name="description" content="{{ description || site.description[lang] }}">
+<link rel="canonical" href="{{ url |> url(true) }}">
+{{ if altUrl }}
+<link rel="alternate" hreflang="{{ lang === "zh" ? "en" : "zh-Hans" }}" href="{{ altUrl |> url(true) }}">
+<link rel="alternate" hreflang="{{ lang === "zh" ? "zh-Hans" : "en" }}" href="{{ url |> url(true) }}">
+{{ /if }}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ site.name }}">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ description || site.description[lang] }}">
+<meta property="og:url" content="{{ url |> url(true) }}">
+<meta property="og:locale" content="{{ lang === "zh" ? "zh_CN" : "en_US" }}">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;500;600&family=Young+Serif&display=swap">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">{{ ui[lang].skip_to_content }}</a>
+
+<header class="masthead">
+  <div class="masthead-inner wrap">
+    <a class="wordmark" href="{{ lang === "zh" ? "/zh/" : "/en/" }}">{{ site.wordmark }}</a>
+    <div class="masthead-links">
+      <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a>
+      <a href="{{ site.contact.github }}">{{ site.contact.github_label }}</a>
+      <a href="{{ site.contact.arxiv }}">{{ site.contact.arxiv_label }}</a>
+      <div class="langswitch" role="group" aria-label="{{ ui[lang].language }}">
+        <a lang="en" href="{{ lang === "en" ? url : (altUrl || "/en/") }}"{{ if lang === "en" }} aria-current="true"{{ /if }}>EN</a>
+        <a class="lang-zh" lang="zh-CN" href="{{ lang === "zh" ? url : (altUrl || "/zh/") }}"{{ if lang === "zh" }} aria-current="true"{{ /if }}>中文</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="rail" aria-label="{{ ui[lang].sections }}">
+  <ul class="rail-list">
+    {{ for group of site.nav }}
+      {{ for link of group.links }}
+    <li>
+      <a class="rail-link" href="{{ link.href[lang] }}"{{ if link.id === section || link.id === navHighlight }} aria-current="page"{{ /if }}{{ if link.external }} rel="noopener"{{ /if }}>
+        <span class="marker marker--{{ link.tone || "hollow" }}" aria-hidden="true"></span>
+        <span>{{ link.label[lang] }}</span>
+      </a>
+    </li>
+      {{ /for }}
+    {{ /for }}
+  </ul>
+</nav>
+
+<main id="main">
+  {{ content }}
+</main>
+
+<footer class="site-footer wrap">
+  <p>{{ site.footer.copyright }}</p>
+  <p>
+    {{ for link of site.footer.links }}
+    <a href="{{ link.href }}">{{ link.label }}</a>
+    {{ /for }}
+  </p>
+</footer>
+</body>
+</html>

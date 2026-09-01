@@ -1,0 +1,64 @@
+# Interface strings. Page *content* (paper titles, seminar abstracts, note
+# descriptions) is English-only because that is how it was written; these are
+# the chrome strings that let the EN/中文 control work on every page.
+en:
+  skip_to_content: Skip to content
+  language: Language
+  sections: Sections
+  selected_papers: Selected papers
+  all_papers: All papers
+  papers: Papers
+  notes: Notes
+  all_notes: All notes
+  seminars: Seminars
+  travel: Travel
+  now: Now
+  about: About
+  submitted: submitted
+  pages: pp.
+  pdf: PDF
+  author_short: P. Lei
+  papers_lede: >-
+    Preprints and papers, newest first. Everything is on the arXiv.
+  notes_lede: >-
+    Notes I typed up from courses and seminars, mostly at Columbia, UMass, Boston
+    College, and the Simons Center. All are PDFs.
+  seminars_lede: >-
+    Seminars I have organized, with schedules and abstracts.
+  travel_lede: Countries I have visited.
+  globe_start: Rotate globe
+  globe_pause: Pause rotation
+  now_lede: What I'm working on and thinking about right now.
+  now_what: What is this?
+  contact: Contact
+  english_only_note: This page is written in English.
+zh:
+  skip_to_content: 跳到正文
+  language: 语言
+  sections: 栏目
+  selected_papers: 精选论文
+  all_papers: 全部论文
+  papers: 论文
+  notes: 笔记
+  all_notes: 全部笔记
+  seminars: 讨论班
+  travel: 旅行
+  now: 最近
+  about: 关于
+  submitted: 已投稿
+  pages: 页
+  pdf: PDF
+  author_short: P. Lei
+  papers_lede: >-
+    预印本与论文，按时间倒序排列，全部可在 arXiv 上找到。
+  notes_lede: >-
+    我在哥伦比亚大学、马萨诸塞大学、波士顿学院和 Simons 中心的课程与讨论班上整理的笔记，均为 PDF。
+  seminars_lede: >-
+    我组织过的讨论班，含日程与摘要。
+  travel_lede: 去过的国家。
+  globe_start: 旋转地球
+  globe_pause: 暂停旋转
+  now_lede: 我最近在做的事和在想的事。
+  now_what: 这是什么？
+  contact: 联系
+  english_only_note: 本页内容为英文。

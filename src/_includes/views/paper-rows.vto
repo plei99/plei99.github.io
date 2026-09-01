@@ -1,0 +1,21 @@
+<ul class="rows{{ if featured }} rows--featured{{ /if }}">
+  {{ for paper of list }}
+  <li class="row">
+    <div class="row-date">
+      <span>{{ paper.date |> date("yyyy") }}</span>
+      {{ if paper.pages }}<span>{{ paper.pages }} {{ ui[lang].pages }}</span>{{ /if }}
+    </div>
+    <h3 class="row-title">
+      <a href="https://arxiv.org/abs/{{ paper.arxiv }}">{{ paper.title.trim() }}</a>
+    </h3>
+    <div class="row-meta">
+      <span>{{ ui[lang].author_short }}</span>
+      <span>{{ paper.categories.join(" · ") }}</span>
+    </div>
+    <div class="row-links">
+      <a href="https://arxiv.org/abs/{{ paper.arxiv }}">arXiv:{{ paper.arxiv }}</a>
+      <a href="https://arxiv.org/pdf/{{ paper.arxiv }}">{{ ui[lang].pdf }}</a>
+    </div>
+  </li>
+  {{ /for }}
+</ul>
