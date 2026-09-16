@@ -359,7 +359,7 @@ img {
   color: var(--soft-black);
 }
 
-/* ---- Portrait placeholder ---------------------------------- */
+/* ---- Portrait ---------------------------------------------- */
 .portrait {
   display: none;
 }
@@ -376,15 +376,12 @@ img {
     aspect-ratio: 1;
     border: 1px solid var(--rule);
     border-radius: 50%;
-    /* Hard-stop stripes, not a gradient. */
+    /* Hard-stop stripes, not a gradient. Visible only until the photo loads. */
     background-image: repeating-linear-gradient(
       -45deg,
       var(--stripe) 0 5px,
       var(--pearl-raised) 5px 11px
     );
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    color: var(--muted-soft);
     overflow: hidden;
   }
 
