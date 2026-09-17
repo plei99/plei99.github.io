@@ -17,6 +17,7 @@ en:
   submitted: submitted
   pages: pp.
   pdf: PDF
+  zh_translation: Chinese translation
   author_short: P. Lei
   papers_lede: >-
     Preprints and papers, newest first. Everything is on the arXiv.
@@ -52,6 +53,7 @@ zh:
   submitted: 已投稿
   pages: 页
   pdf: PDF
+  zh_translation: 中文译本
   author_short: P. Lei
   papers_lede: >-
     预印本与论文，按时间倒序排列，全部可在 arXiv 上找到。

@@ -17,6 +17,13 @@
         <div>
           <h2 class="row-title"><a href="{{ note.url }}">{{ note.name }}</a></h2>
           <p class="row-body">{{ note.description.trim() }}</p>
+          {{ if note.zh_translations }}
+          <div class="row-links">
+            {{ for t of note.zh_translations }}
+            <a href="{{ t.url }}">{{ ui[lang].zh_translation }} · {{ t.translator }}</a>
+            {{ /for }}
+          </div>
+          {{ /if }}
         </div>
         <div class="row-meta"><span>{{ note.place }}</span></div>
       </li>

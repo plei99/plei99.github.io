@@ -658,6 +658,10 @@ img {
   max-width: 40rem;
 }
 
+.row--notes .row-links {
+  margin-top: 0.45rem;
+}
+
 /* ---- Prose (about, seminar pages, now) --------------------- */
 .prose {
   max-width: 40rem;

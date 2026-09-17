@@ -5,6 +5,11 @@
   date: Summer 2026
   place: Sichuan University
   url: https://github.com/plei99/notes/raw/main/misc/sichuan/notes.pdf
+  zh_translations:
+    - translator: Claude
+      url: https://github.com/plei99/notes/raw/main/misc/sichuan/notes-cn.pdf
+    - translator: Codex
+      url: https://github.com/plei99/notes/raw/main/misc/sichuan/notes-zh.pdf
 
 - name: Higher genus GW theory
   description: >
