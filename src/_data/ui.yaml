@@ -30,6 +30,9 @@ en:
   globe_pause: Pause rotation
   now_lede: What I'm working on and thinking about right now.
   now_what: What is this?
+  uses: Uses
+  uses_lede: Things I use and like.
+  uses_what: What is this?
   contact: Contact
   portrait_alt: Portrait of Patrick Lei
   english_only_note: This page is written in English.
@@ -61,6 +64,9 @@ zh:
   globe_pause: 暂停旋转
   now_lede: 我最近在做的事和在想的事。
   now_what: 这是什么？
+  uses: 装备
+  uses_lede: 我在用也喜欢的东西。
+  uses_what: 这是什么？
   contact: 联系
   portrait_alt: Patrick Lei 的照片
   english_only_note: 本页内容为英文。

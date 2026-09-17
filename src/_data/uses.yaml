@@ -1,0 +1,120 @@
+# The Uses page: gear I use and like, grouped by category.
+#
+# Each category has a bilingual `title`, a `tone` for its section marker
+# (apricot, lilac, or ink, cycling like the homepage sections), an optional
+# bilingual `body`, and `items`.
+#
+# `body` is Markdown and renders as prose between the heading and the gear
+# rows. Use it for longer thoughts that belong to the category rather than to
+# one item (how you pick shoes, what you think of RunRepeat). Keep each Chinese
+# paragraph on one line: Markdown turns a line break inside a paragraph into a
+# space, which is fine in English but wrong between Chinese characters.
+#
+# Each item has a short mono `kind` label for the left column ("daily trainer",
+# "fine nib"), a `name`, an optional `url`, and a bilingual `note`. The note is
+# a single paragraph of inline Markdown, so links and emphasis work in it.
+
+- id: livetexing
+  tone: lilac
+  title:
+    en: live-TeXing
+    zh: 实时 TeX 笔记
+  body:
+    en: >-
+      I think the most important things are typing speed (empirically, you only need to type around 75 wpm), muscle memory, a good set of LaTeX macros and shortcuts, and a good snippets engine in the editor. I type all commutative diagrams directly in `tikzcd` environments during the lecture, but more complex figures are post-processed.
+    zh: >-
+      我觉得最重要的是打字速度（从经验上看，大约每分钟 75 词，也就是 75 wpm，就够了）、肌肉记忆、一套好用的 LaTeX 宏和快捷键，以及编辑器里一个好的代码片段引擎。所有交换图我都是在课上直接用 `tikzcd` 环境敲出来的，更复杂的图则留到课后再处理。
+  items:
+    - kind: laptop
+      name: 14 inch MacBook Pro (M4 Pro)
+      note:
+        en: >-
+          I didn't realize it would take so much effort to get MacOS to behave like my old Linux setup. I used to use a System76 Lemur Pro (running either Arch Linux or NixOS), which I liked a lot. Before that, I used a 2015-era MacBook Air, but I hate its keyboard.
+        zh: >-
+          没想到要让 macOS 用起来像我以前的 Linux 环境，得费这么大劲。我以前用的是 System76 Lemur Pro（装的是 Arch Linux 或 NixOS），我很喜欢它。再之前用的是一台 2015 年前后的 MacBook Air，但我很讨厌它的键盘。
+    - kind: editor
+      name: neovim, VS Code
+      note:
+        en: >-
+          Almost all of the notes were taken in neovim (including all of the notes taken as a student), with a small number done in VS Code. Most modern code editors have good performance, so the most important thing is to have a good snippets engine (I currently use LuaSnip in neovim and HyperSnips in VS Code).
+        zh: >-
+          几乎所有笔记都是用 neovim 记的（包括学生时代的全部笔记），只有少数是在 VS Code 里完成的。现在的代码编辑器性能大多不错，所以最重要的是有一个好的代码片段引擎（我目前在 neovim 里用 LuaSnip，在 VS Code 里用 HyperSnips）。
+    - kind: window manager
+      name: yabai (MacOS), hyprland (Linux)
+      note:
+        en: >-
+          Ideally, Linux would have a Wayland version of XMonad which plays well with a status bar better than xmobar (which sucks). With hyprland now being configured in Lua, we might actually have something like that. I also used i3, awesome, dwm, bspwm, sway, and river on Linux, but screen tearing on X makes it not usable for me and I found hyprland to be the best experience on Wayland for me (but Sway's tabbed layout implementation was better). There is no good solution on MacOS, but I find yabai to be the least bad.
+        zh: >-
+          理想情况下，Linux 上应该有一个 Wayland 版的 XMonad，并且能和一个比 xmobar（很烂）更好的状态栏配合得当。现在 hyprland 改用 Lua 来配置，我们也许真的能有这样的东西了。我在 Linux 上还用过 i3、awesome、dwm、bspwm、sway 和 river，但 X 上的画面撕裂让我没法用；在 Wayland 上，hyprland 是我体验最好的（不过 Sway 的标签式布局实现得更好）。macOS 上没有好的方案，但我觉得 yabai 是最不糟的那个。
+    - kind: ai tools
+      name: Codex, Claude Code
+      note:
+        en: >-
+          Pure TikZ for images is a complete mystery to me, so what used to be painstaking hand-written reproduction of images post-lectures is now a prompt to a coding agent. I haven't tried Astra yet, but 5.6 Sol was a complete disaster for writing TikZ code compared to Claude models (I have tried Fable 5 and Opus 5).
+        zh: >-
+          用纯 TikZ 画图对我来说完全是个谜，所以过去课后要费力手写复现的图，现在只要给编程智能体一句提示词就行了。我还没试过 Astra，不过和 Claude 的模型相比（我试过 Fable 5 和 Opus 5），5.6 Sol 写 TikZ 代码简直是一场灾难。
+    - kind: pdf viewer
+      name: Zathura (Linux), Skim (MacOS)
+      note:
+        en: >-
+          Just look at the different file formats supported by Zathura. I wish every other PDF viewer had this kind of file format coverage, and the vim motions make everything quite convenient, especially when jumping from a neovim window. Skim has synctex support, but otherwise it is not very good.
+        zh: >-
+          看看 Zathura 支持多少种文件格式就知道了。真希望其他 PDF 阅读器也有这样的格式覆盖面；vim 式的按键操作也让一切都很方便，尤其是从 neovim 窗口跳转过来的时候。Skim 支持 SyncTeX，但除此之外并不怎么好用。
+
+- id: running
+  tone: apricot
+  title:
+    en: Running
+    zh: 跑步
+  body:
+    en: |
+      I swear by [RunRepeat](https://runrepeat.com/), in particular the tests for shock absorption, energy return, breathability, and weight. I also go to physical stores and try on the shoes, so shoes need to have good numbers (I generally use fast shoes as daily trainers) and fit my feet and running mechanics. I have no scientific testing of gels, so my opinion is literally just based on vibes.
+
+      There is a lot of misinformation in running shoe reviews (for example [this article](https://www.runningxpert.com/en/inspiration/test-adidas-evo-sl-woven) claims the Lightstrike Pro foam in the Evo SL differs from race shoes, but [RunRepeat](https://runrepeat.com/adidas-adizero-evo-sl#lightstrike-pro) cut foam from both the Evo SL and the Adios Pro 3 (note: not the Adios Pro Evo 3) and found them to be the same under a microscope), so be careful about what you read online.
+    zh: |
+      买跑鞋我非常信赖 [RunRepeat](https://runrepeat.com/)，尤其看重它对减震、能量回馈、透气性和重量的测试。我也会去实体店试穿，所以一双鞋既要数据过关（我一般拿竞速鞋当日常训练鞋），也要合脚、适合我的跑姿。至于能量胶，我没有任何科学测试，纯粹凭感觉。
+
+      跑鞋评测里有不少错误信息。比如[这篇文章](https://www.runningxpert.com/en/inspiration/test-adidas-evo-sl-woven)声称 Evo SL 的 Lightstrike Pro 泡棉与竞速鞋的不同，但 [RunRepeat](https://runrepeat.com/adidas-adizero-evo-sl#lightstrike-pro) 从 Evo SL 和 Adios Pro 3（注意，不是 Adios Pro Evo 3）上各切了一块泡棉，在显微镜下发现两者相同。所以网上的评测要谨慎看待。
+  items:
+    - kind: daily trainer
+      name: Saucony Endorphin Pro 4
+      note:
+        en: >-
+          Both the [numbers](https://runrepeat.com/saucony-endorphin-pro-4#energy-return) and actual use suggests this shoe is a carbon-plated trainer rather than a race shoe. This might be the slowest shoe I own currently.
+        zh: >-
+          无论是[数据](https://runrepeat.com/saucony-endorphin-pro-4#energy-return)还是实际使用体验都表明，这双鞋更像一双碳板训练鞋而不是竞速鞋。这可能是我目前所有跑鞋里最慢的一双。
+    - kind: speed work
+      name: Saucony Endorphin Speed 5
+      note:
+        en: >-
+          This is possibly the favorite model of running shoe I have ever worn, is extremely durable, and has grown on me with time. The only flaw is that it isn't so cushioned for longer runs. With [78% energy return in the forefoot](https://runrepeat.com/saucony-endorphin-speed-5#energy-return) and a low stack height, it works very well for things that resemble track sessions.
+        zh: >-
+          这大概是我穿过最喜欢的一款跑鞋，非常耐用，而且越穿越喜欢。唯一的缺点是跑长距离时缓震不太够。它的[前掌能量回馈达到 78%](https://runrepeat.com/saucony-endorphin-speed-5#energy-return)，鞋底又比较薄，很适合类似田径场训练的课表。
+    - kind: long runs
+      name: Adidas Adizero Evo SL
+      note:
+        en: >-
+          Another nearly perfect shoe. The only flaw with this shoe is that the foam is only responsive for something like 300 miles. It's also completely fine for extremely cold weather despite the breathability, is already very comfortable, and grips well in wet conditions, so I don't get why Adidas introduced the ATR or woven versions.
+        zh: >-
+          又是一双近乎完美的鞋。唯一的缺点是中底大概只能保持 300 英里（约 480 公里）的弹性。虽然透气，极冷的天气也完全没问题；本身已经很舒服，湿滑路面抓地也好，所以我不明白 Adidas 为什么还要出 ATR 和编织鞋面的版本。
+    - kind: race day
+      name: Asics Metaspeed Edge Tokyo
+      note:
+        en: >-
+          I went to Marathon Sports, tried on a bunch of race shoes, and this one felt best. Weight is unfortunately not so competitive with the Adios Pro Evo 3 (but which non-Adidas shoe is?) and even with Asics is not so competitive with the Metaspeed Ray, but that shoe didn't exist when I bought this one. I did break 3 in it, so I am quite happy with the shoe.
+        zh: >-
+          我去 Marathon Sports 试了一堆竞速鞋，这双脚感最好。可惜重量比不过 Adios Pro Evo 3（不过哪双非 Adidas 的鞋比得过呢？），就算在 Asics 自家也比不过 Metaspeed Ray，但我买的时候那双鞋还没出。我穿着它破了三，所以对它相当满意。
+    - kind: gels
+      name: Maurten Gel 100
+      note:
+        en: >-
+          Goes down easily in situations where water is limited, doesn't upset the stomach, and no weird taste.
+        zh: >-
+          在没什么水的情况下也容易咽下去，不伤胃，也没有奇怪的味道。
+    - kind: watch
+      name: Garmin Forerunner 970
+      note:
+        en: >-
+          Yes, I paid for the flashlight and navigation features...
+        zh: >-
+          是的，我就是为了手电筒和导航功能多花的钱……

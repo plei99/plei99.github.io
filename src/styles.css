@@ -810,6 +810,17 @@ img {
   border-bottom: 1px solid var(--rule);
 }
 
+/* ---- Uses asides ------------------------------------------- */
+/* A category's Markdown body sits between its heading and its gear rows, so it
+   takes the same gap below as the section head takes above it. */
+.uses-prose {
+  margin-bottom: clamp(1.75rem, 3.5vw, 3rem);
+}
+
+.uses-prose > :last-child {
+  margin-bottom: 0;
+}
+
 /* ---- Travel globe ------------------------------------------ */
 #globe-container {
   width: 100%;

@@ -46,6 +46,9 @@ nav:
       - id: now
         label: { en: Now, zh: 最近 }
         href: { en: /en/now.html, zh: /zh/now.html }
+      - id: uses
+        label: { en: Uses, zh: 装备 }
+        href: { en: /en/uses.html, zh: /zh/uses.html }
 
 contact:
   email: patrick.lei@bc.edu

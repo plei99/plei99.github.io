@@ -25,6 +25,7 @@ src/
     home.yaml           Hero copy, bio, About prose, Now list (en + zh)
     papers.yaml         Paper records
     notes.yaml          Notes catalogue
+    uses.yaml           Uses page: gear by category, Markdown asides (en + zh)
   _includes/
     layouts/base.vto    Masthead, nav rail, footer, <head>
     layouts/seminar.vto Wrapper for seminar markdown pages
@@ -42,10 +43,10 @@ Content lives in YAML and Markdown, not in templates. To add a paper, edit
 
 ## Languages
 
-The homepage, Now, and Travel pages are fully bilingual, driven by `en`/`zh`
-keys in the data files. Papers, Notes, and Seminars have translated interface
-chrome but English content, since that is the language the content is written
-in. The EN/中文 control uses each page's `altUrl` front matter.
+The homepage, Now, Travel, and Uses pages are fully bilingual, driven by
+`en`/`zh` keys in the data files. Papers, Notes, and Seminars have translated
+interface chrome but English content, since that is the language the content is
+written in. The EN/中文 control uses each page's `altUrl` front matter.
 
 ## Design
 
@@ -58,6 +59,6 @@ metadata).
 
 Routes match the previous generator exactly: `/en/`, `/zh/`, `/papers.html`,
 `/notes.html`, `/seminars/`, `/seminars/<slug>/`, `/en/now.html`,
-`/zh/now.html`, `/en/travel.html`, `/zh/travel.html`, and a language-detecting
-redirect at `/`. Chinese variants of Papers, Notes, and Seminars were added
-under `/zh/`.
+`/zh/now.html`, `/en/travel.html`, `/zh/travel.html`, `/en/uses.html`,
+`/zh/uses.html`, and a language-detecting redirect at `/`. Chinese variants of
+Papers, Notes, and Seminars were added under `/zh/`.
