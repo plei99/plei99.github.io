@@ -2,6 +2,8 @@
 title: Intersection theory
 pubDate: 2021-01-20
 description: This is a seminar on intersection theory.
+title_zh: 相交理论
+description_zh: 关于相交理论的讨论班。
 ---
 
 - **Organizers:** Patrick Lei, Caleb Ji 
@@ -9,15 +11,15 @@ description: This is a seminar on intersection theory.
 - **Where:** math building or email Caleb for zoom link  
 - [Notes from the seminar](https://github.com/plei99/notes/raw/main/seminars/INT/notes.pdf)
 
-# References
+## References
 
 - **[F]** Fulton, _Intersection Theory_
 - **[EH]** Eisenbud, Harris, _3264 and all that_
 - **[S]** [stacks project chapter](https://stacks.math.columbia.edu/tag/0AZ6)
 - [fall 2018 seminar](https://web.archive.org/web/20181222011835/http://math.columbia.edu/~syu/f18-intersection.html)
-- [spring 2015 seminar](http://math.columbia.edu/~dejong/seminar/seminar-intersection.html)
+- [spring 2015 seminar](https://www.math.columbia.edu/~dejong/seminar/seminar-intersection.html)
 
-# Schedule
+## Schedule
 
 | Date      | Speaker           | Title                                                        | Abstract |
 |-----------|-------------------|--------------------------------------------------------------|----------|

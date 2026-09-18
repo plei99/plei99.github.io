@@ -2,6 +2,8 @@
 title: Quantum information undergrad seminar
 pubDate: 2024-01-18
 description: This is an undergraduate seminar on quantum information theory.
+title_zh: 量子信息本科生讨论班
+description_zh: 面向本科生的量子信息论讨论班。
 ---
 
 - **Organizer:** Patrick Lei
@@ -11,11 +13,11 @@ description: This is an undergraduate seminar on quantum information theory.
 - [Some essential papers in quantum information theory](https://felixleditzky.info/qit_essentials.html)
 - [Notes taken by one of the participants](https://mychern.github.io/notes/24sp-math-3952/24sp-math-3952.html)
 
-# About this seminar
+## About this seminar
 
 For many years, it has been expected that quantum algorithms will massively increase computational efficiency for certain tasks, for example factorization of integers. In this seminar, you will learn how to think about the most basic unit of quantum computing, the qubit, and interactions between them using the language of linear algebra. Later in the semester, we will move on to applications, for example quantum algorithms, approximation, or error correction.
 
-# Expectations
+## Expectations
 
 Each participant will give at least one talk over the course of the semester, during which I hope you enjoy some interesting mathematics and improve your presentation skills. Speakers are required to meet with me once at least 24 hours before your talk (note: I will not agree to meet over the weekend), at which point your notes should be 75% done. After your talk, please email me a copy of your notes. When you are not speaking, I hope that you can help form a friendly and lively seminar environment. The expectations are as follows:
 
@@ -23,7 +25,7 @@ Each participant will give at least one talk over the course of the semester, du
 - For every talk in which you are not speaking, please write [three things](https://math.stanford.edu/~vakil/threethings.html) (read the link to see what a "thing" is) on a sheet of paper (with your name and date on it) and give it to me at the end of the class. Note that you may write the three "things" during the talk.
 - Do not be afraid to ask questions during the talk.
 
-# Schedule
+## Schedule
 
 Each talk will last approximately 50 minutes. The schedule is subject to change at any point.
 

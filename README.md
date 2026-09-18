@@ -52,7 +52,7 @@ written in. The EN/中文 control uses each page's `altUrl` front matter.
 
 The visual design is "Open Margins": a pearl canvas (`#F7F5F1`), soft black, ink
 blue, dusty lilac, and muted apricot, with no gradients or shadows. Typography
-is Fraunces (display), Source Sans 3 (body), and IBM Plex Mono (dates and
+is Young Serif (display), Source Sans 3 (body), and IBM Plex Mono (dates and
 metadata).
 
 ## URLs

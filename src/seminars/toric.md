@@ -2,9 +2,11 @@
 title: Toric varieties undergrad seminar
 pubDate: 2023-09-05
 description: This is an undergraduate seminar on toric varieties.
+title_zh: 环面簇本科生讨论班
+description_zh: 面向本科生的环面簇讨论班。
 ---
 
-- **Organizer:** [Patrick Lei](index.html)
+- **Organizer:** [Patrick Lei](/en/)
 - **When:** Wednesdays, 6-8 PM
 - **Where:** Math 528
 
@@ -13,11 +15,11 @@ description: This is an undergraduate seminar on toric varieties.
 - **[CLS]** David Cox, John Little, and Hal Schenck, _Toric varieties_. This is the newest, longest (by far), and most elementary.
 - **[O]** Tadao Oda, _Convex bodies and algebraic geometry_. This is the oldest and most technical book, written by an expert in the field.
 
-# About this seminar
+## About this seminar
 
 Toric varieties are special geometric objects which are defined using combinatorial information. This combinatorial data can be used to compute many geometric properties of toric varieties. Even though toric varieties are quite special, many general phenomena can be observed on them. In this semester, we will discuss the basic geometry of toric varieties and then see their applications in algebraic geometry and other areas of mathematics. For example, applications of toric varieties to results in combinatorics are discussed in Chapter 5 of **[F]** and in Chapter 4 of **[O]**.
 
-# Expectations
+## Expectations
 
 Each participant will give at least one talk over the course of the semester, during which I hope you enjoy some interesting mathematics and improve your presentation skills. Speakers are required to meet with me once at least 24 hours before your talk, at which point you should give me a title and abstract. After your talk, please email me a copy of your notes. When you are not speaking, I hope that you can help form a friendly and lively seminar environment. The expectations are as follows:
 
@@ -25,7 +27,7 @@ Each participant will give at least one talk over the course of the semester, du
 - For every talk in which you are not speaking, please write [three things](https://math.stanford.edu/~vakil/threethings.html) (read the link to see what a "thing" is) on a sheet of paper (with your name and date on it) and give it to me at the end of the class. Note that you may write the three "things" during the talk.
 - Do not be afraid to ask questions during the talk.
 
-# Outline of the seminar
+## Outline of the seminar
 
 **Fundamental topics:**
 - Crash course on algebraic varieties
@@ -50,7 +52,7 @@ Each participant will give at least one talk over the course of the semester, du
 - Reflexive polytopes and Fano toric varieties. _Reference:_ **[CLS]**, section 5.1, chapters 14, 15.
 - Application of the above to mathematical physics. _Reference:_ Victor Batyrev, [_Dual polyhedra and mirror symmetry for Calabi-Yau hypersurfaces in toric varieties._](https://arxiv.org/abs/alg-geom/9310003)
 
-# Schedule
+## Schedule
 
 Each talk will last approximately 50 minutes. The schedule is subject to change at any point.
 

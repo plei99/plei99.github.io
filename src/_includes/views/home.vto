@@ -37,10 +37,11 @@
 
     <ul class="rows rows--home-notes">
       {{ for note of notes.slice(0, 3) }}
+      {{ set n = lang === "zh" && note.zh ? { ...note, ...note.zh } : note }}
       <li class="row row--notes">
-        <div class="row-date"><span>{{ note.date }}</span></div>
-        <h3 class="row-title"><a href="{{ note.url }}">{{ note.name }}</a></h3>
-        <div class="row-meta"><span>{{ note.place }}</span></div>
+        <div class="row-date"><span>{{ n.date }}</span></div>
+        <h3 class="row-title"><a href="{{ note.url }}">{{ n.name }}</a></h3>
+        <div class="row-meta"><span>{{ n.place }}</span></div>
         <div class="row-links"><a href="{{ note.url }}">{{ ui[lang].pdf }} &darr;</a></div>
       </li>
       {{ /for }}

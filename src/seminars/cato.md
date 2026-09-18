@@ -2,16 +2,18 @@
 title: Category O
 pubDate: 2021-09-05
 description: This is a seminar on category O for semisimple Lie algebras.
+title_zh: 范畴 O
+description_zh: 关于半单李代数的范畴 O 的讨论班。
 ---
 
-- **Organizers:** Kevin Chang, [Patrick Lei](https://math.columbia.edu/~plei), Fan Zhou  
+- **Organizers:** Kevin Chang, [Patrick Lei](/en/), Fan Zhou  
 - **When:** Wednesday 4-5:30 PM (Note: dinner offered!)  
 - **Where:** 622 Mathematics  
 - [Notes from the seminar](https://github.com/plei99/notes/raw/main/seminars/CO/notes.pdf)
 
 We plan to cover roughly the first half (7-8 chapters) of Humphreys’s book on category O (**[H]**) over the course of this semester. We will discuss various constructions in category O such as Vermas and contragredients, homological aspects such as relating to Exts, the BGG resolution, translation functors, and maybe some Kazhdan-Lusztig theory. This will probably take the majority of the semester, but if there is time left (and maybe next semester), we can discuss more geometric aspects, such as localization, Springer theory, the proof of the KL conjecture, and other topics that participants are interested in. We are inspired by the seminar run by Cailan, Henry, and Mrudul last year, but will (probably) remain much more basic than their seminar this semester.
 
-# Schedule
+## Schedule
 
 | Date      | Speaker       | Title                                                                 | Abstract |
 |-----------|--------------|-----------------------------------------------------------------------|----------|

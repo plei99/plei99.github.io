@@ -3,6 +3,7 @@
     threefolds II: Feynman rule and anomaly equations
   date: 2024-12-09
   arxiv: "2412.06527"
+  title_zh: 单参数 Calabi-Yau 三维簇的高亏格 Gromov-Witten 理论 II：Feynman 法则与反常方程
   categories: [math.AG]
   pages: 37
 
@@ -11,6 +12,7 @@
     threefolds I: Polynomiality
   date: 2024-09-17
   arxiv: "2409.11659"
+  title_zh: 单参数 Calabi-Yau 三维簇的高亏格 Gromov-Witten 理论 I：多项式性
   categories: [math.AG, math-ph]
   pages: 49
 
@@ -18,4 +20,5 @@
     MSP theory for smooth Calabi-Yau threefolds in weighted P^4
   date: 2024-09-17
   arxiv: "2409.11660"
+  title_zh: 加权 P^4 中光滑 Calabi-Yau 三维簇的 MSP 理论
   categories: [math.AG, math-ph]

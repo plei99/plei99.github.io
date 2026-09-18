@@ -3,4 +3,7 @@
 type: seminar
 layout: layouts/seminar.vto
 section: seminars
-altUrl: /zh/seminars/
+# Individual seminar pages exist only in English. `switchUrl` tells the EN/中文
+# control where to go without claiming a translation, so no hreflang pair is
+# emitted. The index page sets a real `altUrl` in its own front matter.
+switchUrl: /zh/seminars/

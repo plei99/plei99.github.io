@@ -7,6 +7,7 @@
     </div>
     <h3 class="row-title">
       <a href="https://arxiv.org/abs/{{ paper.arxiv }}">{{ paper.title.trim() }}</a>
+      {{ if lang === "zh" && paper.title_zh }}<span class="row-title-gloss">{{ paper.title_zh }}</span>{{ /if }}
     </h3>
     <div class="row-meta">
       <span>{{ ui[lang].author_short }}</span>

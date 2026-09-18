@@ -2,9 +2,11 @@
 title: Calculations seminar
 pubDate: 2025-01-20
 description: This is a seminar on calculations in enumerative geometry.
+title_zh: 计算讨论班
+description_zh: 关于计数几何中各种计算的讨论班。
 ---
 
-# About this seminar
+## About this seminar
 
 - Organizer: Patrick Lei
 - When: Wednesday 4:30-6 PM
@@ -12,13 +14,13 @@ description: This is a seminar on calculations in enumerative geometry.
 
 Enumerative geometry is a field where in many cases, the answer to a question is an actual formula. In this informal seminar, we will teach each other our tricks for actually computing these formulae. In the process, we will hopefully gain a better understanding of the underlying theory in the field.
 
-# Rules
+## Rules
 
 - All talks must be about computations--in particular, there should be concrete formulae in your talk.
 - The term "enumerative geometry" should be construed broadly--feel free to talk about whatever you think is relevant.
 - Speakers must email me a title and abstract at least 24 hours before their talks.
 
-# Schedule
+## Schedule
 
 | Date      | Speaker                | Title and abstract |
 |-----------|------------------------|------------------|

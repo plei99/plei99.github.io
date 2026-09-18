@@ -2,6 +2,8 @@
 title: Geometric rep theory
 pubDate: 2022-01-20
 description: This is a seminar on geometric representation theory with a focus on D-modules and localization.
+title_zh: 几何表示论
+description_zh: 关于几何表示论的讨论班，侧重 D-模与局部化。
 ---
 
 - **Organizers:** Kevin Chang, Patrick Lei, Fan Zhou  
@@ -33,7 +35,7 @@ Some references are:
 - **[EMTW]**: Elias, Makisumi, Thiel, Williamson, *Introduction to Soergel Bimodules*
 - **[Gi]**: Ginzburg, [*Lectures on Nakajima’s quiver varieties*](https://arxiv.org/abs/0905.0686)
 
-# Schedule
+## Schedule
 
 | Date    | Speaker       | Title                                                                 | Abstract                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 |---------|--------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

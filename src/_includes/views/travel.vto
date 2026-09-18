@@ -1,25 +1,30 @@
-<div class="wrap">
-  <header class="page-head">
-    <h1 class="page-title">
-      <span class="marker marker--hollow" aria-hidden="true"></span>
-      {{ ui[lang].travel }}
-    </h1>
-    <p class="page-lede">{{ ui[lang].travel_lede }}</p>
+<div class="wrap travel-page">
+  <header class="atlas-heading">
+    <h1>{{ travel[lang].title }}</h1>
   </header>
 
-  {{ include "views/bow.vto" }}
-
-  <section class="section section--tight">
-    <div id="globe-container"></div>
-    <button
-      id="globe-motion-toggle"
-      class="globe-motion-toggle"
-      type="button"
-      data-start-label="{{ ui[lang].globe_start }}"
-      data-pause-label="{{ ui[lang].globe_pause }}"
-    >{{ ui[lang].globe_pause }}</button>
+  <section class="atlas" aria-label="{{ ui[lang].travel }}">
+    <div class="atlas-stage">
+      <div id="globe-container" role="group" aria-label="{{ travel[lang].globe_label }}"
+        data-fallback-label="{{ travel[lang].flat }}"
+        data-visited="{{ travel.places.map(place => place.feature).join("|") }}">
+        <img class="atlas-fallback" src="/images/travel-globe.svg" alt="{{ travel[lang].globe_label }}" width="800" height="800">
+      </div>
+      <div class="atlas-controls" aria-label="{{ travel[lang].controls }}">
+        <button type="button" id="globe-zoom-in" aria-label="{{ travel[lang].zoom_in }}" title="{{ travel[lang].zoom_in }}" disabled>+</button>
+        <button type="button" id="globe-zoom-out" aria-label="{{ travel[lang].zoom_out }}" title="{{ travel[lang].zoom_out }}" disabled>−</button>
+        <span class="atlas-control-divider"></span>
+        <button type="button" id="globe-reset" aria-label="{{ travel[lang].reset }}" title="{{ travel[lang].reset }}" disabled>↺</button>
+        <button id="globe-motion-toggle" class="globe-motion-toggle" type="button" aria-pressed="false"
+          aria-label="{{ travel[lang].play }}" title="{{ travel[lang].play }}"
+          data-start-label="{{ travel[lang].play }}" data-pause-label="{{ travel[lang].pause }}" disabled>
+          <span class="atlas-motion-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+      <span id="globe-keyboard-help" class="visually-hidden">{{ travel[lang].keyboard }}</span>
+      <span id="globe-status" class="visually-hidden" role="status"></span>
+    </div>
   </section>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/d3@7" defer></script>
-<script src="/js/globe.js" defer></script>
+<script type="module" src="/js/globe.js"></script>

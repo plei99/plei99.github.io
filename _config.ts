@@ -16,7 +16,7 @@ site.copy("js");
 site.copy("images");
 
 site.use(date());
-site.use(sitemap());
+site.use(sitemap({ query: "url!=/ url!=/404.html" }));
 
 // Seminar schedules are wide tables written in Markdown. Wrap each one in a
 // focusable scroll container so narrow screens scroll the table instead of the

@@ -27,7 +27,7 @@
     <ul class="rows">
       {{ for item of category.items }}
       <li class="row row--pair">
-        <div class="row-date"><span>{{ item.kind }}</span></div>
+        <div class="row-date"><span>{{ item.kind[lang] }}</span></div>
         <div>
           <h3 class="row-title">{{ if item.url }}<a href="{{ item.url }}">{{ item.name }}</a>{{ else }}{{ item.name }}{{ /if }}</h3>
           <p class="row-body">{{ item.note[lang] |> md(true) }}</p>

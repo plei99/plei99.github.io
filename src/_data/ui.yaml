@@ -36,7 +36,6 @@ en:
   uses_what: What is this?
   contact: Contact
   portrait_alt: Portrait of Patrick Lei
-  english_only_note: This page is written in English.
 zh:
   skip_to_content: 跳到正文
   language: 语言
@@ -58,7 +57,7 @@ zh:
   papers_lede: >-
     预印本与论文，按时间倒序排列，全部可在 arXiv 上找到。
   notes_lede: >-
-    我在哥伦比亚大学、马萨诸塞大学、波士顿学院和 Simons 中心的课程与讨论班上整理的笔记，均为 PDF。
+    我在课程与讨论班上整理的笔记，主要来自哥伦比亚大学、马萨诸塞大学、波士顿学院和 Simons 中心，均为 PDF。
   seminars_lede: >-
     我组织过的讨论班，含日程与摘要。
   travel_lede: 去过的国家。
@@ -71,4 +70,3 @@ zh:
   uses_what: 这是什么？
   contact: 联系
   portrait_alt: Patrick Lei 的照片
-  english_only_note: 本页内容为英文。

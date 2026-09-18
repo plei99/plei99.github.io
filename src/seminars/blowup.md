@@ -2,9 +2,11 @@
 title: Blowup formula seminar
 pubDate: 2024-01-20
 description: This is a seminar on the blowup formula in Gromov-Witten theory.
+title_zh: 爆破公式讨论班
+description_zh: 关于 Gromov-Witten 理论中爆破公式的讨论班。
 ---
 
-# About this seminar
+## About this seminar
 
 - Organizers: Shaoyun Bai, Patrick Lei  
 - **When:** Thursdays, 2:30–4PM  
@@ -27,7 +29,7 @@ In the remaining part of the semester, we will explore some related work, for ex
 
 - **[CIJ]** Tom Coates, Hiroshi Iritani, and Yunfeng Jiang, _[The crepant transformation conjecture for toric complete intersections](https://www.sciencedirect.com/science/article/pii/S0001870817303420)_
 
-# Schedule
+## Schedule
 
 
 | Date      | Speaker                | Title and Abstract |

@@ -2,9 +2,11 @@
 title: Geometric invariant theory
 pubDate: 2020-09-05
 description: This is a seminar on geometric invariant theory.
+title_zh: 几何不变量理论
+description_zh: 关于几何不变量理论的讨论班。
 ---
 
-- **Organizers:** [Patrick Lei](index.html), Anna Abasheva  
+- **Organizers:** [Patrick Lei](/en/), Anna Abasheva  
 - **When:** Friday 11am-12:30pm EDT  
 - **Where:** math building or email Patrick for the link  
 - [notes from the seminar](https://github.com/plei99/notes/raw/main/seminars/GIT/notes.pdf)
@@ -27,7 +29,7 @@ Classically, invariant theory focused on studying invariants of rings under grou
 
 - **[N]** Nagata, *On the 14th Problem of Hilbert*
 
-##### Schedule
+## Schedule
 
 | Date      | Speaker (Format)           | Title                                                         | Abstract |
 |-----------|----------------------------|------------------------------------------------------------------------------|-----------------------|
