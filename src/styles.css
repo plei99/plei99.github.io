@@ -10,8 +10,9 @@
   --paper: #fff;
   --text: #111;
   --muted: #5a5a5a;
-  /* One blue, kept well away from black so the drawing reads as blue. --link
-     is the same hue a step darker, for small text. */
+  /* The drawing itself (outlines, C, X, x_i, alpha_i) is in the text colour.
+     Blue marks what can be followed: --ink for the marked points and cycles,
+     --link, the same hue a step darker, for words. */
   --ink: #2f6fd6;
   --link: #1d5bbf;
   --link-hover: #12408f;
@@ -280,7 +281,7 @@ img {
 }
 
 .fig-ink {
-  stroke: var(--ink);
+  stroke: var(--text);
   stroke-width: 2;
 }
 
@@ -290,7 +291,7 @@ img {
 
 .fig-math {
   font: italic 400 21px var(--serif);
-  fill: var(--ink);
+  fill: var(--text);
 }
 
 .fig-math--lg {
