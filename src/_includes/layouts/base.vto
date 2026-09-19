@@ -18,11 +18,21 @@
 <meta property="og:locale" content="{{ lang === "zh" ? "zh_CN" : "en_US" }}">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="/favicon.ico" sizes="any">
+<meta name="color-scheme" content="light dark">
+<script>
+  // Apply a saved theme before first paint. With nothing saved, the
+  // stylesheet follows the system setting on its own.
+  try {
+    var theme = localStorage.getItem("theme");
+    if (theme === "dark" || theme === "light") document.documentElement.dataset.theme = theme;
+  } catch (_) {}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap">
 <link rel="stylesheet" href="/styles.css">
 <script type="module" src="/js/panel.js"></script>
+<script type="module" src="/js/theme.js"></script>
 </head>
 {{ set homeUrl = lang === "zh" ? "/zh/" : "/en/" }}
 {{ set isHome = section === "home" }}
@@ -39,9 +49,13 @@
       {{ /if }}
       <p class="tagline">{{ home.tagline[lang] }}</p>
     </div>
+    <div class="controls">
+    <button class="theme-toggle" type="button" hidden aria-label="{{ ui[lang].theme_toggle }}"
+      data-dark-label="{{ ui[lang].theme_dark }}" data-light-label="{{ ui[lang].theme_light }}"></button>
     <div class="langswitch" role="group" aria-label="{{ ui[lang].language }}">
       <a lang="en" data-no-panel href="{{ lang === "en" ? url : (altUrl || switchUrl || "/en/") }}"{{ if lang === "en" }} aria-current="true"{{ /if }}>English</a>
       <a lang="zh-CN" data-no-panel href="{{ lang === "zh" ? url : (altUrl || switchUrl || "/zh/") }}"{{ if lang === "zh" }} aria-current="true"{{ /if }}>中文</a>
+    </div>
     </div>
   </header>
 
@@ -53,8 +67,6 @@
     <p>
       <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a>
       <a href="{{ site.contact.github }}">GitHub</a>
-      <a href="{{ site.contact.arxiv }}">arXiv</a>
-      <a href="{{ site.pages.uses.href[lang] }}">{{ ui[lang].uses }}</a>
     </p>
     <p>
       {{ site.footer.copyright }}

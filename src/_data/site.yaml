@@ -9,7 +9,7 @@ description:
 
 # Every destination on the site, keyed by the id the figure uses. In the figure
 # the marked points of C are about, seminars and notes; the map f is travel; the
-# insertions on X are papers, now and cv. Uses is a text link under the figure.
+# insertions on X are papers (labelled arXiv), now and cv. The label C is uses.
 pages:
   about:
     label: { en: about me, zh: 关于我 }
@@ -24,7 +24,7 @@ pages:
     label: { en: travel, zh: 旅行 }
     href: { en: /en/travel.html, zh: /zh/travel.html }
   papers:
-    label: { en: papers, zh: 论文 }
+    label: { en: arXiv, zh: arXiv }
     href: { en: /papers.html, zh: /zh/papers.html }
   now:
     label: { en: now, zh: 最近 }

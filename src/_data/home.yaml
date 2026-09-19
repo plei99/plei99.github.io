@@ -1,8 +1,8 @@
 # `tagline` sits under the name on every page. `bio` and `about` make up the
 # About me panel.
 tagline:
-  en: Postdoc at the Shanghai Center for Mathematical Sciences, Fudan University. Algebraic geometry.
-  zh: 复旦大学上海数学中心博士后，研究代数几何。
+  en: Algebraic geometer
+  zh: 代数几何学家
 bio:
   en: |
     I am a postdoc at the <a href="https://scms.fudan.edu.cn/">Shanghai Center for

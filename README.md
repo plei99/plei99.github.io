@@ -54,8 +54,9 @@ written in. The EN/中文 control uses each page's `altUrl` front matter.
 
 The site is one figure: a stable map f : (C, x1, x2, x3) -> X from a genus 2
 curve. The marked points are About me, Seminars and Notes; the map f is Travel;
-the three cycles on X, whose classes are the insertions, are Papers, Now and CV.
-Every other page is a panel laid over the figure.
+the three cycles on X, whose classes are the insertions, are Papers (labelled
+arXiv), Now and CV; the label C is Uses. Every other page is a panel laid over
+the figure.
 
 Each page is still built at its own URL, with the figure behind it and its
 content inside `<dialog id="panel">`, already open in the static HTML.
@@ -63,10 +64,13 @@ content inside `<dialog id="panel">`, already open in the static HTML.
 content swaps with `pushState`, so the figure never reloads. Without JavaScript
 the labels and the close button are plain links.
 
-The look is a page from a paper: white, black text, one ink blue (`#1f4e8c`) for
-the drawing and links, and one typeface, STIX Two Text. The figure is drawn
-twice in `figure/figure.vto`, left to right and top to bottom, because an SVG
-viewBox cannot change with a media query.
+The look is a page from a paper: white, black text, one blue (`--ink` for the
+drawing, `--link` for text links), and one typeface, STIX Two Text. Dark mode
+follows the system setting; the Dark/Light button in the masthead saves an
+explicit choice to `localStorage` (`js/theme.js`, plus a small inline script in
+`<head>` that applies it before first paint). The figure is drawn twice in
+`figure/figure.vto`, left to right and top to bottom, because an SVG viewBox
+cannot change with a media query.
 
 The previous design ("Open Margins") is kept on the `archive/2026-09-classic`
 branch and the `classic-2026-09` tag.
