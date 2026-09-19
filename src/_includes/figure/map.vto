@@ -1,0 +1,17 @@
+{{# The map f, which is also the link to Travel. `vertical` turns it to point
+    down for narrow screens. #}}
+<a class="fig-link" href="{{ site.pages.travel.href[lang] }}"{{ if section === "travel" }} aria-current="page"{{ /if }} data-id="travel">
+  {{ if vertical }}
+  <path class="fig-hit" d="M 210 335 L 210 490 M 210 412 L 350 412"/>
+  <path class="fig-arrow" d="M 210 335 L 210 488 M 204 477 L 210 489 L 216 477"/>
+  <path class="fig-leader" d="M 219 412 L 282 412"/>
+  <text class="fig-math fig-math--f" x="196" y="418" text-anchor="end" aria-hidden="true">f</text>
+  <text class="fig-word fig-word--start" x="290" y="419">{{ site.pages.travel.label[lang] }}</text>
+  {{ else }}
+  <path class="fig-hit" d="M 430 208 L 602 208 M 515 208 L 515 350"/>
+  <path class="fig-arrow" d="M 430 208 L 600 208 M 589 202 L 601 208 L 589 214"/>
+  <path class="fig-leader" d="M 515 217 L 515 318"/>
+  <text class="fig-math fig-math--f" x="515" y="194" text-anchor="middle" aria-hidden="true">f</text>
+  <text class="fig-word" x="515" y="345">{{ site.pages.travel.label[lang] }}</text>
+  {{ /if }}
+</a>

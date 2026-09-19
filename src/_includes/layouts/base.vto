@@ -20,53 +20,59 @@
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;500;600&family=Young+Serif&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap">
 <link rel="stylesheet" href="/styles.css">
+<script type="module" src="/js/panel.js"></script>
 </head>
-<body>
-<a class="skip-link" href="#main">{{ ui[lang].skip_to_content }}</a>
+{{ set homeUrl = lang === "zh" ? "/zh/" : "/en/" }}
+{{ set isHome = section === "home" }}
+<body data-home="{{ homeUrl }}" data-home-title="{{ site.name }}"{{ if isHome }} class="is-home"{{ /if }}>
+<a class="skip-link" href="{{ isHome ? "#figure" : "#panel" }}">{{ ui[lang].skip_to_content }}</a>
 
-<header class="masthead">
-  <div class="masthead-inner wrap">
-    <a class="wordmark" href="{{ lang === "zh" ? "/zh/" : "/en/" }}">{{ site.wordmark }}</a>
-    <div class="masthead-links">
-      <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a>
-      <a href="{{ site.contact.github }}">{{ site.contact.github_label }}</a>
-      <a href="{{ site.contact.arxiv }}">{{ site.contact.arxiv_label }}</a>
-      <div class="langswitch" role="group" aria-label="{{ ui[lang].language }}">
-        <a lang="en" href="{{ lang === "en" ? url : (altUrl || switchUrl || "/en/") }}"{{ if lang === "en" }} aria-current="true"{{ /if }}>EN</a>
-        <a class="lang-zh" lang="zh-CN" href="{{ lang === "zh" ? url : (altUrl || switchUrl || "/zh/") }}"{{ if lang === "zh" }} aria-current="true"{{ /if }}>中文</a>
-      </div>
+<div class="page">
+  <header class="masthead">
+    <div>
+      {{ if isHome }}
+      <h1 class="name">{{ site.name }}</h1>
+      {{ else }}
+      <p class="name"><a href="{{ homeUrl }}">{{ site.name }}</a></p>
+      {{ /if }}
+      <p class="tagline">{{ home.tagline[lang] }}</p>
     </div>
-  </div>
-</header>
+    <div class="langswitch" role="group" aria-label="{{ ui[lang].language }}">
+      <a lang="en" data-no-panel href="{{ lang === "en" ? url : (altUrl || switchUrl || "/en/") }}"{{ if lang === "en" }} aria-current="true"{{ /if }}>English</a>
+      <a lang="zh-CN" data-no-panel href="{{ lang === "zh" ? url : (altUrl || switchUrl || "/zh/") }}"{{ if lang === "zh" }} aria-current="true"{{ /if }}>中文</a>
+    </div>
+  </header>
 
-<nav class="rail" aria-label="{{ ui[lang].sections }}">
-  <ul class="rail-list">
-    {{ for group of site.nav }}
-      {{ for link of group.links }}
-    <li>
-      <a class="rail-link" href="{{ link.href[lang] }}"{{ if link.id === section }} aria-current="page"{{ /if }}{{ if link.external }} rel="noopener"{{ /if }}>
-        <span class="marker marker--{{ link.tone || "hollow" }}" aria-hidden="true"></span>
-        <span>{{ link.label[lang] }}</span>
-      </a>
-    </li>
+  <main id="figure" tabindex="-1">
+    {{ include "figure/figure.vto" }}
+  </main>
+
+  <footer class="colophon">
+    <p>
+      <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a>
+      <a href="{{ site.contact.github }}">GitHub</a>
+      <a href="{{ site.contact.arxiv }}">arXiv</a>
+      <a href="{{ site.pages.uses.href[lang] }}">{{ ui[lang].uses }}</a>
+    </p>
+    <p>
+      {{ site.footer.copyright }}
+      {{ for link of site.footer.links }}
+      <a href="{{ link.href }}">{{ link.label }}</a>
       {{ /for }}
-    {{ /for }}
-  </ul>
-</nav>
+    </p>
+  </footer>
+</div>
 
-<main id="main">
-  {{ content }}
-</main>
-
-<footer class="site-footer wrap">
-  <p>{{ site.footer.copyright }}</p>
-  <p>
-    {{ for link of site.footer.links }}
-    <a href="{{ link.href }}">{{ link.label }}</a>
-    {{ /for }}
-  </p>
-</footer>
+{{# Every page other than the home page is this panel, already open in the
+    static HTML. panel.js upgrades it to a modal dialog and swaps its content
+    when a label in the figure is followed. #}}
+<dialog id="panel" class="panel" aria-labelledby="panel-title"{{ if !isHome }} open{{ /if }}>
+  <a class="panel-close" href="{{ homeUrl }}" aria-label="{{ ui[lang].close }}" title="{{ ui[lang].close }}"><span aria-hidden="true">×</span></a>
+  <article id="panel-content" tabindex="-1" data-section="{{ section }}" data-title="{{ title }}{{ if title !== site.name }} · {{ site.name }}{{ /if }}">
+    {{ if !isHome }}{{ content }}{{ /if }}
+  </article>
+</dialog>
 </body>
 </html>

@@ -1,46 +1,30 @@
-<div class="wrap">
-  <header class="page-head">
-    <h1 class="page-title">
-      <span class="marker marker--hollow" aria-hidden="true"></span>
-      {{ ui[lang].uses }}
-    </h1>
-    <p class="page-lede">{{ ui[lang].uses_lede }}</p>
-  </header>
+<header class="panel-head">
+  <h1 id="panel-title">{{ ui[lang].uses }}</h1>
+  <p class="lede">{{ ui[lang].uses_lede }}</p>
+</header>
 
-  {{ include "views/bow.vto" }}
+{{ for category of uses }}
+<section class="uses-group" aria-labelledby="uses-{{ category.id }}-heading">
+  <h2 id="uses-{{ category.id }}-heading">{{ category.title[lang] }}</h2>
 
-  {{ for category of uses }}
-  <section class="section" aria-labelledby="uses-{{ category.id }}-heading">
-    <div class="section-head">
-      <h2 class="section-title" id="uses-{{ category.id }}-heading">
-        <span class="marker marker--{{ category.tone }}" aria-hidden="true"></span>
-        {{ category.title[lang] }}
-      </h2>
-    </div>
+  {{ if category.body }}
+  <div class="prose">
+    {{ category.body[lang] |> md }}
+  </div>
+  {{ /if }}
 
-    {{ if category.body }}
-    <div class="prose uses-prose">
-      {{ category.body[lang] |> md }}
-    </div>
-    {{ /if }}
+  <ul class="entries">
+    {{ for item of category.items }}
+    <li class="entry">
+      <p class="entry-when">{{ item.kind[lang] }}</p>
+      <div>
+        <h3 class="entry-title">{{ if item.url }}<a href="{{ item.url }}">{{ item.name }}</a>{{ else }}{{ item.name }}{{ /if }}</h3>
+        <p class="entry-body">{{ item.note[lang] |> md(true) }}</p>
+      </div>
+    </li>
+    {{ /for }}
+  </ul>
+</section>
+{{ /for }}
 
-    <ul class="rows">
-      {{ for item of category.items }}
-      <li class="row row--pair">
-        <div class="row-date"><span>{{ item.kind[lang] }}</span></div>
-        <div>
-          <h3 class="row-title">{{ if item.url }}<a href="{{ item.url }}">{{ item.name }}</a>{{ else }}{{ item.name }}{{ /if }}</h3>
-          <p class="row-body">{{ item.note[lang] |> md(true) }}</p>
-        </div>
-      </li>
-      {{ /for }}
-    </ul>
-  </section>
-  {{ /for }}
-
-  <section class="section section--tight">
-    <p class="page-lede">
-      <a href="https://uses.tech/">{{ ui[lang].uses_what }}</a>
-    </p>
-  </section>
-</div>
+<p class="aside"><a href="https://uses.tech/">{{ ui[lang].uses_what }}</a></p>

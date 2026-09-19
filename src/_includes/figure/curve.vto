@@ -1,0 +1,34 @@
+{{# The source curve C: genus 2, with marked points x1 (about me), x2 (seminars)
+    and x3 (notes). Coordinates are local; figure.vto places the group. #}}
+<path class="fig-ink fig-draw" pathLength="1" d="M 80 215 C 80 165, 120 140, 160 143 C 195 146, 205 170, 232 170 C 262 170, 275 128, 320 128 C 368 128, 392 165, 392 208 C 392 252, 362 285, 322 283 C 285 281, 268 252, 235 252 C 205 252, 195 292, 155 290 C 112 288, 80 260, 80 215 Z"/>
+<g class="fig-ink fig-draw fig-thin">
+  <path pathLength="1" d="M 116 208 Q 150 240 184 208"/>
+  <path pathLength="1" d="M 127 217 Q 150 197 173 217"/>
+  <path pathLength="1" d="M 284 198 Q 318 230 352 198"/>
+  <path pathLength="1" d="M 295 207 Q 318 187 341 207"/>
+</g>
+<g class="fig-math" aria-hidden="true">
+  <text x="72" y="138">C</text>
+  <text x="147" y="272">x<tspan class="fig-sub" dy="5">1</tspan></text>
+  <text x="247" y="206">x<tspan class="fig-sub" dy="5">2</tspan></text>
+  <text x="312" y="262">x<tspan class="fig-sub" dy="5">3</tspan></text>
+</g>
+
+<a class="fig-link" href="{{ site.pages.about.href[lang] }}"{{ if section === "about" }} aria-current="page"{{ /if }} data-id="about">
+  <path class="fig-hit" d="M 135 262 L 135 368"/>
+  <path class="fig-leader" d="M 135 271 L 135 336"/>
+  <circle class="fig-pt" cx="135" cy="262" r="5"/>
+  <text class="fig-word" x="135" y="362">{{ site.pages.about.label[lang] }}</text>
+</a>
+<a class="fig-link" href="{{ site.pages.seminars.href[lang] }}"{{ if section === "seminars" }} aria-current="page"{{ /if }} data-id="seminars">
+  <path class="fig-hit" d="M 236 195 L 236 70"/>
+  <path class="fig-leader" d="M 236 186 L 236 100"/>
+  <circle class="fig-pt" cx="236" cy="195" r="5"/>
+  <text class="fig-word" x="236" y="88">{{ site.pages.seminars.label[lang] }}</text>
+</a>
+<a class="fig-link" href="{{ site.pages.notes.href[lang] }}"{{ if section === "notes" }} aria-current="page"{{ /if }} data-id="notes">
+  <path class="fig-hit" d="M 345 250 L 390 366"/>
+  <path class="fig-leader" d="M 348.5 258.5 L 380 336"/>
+  <circle class="fig-pt" cx="345" cy="250" r="5"/>
+  <text class="fig-word" x="388" y="362">{{ site.pages.notes.label[lang] }}</text>
+</a>

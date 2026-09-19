@@ -1,34 +1,24 @@
-<div class="wrap">
-  <header class="page-head">
-    <h1 class="page-title">
-      <span class="marker marker--lilac" aria-hidden="true"></span>
-      {{ ui[lang].notes }}
-    </h1>
-    <p class="page-lede">{{ ui[lang].notes_lede }}</p>
-  </header>
+<header class="panel-head">
+  <h1 id="panel-title">{{ ui[lang].notes }}</h1>
+  <p class="lede">{{ ui[lang].notes_lede }}</p>
+</header>
 
-  {{ include "views/bow.vto" }}
-
-  <section class="section section--tight">
-    <ul class="rows">
-      {{ for note of notes }}
-      {{ set n = lang === "zh" && note.zh ? { ...note, ...note.zh } : note }}
-      <li class="row row--notes">
-        <div class="row-date"><span>{{ n.date }}</span></div>
-        <div>
-          <h2 class="row-title"><a href="{{ note.url }}">{{ n.name }}</a></h2>
-          <p class="row-body">{{ n.description.trim() }}</p>
-          {{ if note.zh_translations }}
-          <div class="row-links">
-            {{ for t of note.zh_translations }}
-            <a href="{{ t.url }}">{{ ui[lang].zh_translation }} · {{ t.translator }}</a>
-            {{ /for }}
-          </div>
-          {{ /if }}
-        </div>
-        <div class="row-meta"><span>{{ n.place }}</span></div>
-      </li>
-      {{ /for }}
-    </ul>
-  </section>
-</div>
+<ul class="entries">
+  {{ for note of notes }}
+  {{ set n = lang === "zh" && note.zh ? { ...note, ...note.zh } : note }}
+  <li class="entry">
+    <p class="entry-when">{{ n.date }}</p>
+    <div>
+      <h2 class="entry-title"><a href="{{ note.url }}">{{ n.name }}</a></h2>
+      <p class="entry-where">{{ n.place }}</p>
+      <p class="entry-body">{{ n.description.trim() }}</p>
+      {{ if note.zh_translations }}
+      <p class="entry-extra">
+        {{ ui[lang].zh_translation }}:
+        {{ for t of note.zh_translations }}<a href="{{ t.url }}">{{ t.translator }}</a>{{ /for }}
+      </p>
+      {{ /if }}
+    </div>
+  </li>
+  {{ /for }}
+</ul>

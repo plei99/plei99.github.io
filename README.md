@@ -20,20 +20,22 @@ _config.ts              Lume config: plugins, static file copies, table wrapping
 src/
   _data.yaml            Site-wide defaults (lang, layout)
   _data/
-    site.yaml           Name, navigation, contact links, footer
+    site.yaml           Name, the page map the figure links to, contact, footer
     ui.yaml             Interface strings for en + zh
-    home.yaml           Hero copy, bio, About prose, Now list (en + zh)
+    home.yaml           Tagline, bio, About prose, Now list (en + zh)
     papers.yaml         Paper records
     notes.yaml          Notes catalogue
     uses.yaml           Uses page: gear by category, Markdown asides (en + zh)
   _includes/
-    layouts/base.vto    Masthead, nav rail, footer, <head>
+    layouts/base.vto    <head>, masthead, the figure, footer, the panel dialog
     layouts/seminar.vto Wrapper for seminar markdown pages
-    views/*.vto         Page bodies, shared between languages
+    figure/*.vto        The home page figure: curve, map and target partials
+    views/*.vto         Panel bodies, shared between languages
   en/, zh/              Per-language pages; each one includes a shared view
   seminars/*.md         Seminar pages, one Markdown file each
   papers.vto, notes.vto Top-level English pages
   styles.css            The whole stylesheet
+  js/panel.js           Opens pages as panels over the figure
   js/, images/          Static assets copied verbatim
 ```
 
@@ -50,10 +52,24 @@ written in. The EN/中文 control uses each page's `altUrl` front matter.
 
 ## Design
 
-The visual design is "Open Margins": a pearl canvas (`#F7F5F1`), soft black, ink
-blue, dusty lilac, and muted apricot, with no gradients or shadows. Typography
-is Young Serif (display), Source Sans 3 (body), and IBM Plex Mono (dates and
-metadata).
+The site is one figure: a stable map f : (C, x1, x2, x3) -> X from a genus 2
+curve. The marked points are About me, Seminars and Notes; the map f is Travel;
+the three cycles on X, whose classes are the insertions, are Papers, Now and CV.
+Every other page is a panel laid over the figure.
+
+Each page is still built at its own URL, with the figure behind it and its
+content inside `<dialog id="panel">`, already open in the static HTML.
+`js/panel.js` upgrades that to a modal dialog and turns internal links into
+content swaps with `pushState`, so the figure never reloads. Without JavaScript
+the labels and the close button are plain links.
+
+The look is a page from a paper: white, black text, one ink blue (`#1f4e8c`) for
+the drawing and links, and one typeface, STIX Two Text. The figure is drawn
+twice in `figure/figure.vto`, left to right and top to bottom, because an SVG
+viewBox cannot change with a media query.
+
+The previous design ("Open Margins") is kept on the `archive/2026-09-classic`
+branch and the `classic-2026-09` tag.
 
 ## URLs
 

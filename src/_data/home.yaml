@@ -1,19 +1,8 @@
-# Short hero copy. `bio` below is the longer version, kept for the About section.
-intro:
-  en: Researcher, teacher, and runner.
-  zh: 研究者、教师、跑者。
-lede:
-  en: |
-    I'm a postdoc at the <a href="https://scms.fudan.edu.cn/">Shanghai Center for
-    Mathematical Sciences</a> at Fudan University, working in algebraic geometry.
-    I write about my research in <a href="/papers.html">papers</a>, think out loud
-    in <a href="/notes.html">notes</a>, and keep a running <a href="/en/now.html">Now
-    page</a> about what I'm up to.
-  zh: |
-    我目前在复旦大学<a href="https://scms.fudan.edu.cn/">上海数学中心</a>从事博士后研究，研究代数几何。
-    研究写在<a href="/zh/papers.html">论文</a>里，边想边写的东西放在<a href="/zh/notes.html">笔记</a>里，
-    近况则记在<a href="/zh/now.html">「最近」</a>页面。
-
+# `tagline` sits under the name on every page. `bio` and `about` make up the
+# About me panel.
+tagline:
+  en: Postdoc at the Shanghai Center for Mathematical Sciences, Fudan University. Algebraic geometry.
+  zh: 复旦大学上海数学中心博士后，研究代数几何。
 bio:
   en: |
     I am a postdoc at the <a href="https://scms.fudan.edu.cn/">Shanghai Center for
@@ -35,7 +24,7 @@ about:
     zh: 关于我
   body:
     en: |
-      You may also know me from:
+      <p>You may also know me from:</p>
       <ul>
         <li><a href="https://www.umass.edu/mathematics-statistics/">UMass Amherst</a>,
         where I was advised by <a href="https://paulhacking.github.io/">Paul Hacking</a>
@@ -51,7 +40,7 @@ about:
       I also like to learn about the historical evolution of Chinese dialects.
       I'm always open to suggestions for affordable but legitimately high-quality Sichuan cuisine.</p>
     zh: |
-      你也可能在这些地方认识我：
+      <p>你也可能在这些地方认识我：</p>
       <ul>
         <li><a href="https://www.umass.edu/mathematics-statistics/">马萨诸塞大学阿默斯特分校</a>，
         我在那里师从 <a href="https://paulhacking.github.io/">Paul Hacking</a>，

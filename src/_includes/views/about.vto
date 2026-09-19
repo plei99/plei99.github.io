@@ -1,0 +1,21 @@
+<header class="panel-head panel-head--portrait">
+  <div>
+    <h1 id="panel-title">{{ home.about.title[lang] }}</h1>
+  </div>
+  <img class="portrait" src="/images/me.webp" alt="{{ ui[lang].portrait_alt }}" width="800" height="800" decoding="async">
+</header>
+
+<div class="prose">
+  <p>{{ home.bio[lang] }}</p>
+  {{ home.about.body[lang] }}
+</div>
+
+<section class="contact" aria-labelledby="contact-heading">
+  <h2 id="contact-heading">{{ ui[lang].contact }}</h2>
+  <ul>
+    <li><a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a></li>
+    <li><a href="{{ site.contact.github }}">GitHub</a></li>
+    <li><a href="{{ site.contact.arxiv }}">arXiv</a></li>
+    <li><a href="{{ site.pages.cv.href[lang] }}" rel="noopener">{{ ui[lang].cv }} (PDF)</a></li>
+  </ul>
+</section>

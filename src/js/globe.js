@@ -358,6 +358,7 @@ async function init() {
   resize();
 
   function dispose() {
+    if (disposed) return;
     disposed = true;
     cancelAnimationFrame(frame);
     resizeObserver.disconnect();
@@ -378,6 +379,9 @@ async function init() {
     dispose();
     showFallback(new Error("WebGL context lost"));
   }, { once: true });
+  // The travel page opens as a panel over the figure; panel.js fires this when
+  // the panel closes or its content is replaced, so the WebGL context is freed.
+  document.addEventListener("panel:close", dispose, { once: true });
   addEventListener("pagehide", (event) => {
     if (!event.persisted) dispose();
   }, { once: true });

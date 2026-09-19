@@ -1,0 +1,28 @@
+{{# The target X, drawn as a slanted sheet, with the three cycles whose classes
+    are the insertions: papers, now and CV. #}}
+<path class="fig-ink fig-ink--deep fig-draw" pathLength="1" d="M 670 110 L 950 110 L 920 310 L 640 310 Z"/>
+<g class="fig-math" aria-hidden="true">
+  <text class="fig-math--lg" x="795" y="224" text-anchor="middle">X</text>
+  <text x="727" y="238">γ<tspan class="fig-sub" dy="5">1</tspan></text>
+  <text x="896" y="214">γ<tspan class="fig-sub" dy="5">2</tspan></text>
+  <text x="850" y="296">γ<tspan class="fig-sub" dy="5">3</tspan></text>
+</g>
+
+<a class="fig-link" href="{{ site.pages.papers.href[lang] }}"{{ if section === "papers" }} aria-current="page"{{ /if }} data-id="papers">
+  <path class="fig-hit" d="M 713 60 L 709 200 M 690 240 C 718 222, 698 182, 730 158"/>
+  <path class="fig-leader" d="M 712 84 L 709 194"/>
+  <path class="fig-cycle" d="M 690 240 C 718 222, 698 182, 730 158"/>
+  <text class="fig-word" x="713" y="72">{{ site.pages.papers.label[lang] }}</text>
+</a>
+<a class="fig-link" href="{{ site.pages.now.href[lang] }}"{{ if section === "now" }} aria-current="page"{{ /if }} data-id="now">
+  <path class="fig-hit" d="M 934 60 L 876 196 M 852 160 C 888 172, 858 222, 892 252"/>
+  <path class="fig-leader" d="M 927 84 L 877 192"/>
+  <path class="fig-cycle" d="M 852 160 C 888 172, 858 222, 892 252"/>
+  <text class="fig-word" x="934" y="72">{{ site.pages.now.label[lang] }}</text>
+</a>
+<a class="fig-link" href="{{ site.pages.cv.href[lang] }}" rel="noopener" target="_blank" data-id="cv">
+  <path class="fig-hit" d="M 788 276 L 788 374 M 742 278 C 772 256, 802 296, 842 276"/>
+  <path class="fig-leader" d="M 788 283 L 788 344"/>
+  <path class="fig-cycle" d="M 742 278 C 772 256, 802 296, 842 276"/>
+  <text class="fig-word" x="788" y="370">{{ site.pages.cv.label[lang] }}</text>
+</a>

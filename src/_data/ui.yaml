@@ -36,6 +36,11 @@ en:
   uses_what: What is this?
   contact: Contact
   portrait_alt: Portrait of Patrick Lei
+  cv: CV
+  close: Close
+  back_to_seminars: All seminars
+  figure_label: Site map, drawn as a stable map from a genus 2 curve to a target X
+  index: Pages
 zh:
   skip_to_content: 跳到正文
   language: 语言
@@ -70,3 +75,8 @@ zh:
   uses_what: 这是什么？
   contact: 联系
   portrait_alt: Patrick Lei 的照片
+  cv: 简历
+  close: 关闭
+  back_to_seminars: 全部讨论班
+  figure_label: 网站导航图，画成一个从亏格 2 曲线到 X 的稳定映射
+  index: 页面
