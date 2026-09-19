@@ -676,11 +676,6 @@ img {
   font-size: 1rem;
 }
 
-.entry-extra a + a::before {
-  content: ", ";
-  color: var(--text);
-}
-
 /* ---- Papers, set as a bibliography -------------------------- */
 .refs {
   list-style: none;

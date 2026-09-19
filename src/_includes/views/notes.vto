@@ -14,8 +14,8 @@
       <p class="entry-body">{{ n.description.trim() }}</p>
       {{ if note.zh_translations }}
       <p class="entry-extra">
-        {{ ui[lang].zh_translation }}:
-        {{ for t of note.zh_translations }}<a href="{{ t.url }}">{{ t.translator }}</a>{{ /for }}
+        {{ ui[lang].zh_translation }}{{ lang === "zh" ? "：" : ":" }}
+        {{ for i, t of note.zh_translations }}{{ if i }}{{ lang === "zh" ? "、" : ", " }}{{ /if }}<a href="{{ t.url }}">{{ t.translator }}</a>{{ /for }}
       </p>
       {{ /if }}
     </div>
