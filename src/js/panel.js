@@ -64,7 +64,8 @@ function setLanguageLinks(doc) {
 // re-imported under a fresh query string each time its panel opens.
 function runScripts() {
   for (const script of content.querySelectorAll("script[src]")) {
-    import(`${script.getAttribute("src")}?open=${Date.now()}`);
+    const src = script.getAttribute("src");
+    import(`${src}${src.includes("?") ? "&" : "?"}open=${Date.now()}`);
   }
 }
 

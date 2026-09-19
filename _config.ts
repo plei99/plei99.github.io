@@ -8,6 +8,11 @@ const site = lume({
   location: new URL("https://plei99.github.io/"),
 });
 
+// A per-build id appended to the stylesheet and script URLs. GitHub Pages
+// caches everything for ten minutes, so without it a browser can pair fresh
+// HTML with a stale stylesheet right after a deploy.
+site.data("rev", Date.now().toString(36));
+
 // Static assets are copied verbatim so their public URLs stay stable.
 site.copy("styles.css");
 site.copy("favicon.ico");

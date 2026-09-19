@@ -353,6 +353,10 @@ img {
   text-anchor: start;
 }
 
+.fig-word--end {
+  text-anchor: end;
+}
+
 .fig-link:hover .fig-word,
 .fig-link:focus-visible .fig-word,
 .fig-link[aria-current] .fig-word,
