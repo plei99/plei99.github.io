@@ -1,28 +1,47 @@
-{{# The target X, drawn as a slanted sheet, with the three cycles whose classes
-    are the insertions: papers (labelled arXiv), now and CV. #}}
-<path class="fig-ink fig-draw" pathLength="1" d="M 670 110 L 950 110 L 920 310 L 640 310 Z"/>
+{{# The target X, drawn as a slanted sheet. Inside it is the image f(C), which
+    meets each of the three cycles at the image of a marked point. The classes
+    of the cycles are the insertions, and the links hang off the points f(x_i):
+    papers (labelled arXiv) at f(x1), now at f(x2), CV at f(x3).
+
+    Each cycle is an arc touching f(C) at its apex, so a vertical leader from
+    the point runs up or down the open wedge between the two curves. #}}
+<path class="fig-ink fig-draw" pathLength="1" d="M 658 110 L 950 110 L 918.5 320 L 626.5 320 Z"/>
+<g class="fig-image fig-draw">
+  <path pathLength="1" d="M 708 201 C 708 178, 728 160, 750 160 C 770 160, 776 176, 793 176 C 810 176, 815 157, 836 157 C 858 157, 873 176, 873 199 C 873 235, 845 282, 814 282 C 796 282, 792 256, 775 256 C 760 256, 752 270, 736 270 C 718 270, 708 228, 708 201 Z"/>
+  <path pathLength="1" d="M 736 211 Q 748 223 760 211"/>
+  <path pathLength="1" d="M 740 214 Q 748 206 756 214"/>
+  <path pathLength="1" d="M 826 209 Q 838 221 850 209"/>
+  <path pathLength="1" d="M 830 212 Q 838 204 846 212"/>
+</g>
 <g class="fig-math" aria-hidden="true">
-  <text class="fig-math--lg" x="795" y="224" text-anchor="middle">X</text>
-  <text x="672" y="266">α<tspan class="fig-sub" dy="5">1</tspan></text>
-  <text x="899" y="240">α<tspan class="fig-sub" dy="5">2</tspan></text>
-  <text x="850" y="296">α<tspan class="fig-sub" dy="5">3</tspan></text>
+  <text class="fig-math--lg" x="795" y="226" text-anchor="middle">X</text>
+  <text class="fig-math--sm" x="793" y="147" text-anchor="middle">f(C)</text>
+  <text class="fig-math--sm" x="697" y="207" text-anchor="end">f(x<tspan class="fig-sub" dy="4">1</tspan><tspan dy="-4">)</tspan></text>
+  <text class="fig-math--sm" x="884" y="205">f(x<tspan class="fig-sub" dy="4">2</tspan><tspan dy="-4">)</tspan></text>
+  <text class="fig-math--sm" x="807" y="312" text-anchor="end">f(x<tspan class="fig-sub" dy="4">3</tspan><tspan dy="-4">)</tspan></text>
+  <text x="664" y="276">α<tspan class="fig-sub" dy="5">1</tspan></text>
+  <text x="897" y="266">α<tspan class="fig-sub" dy="5">2</tspan></text>
+  <text x="860" y="308">α<tspan class="fig-sub" dy="5">3</tspan></text>
 </g>
 
 <a class="fig-link" href="{{ site.pages.papers.href[lang] }}"{{ if section === "papers" }} aria-current="page"{{ /if }} data-id="papers">
-  <path class="fig-hit" d="M 713 60 L 709 200 M 690 240 C 718 222, 698 182, 730 158"/>
-  <path class="fig-leader" d="M 712 84 L 709 194"/>
-  <path class="fig-cycle" d="M 690 240 C 718 222, 698 182, 730 158"/>
-  <text class="fig-word" x="713" y="72">{{ site.pages.papers.label[lang] }}</text>
+  <path class="fig-hit" d="M 708 60 L 708 201 M 692 252 Q 724 201 692 150"/>
+  <path class="fig-leader" d="M 708 84 L 708 193"/>
+  <path class="fig-cycle" d="M 692 252 Q 724 201 692 150"/>
+  <circle class="fig-pt" cx="708" cy="201" r="4.5"/>
+  <text class="fig-word" x="708" y="72">{{ site.pages.papers.label[lang] }}</text>
 </a>
 <a class="fig-link" href="{{ site.pages.now.href[lang] }}"{{ if section === "now" }} aria-current="page"{{ /if }} data-id="now">
-  <path class="fig-hit" d="M 934 60 L 876 196 M 852 160 C 888 172, 858 222, 892 252"/>
-  <path class="fig-leader" d="M 927 84 L 877 192"/>
-  <path class="fig-cycle" d="M 852 160 C 888 172, 858 222, 892 252"/>
-  <text class="fig-word" x="934" y="72">{{ site.pages.now.label[lang] }}</text>
+  <path class="fig-hit" d="M 873 60 L 873 199 M 890 148 Q 856 199 890 250"/>
+  <path class="fig-leader" d="M 873 84 L 873 191"/>
+  <path class="fig-cycle" d="M 890 148 Q 856 199 890 250"/>
+  <circle class="fig-pt" cx="873" cy="199" r="4.5"/>
+  <text class="fig-word" x="873" y="72">{{ site.pages.now.label[lang] }}</text>
 </a>
 <a class="fig-link" href="{{ site.pages.cv.href[lang] }}" rel="noopener" target="_blank" data-id="cv">
-  <path class="fig-hit" d="M 788 276 L 788 374 M 742 278 C 772 256, 802 296, 842 276"/>
-  <path class="fig-leader" d="M 788 283 L 788 344"/>
-  <path class="fig-cycle" d="M 742 278 C 772 256, 802 296, 842 276"/>
-  <text class="fig-word" x="788" y="370">{{ site.pages.cv.label[lang] }}</text>
+  <path class="fig-hit" d="M 814 282 L 814 376 M 774 294 Q 814 270 854 294"/>
+  <path class="fig-leader" d="M 814 290 L 814 346"/>
+  <path class="fig-cycle" d="M 774 294 Q 814 270 854 294"/>
+  <circle class="fig-pt" cx="814" cy="282" r="4.5"/>
+  <text class="fig-word" x="814" y="372">{{ site.pages.cv.label[lang] }}</text>
 </a>

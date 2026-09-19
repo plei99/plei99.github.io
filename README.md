@@ -55,8 +55,8 @@ written in. The EN/中文 control uses each page's `altUrl` front matter.
 The site is one figure: a stable map f : (C, x1, x2, x3) -> X from a genus 2
 curve. The marked points are About me, Seminars and Notes; the map f is Travel;
 the three cycles on X, whose classes are the insertions, are Papers (labelled
-arXiv), Now and CV; the label C is Uses. Every other page is a panel laid over
-the figure.
+arXiv), Now and CV, each linked from the point f(x_i) where the image f(C) meets
+it; the label C is Uses. Every other page is a panel laid over the figure.
 
 Each page is still built at its own URL, with the figure behind it and its
 content inside `<dialog id="panel">`, already open in the static HTML.
