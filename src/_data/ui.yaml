@@ -3,7 +3,6 @@
 # the chrome strings that let the EN/中文 control work on every page.
 en:
   skip_to_content: Skip to content
-  language: Language
   sections: Sections
   selected_papers: Selected papers
   all_papers: All papers
@@ -47,7 +46,6 @@ en:
   index: Pages
 zh:
   skip_to_content: 跳到正文
-  language: 语言
   sections: 栏目
   selected_papers: 精选论文
   all_papers: 全部论文

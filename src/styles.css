@@ -30,16 +30,16 @@
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --paper: #17191d;
+  --paper: #000;
   --text: #e9e7e2;
   --muted: #a3a29c;
-  --ink: #7fb2ff;
-  --link: #8dbbff;
-  --link-hover: #c0d9ff;
-  --rule: #363a42;
-  --wash: rgb(23 25 29 / 0.86);
+  --ink: #5a9bf2;
+  --link: #6ba6f5;
+  --link-hover: #a5c9fb;
+  --rule: #2e3138;
+  --wash: rgb(0 0 0 / 0.86);
   --shadow: rgb(0 0 0 / 0.6);
-  --globe-stage: #232a33;
+  --globe-stage: #10151b;
 }
 
 /* The same values again, for visitors whose system is dark and who have not
@@ -47,16 +47,16 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     color-scheme: dark;
-    --paper: #17191d;
+    --paper: #000;
     --text: #e9e7e2;
     --muted: #a3a29c;
-    --ink: #7fb2ff;
-    --link: #8dbbff;
-    --link-hover: #c0d9ff;
-    --rule: #363a42;
-    --wash: rgb(23 25 29 / 0.86);
+    --ink: #5a9bf2;
+    --link: #6ba6f5;
+    --link-hover: #a5c9fb;
+    --rule: #2e3138;
+    --wash: rgb(0 0 0 / 0.86);
     --shadow: rgb(0 0 0 / 0.6);
-    --globe-stage: #232a33;
+    --globe-stage: #10151b;
   }
 }
 
@@ -198,25 +198,14 @@ img {
 }
 
 .langswitch {
-  display: flex;
-  gap: 1rem;
-  font-size: 1rem;
-}
-
-.langswitch a {
   color: var(--muted);
+  font-size: 1rem;
   text-decoration: none;
 }
 
-.langswitch a:hover {
+.langswitch:hover {
   color: var(--text);
   text-decoration: underline;
-}
-
-.langswitch a[aria-current] {
-  color: var(--text);
-  text-decoration: underline;
-  text-decoration-thickness: 0.08em;
 }
 
 .colophon {

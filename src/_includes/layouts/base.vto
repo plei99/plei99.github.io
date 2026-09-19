@@ -52,10 +52,12 @@
     <div class="controls">
     <button class="theme-toggle" type="button" hidden aria-label="{{ ui[lang].theme_toggle }}"
       data-dark-label="{{ ui[lang].theme_dark }}" data-light-label="{{ ui[lang].theme_light }}"></button>
-    <div class="langswitch" role="group" aria-label="{{ ui[lang].language }}">
-      <a lang="en" data-no-panel href="{{ lang === "en" ? url : (altUrl || switchUrl || "/en/") }}"{{ if lang === "en" }} aria-current="true"{{ /if }}>English</a>
-      <a lang="zh-CN" data-no-panel href="{{ lang === "zh" ? url : (altUrl || switchUrl || "/zh/") }}"{{ if lang === "zh" }} aria-current="true"{{ /if }}>中文</a>
-    </div>
+    {{# Like the theme button, the language link names what it switches to. #}}
+    {{ if lang === "zh" }}
+    <a class="langswitch" lang="en" hreflang="en" data-no-panel href="{{ altUrl || switchUrl || "/en/" }}">English</a>
+    {{ else }}
+    <a class="langswitch" lang="zh-CN" hreflang="zh-Hans" data-no-panel href="{{ altUrl || switchUrl || "/zh/" }}">中文</a>
+    {{ /if }}
     </div>
   </header>
 

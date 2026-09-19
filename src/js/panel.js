@@ -38,15 +38,26 @@ function markCurrent(section) {
   }
 }
 
+// The language link comes from the page now in the panel, label included: a
+// seminar page opened from the Chinese site is English, so its link must offer
+// 中文. Closing the panel restores the link the home page started with.
+const homeLanguageLink = document.body.classList.contains("is-home")
+  ? document.querySelector(".langswitch").cloneNode(true)
+  : null;
+
 function setLanguageLinks(doc) {
-  const fresh = doc?.querySelectorAll(".langswitch a");
-  document.querySelectorAll(".langswitch a").forEach((link, i) => {
-    link.href = fresh
-      ? fresh[i].getAttribute("href")
-      : i === 0
-      ? "/en/"
-      : "/zh/";
-  });
+  const current = document.querySelector(".langswitch");
+  const fresh = doc?.querySelector(".langswitch") ?? homeLanguageLink;
+  if (fresh) {
+    current.replaceWith(document.importNode(fresh, true));
+    return;
+  }
+  // Closed a panel on a page that did not load as the home page.
+  const toEnglish = home === "/zh/";
+  current.href = toEnglish ? "/en/" : "/zh/";
+  current.textContent = toEnglish ? "English" : "中文";
+  current.lang = toEnglish ? "en" : "zh-CN";
+  current.hreflang = toEnglish ? "en" : "zh-Hans";
 }
 
 // Module scripts only run once per URL, so a page script (the globe) is
