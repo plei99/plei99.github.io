@@ -77,8 +77,9 @@ branch and the `classic-2026-09` tag.
 
 ## URLs
 
-Routes match the previous generator exactly: `/en/`, `/zh/`, `/papers.html`,
+The English home page is the site root, `/`; `/en/` redirects to it. The other
+routes match the previous generator exactly: `/zh/`, `/papers.html`,
 `/notes.html`, `/seminars/`, `/seminars/<slug>/`, `/en/now.html`,
 `/zh/now.html`, `/en/travel.html`, `/zh/travel.html`, `/en/uses.html`,
-`/zh/uses.html`, and a language-detecting redirect at `/`. Chinese variants of
-Papers, Notes, and Seminars were added under `/zh/`.
+`/zh/uses.html`. On a first visit, `/` sends browsers set to Chinese to `/zh/`.
+Chinese variants of Papers, Notes, and Seminars were added under `/zh/`.

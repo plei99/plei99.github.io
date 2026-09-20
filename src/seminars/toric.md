@@ -6,7 +6,7 @@ title_zh: 环面簇本科生讨论班
 description_zh: 面向本科生的环面簇讨论班。
 ---
 
-- **Organizer:** [Patrick Lei](/en/)
+- **Organizer:** [Patrick Lei](/)
 - **When:** Wednesdays, 6-8 PM
 - **Where:** Math 528
 

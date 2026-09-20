@@ -6,7 +6,7 @@ title_zh: 范畴 O
 description_zh: 关于半单李代数的范畴 O 的讨论班。
 ---
 
-- **Organizers:** Kevin Chang, [Patrick Lei](/en/), Fan Zhou  
+- **Organizers:** Kevin Chang, [Patrick Lei](/), Fan Zhou  
 - **When:** Wednesday 4-5:30 PM (Note: dinner offered!)  
 - **Where:** 622 Mathematics  
 - [Notes from the seminar](https://github.com/plei99/notes/raw/main/seminars/CO/notes.pdf)

@@ -14,8 +14,7 @@ const parser = new DOMParser();
 let request = 0;
 
 function isHome(url) {
-  return url.pathname === "/en/" || url.pathname === "/zh/" ||
-    url.pathname === "/";
+  return url.pathname === "/" || url.pathname === "/zh/";
 }
 
 // A link opens in the panel when it points at another HTML page of this site.
@@ -54,7 +53,7 @@ function setLanguageLinks(doc) {
   }
   // Closed a panel on a page that did not load as the home page.
   const toEnglish = home === "/zh/";
-  current.href = toEnglish ? "/en/" : "/zh/";
+  current.href = toEnglish ? "/" : "/zh/";
   current.textContent = toEnglish ? "English" : "中文";
   current.lang = toEnglish ? "en" : "zh-CN";
   current.hreflang = toEnglish ? "en" : "zh-Hans";
@@ -124,6 +123,18 @@ async function openPanel(url, { push }) {
   show();
   runScripts();
 }
+
+// Remember a deliberate language choice, so the root page's first-visit
+// language detection never overrides it.
+document.addEventListener("click", (event) => {
+  const link = event.target.closest?.(".langswitch");
+  if (!link) return;
+  try {
+    localStorage.setItem("lang", link.lang.startsWith("zh") ? "zh" : "en");
+  } catch {
+    // Private browsing: nothing to remember.
+  }
+});
 
 document.addEventListener("click", (event) => {
   if (event.defaultPrevented || event.button !== 0) return;

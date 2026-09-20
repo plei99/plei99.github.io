@@ -6,7 +6,7 @@ title_zh: 几何不变量理论
 description_zh: 关于几何不变量理论的讨论班。
 ---
 
-- **Organizers:** [Patrick Lei](/en/), Anna Abasheva  
+- **Organizers:** [Patrick Lei](/), Anna Abasheva  
 - **When:** Friday 11am-12:30pm EDT  
 - **Where:** math building or email Patrick for the link  
 - [notes from the seminar](https://github.com/plei99/notes/raw/main/seminars/GIT/notes.pdf)

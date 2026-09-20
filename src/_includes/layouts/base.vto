@@ -19,6 +19,20 @@
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <meta name="color-scheme" content="light dark">
+{{ if detectLanguage }}
+<script>
+  // First visit from a browser set to Chinese: go to the Chinese site. Skipped
+  // once the visitor has used the language link (panel.js records that), and
+  // when arriving from another page of this site.
+  try {
+    var here = document.referrer.indexOf(location.origin) === 0;
+    if (!here && !localStorage.getItem("lang") &&
+        (navigator.language || "").toLowerCase().indexOf("zh") === 0) {
+      location.replace("/zh/");
+    }
+  } catch (_) {}
+</script>
+{{ /if }}
 <script>
   // Apply a saved theme before first paint. With nothing saved, the
   // stylesheet follows the system setting on its own.
@@ -34,7 +48,7 @@
 <script type="module" src="/js/panel.js?v={{ rev }}"></script>
 <script type="module" src="/js/theme.js?v={{ rev }}"></script>
 </head>
-{{ set homeUrl = lang === "zh" ? "/zh/" : "/en/" }}
+{{ set homeUrl = lang === "zh" ? "/zh/" : "/" }}
 {{ set isHome = section === "home" }}
 <body data-home="{{ homeUrl }}" data-home-title="{{ site.name }}"{{ if isHome }} class="is-home"{{ /if }}>
 <a class="skip-link" href="{{ isHome ? "#figure" : "#panel" }}">{{ ui[lang].skip_to_content }}</a>
@@ -54,7 +68,7 @@
       data-dark-label="{{ ui[lang].theme_dark }}" data-light-label="{{ ui[lang].theme_light }}"></button>
     {{# Like the theme button, the language link names what it switches to. #}}
     {{ if lang === "zh" }}
-    <a class="langswitch" lang="en" hreflang="en" data-no-panel href="{{ altUrl || switchUrl || "/en/" }}">English</a>
+    <a class="langswitch" lang="en" hreflang="en" data-no-panel href="{{ altUrl || switchUrl || "/" }}">English</a>
     {{ else }}
     <a class="langswitch" lang="zh-CN" hreflang="zh-Hans" data-no-panel href="{{ altUrl || switchUrl || "/zh/" }}">中文</a>
     {{ /if }}
