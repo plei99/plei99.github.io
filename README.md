@@ -67,16 +67,17 @@ the labels and the close button are plain links.
 The look is a page from a paper: one typeface, STIX Two Text, with the figure's
 outlines in the text colour and one accent for whatever can be followed.
 
-Colours come from terminal colour schemes. Modus (Operandi and Vivendi) is the
-default, and the masthead picker also offers Ayu, Solarized, Rosé Pine,
-Catppuccin, Monokai, Gruvbox and Nord. Each scheme is one block in `styles.css`
-giving a light and a dark value, through `light-dark()`, for seven roles: paper,
-text, muted, ink, link, rule and stage. To add a scheme, add a block there and a
-line under `schemes` in `src/_data/site.yaml`.
+Colours come from terminal colour schemes, chosen by name from one picker in the
+masthead: Modus Operandi and Vivendi, Ayu Light and Dark, Solarized Light and
+Dark, Rosé Pine Dawn and Rosé Pine, Catppuccin Latte and Mocha, Monokai Pro
+Light and Monokai, Gruvbox Light and Dark, and Nord. Each theme is one block in
+`styles.css` giving seven roles: paper, text, muted, ink, link, rule and stage.
+To add a theme, add a block there and a line under `themes` in
+`src/_data/site.yaml`.
 
-Light or dark follows the system setting until the Dark/Light button is used.
-`js/theme.js` saves both choices to `localStorage`, and a small inline script in
-`<head>` applies them before first paint.
+With nothing chosen the page is Modus Operandi, or Modus Vivendi when the system
+is set to dark. `js/theme.js` saves a choice to `localStorage`, and a small
+inline script in `<head>` applies it before first paint.
 
 The previous design ("Open Margins") is kept on the `archive/2026-09-classic`
 branch and the `classic-2026-09` tag.

@@ -39,16 +39,23 @@ pages:
     label: { en: uses, zh: 装备 }
     href: { en: /en/uses.html, zh: /zh/uses.html }
 
-# Colour schemes offered in the masthead. `id` is the data-scheme value in
-# styles.css; Modus has no id because it is the default.
-schemes:
-  - { id: "", name: Modus }
-  - { id: ayu, name: Ayu }
-  - { id: solarized, name: Solarized }
+# Themes offered in the masthead, in order. `id` is the data-theme value in
+# styles.css.
+themes:
+  - { id: modus-operandi, name: Modus Operandi }
+  - { id: modus-vivendi, name: Modus Vivendi }
+  - { id: ayu-light, name: Ayu Light }
+  - { id: ayu-dark, name: Ayu Dark }
+  - { id: solarized-light, name: Solarized Light }
+  - { id: solarized-dark, name: Solarized Dark }
+  - { id: rose-pine-dawn, name: Rosé Pine Dawn }
   - { id: rose-pine, name: Rosé Pine }
-  - { id: catppuccin, name: Catppuccin }
+  - { id: catppuccin-latte, name: Catppuccin Latte }
+  - { id: catppuccin-mocha, name: Catppuccin Mocha }
+  - { id: monokai-pro-light, name: Monokai Pro Light }
   - { id: monokai, name: Monokai }
-  - { id: gruvbox, name: Gruvbox }
+  - { id: gruvbox-light, name: Gruvbox Light }
+  - { id: gruvbox-dark, name: Gruvbox Dark }
   - { id: nord, name: Nord }
 
 contact:

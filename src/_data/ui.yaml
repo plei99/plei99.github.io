@@ -38,10 +38,7 @@ en:
   cv: CV
   close: Close
   arxiv_author: My arXiv author page.
-  scheme: Color scheme
-  theme_dark: Dark
-  theme_light: Light
-  theme_toggle: Switch between light and dark mode
+  theme: Theme
   back_to_seminars: All seminars
   figure_label: Site map, drawn as a stable map from a genus 2 curve to a target X
   index: Pages
@@ -81,10 +78,7 @@ zh:
   cv: 简历
   close: 关闭
   arxiv_author: 我的 arXiv 作者页面。
-  scheme: 配色方案
-  theme_dark: 深色
-  theme_light: 浅色
-  theme_toggle: 切换浅色或深色模式
+  theme: 主题
   back_to_seminars: 全部讨论班
   figure_label: 网站导航图，画成一个从亏格 2 曲线到 X 的稳定映射
   index: 页面

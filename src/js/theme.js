@@ -1,58 +1,46 @@
-// The colour scheme picker and the light/dark button.
+// The theme picker.
 //
-// styles.css defines every scheme with light-dark(), so this script only sets
-// two attributes on <html>: data-scheme (absent for Modus, the default) and
-// data-theme (absent to follow the system). Both choices are saved, and the
-// inline script in <head> applies them before first paint on later visits.
+// styles.css defines one block per theme, selected by data-theme on <html>.
+// With nothing chosen the attribute is absent and the stylesheet shows Modus
+// Operandi or Modus Vivendi by the system setting; the picker then shows
+// whichever of the two is on screen. A choice is saved, and the inline script
+// in <head> applies it before first paint on later visits.
 
 const root = document.documentElement;
-const button = document.querySelector(".theme-toggle");
 const picker = document.querySelector(".scheme");
 const select = picker.querySelector("select");
 const system = matchMedia("(prefers-color-scheme: dark)");
 
-function save(key, value) {
+function save(value) {
   try {
-    if (value) localStorage.setItem(key, value);
-    else localStorage.removeItem(key);
+    if (value) localStorage.setItem("theme", value);
+    else localStorage.removeItem("theme");
+    localStorage.removeItem("scheme"); // from the earlier two-control design
   } catch {
     // Private browsing: the choice lasts for this page only.
   }
 }
 
-function current() {
-  return root.dataset.theme || (system.matches ? "dark" : "light");
+function showCurrent() {
+  select.value = root.dataset.theme ||
+    (system.matches ? "modus-vivendi" : "modus-operandi");
 }
-
-// The button names the mode it switches to.
-function label() {
-  button.textContent = current() === "dark"
-    ? button.dataset.lightLabel
-    : button.dataset.darkLabel;
-}
-
-button.addEventListener("click", () => {
-  const next = current() === "dark" ? "light" : "dark";
-  root.dataset.theme = next;
-  save("theme", next);
-  label();
-});
 
 select.addEventListener("change", () => {
-  if (select.value) root.dataset.scheme = select.value;
-  else delete root.dataset.scheme;
-  save("scheme", select.value);
+  root.dataset.theme = select.value;
+  save(select.value);
 });
 
-// A saved scheme that no longer exists falls back to the default.
-select.value = root.dataset.scheme || "";
+// A saved theme that no longer exists (an old "dark", the removed light Nord)
+// falls back to the default.
+showCurrent();
 if (select.selectedIndex < 0) {
-  select.value = "";
-  delete root.dataset.scheme;
-  save("scheme", "");
+  delete root.dataset.theme;
+  save("");
+  showCurrent();
 }
 
-system.addEventListener("change", label);
-button.hidden = false;
+system.addEventListener("change", () => {
+  if (!root.dataset.theme) showCurrent();
+});
 picker.hidden = false;
-label();
