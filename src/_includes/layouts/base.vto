@@ -44,6 +44,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap">
+<link rel="stylesheet" href="/themes.css?v={{ rev }}">
 <link rel="stylesheet" href="/styles.css?v={{ rev }}">
 <script type="module" src="/js/panel.js?v={{ rev }}"></script>
 <script type="module" src="/js/theme.js?v={{ rev }}"></script>
@@ -66,9 +67,18 @@
     <div class="controls">
     <label class="scheme" hidden>
       <span class="visually-hidden">{{ ui[lang].theme }}</span>
-      <select>
-        {{ for theme of site.themes }}
-        <option value="{{ theme.id }}">{{ theme.name }}</option>
+      {{ set allThemes = themes.flatMap((family) => family.themes) }}
+      <select data-default-light="{{ allThemes.find((t) => !t.dark).id }}" data-default-dark="{{ allThemes.find((t) => t.dark).id }}">
+        {{ for family of themes }}
+        {{ if family.themes.length > 1 }}
+        <optgroup label="{{ family.family }}">
+          {{ for theme of family.themes }}
+          <option value="{{ theme.id }}">{{ theme.name }}</option>
+          {{ /for }}
+        </optgroup>
+        {{ else }}
+        <option value="{{ family.themes[0].id }}">{{ family.themes[0].name }}</option>
+        {{ /if }}
         {{ /for }}
       </select>
     </label>

@@ -39,25 +39,6 @@ pages:
     label: { en: uses, zh: 装备 }
     href: { en: /en/uses.html, zh: /zh/uses.html }
 
-# Themes offered in the masthead, in order. `id` is the data-theme value in
-# styles.css.
-themes:
-  - { id: modus-operandi, name: Modus Operandi }
-  - { id: modus-vivendi, name: Modus Vivendi }
-  - { id: ayu-light, name: Ayu Light }
-  - { id: ayu-dark, name: Ayu Dark }
-  - { id: solarized-light, name: Solarized Light }
-  - { id: solarized-dark, name: Solarized Dark }
-  - { id: rose-pine-dawn, name: Rosé Pine Dawn }
-  - { id: rose-pine, name: Rosé Pine }
-  - { id: catppuccin-latte, name: Catppuccin Latte }
-  - { id: catppuccin-mocha, name: Catppuccin Mocha }
-  - { id: monokai-pro-light, name: Monokai Pro Light }
-  - { id: monokai, name: Monokai }
-  - { id: gruvbox-light, name: Gruvbox Light }
-  - { id: gruvbox-dark, name: Gruvbox Dark }
-  - { id: nord, name: Nord }
-
 contact:
   email: plei@fudan.edu.cn
   github: https://github.com/plei99

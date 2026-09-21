@@ -1,8 +1,8 @@
 // The theme picker.
 //
-// styles.css defines one block per theme, selected by data-theme on <html>.
-// With nothing chosen the attribute is absent and the stylesheet shows Modus
-// Operandi or Modus Vivendi by the system setting; the picker then shows
+// themes.css defines one block per theme, selected by data-theme on <html>.
+// With nothing chosen the attribute is absent and the stylesheet shows the
+// default light or dark theme by the system setting; the picker then shows
 // whichever of the two is on screen. A choice is saved, and the inline script
 // in <head> applies it before first paint on later visits.
 
@@ -23,7 +23,7 @@ function save(value) {
 
 function showCurrent() {
   select.value = root.dataset.theme ||
-    (system.matches ? "modus-vivendi" : "modus-operandi");
+    (system.matches ? select.dataset.defaultDark : select.dataset.defaultLight);
 }
 
 select.addEventListener("change", () => {
