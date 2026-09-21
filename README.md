@@ -36,6 +36,7 @@ src/
   notes.vto             Top-level English page (papers.vto redirects to arXiv)
   styles.css            The whole stylesheet
   js/panel.js           Opens pages as panels over the figure
+  fonts/                STIX Two Text, self-hosted (no third-party requests)
   js/, images/          Static assets copied verbatim
 ```
 

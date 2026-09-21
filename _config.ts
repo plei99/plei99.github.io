@@ -19,6 +19,7 @@ site.copy("favicon.ico");
 site.copy("robots.txt");
 site.copy("js");
 site.copy("images");
+site.copy("fonts");
 
 site.use(date());
 site.use(
