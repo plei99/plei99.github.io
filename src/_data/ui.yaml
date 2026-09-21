@@ -4,22 +4,14 @@
 en:
   skip_to_content: Skip to content
   sections: Sections
-  selected_papers: Selected papers
-  all_papers: All papers
-  papers: Papers
   notes: Notes
   all_notes: All notes
   seminars: Seminars
   travel: Travel
   now: Now
   about: About
-  submitted: submitted
-  pages: pp.
   pdf: PDF
   zh_translation: Chinese translation
-  author_short: P. Lei
-  papers_lede: >-
-    Preprints and papers, newest first. Everything is on the arXiv.
   notes_lede: >-
     Notes I typed up from courses and seminars, mostly at Columbia, UMass, Boston
     College, and the Simons Center. All are PDFs.
@@ -37,7 +29,6 @@ en:
   portrait_alt: Portrait of Patrick Lei
   cv: CV
   close: Close
-  arxiv_author: My arXiv author page.
   theme: Theme
   back_to_seminars: All seminars
   figure_label: Site map, drawn as a stable map from a genus 2 curve to a target X
@@ -45,22 +36,14 @@ en:
 zh:
   skip_to_content: 跳到正文
   sections: 栏目
-  selected_papers: 精选论文
-  all_papers: 全部论文
-  papers: 论文
   notes: 笔记
   all_notes: 全部笔记
   seminars: 讨论班
   travel: 旅行
   now: 最近
   about: 关于
-  submitted: 已投稿
-  pages: 页
   pdf: PDF
   zh_translation: 中文译本
-  author_short: P. Lei
-  papers_lede: >-
-    预印本与论文，按时间倒序排列，全部可在 arXiv 上找到。
   notes_lede: >-
     我在课程与讨论班上整理的笔记，主要来自哥伦比亚大学、马萨诸塞大学、波士顿学院和 Simons 中心，均为 PDF。
   seminars_lede: >-
@@ -77,7 +60,6 @@ zh:
   portrait_alt: Patrick Lei 的照片
   cv: 简历
   close: 关闭
-  arxiv_author: 我的 arXiv 作者页面。
   theme: 主题
   back_to_seminars: 全部讨论班
   figure_label: 网站导航图，画成一个从亏格 2 曲线到 X 的稳定映射

@@ -1,7 +1,22 @@
 ---
-title: 论文
+layout: ~
 url: /zh/papers.html
-section: papers
-altUrl: /papers.html
 ---
-{{ include "views/papers.vto" }}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patrick Lei</title>
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url={{ site.contact.arxiv }}">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<script>
+  // The papers list used to live here. The arXiv author page replaces it.
+  window.location.replace("{{ site.contact.arxiv }}");
+</script>
+</head>
+<body>
+<p><a href="{{ site.contact.arxiv }}">arXiv</a></p>
+</body>
+</html>

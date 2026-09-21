@@ -9,7 +9,8 @@ description:
 
 # Every destination on the site, keyed by the id the figure uses. In the figure
 # the marked points of C are about, seminars and notes; the map f is travel; the
-# insertions on X are papers (labelled arXiv), now and cv. The letter f is uses.
+# insertions on X are arxiv, now and cv. The letter f is uses. `arxiv` and `cv`
+# leave the site, so they open in a new tab and not in a panel.
 pages:
   about:
     label: { en: about me, zh: 关于我 }
@@ -23,9 +24,10 @@ pages:
   travel:
     label: { en: travel, zh: 旅行 }
     href: { en: /en/travel.html, zh: /zh/travel.html }
-  papers:
+  # Links to `contact.arxiv` below, so the address is written once.
+  arxiv:
     label: { en: arXiv, zh: arXiv }
-    href: { en: /papers.html, zh: /zh/papers.html }
+    external: true
   now:
     label: { en: now, zh: 最近 }
     href: { en: /en/now.html, zh: /zh/now.html }

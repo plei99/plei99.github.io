@@ -23,7 +23,6 @@ src/
     site.yaml           Name, the page map the figure links to, contact, footer
     ui.yaml             Interface strings for en + zh
     home.yaml           Tagline, bio, About prose, Now list (en + zh)
-    papers.yaml         Paper records
     notes.yaml          Notes catalogue
     themes.yaml         Colour themes: the picker and /themes.css come from this
     uses.yaml           Uses page: gear by category, Markdown asides (en + zh)
@@ -34,30 +33,30 @@ src/
     views/*.vto         Panel bodies, shared between languages
   en/, zh/              Per-language pages; each one includes a shared view
   seminars/*.md         Seminar pages, one Markdown file each
-  papers.vto, notes.vto Top-level English pages
+  notes.vto             Top-level English page (papers.vto redirects to arXiv)
   styles.css            The whole stylesheet
   js/panel.js           Opens pages as panels over the figure
   js/, images/          Static assets copied verbatim
 ```
 
-Content lives in YAML and Markdown, not in templates. To add a paper, edit
-`src/_data/papers.yaml`; to add a seminar, drop a Markdown file with `title`,
-`pubDate`, and `description` front matter into `src/seminars/`.
+Content lives in YAML and Markdown, not in templates. To add a seminar, drop a
+Markdown file with `title`, `pubDate`, and `description` front matter into
+`src/seminars/`.
 
 ## Languages
 
 The homepage, Now, Travel, and Uses pages are fully bilingual, driven by
-`en`/`zh` keys in the data files. Papers, Notes, and Seminars have translated
-interface chrome but English content, since that is the language the content is
-written in. The EN/中文 control uses each page's `altUrl` front matter.
+`en`/`zh` keys in the data files. Notes and Seminars have translated interface
+chrome but English content, since that is the language the content is written
+in. The EN/中文 control uses each page's `altUrl` front matter.
 
 ## Design
 
 The site is one figure: a stable map f : (C, x1, x2, x3) -> X from a genus 2
 curve. The marked points are About me, Seminars and Notes; the map f is Travel;
-the three cycles on X, whose classes are the insertions, are Papers (labelled
-arXiv), Now and CV, each linked from the point f(x_i) where the image f(C) meets
-it; the letter f is Uses. Every other page is a panel laid over the figure.
+the three cycles on X, whose classes are the insertions, are arXiv, Now and CV,
+each linked from the point f(x_i) where the image f(C) meets it; the letter f is
+Uses. Every other page is a panel laid over the figure.
 
 Each page is still built at its own URL, with the figure behind it and its
 content inside `<dialog id="panel">`, already open in the static HTML.
@@ -90,4 +89,6 @@ routes match the previous generator exactly: `/zh/`, `/papers.html`,
 `/notes.html`, `/seminars/`, `/seminars/<slug>/`, `/en/now.html`,
 `/zh/now.html`, `/en/travel.html`, `/zh/travel.html`, `/en/uses.html`,
 `/zh/uses.html`. On a first visit, `/` sends browsers set to Chinese to `/zh/`.
-Chinese variants of Papers, Notes, and Seminars were added under `/zh/`.
+Chinese variants of Notes and Seminars were added under `/zh/`. There is no
+papers page: the arXiv label in the figure goes to the arXiv author page, and
+`/papers.html` and `/zh/papers.html` redirect there.

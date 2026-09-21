@@ -1,7 +1,7 @@
 {{# The target X, drawn as a slanted sheet. Inside it is the image f(C), which
     meets each of the three cycles at the image of a marked point. The classes
     of the cycles are the insertions, and the links hang off the points f(x_i):
-    papers (labelled arXiv) at f(x1), now at f(x2), CV at f(x3).
+    arXiv at f(x1), now at f(x2), CV at f(x3).
 
     Each cycle is an arc touching f(C) at its apex, so a vertical leader from
     the point runs up or down the open wedge between the two curves. #}}
@@ -24,12 +24,12 @@
   <text x="746" y="306">α<tspan class="fig-sub" dy="5">3</tspan></text>
 </g>
 
-<a class="fig-link" href="{{ site.pages.papers.href[lang] }}"{{ if section === "papers" }} aria-current="page"{{ /if }} data-id="papers">
+<a class="fig-link" href="{{ site.contact.arxiv }}" rel="noopener" target="_blank" data-id="arxiv">
   <path class="fig-hit" d="M 708 60 L 708 201 M 692 252 Q 724 201 692 150"/>
   <path class="fig-leader" d="M 708 84 L 708 193"/>
   <path class="fig-cycle" d="M 692 252 Q 724 201 692 150"/>
   <circle class="fig-pt" cx="708" cy="201" r="4.5"/>
-  <text class="fig-word" x="708" y="72">{{ site.pages.papers.label[lang] }}</text>
+  <text class="fig-word" x="708" y="72">{{ site.pages.arxiv.label[lang] }}</text>
 </a>
 <a class="fig-link" href="{{ site.pages.now.href[lang] }}"{{ if section === "now" }} aria-current="page"{{ /if }} data-id="now">
   <path class="fig-hit" d="M 873 60 L 873 199 M 890 148 Q 856 199 890 250"/>

@@ -677,51 +677,6 @@ img {
   font-size: 1rem;
 }
 
-/* ---- Papers, set as a bibliography -------------------------- */
-.refs {
-  list-style: none;
-  padding: 0;
-}
-
-.refs li {
-  position: relative;
-  padding: 0 0 1.4rem 3rem;
-}
-
-.ref-n {
-  position: absolute;
-  left: 0;
-  top: 0.12rem;
-  color: var(--muted);
-  font-variant-numeric: lining-nums;
-}
-
-.ref-title {
-  font-size: 1.22rem;
-  font-weight: 600;
-  line-height: 1.35;
-  max-width: 40rem;
-}
-
-.ref-title a {
-  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
-}
-
-.ref-title a:hover {
-  color: var(--link-hover);
-  text-decoration-color: currentColor;
-}
-
-.ref-gloss {
-  color: var(--muted);
-  font-size: 1.02rem;
-}
-
-.ref-meta {
-  margin-top: 0.2rem;
-  font-size: 1.02rem;
-}
-
 /* ---- Now ---------------------------------------------------- */
 .now-list {
   padding-left: 1.3rem;
@@ -889,9 +844,6 @@ img {
   }
   .entry-when {
     line-height: 1.4;
-  }
-  .refs li {
-    padding-left: 2.4rem;
   }
 }
 
