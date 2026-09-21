@@ -1,63 +1,168 @@
 /* Patrick Lei's site. One page: a figure of a stable map whose labels open
    the other pages as sheets of paper laid over it.
 
-   The look is a page from a paper: white stock, black text, one ink blue for
-   the drawing and for links, one typeface (STIX Two, the face the PDFs are set
-   in). Colour and line weight mean something or are absent. */
+   The look is a page from a paper: one typeface (STIX Two, the face the PDFs
+   are set in), outlines in the text colour, and one accent for what can be
+   followed. Colour and line weight mean something or are absent. */
+
+/* Colour comes from terminal colour schemes, not from a palette of our own.
+   Each scheme gives a light and a dark value for the same seven roles:
+
+     --paper  background            --ink   marked points and cycles
+     --text   text and outlines     --link  words that can be followed
+     --muted  dates, ledes          --rule  hairlines
+     --stage  raised surfaces (the globe's backdrop)
+
+   light-dark() picks the value from the used color-scheme, so with nothing
+   chosen the system setting decides, and the Dark/Light button only has to
+   flip color-scheme. Modus is the default; the others are selected with
+   data-scheme on <html>. js/theme.js owns both attributes.
+
+   Values are each scheme's published ones, with one exception. A terminal
+   "comment" colour is meant to be skippable, but --muted carries dates and
+   ledes, so where the comment colour fell below 4.5:1 on its background
+   (Ayu Light, Monokai, Nord's dark side) --muted is the scheme's text colour
+   blended toward its background until it reaches 4.5:1. Solarized instead
+   uses its own emphasised tones for --text and its body tones for --muted. */
+
+/* Modus Operandi / Modus Vivendi */
+:root {
+  color-scheme: light dark;
+  --paper: light-dark(#ffffff, #000000);
+  --text: light-dark(#000000, #ffffff);
+  --muted: light-dark(#595959, #989898);
+  --ink: light-dark(#3548cf, #2fafff);
+  --link: light-dark(#3548cf, #79a8ff);
+  --rule: light-dark(#c4c4c4, #535353);
+  --stage: light-dark(#f2f2f2, #1e1e1e);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/* Ayu Light / Ayu Dark */
+:root[data-scheme="ayu"] {
+  --paper: light-dark(#fcfcfc, #0b0e14);
+  --text: light-dark(#5c6166, #bfbdb6);
+  --muted: light-dark(#71757a, #6c7986);
+  --ink: light-dark(#399ee6, #59c2ff);
+  --link: light-dark(#399ee6, #59c2ff);
+  --rule: light-dark(#e7eaed, #1b1f29);
+  --stage: light-dark(#f3f4f5, #11151c);
+}
+
+/* Solarized Light / Solarized Dark */
+:root[data-scheme="solarized"] {
+  --paper: light-dark(#fdf6e3, #002b36);
+  --text: light-dark(#586e75, #93a1a1);
+  --muted: light-dark(#657b83, #839496);
+  --ink: light-dark(#268bd2, #268bd2);
+  --link: light-dark(#268bd2, #268bd2);
+  --rule: light-dark(#e4ddc8, #0d4654);
+  --stage: light-dark(#eee8d5, #073642);
+}
+
+/* Rosé Pine Dawn / Rosé Pine */
+:root[data-scheme="rose-pine"] {
+  --paper: light-dark(#faf4ed, #191724);
+  --text: light-dark(#575279, #e0def4);
+  --muted: light-dark(#797593, #908caa);
+  --ink: light-dark(#56949f, #9ccfd8);
+  --link: light-dark(#286983, #9ccfd8);
+  --rule: light-dark(#dfdad9, #403d52);
+  --stage: light-dark(#f2e9e1, #1f1d2e);
+}
+
+/* Catppuccin Latte / Catppuccin Mocha */
+:root[data-scheme="catppuccin"] {
+  --paper: light-dark(#eff1f5, #1e1e2e);
+  --text: light-dark(#4c4f69, #cdd6f4);
+  --muted: light-dark(#6c6f85, #a6adc8);
+  --ink: light-dark(#1e66f5, #89b4fa);
+  --link: light-dark(#1e66f5, #89b4fa);
+  --rule: light-dark(#ccd0da, #45475a);
+  --stage: light-dark(#e6e9ef, #181825);
+}
+
+/* Monokai Pro Light / Monokai */
+:root[data-scheme="monokai"] {
+  --paper: light-dark(#faf4f2, #272822);
+  --text: light-dark(#29242a, #f8f8f2);
+  --muted: light-dark(#746f72, #90908a);
+  --ink: light-dark(#1c8ca8, #66d9ef);
+  --link: light-dark(#1c8ca8, #66d9ef);
+  --rule: light-dark(#d3cdcc, #49483e);
+  --stage: light-dark(#eee5e2, #3e3d32);
+}
+
+/* Gruvbox Light / Gruvbox Dark */
+:root[data-scheme="gruvbox"] {
+  --paper: light-dark(#fbf1c7, #282828);
+  --text: light-dark(#3c3836, #ebdbb2);
+  --muted: light-dark(#7c6f64, #a89984);
+  --ink: light-dark(#076678, #83a598);
+  --link: light-dark(#076678, #83a598);
+  --rule: light-dark(#d5c4a1, #504945);
+  --stage: light-dark(#ebdbb2, #3c3836);
+}
+
+/* Nord Snow Storm / Nord Polar Night */
+:root[data-scheme="nord"] {
+  --paper: light-dark(#eceff4, #2e3440);
+  --text: light-dark(#2e3440, #d8dee9);
+  --muted: light-dark(#4c566a, #969ca7);
+  --ink: light-dark(#5e81ac, #81a1c1);
+  --link: light-dark(#5e81ac, #88c0d0);
+  --rule: light-dark(#d8dee9, #434c5e);
+  --stage: light-dark(#e5e9f0, #3b4252);
+}
+
+/* Derived from the scheme, so a new scheme needs only the seven roles. */
+:root {
+  --link-hover: color-mix(in srgb, var(--link) 65%, var(--text));
+  --wash: color-mix(in srgb, var(--paper) 86%, transparent);
+  --shadow: light-dark(rgb(17 17 17 / 0.35), rgb(0 0 0 / 0.6));
+}
+
+/* Browsers without light-dark() (before 2024) get Modus, light or dark by the
+   button only. */
+@supports not (color: light-dark(#000, #fff)) {
+  :root,
+  :root[data-scheme] {
+    --paper: #ffffff;
+    --text: #000000;
+    --muted: #595959;
+    --ink: #3548cf;
+    --link: #3548cf;
+    --rule: #c4c4c4;
+    --stage: #f2f2f2;
+    --shadow: rgb(17 17 17 / 0.35);
+  }
+
+  :root[data-theme="dark"],
+  :root[data-theme="dark"][data-scheme] {
+    --paper: #000000;
+    --text: #ffffff;
+    --muted: #989898;
+    --ink: #2fafff;
+    --link: #79a8ff;
+    --rule: #535353;
+    --stage: #1e1e1e;
+    --shadow: rgb(0 0 0 / 0.6);
+  }
+}
 
 :root {
-  color-scheme: light;
-  --paper: #fff;
-  --text: #111;
-  --muted: #5a5a5a;
-  /* The drawing itself (outlines, C, X, x_i, alpha_i) is in the text colour.
-     Blue marks what can be followed: --ink for the marked points and cycles,
-     --link, the same hue a step darker, for words. */
-  --ink: #2f6fd6;
-  --link: #1d5bbf;
-  --link-hover: #12408f;
-  --rule: #d9d9d9;
-  --wash: rgb(255 255 255 / 0.84);
-  --shadow: rgb(17 17 17 / 0.35);
-  --globe-stage: #dfe6ec;
-
   --serif: "STIX Two Text", "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC",
     Georgia, serif;
 
   --measure: 36rem;
   --gutter: clamp(1.25rem, 4vw, 3rem);
-}
-
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --paper: #000;
-  --text: #e9e7e2;
-  --muted: #a3a29c;
-  --ink: #5a9bf2;
-  --link: #6ba6f5;
-  --link-hover: #a5c9fb;
-  --rule: #2e3138;
-  --wash: rgb(0 0 0 / 0.86);
-  --shadow: rgb(0 0 0 / 0.6);
-  --globe-stage: #10151b;
-}
-
-/* The same values again, for visitors whose system is dark and who have not
-   chosen a theme with the button. */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    color-scheme: dark;
-    --paper: #000;
-    --text: #e9e7e2;
-    --muted: #a3a29c;
-    --ink: #5a9bf2;
-    --link: #6ba6f5;
-    --link-hover: #a5c9fb;
-    --rule: #2e3138;
-    --wash: rgb(0 0 0 / 0.86);
-    --shadow: rgb(0 0 0 / 0.6);
-    --globe-stage: #10151b;
-  }
 }
 
 *,
@@ -181,10 +286,50 @@ img {
   gap: 1rem;
 }
 
-.theme-toggle {
-  padding: 0 1rem 0 0;
+.scheme {
+  position: relative;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.scheme::after {
+  content: "▾";
+  position: absolute;
+  right: 0;
+  top: 0;
+  pointer-events: none;
+}
+
+.scheme select {
+  appearance: none;
+  padding: 0 1.1rem 0 0;
   border: 0;
-  border-right: 1px solid var(--rule);
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.scheme:hover {
+  color: var(--text);
+}
+
+.scheme select option {
+  background: var(--paper);
+  color: var(--text);
+}
+
+.controls > * + * {
+  padding-left: 1rem;
+  border-left: 1px solid var(--rule);
+}
+
+.theme-toggle {
+  padding-block: 0;
+  padding-right: 0;
+  border-block: 0;
+  border-right: 0;
   background: none;
   color: var(--muted);
   font: inherit;
@@ -784,7 +929,7 @@ img {
   height: clamp(24rem, 62dvh, 40rem);
   overflow: hidden;
   isolation: isolate;
-  background: var(--globe-stage);
+  background: var(--stage);
 }
 
 #globe-container {

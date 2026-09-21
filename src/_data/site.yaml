@@ -39,6 +39,18 @@ pages:
     label: { en: uses, zh: 装备 }
     href: { en: /en/uses.html, zh: /zh/uses.html }
 
+# Colour schemes offered in the masthead. `id` is the data-scheme value in
+# styles.css; Modus has no id because it is the default.
+schemes:
+  - { id: "", name: Modus }
+  - { id: ayu, name: Ayu }
+  - { id: solarized, name: Solarized }
+  - { id: rose-pine, name: Rosé Pine }
+  - { id: catppuccin, name: Catppuccin }
+  - { id: monokai, name: Monokai }
+  - { id: gruvbox, name: Gruvbox }
+  - { id: nord, name: Nord }
+
 contact:
   email: plei@fudan.edu.cn
   github: https://github.com/plei99

@@ -34,11 +34,13 @@
 </script>
 {{ /if }}
 <script>
-  // Apply a saved theme before first paint. With nothing saved, the
-  // stylesheet follows the system setting on its own.
+  // Apply a saved colour scheme and light/dark choice before first paint. With
+  // nothing saved, the stylesheet uses Modus and follows the system setting.
   try {
     var theme = localStorage.getItem("theme");
     if (theme === "dark" || theme === "light") document.documentElement.dataset.theme = theme;
+    var scheme = localStorage.getItem("scheme");
+    if (scheme) document.documentElement.dataset.scheme = scheme;
   } catch (_) {}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,6 +66,14 @@
       <p class="tagline">{{ home.tagline[lang] }}</p>
     </div>
     <div class="controls">
+    <label class="scheme" hidden>
+      <span class="visually-hidden">{{ ui[lang].scheme }}</span>
+      <select>
+        {{ for scheme of site.schemes }}
+        <option value="{{ scheme.id }}">{{ scheme.name }}</option>
+        {{ /for }}
+      </select>
+    </label>
     <button class="theme-toggle" type="button" hidden aria-label="{{ ui[lang].theme_toggle }}"
       data-dark-label="{{ ui[lang].theme_dark }}" data-light-label="{{ ui[lang].theme_light }}"></button>
     {{# Like the theme button, the language link names what it switches to. #}}

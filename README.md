@@ -64,13 +64,19 @@ content inside `<dialog id="panel">`, already open in the static HTML.
 content swaps with `pushState`, so the figure never reloads. Without JavaScript
 the labels and the close button are plain links.
 
-The look is a page from a paper: white, black text, one blue (`--ink` for the
-drawing, `--link` for text links), and one typeface, STIX Two Text. Dark mode
-follows the system setting; the Dark/Light button in the masthead saves an
-explicit choice to `localStorage` (`js/theme.js`, plus a small inline script in
-`<head>` that applies it before first paint). The figure is drawn twice in
-`figure/figure.vto`, left to right and top to bottom, because an SVG viewBox
-cannot change with a media query.
+The look is a page from a paper: one typeface, STIX Two Text, with the figure's
+outlines in the text colour and one accent for whatever can be followed.
+
+Colours come from terminal colour schemes. Modus (Operandi and Vivendi) is the
+default, and the masthead picker also offers Ayu, Solarized, Rosé Pine,
+Catppuccin, Monokai, Gruvbox and Nord. Each scheme is one block in `styles.css`
+giving a light and a dark value, through `light-dark()`, for seven roles: paper,
+text, muted, ink, link, rule and stage. To add a scheme, add a block there and a
+line under `schemes` in `src/_data/site.yaml`.
+
+Light or dark follows the system setting until the Dark/Light button is used.
+`js/theme.js` saves both choices to `localStorage`, and a small inline script in
+`<head>` applies them before first paint.
 
 The previous design ("Open Margins") is kept on the `archive/2026-09-classic`
 branch and the `classic-2026-09` tag.

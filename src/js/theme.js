@@ -1,10 +1,24 @@
-// The light/dark button. With nothing saved the stylesheet follows the system
-// setting; pressing the button saves an explicit choice, which the inline
-// script in <head> applies before first paint on later visits.
+// The colour scheme picker and the light/dark button.
+//
+// styles.css defines every scheme with light-dark(), so this script only sets
+// two attributes on <html>: data-scheme (absent for Modus, the default) and
+// data-theme (absent to follow the system). Both choices are saved, and the
+// inline script in <head> applies them before first paint on later visits.
 
-const button = document.querySelector(".theme-toggle");
 const root = document.documentElement;
+const button = document.querySelector(".theme-toggle");
+const picker = document.querySelector(".scheme");
+const select = picker.querySelector("select");
 const system = matchMedia("(prefers-color-scheme: dark)");
+
+function save(key, value) {
+  try {
+    if (value) localStorage.setItem(key, value);
+    else localStorage.removeItem(key);
+  } catch {
+    // Private browsing: the choice lasts for this page only.
+  }
+}
 
 function current() {
   return root.dataset.theme || (system.matches ? "dark" : "light");
@@ -20,14 +34,25 @@ function label() {
 button.addEventListener("click", () => {
   const next = current() === "dark" ? "light" : "dark";
   root.dataset.theme = next;
-  try {
-    localStorage.setItem("theme", next);
-  } catch {
-    // Private browsing: the choice lasts for this page only.
-  }
+  save("theme", next);
   label();
 });
 
+select.addEventListener("change", () => {
+  if (select.value) root.dataset.scheme = select.value;
+  else delete root.dataset.scheme;
+  save("scheme", select.value);
+});
+
+// A saved scheme that no longer exists falls back to the default.
+select.value = root.dataset.scheme || "";
+if (select.selectedIndex < 0) {
+  select.value = "";
+  delete root.dataset.scheme;
+  save("scheme", "");
+}
+
 system.addEventListener("change", label);
 button.hidden = false;
+picker.hidden = false;
 label();
