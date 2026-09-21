@@ -1,4 +1,9 @@
-Copyright 2001-2021 The STIX Fonts Project Authors (https://github.com/stipub/stixfonts), with Reserved Font Name "TM Math". STIX Fonts™ is a trademark of The Institute of Electrical and Electronics Engineers, Inc.
+Copyright (c) 2007-2025, Apostolos Syropoulos (<asyropoulos@yahoo.com),
+with Reserved Font Name Asana Math.
+Copyright (c) 2000 Young Ryu,
+with Reserved Font Name pxfonts.
+Copyright (c) 1997, 1999 Claudio Beccari, 
+with Reserved Font Name gsmn1000.
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:

@@ -1,9 +1,10 @@
 /* Patrick Lei's site. One page: a figure of a stable map whose labels open
    the other pages as sheets of paper laid over it.
 
-   The look is a page from a paper: one typeface (STIX Two, the face the PDFs
-   are set in), outlines in the text colour, and one accent for what can be
-   followed. Colour and line weight mean something or are absent. */
+   The look is a page from the PDF notes: text in TeX Gyre Pagella (a Palatino
+   clone), mathematics in Asana Math, outlines in the text colour, and one
+   accent for what can be followed. Colour and line weight mean something or
+   are absent. */
 
 /* Colour comes from terminal colour schemes, not from a palette of our own.
    The themes live in src/_data/themes.yaml, and /themes.css, generated from
@@ -23,8 +24,10 @@
 }
 
 :root {
-  --serif: "STIX Two Text", "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC",
-    Georgia, serif;
+  --serif: "TeX Gyre Pagella", "Palatino Linotype", Palatino, "Book Antiqua",
+    "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", Georgia, serif;
+  --math: "Asana Math", "TeX Gyre Pagella", "Palatino Linotype", Palatino, math,
+    serif;
 
   --measure: 36rem;
   --gutter: clamp(1.25rem, 4vw, 3rem);
@@ -127,7 +130,7 @@ img {
 
 .name {
   font-size: clamp(1.9rem, 3.2vw, 2.5rem);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.01em;
 }
@@ -274,8 +277,11 @@ img {
   stroke-width: 1.6;
 }
 
+/* The labels are Unicode mathematical italics (𝐶, 𝑥, 𝑓, 𝛼), which is where a
+   math font keeps its italic alphabet, so they are set upright in --math. */
 .fig-math {
-  font: italic 400 21px var(--serif);
+  font: normal 400 21px var(--math);
+  font-variant-numeric: lining-nums;
   fill: var(--text);
 }
 
@@ -299,7 +305,6 @@ img {
 
 .fig-sub {
   font-size: 0.68em;
-  font-style: normal;
 }
 
 /* Links in the figure: a marked point, the arrow, or a cycle, joined to its
@@ -515,7 +520,7 @@ img {
 
 .panel-head h1 {
   font-size: clamp(1.9rem, 4vw, 2.6rem);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.01em;
   text-wrap: balance;
@@ -576,7 +581,7 @@ img {
 .prose h3 {
   margin-top: 2rem;
   font-size: 1.3rem;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.3;
 }
 
@@ -600,7 +605,7 @@ img {
 
 .prose th {
   border-bottom: 1px solid var(--text);
-  font-weight: 600;
+  font-weight: 700;
   text-align: left;
 }
 
@@ -646,7 +651,7 @@ img {
 
 .entry-title {
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.35;
 }
 
@@ -696,7 +701,7 @@ img {
 .uses-group h2,
 .contact h2 {
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.25;
 }
 
@@ -855,6 +860,14 @@ img {
 
 :lang(zh) .entry-where {
   font-style: normal;
+}
+
+/* Inline mathematics is MathML; the browser takes italics, spacing and
+   script positions from Asana Math's MATH table. */
+math {
+  font-family: var(--math);
+  font-size: 1em;
+  font-variant-numeric: lining-nums;
 }
 
 sup,

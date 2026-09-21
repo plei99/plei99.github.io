@@ -36,7 +36,7 @@ src/
   notes.vto             Top-level English page (papers.vto redirects to arXiv)
   styles.css            The whole stylesheet
   js/panel.js           Opens pages as panels over the figure
-  fonts/                STIX Two Text, self-hosted (no third-party requests)
+  fonts/                Pagella and Asana Math, self-hosted; see fonts/README.md
   js/, images/          Static assets copied verbatim
 ```
 
@@ -65,8 +65,10 @@ content inside `<dialog id="panel">`, already open in the static HTML.
 content swaps with `pushState`, so the figure never reloads. Without JavaScript
 the labels and the close button are plain links.
 
-The look is a page from a paper: one typeface, STIX Two Text, with the figure's
-outlines in the text colour and one accent for whatever can be followed.
+The look is a page from the PDF notes: text in TeX Gyre Pagella (a free Palatino
+clone), mathematics in Asana Math, the figure's outlines in the text colour, and
+one accent for whatever can be followed. Inline mathematics is MathML; the
+figure's labels are Unicode mathematical italics set in Asana Math.
 
 Colours come from terminal colour schemes, chosen by name from one picker in the
 masthead: Modus, Ayu, Solarized, Rosé Pine, Catppuccin, Monokai, Gruvbox, Nord,

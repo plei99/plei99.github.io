@@ -13,11 +13,13 @@
     {{ include "figure/map.vto" { vertical: true } }}
     <g transform="translate(-585 450)">{{ include "figure/target.vto" }}</g>
   </svg>
+  {{# The mathematics is MathML, so it is set in Asana Math with proper
+      italics and script positions, and read correctly by screen readers. #}}
   <figcaption>
     {{ if lang === "zh" }}
-    <b>图 1.</b> 一个亏格 2 的稳定映射 <i>f</i> : (<i>C</i>, <i>x</i><sub>1</sub>, <i>x</i><sub>2</sub>, <i>x</i><sub>3</sub>) → <i>X</i>，插入为 <i>α</i><sub>1</sub>, <i>α</i><sub>2</sub>, <i>α</i><sub>3</sub> ∈ <i>A</i><sup>∗</sup>(<i>X</i>)。
+    <b>图 1.</b> 一个亏格 2 的稳定映射 <math><mi>f</mi><mo>:</mo><mo stretchy="false">(</mo><mi>C</mi><mo>,</mo><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo><msub><mi>x</mi><mn>3</mn></msub><mo stretchy="false">)</mo><mo>→</mo><mi>X</mi></math>，插入为 <math><msub><mi>α</mi><mn>1</mn></msub><mo>,</mo><msub><mi>α</mi><mn>2</mn></msub><mo>,</mo><msub><mi>α</mi><mn>3</mn></msub><mo>∈</mo><msup><mi>A</mi><mo>*</mo></msup><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></math>。
     {{ else }}
-    <b>Figure 1.</b> A stable map <i>f</i> : (<i>C</i>, <i>x</i><sub>1</sub>, <i>x</i><sub>2</sub>, <i>x</i><sub>3</sub>) → <i>X</i> of genus 2, with insertions <i>α</i><sub>1</sub>, <i>α</i><sub>2</sub>, <i>α</i><sub>3</sub> ∈ <i>A</i><sup>∗</sup>(<i>X</i>).
+    <b>Figure 1.</b> A stable map <math><mi>f</mi><mo>:</mo><mo stretchy="false">(</mo><mi>C</mi><mo>,</mo><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo><msub><mi>x</mi><mn>3</mn></msub><mo stretchy="false">)</mo><mo>→</mo><mi>X</mi></math> of genus 2, with insertions <math><msub><mi>α</mi><mn>1</mn></msub><mo>,</mo><msub><mi>α</mi><mn>2</mn></msub><mo>,</mo><msub><mi>α</mi><mn>3</mn></msub><mo>∈</mo><msup><mi>A</mi><mo>*</mo></msup><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></math>.
     {{ /if }}
   </figcaption>
 </figure>
