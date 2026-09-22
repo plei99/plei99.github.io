@@ -87,8 +87,12 @@
     <label class="latin" hidden>
       <span class="visually-hidden">{{ ui[lang].latin_font }}</span>
       <select>
-        {{ for font of site.latin_fonts }}
-        <option value="{{ font.id }}">{{ font.name }}</option>
+        {{ for group of site.latin_fonts }}
+        <optgroup label="{{ group.group[lang] }}">
+          {{ for font of group.fonts }}
+          <option value="{{ font.id }}">{{ font.name }}</option>
+          {{ /for }}
+        </optgroup>
         {{ /for }}
       </select>
     </label>

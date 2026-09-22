@@ -1,7 +1,9 @@
-/* Latin text and mathematics come in four pairings, chosen from the masthead:
-   TeX Gyre Pagella with Asana Math (the default, the pairing of the PDF notes
-   this site links to), TeX Gyre Bonum, Latin Modern and Libertinus, each with
-   its own math font. Chinese is Source Han Serif SC, or LXGW WenKai by choice.
+/* Latin text and mathematics come in pairings chosen from the masthead. The
+   default is TeX Gyre Pagella with Asana Math, the pairing of the PDF notes
+   this site links to; the others are Pagella with Euler Math, TeX Gyre Bonum,
+   TeX Gyre Schola, Latin Modern, Libertinus, EB Garamond, Fira Sans, New
+   Computer Modern Sans and Lato (with Lete Sans Math), each with its own math
+   font. Chinese is Source Han Serif SC, or LXGW WenKai by choice.
    All are served from this site, because a third-party font request is
    blocked by some browsers' tracking protection and is slow or unreachable
    from mainland China. Sources and licences: fonts/README.md. */
@@ -164,6 +166,198 @@
   font-weight: 400;
   font-display: swap;
   src: url("/fonts/libertinus-math.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "TeX Gyre Schola";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/tex-gyre-schola-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "TeX Gyre Schola";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/tex-gyre-schola-italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "TeX Gyre Schola";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/tex-gyre-schola-bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "TeX Gyre Schola";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/tex-gyre-schola-bolditalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "TeX Gyre Schola Math";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/tex-gyre-schola-math.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Euler Math";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/euler-math.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "EB Garamond";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/eb-garamond-roman.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "EB Garamond";
+  font-style: italic;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/eb-garamond-italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Garamond Math";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/garamond-math.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Fira Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/fira-sans-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Fira Sans";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/fira-sans-italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Fira Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/fira-sans-bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Fira Sans";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/fira-sans-bolditalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Fira Math";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/fira-math.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "New CM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/new-cm-sans-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "New CM Sans";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/new-cm-sans-italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "New CM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/new-cm-sans-bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "New CM Sans";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/new-cm-sans-bolditalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "New CM Sans Math";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/new-cm-sans-math.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/lato-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Lato";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/lato-italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/lato-bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Lato";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/lato-bolditalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Lete Sans Math";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/lete-sans-math.woff2") format("woff2");
 }
 
 @font-face {

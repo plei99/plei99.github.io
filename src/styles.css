@@ -56,6 +56,35 @@
   --latin-math: "Libertinus Math";
 }
 
+:root[data-latin="euler"] {
+  --latin-math: "Euler Math";
+}
+
+:root[data-latin="schola"] {
+  --latin: "TeX Gyre Schola", "Century Schoolbook", "New Century Schoolbook";
+  --latin-math: "TeX Gyre Schola Math";
+}
+
+:root[data-latin="garamond"] {
+  --latin: "EB Garamond", Garamond;
+  --latin-math: "Garamond Math";
+}
+
+:root[data-latin="fira"] {
+  --latin: "Fira Sans";
+  --latin-math: "Fira Math";
+}
+
+:root[data-latin="new-cm-sans"] {
+  --latin: "New CM Sans", "Computer Modern Sans";
+  --latin-math: "New CM Sans Math";
+}
+
+:root[data-latin="lato"] {
+  --latin: Lato;
+  --latin-math: "Lete Sans Math";
+}
+
 *,
 *::before,
 *::after {

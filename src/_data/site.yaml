@@ -45,10 +45,20 @@ pages:
 # is the data-latin value in styles.css; Pagella has none because it is the
 # default. Names are the same in both languages.
 latin_fonts:
-  - { id: "", name: Pagella }
-  - { id: bonum, name: Bonum }
-  - { id: latin-modern, name: Latin Modern }
-  - { id: libertinus, name: Libertinus }
+  - group: { en: Serif, zh: 衬线 }
+    fonts:
+      - { id: "", name: Pagella }
+      - { id: euler, name: Pagella + Euler }
+      - { id: bonum, name: Bonum }
+      - { id: schola, name: Schola }
+      - { id: latin-modern, name: Latin Modern }
+      - { id: libertinus, name: Libertinus }
+      - { id: garamond, name: Garamond }
+  - group: { en: Sans, zh: 无衬线 }
+    fonts:
+      - { id: fira, name: Fira Sans }
+      - { id: new-cm-sans, name: New CM Sans }
+      - { id: lato, name: Lato }
 
 contact:
   email: plei@fudan.edu.cn

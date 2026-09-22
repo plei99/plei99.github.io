@@ -51,6 +51,57 @@ License 1.1, in `OFL-Libertinus.txt`. Its Reserved Font Names are "Linux
 Libertine", "Biolinum" and "STIX Fonts", none of which these files use, so the
 `libertinus-*.woff2` subsets keep the Libertinus name.
 
+## TeX Gyre Schola and TeX Gyre Schola Math
+
+A free Century Schoolbook clone by the TeX Gyre project, text version 2.005 and
+math version 1.533, from <https://ctan.org/pkg/tex-gyre-schola> and
+<https://ctan.org/pkg/tex-gyre-math>. Licence: GUST Font License. The
+`tex-gyre-schola-*.woff2` files are **modified** as described for Pagella.
+
+## Euler Math (with Pagella)
+
+Hermann Zapf's Euler as an OpenType math font, by Khaled Hosny and Daniel Flipo
+from the AMS originals, version 0.75, from <https://ctan.org/pkg/euler-math>.
+Licence: SIL Open Font License 1.1, no reserved names, in `OFL-Euler-Math.txt`.
+`euler-math.woff2` is a subset.
+
+## EB Garamond and Garamond-Math
+
+EB Garamond by Georg Duffner and Octavio Pardo, version 1.003 (the variable
+build distributed by Google Fonts), from
+<https://github.com/octaviopardo/EBGaramond12>; Garamond-Math by Yuansheng Zhao
+and Xiangdong Zeng, 2022 release, from <https://ctan.org/pkg/garamond-math>.
+Both SIL Open Font License 1.1 with no reserved names, in `OFL-EB-Garamond.txt`
+and `OFL-Garamond-Math.txt`. The `eb-garamond-*.woff2` and `garamond-math.woff2`
+files are subsets; the text files keep the weight axis, so bold is the font's
+own.
+
+## Fira Sans and Fira Math
+
+Fira Sans by Mozilla and Telefónica (Carrois Type Design), version 4.203, from
+Google Fonts; Fira Math by Xiangdong Zeng, version 0.3.4, from
+<https://ctan.org/pkg/firamath>. Both SIL Open Font License 1.1 with no reserved
+names, in `OFL-Fira-Sans.txt` and `OFL-Fira-Math.txt`. The `fira-*.woff2` files
+are subsets.
+
+## New Computer Modern Sans and Sans Math
+
+By Antonis Tsolomitis, text version 8.1.1 (the 10 pt design; the "Oblique"
+styles serve as italic) and math version 4.0, from
+<https://ctan.org/pkg/newcomputermodern>. Licence: GUST Font License. The
+`new-cm-sans-*.woff2` files are **modified** as described for Pagella.
+
+## Lato and Lete Sans Math
+
+Lato by Łukasz Dziedzic, version 2.015, from Google Fonts. Licence: SIL Open
+Font License 1.1 with the Reserved Font Name "Lato", in `OFL-Lato.txt`, so the
+four `lato-*.woff2` files are the complete, unmodified fonts in WOFF2 form and
+not subsets. Lete Sans Math by Chenjing Bu and Daniel Flipo, version 0.63, is
+the math companion built on Lato (renamed from "Lato Math" for that same
+clause), from <https://ctan.org/pkg/lete-sans-math>, SIL Open Font License 1.1
+with no reserved names, in `OFL-Lete-Sans-Math.txt`; `lete-sans-math.woff2` is a
+subset.
+
 ## Source Han Serif SC (Chinese)
 
 By Adobe and Google (the Noto Serif CJK build), from

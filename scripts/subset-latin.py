@@ -9,14 +9,16 @@ src/fonts/README.md for where each comes from). Text fonts are cut to Latin,
 Greek, punctuation and common symbols; math fonts additionally keep the
 mathematical alphanumerics, operators, arrows and their MATH table, so MathML
 still has proper italics, spacing and stretchy delimiters. Every layout
-feature is kept and no outline is altered. Asana Math is not handled here:
-its licence reserves the name, so it is shipped whole (see the README).
+feature is kept and no outline is altered. Fonts whose licence reserves the
+name (Lato) are only converted, never subsetted; Asana Math, likewise, is not
+handled here at all and is shipped whole (see the README).
 """
 
 import sys
 from pathlib import Path
 
 from fontTools import subset
+from fontTools.ttLib import TTFont
 
 OUT = Path(__file__).resolve().parent.parent / "src" / "fonts"
 TEXT = (
@@ -27,32 +29,56 @@ TEXT = (
 MATH = TEXT + (
     ",U+2200-22FF,U+2300-23FF,U+27C0-27FF,U+2900-2AFF,U+1D400-1D7FF"
 )
-# output stem -> (source file, is math font)
+# output stem -> (source file, kind): "text", "math", or "whole" (convert only)
 FAMILIES = {
-    "tex-gyre-pagella-regular": ("pagella-regular.otf", False),
-    "tex-gyre-pagella-italic": ("pagella-italic.otf", False),
-    "tex-gyre-pagella-bold": ("pagella-bold.otf", False),
-    "tex-gyre-pagella-bolditalic": ("pagella-bolditalic.otf", False),
-    "tex-gyre-bonum-regular": ("bonum-regular.otf", False),
-    "tex-gyre-bonum-italic": ("bonum-italic.otf", False),
-    "tex-gyre-bonum-bold": ("bonum-bold.otf", False),
-    "tex-gyre-bonum-bolditalic": ("bonum-bolditalic.otf", False),
-    "tex-gyre-bonum-math": ("bonum-math.otf", True),
-    "latin-modern-roman-regular": ("lm-regular.otf", False),
-    "latin-modern-roman-italic": ("lm-italic.otf", False),
-    "latin-modern-roman-bold": ("lm-bold.otf", False),
-    "latin-modern-roman-bolditalic": ("lm-bolditalic.otf", False),
-    "latin-modern-math": ("lm-math.otf", True),
-    "libertinus-serif-regular": ("LibertinusSerif-Regular.otf", False),
-    "libertinus-serif-italic": ("LibertinusSerif-Italic.otf", False),
-    "libertinus-serif-bold": ("LibertinusSerif-Bold.otf", False),
-    "libertinus-serif-bolditalic": ("LibertinusSerif-BoldItalic.otf", False),
-    "libertinus-math": ("LibertinusMath-Regular.otf", True),
+    "tex-gyre-pagella-regular": ("pagella-regular.otf", "text"),
+    "tex-gyre-pagella-italic": ("pagella-italic.otf", "text"),
+    "tex-gyre-pagella-bold": ("pagella-bold.otf", "text"),
+    "tex-gyre-pagella-bolditalic": ("pagella-bolditalic.otf", "text"),
+    "tex-gyre-bonum-regular": ("bonum-regular.otf", "text"),
+    "tex-gyre-bonum-italic": ("bonum-italic.otf", "text"),
+    "tex-gyre-bonum-bold": ("bonum-bold.otf", "text"),
+    "tex-gyre-bonum-bolditalic": ("bonum-bolditalic.otf", "text"),
+    "tex-gyre-bonum-math": ("bonum-math.otf", "math"),
+    "latin-modern-roman-regular": ("lm-regular.otf", "text"),
+    "latin-modern-roman-italic": ("lm-italic.otf", "text"),
+    "latin-modern-roman-bold": ("lm-bold.otf", "text"),
+    "latin-modern-roman-bolditalic": ("lm-bolditalic.otf", "text"),
+    "latin-modern-math": ("lm-math.otf", "math"),
+    "libertinus-serif-regular": ("LibertinusSerif-Regular.otf", "text"),
+    "libertinus-serif-italic": ("LibertinusSerif-Italic.otf", "text"),
+    "libertinus-serif-bold": ("LibertinusSerif-Bold.otf", "text"),
+    "libertinus-serif-bolditalic": ("LibertinusSerif-BoldItalic.otf", "text"),
+    "libertinus-math": ("LibertinusMath-Regular.otf", "math"),
+    "tex-gyre-schola-regular": ("schola-regular.otf", "text"),
+    "tex-gyre-schola-italic": ("schola-italic.otf", "text"),
+    "tex-gyre-schola-bold": ("schola-bold.otf", "text"),
+    "tex-gyre-schola-bolditalic": ("schola-bolditalic.otf", "text"),
+    "tex-gyre-schola-math": ("schola-math.otf", "math"),
+    "euler-math": ("euler-math.otf", "math"),
+    "eb-garamond-roman": ("ebgaramond-roman.ttf", "text"),
+    "eb-garamond-italic": ("ebgaramond-italic.ttf", "text"),
+    "garamond-math": ("garamond-math.otf", "math"),
+    "fira-sans-regular": ("firasans-Regular.ttf", "text"),
+    "fira-sans-italic": ("firasans-Italic.ttf", "text"),
+    "fira-sans-bold": ("firasans-Bold.ttf", "text"),
+    "fira-sans-bolditalic": ("firasans-BoldItalic.ttf", "text"),
+    "fira-math": ("fira-math.otf", "math"),
+    "new-cm-sans-regular": ("newcmsans-Regular.otf", "text"),
+    "new-cm-sans-italic": ("newcmsans-Oblique.otf", "text"),
+    "new-cm-sans-bold": ("newcmsans-Bold.otf", "text"),
+    "new-cm-sans-bolditalic": ("newcmsans-BoldOblique.otf", "text"),
+    "new-cm-sans-math": ("newcmsans-math.otf", "math"),
+    "lato-regular": ("lato-Regular.ttf", "whole"),
+    "lato-italic": ("lato-Italic.ttf", "whole"),
+    "lato-bold": ("lato-Bold.ttf", "whole"),
+    "lato-bolditalic": ("lato-BoldItalic.ttf", "whole"),
+    "lete-sans-math": ("lete-sans-math.otf", "math"),
 }
 
 
 def main(source_dir: str) -> None:
-    for stem, (name, is_math) in FAMILIES.items():
+    for stem, (name, kind) in FAMILIES.items():
         source = Path(source_dir) / name
         if not source.exists():
             print(f"skip {stem}: {source} not found")
@@ -63,12 +89,19 @@ def main(source_dir: str) -> None:
         options.name_IDs = ["*"]
         options.notdef_outline = True
         options.glyph_names = False
-        font = subset.load_font(str(source), options)
-        subsetter = subset.Subsetter(options)
-        subsetter.populate(unicodes=subset.parse_unicodes(MATH if is_math else TEXT))
-        subsetter.subset(font)
         out = OUT / f"{stem}.woff2"
-        subset.save_font(font, str(out), options)
+        if kind == "whole":
+            font = TTFont(str(source))
+            font.flavor = "woff2"
+            font.save(str(out))
+        else:
+            font = subset.load_font(str(source), options)
+            subsetter = subset.Subsetter(options)
+            subsetter.populate(
+                unicodes=subset.parse_unicodes(MATH if kind == "math" else TEXT)
+            )
+            subsetter.subset(font)
+            subset.save_font(font, str(out), options)
         print(f"{out.name}: {out.stat().st_size // 1024} KB")
 
 
