@@ -102,6 +102,14 @@ clause), from <https://ctan.org/pkg/lete-sans-math>, SIL Open Font License 1.1
 with no reserved names, in `OFL-Lete-Sans-Math.txt`; `lete-sans-math.woff2` is a
 subset.
 
+## Iosevka (monospaced)
+
+By Renzhi Li (Belleve Invis), version 34.8.1, the default Iosevka build from
+<https://github.com/be5invis/Iosevka>. Licence: SIL Open Font License 1.1 with
+no reserved names, in `OFL-Iosevka.txt`. The `iosevka-*.woff2` files (Regular,
+Italic, Bold) are subsets cut by `scripts/subset-latin.py` from the unhinted
+TTFs; the site uses them for `code`.
+
 ## Source Han Serif SC (Chinese)
 
 By Adobe and Google (the Noto Serif CJK build), from

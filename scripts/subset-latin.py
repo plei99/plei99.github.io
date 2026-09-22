@@ -29,7 +29,9 @@ TEXT = (
 MATH = TEXT + (
     ",U+2200-22FF,U+2300-23FF,U+27C0-27FF,U+2900-2AFF,U+1D400-1D7FF"
 )
-# output stem -> (source file, kind): "text", "math", or "whole" (convert only)
+# output stem -> (source file, kind): "text", "math", "mono" (text ranges, default
+# layout features only: Iosevka's many stylistic alternates would triple the
+# file), or "whole" (convert only)
 FAMILIES = {
     "tex-gyre-pagella-regular": ("pagella-regular.otf", "text"),
     "tex-gyre-pagella-italic": ("pagella-italic.otf", "text"),
@@ -50,6 +52,9 @@ FAMILIES = {
     "libertinus-serif-bold": ("LibertinusSerif-Bold.otf", "text"),
     "libertinus-serif-bolditalic": ("LibertinusSerif-BoldItalic.otf", "text"),
     "libertinus-math": ("LibertinusMath-Regular.otf", "math"),
+    "iosevka-regular": ("Iosevka-Regular.ttf", "mono"),
+    "iosevka-italic": ("Iosevka-Italic.ttf", "mono"),
+    "iosevka-bold": ("Iosevka-Bold.ttf", "mono"),
     "tex-gyre-schola-regular": ("schola-regular.otf", "text"),
     "tex-gyre-schola-italic": ("schola-italic.otf", "text"),
     "tex-gyre-schola-bold": ("schola-bold.otf", "text"),
@@ -85,7 +90,9 @@ def main(source_dir: str) -> None:
             continue
         options = subset.Options()
         options.flavor = "woff2"
-        options.layout_features = ["*"]
+        options.layout_features = ["*"] if kind != "mono" else list(
+            subset.Options().layout_features
+        )
         options.name_IDs = ["*"]
         options.notdef_outline = True
         options.glyph_names = False
