@@ -30,6 +30,7 @@ en:
   cv: CV
   close: Close
   theme: Theme
+  latin_font: Font
   cjk_font: Chinese font
   cjk_serif: Source Han Serif
   cjk_kai: LXGW WenKai
@@ -64,6 +65,7 @@ zh:
   cv: 简历
   close: 关闭
   theme: 主题
+  latin_font: 西文字体
   cjk_font: 中文字体
   cjk_serif: 思源宋体
   cjk_kai: 霞鹜文楷

@@ -1,7 +1,8 @@
 # Fonts
 
-All four families are served from this site, so pages make no third-party
-requests.
+Every family is served from this site, so pages make no third-party requests.
+The Latin pairings are chosen from the masthead; Pagella with Asana Math is the
+default. `scripts/subset-latin.py` regenerates the Latin files.
 
 ## TeX Gyre Pagella (text)
 
@@ -16,7 +17,7 @@ official OpenType files converted to WOFF2 and subsetted to Latin, Latin
 Extended, punctuation and common symbols, with every OpenType layout feature
 kept. No outline was altered. The unmodified fonts are at the address above.
 
-## Asana Math (mathematics)
+## Asana Math (mathematics, with Pagella)
 
 By Apostolos Syropoulos, version 000.962, from
 <https://ctan.org/pkg/asana-math>. Licence: SIL Open Font License 1.1, in
@@ -25,6 +26,30 @@ By Apostolos Syropoulos, version 000.962, from
 `asana-math.woff2` is the complete, unmodified font in WOFF2 form. It is not
 subsetted, because a subset would be a modified version and could not keep the
 reserved name.
+
+## TeX Gyre Bonum and TeX Gyre Bonum Math
+
+A free Bookman clone, by the same TeX Gyre project as Pagella, text version
+2.004 and math version 1.005, from <https://ctan.org/pkg/tex-gyre-bonum> and
+<https://ctan.org/pkg/tex-gyre-math>. Licence: GUST Font License, as for
+Pagella. The `tex-gyre-bonum-*.woff2` files are **modified**: converted to WOFF2
+and subsetted as described for Pagella; the math font keeps its MATH table and
+the mathematical alphanumerics, operators and arrows.
+
+## Latin Modern Roman and Latin Modern Math
+
+The OpenType Computer Modern, by the same project, text version 2.004 (the 10 pt
+design) and math version 1.959, from <https://ctan.org/pkg/lm> and
+<https://ctan.org/pkg/lm-math>. Licence: GUST Font License. The
+`latin-modern-*.woff2` files are **modified** in the same way.
+
+## Libertinus Serif and Libertinus Math
+
+By the Libertinus Project (Khaled Hosny, Caleb Maclennan and others), version
+7.051, from <https://github.com/alerque/libertinus>. Licence: SIL Open Font
+License 1.1, in `OFL-Libertinus.txt`. Its Reserved Font Names are "Linux
+Libertine", "Biolinum" and "STIX Fonts", none of which these files use, so the
+`libertinus-*.woff2` subsets keep the Libertinus name.
 
 ## Source Han Serif SC (Chinese)
 

@@ -1,10 +1,10 @@
-/* Text is TeX Gyre Pagella, a free Palatino clone, and mathematics is Asana
-   Math: the pairing of the PDF notes this site links to. Chinese is Source Han
-   Serif SC, or LXGW WenKai by choice, both subsetted to the characters the
-   site uses. All are served from
-   this site, because a third-party font request is blocked by some browsers'
-   tracking protection and is slow or unreachable from mainland China.
-   Sources and licences: fonts/README.md. */
+/* Latin text and mathematics come in four pairings, chosen from the masthead:
+   TeX Gyre Pagella with Asana Math (the default, the pairing of the PDF notes
+   this site links to), TeX Gyre Bonum, Latin Modern and Libertinus, each with
+   its own math font. Chinese is Source Han Serif SC, or LXGW WenKai by choice.
+   All are served from this site, because a third-party font request is
+   blocked by some browsers' tracking protection and is slow or unreachable
+   from mainland China. Sources and licences: fonts/README.md. */
 
 @font-face {
   font-family: "TeX Gyre Pagella";
@@ -44,6 +44,126 @@
   font-weight: 400;
   font-display: swap;
   src: url("/fonts/asana-math.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "TeX Gyre Bonum";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/tex-gyre-bonum-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "TeX Gyre Bonum";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/tex-gyre-bonum-italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "TeX Gyre Bonum";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/tex-gyre-bonum-bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "TeX Gyre Bonum";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/tex-gyre-bonum-bolditalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "TeX Gyre Bonum Math";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/tex-gyre-bonum-math.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Latin Modern Roman";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/latin-modern-roman-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Latin Modern Roman";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/latin-modern-roman-italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Latin Modern Roman";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/latin-modern-roman-bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Latin Modern Roman";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/latin-modern-roman-bolditalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Latin Modern Math";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/latin-modern-math.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Libertinus Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/libertinus-serif-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Libertinus Serif";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/libertinus-serif-italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Libertinus Serif";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/libertinus-serif-bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Libertinus Serif";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/libertinus-serif-bolditalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Libertinus Math";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/libertinus-math.woff2") format("woff2");
 }
 
 @font-face {

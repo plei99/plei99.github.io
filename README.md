@@ -36,8 +36,8 @@ src/
   notes.vto             Top-level English page (papers.vto redirects to arXiv)
   styles.css            The whole stylesheet
   js/panel.js           Opens pages as panels over the figure
-  fonts/                Pagella, Asana Math and Source Han Serif, self-hosted; see fonts/README.md
-  scripts/              subset-cjk.py regenerates the Chinese subset; check-cjk-coverage.ts guards it
+  fonts/                All fonts, self-hosted; see fonts/README.md
+  scripts/              subset-latin.py and subset-cjk.py regenerate the font files; check-cjk-coverage.ts guards the Chinese subset
   js/, images/          Static assets copied verbatim
 ```
 
@@ -67,10 +67,12 @@ content swaps with `pushState`, so the figure never reloads. Without JavaScript
 the labels and the close button are plain links.
 
 The look is a page from the PDF notes: text in TeX Gyre Pagella (a free Palatino
-clone), mathematics in Asana Math, Chinese in Source Han Serif SC (or LXGW
-WenKai, by a picker on the Chinese pages), the figure's outlines in the text
-colour, and one accent for whatever can be followed. Inline mathematics is
-MathML; the figure's labels are Unicode mathematical italics set in Asana Math.
+clone) with mathematics in Asana Math, or by a picker in the masthead TeX Gyre
+Bonum, Latin Modern or Libertinus, each with its own math font; Chinese in
+Source Han Serif SC (or LXGW WenKai, by a picker on the Chinese pages), the
+figure's outlines in the text colour, and one accent for whatever can be
+followed. Inline mathematics is MathML; the figure's labels are Unicode
+mathematical italics set in Asana Math.
 
 Colours come from terminal colour schemes, chosen by name from one picker in the
 masthead: Modus, Ayu, Solarized, Rosé Pine, Catppuccin, Monokai, Gruvbox, Nord,

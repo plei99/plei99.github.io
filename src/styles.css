@@ -27,10 +27,11 @@
   /* Pagella carries only Latin, so Chinese falls through to --cjk; Latin inside
      Chinese text stays in Pagella, which is the intended pairing. */
   --cjk: "Source Han Serif SC";
-  --serif: "TeX Gyre Pagella", "Palatino Linotype", Palatino, "Book Antiqua",
-    var(--cjk), "Noto Serif CJK SC", "Songti SC", Georgia, serif;
-  --math: "Asana Math", "TeX Gyre Pagella", "Palatino Linotype", Palatino, math,
+  --latin: "TeX Gyre Pagella", "Palatino Linotype", Palatino, "Book Antiqua";
+  --latin-math: "Asana Math";
+  --serif: var(--latin), var(--cjk), "Noto Serif CJK SC", "Songti SC", Georgia,
     serif;
+  --math: var(--latin-math), var(--latin), math, serif;
 
   --measure: 36rem;
   --gutter: clamp(1.25rem, 4vw, 3rem);
@@ -38,6 +39,21 @@
 
 :root[data-cjk="wenkai"] {
   --cjk: "LXGW WenKai";
+}
+
+:root[data-latin="bonum"] {
+  --latin: "TeX Gyre Bonum", "Bookman Old Style", "URW Bookman";
+  --latin-math: "TeX Gyre Bonum Math";
+}
+
+:root[data-latin="latin-modern"] {
+  --latin: "Latin Modern Roman", "Computer Modern";
+  --latin-math: "Latin Modern Math";
+}
+
+:root[data-latin="libertinus"] {
+  --latin: "Libertinus Serif", "Linux Libertine O";
+  --latin-math: "Libertinus Math";
 }
 
 *,
@@ -162,14 +178,16 @@ img {
 }
 
 .scheme,
-.cjk {
+.cjk,
+.latin {
   position: relative;
   color: var(--muted);
   font-size: 1rem;
 }
 
 .scheme::after,
-.cjk::after {
+.cjk::after,
+.latin::after {
   content: "▾";
   position: absolute;
   right: 0;
@@ -178,7 +196,8 @@ img {
 }
 
 .scheme select,
-.cjk select {
+.cjk select,
+.latin select {
   appearance: none;
   /* Size to the current theme's name, not to the longest one; where that is
      not supported, at least keep the name next to the caret. */
@@ -194,12 +213,14 @@ img {
 }
 
 .scheme:hover,
-.cjk:hover {
+.cjk:hover,
+.latin:hover {
   color: var(--text);
 }
 
 .scheme select option,
-.cjk select option {
+.cjk select option,
+.latin select option {
   background: var(--paper);
   color: var(--text);
 }

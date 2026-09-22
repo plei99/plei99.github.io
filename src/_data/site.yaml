@@ -41,6 +41,15 @@ pages:
     label: { en: uses, zh: 装备 }
     href: { en: /en/uses.html, zh: /zh/uses.html }
 
+# Latin text fonts offered in the masthead, each with its math companion. `id`
+# is the data-latin value in styles.css; Pagella has none because it is the
+# default. Names are the same in both languages.
+latin_fonts:
+  - { id: "", name: Pagella }
+  - { id: bonum, name: Bonum }
+  - { id: latin-modern, name: Latin Modern }
+  - { id: libertinus, name: Libertinus }
+
 contact:
   email: plei@fudan.edu.cn
   github: https://github.com/plei99

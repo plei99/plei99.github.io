@@ -45,21 +45,27 @@ system.addEventListener("change", () => {
 });
 picker.hidden = false;
 
-// Chinese font: Source Han Serif by default, LXGW WenKai by choice, applied
-// through data-cjk on <html> and saved the same way as the theme.
-const cjk = document.querySelector(".cjk");
-if (cjk) {
-  const cjkSelect = cjk.querySelector("select");
-  cjkSelect.value = root.dataset.cjk === "wenkai" ? "wenkai" : "";
-  cjkSelect.addEventListener("change", () => {
-    if (cjkSelect.value) root.dataset.cjk = cjkSelect.value;
-    else delete root.dataset.cjk;
+// The font pickers: Latin text (with its math companion) on every page, and
+// the Chinese face on Chinese pages. Each sets one attribute on <html>, absent
+// for the default, and is saved under the same key.
+function fontPicker(selector, attr) {
+  const picker = document.querySelector(selector);
+  if (!picker) return;
+  const select = picker.querySelector("select");
+  select.value = root.dataset[attr] || "";
+  if (select.selectedIndex < 0) select.value = "";
+  select.addEventListener("change", () => {
+    if (select.value) root.dataset[attr] = select.value;
+    else delete root.dataset[attr];
     try {
-      if (cjkSelect.value) localStorage.setItem("cjk", cjkSelect.value);
-      else localStorage.removeItem("cjk");
+      if (select.value) localStorage.setItem(attr, select.value);
+      else localStorage.removeItem(attr);
     } catch {
       // Private browsing: the choice lasts for this page only.
     }
   });
-  cjk.hidden = false;
+  picker.hidden = false;
 }
+
+fontPicker(".latin", "latin");
+fontPicker(".cjk", "cjk");
