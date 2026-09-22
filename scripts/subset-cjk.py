@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
-"""Subset Source Han Serif SC to the CJK characters the site uses.
+"""Subset the Chinese fonts to the CJK characters the site uses.
 
 The full font is 12 MB a weight, so src/fonts holds a subset of only the
 characters that appear in the site's content, plus CJK punctuation. Run this
 after adding Chinese text with characters the site has not used before:
 
     python3 -m venv /tmp/ft && /tmp/ft/bin/pip install fonttools brotli
-    /tmp/ft/bin/python scripts/subset-cjk.py path/to/NotoSerifSC-Regular.otf \
-        path/to/NotoSerifSC-Bold.otf
+    /tmp/ft/bin/python scripts/subset-cjk.py NotoSerifSC-Regular.otf \
+        NotoSerifSC-Bold.otf LXGWWenKai-Regular.ttf
 
 The source files are Serif/SubsetOTF/SC/NotoSerifSC-{Regular,Bold}.otf from
-https://github.com/notofonts/noto-cjk. The script also writes
+https://github.com/notofonts/noto-cjk and LXGWWenKai-Regular.ttf (the only
+weight released) from https://github.com/lxgw/LxgwWenKai. The output name comes
+from the input name. The script also writes
 src/fonts/cjk-coverage.txt, which `deno task check` compares against the
 content, so a forgotten rerun fails the build rather than silently falling
 back to a system font.
@@ -46,6 +48,7 @@ def main(sources: list[str]) -> None:
     unicodes = subset.parse_unicodes(PUNCTUATION) + [ord(c) for c in chars]
     for source in sources:
         weight = "bold" if "Bold" in source else "regular"
+        family = "lxgw-wenkai" if "WenKai" in source else "source-han-serif-sc"
         options = subset.Options()
         options.flavor = "woff2"
         options.layout_features = ["*"]
@@ -55,7 +58,7 @@ def main(sources: list[str]) -> None:
         subsetter = subset.Subsetter(options)
         subsetter.populate(unicodes=unicodes)
         subsetter.subset(font)
-        out = SRC / "fonts" / f"source-han-serif-sc-{weight}.woff2"
+        out = SRC / "fonts" / f"{family}-{weight}.woff2"
         subset.save_font(font, str(out), options)
         print(f"{out.name}: {out.stat().st_size // 1024} KB, {len(chars)} characters")
     (SRC / "fonts" / "cjk-coverage.txt").write_text(

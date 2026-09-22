@@ -1,4 +1,4 @@
-// The theme picker.
+// The theme picker, and on Chinese pages the Chinese font picker.
 //
 // themes.css defines one block per theme, selected by data-theme on <html>.
 // With nothing chosen the attribute is absent and the stylesheet shows the
@@ -44,3 +44,22 @@ system.addEventListener("change", () => {
   if (!root.dataset.theme) showCurrent();
 });
 picker.hidden = false;
+
+// Chinese font: Source Han Serif by default, LXGW WenKai by choice, applied
+// through data-cjk on <html> and saved the same way as the theme.
+const cjk = document.querySelector(".cjk");
+if (cjk) {
+  const cjkSelect = cjk.querySelector("select");
+  cjkSelect.value = root.dataset.cjk === "wenkai" ? "wenkai" : "";
+  cjkSelect.addEventListener("change", () => {
+    if (cjkSelect.value) root.dataset.cjk = cjkSelect.value;
+    else delete root.dataset.cjk;
+    try {
+      if (cjkSelect.value) localStorage.setItem("cjk", cjkSelect.value);
+      else localStorage.removeItem("cjk");
+    } catch {
+      // Private browsing: the choice lasts for this page only.
+    }
+  });
+  cjk.hidden = false;
+}

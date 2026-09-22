@@ -67,10 +67,10 @@ content swaps with `pushState`, so the figure never reloads. Without JavaScript
 the labels and the close button are plain links.
 
 The look is a page from the PDF notes: text in TeX Gyre Pagella (a free Palatino
-clone), mathematics in Asana Math, Chinese in Source Han Serif SC, the figure's
-outlines in the text colour, and one accent for whatever can be followed. Inline
-mathematics is MathML; the figure's labels are Unicode mathematical italics set
-in Asana Math.
+clone), mathematics in Asana Math, Chinese in Source Han Serif SC (or LXGW
+WenKai, by a picker on the Chinese pages), the figure's outlines in the text
+colour, and one accent for whatever can be followed. Inline mathematics is
+MathML; the figure's labels are Unicode mathematical italics set in Asana Math.
 
 Colours come from terminal colour schemes, chosen by name from one picker in the
 masthead: Modus, Ayu, Solarized, Rosé Pine, Catppuccin, Monokai, Gruvbox, Nord,

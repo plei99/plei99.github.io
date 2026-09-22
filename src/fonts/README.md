@@ -1,6 +1,6 @@
 # Fonts
 
-All three families are served from this site, so pages make no third-party
+All four families are served from this site, so pages make no third-party
 requests.
 
 ## TeX Gyre Pagella (text)
@@ -40,3 +40,13 @@ name, the family is used here under its original name only as a `@font-face`
 alias in `fonts.css`; the files themselves are subsets and not the original
 font. Regenerate them with `scripts/subset-cjk.py` when Chinese content adds new
 characters; `deno task check` fails if that has been forgotten.
+
+## LXGW WenKai (Chinese, by choice)
+
+By LXGW, version 1.522, derived from Fontworks' Klee, from
+<https://github.com/lxgw/LxgwWenKai>. Licence: SIL Open Font License 1.1, in
+`OFL-LXGW-WenKai.txt`. Its reserved names come with an additional permission
+that expressly allows subsets converted to WOFF2 for web delivery to keep the
+name, which `lxgw-wenkai-regular.woff2` relies on. It is cut by the same script
+and to the same characters as Source Han Serif. Only a Regular weight is
+released, so bold text in it is synthesised by the browser.

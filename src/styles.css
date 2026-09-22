@@ -24,15 +24,20 @@
 }
 
 :root {
-  /* Pagella carries only Latin, so Chinese falls through to Source Han Serif;
-     Latin inside Chinese text stays in Pagella, which is the intended pairing. */
+  /* Pagella carries only Latin, so Chinese falls through to --cjk; Latin inside
+     Chinese text stays in Pagella, which is the intended pairing. */
+  --cjk: "Source Han Serif SC";
   --serif: "TeX Gyre Pagella", "Palatino Linotype", Palatino, "Book Antiqua",
-    "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", Georgia, serif;
+    var(--cjk), "Noto Serif CJK SC", "Songti SC", Georgia, serif;
   --math: "Asana Math", "TeX Gyre Pagella", "Palatino Linotype", Palatino, math,
     serif;
 
   --measure: 36rem;
   --gutter: clamp(1.25rem, 4vw, 3rem);
+}
+
+:root[data-cjk="wenkai"] {
+  --cjk: "LXGW WenKai";
 }
 
 *,
@@ -156,13 +161,15 @@ img {
   gap: 1rem;
 }
 
-.scheme {
+.scheme,
+.cjk {
   position: relative;
   color: var(--muted);
   font-size: 1rem;
 }
 
-.scheme::after {
+.scheme::after,
+.cjk::after {
   content: "▾";
   position: absolute;
   right: 0;
@@ -170,7 +177,8 @@ img {
   pointer-events: none;
 }
 
-.scheme select {
+.scheme select,
+.cjk select {
   appearance: none;
   /* Size to the current theme's name, not to the longest one; where that is
      not supported, at least keep the name next to the caret. */
@@ -185,11 +193,13 @@ img {
   cursor: pointer;
 }
 
-.scheme:hover {
+.scheme:hover,
+.cjk:hover {
   color: var(--text);
 }
 
-.scheme select option {
+.scheme select option,
+.cjk select option {
   background: var(--paper);
   color: var(--text);
 }

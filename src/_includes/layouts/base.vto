@@ -39,6 +39,7 @@
   try {
     var theme = localStorage.getItem("theme");
     if (theme) document.documentElement.dataset.theme = theme;
+    if (localStorage.getItem("cjk") === "wenkai") document.documentElement.dataset.cjk = "wenkai";
   } catch (_) {}
 </script>
 <link rel="preload" href="/fonts/tex-gyre-pagella-regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -81,6 +82,16 @@
         {{ /for }}
       </select>
     </label>
+    {{# Chinese pages can also choose the Chinese face: Song (the default) or Kai. #}}
+    {{ if lang === "zh" }}
+    <label class="cjk" hidden>
+      <span class="visually-hidden">{{ ui[lang].cjk_font }}</span>
+      <select>
+        <option value="">{{ ui[lang].cjk_serif }}</option>
+        <option value="wenkai">{{ ui[lang].cjk_kai }}</option>
+      </select>
+    </label>
+    {{ /if }}
     {{# The language link names the language it switches to. #}}
     {{ if lang === "zh" }}
     <a class="langswitch" lang="en" hreflang="en" data-no-panel href="{{ altUrl || switchUrl || "/" }}">English</a>

@@ -30,6 +30,9 @@ en:
   cv: CV
   close: Close
   theme: Theme
+  cjk_font: Chinese font
+  cjk_serif: Source Han Serif
+  cjk_kai: LXGW WenKai
   back_to_seminars: All seminars
   figure_label: Site map, drawn as a stable map from a genus 2 curve to a target X
   index: Pages
@@ -61,6 +64,9 @@ zh:
   cv: 简历
   close: 关闭
   theme: 主题
+  cjk_font: 中文字体
+  cjk_serif: 思源宋体
+  cjk_kai: 霞鹜文楷
   back_to_seminars: 全部讨论班
   figure_label: 网站导航图，画成一个从亏格 2 曲线到 X 的稳定映射
   index: 页面
