@@ -24,8 +24,10 @@
 }
 
 :root {
+  /* Pagella carries only Latin, so Chinese falls through to Source Han Serif;
+     Latin inside Chinese text stays in Pagella, which is the intended pairing. */
   --serif: "TeX Gyre Pagella", "Palatino Linotype", Palatino, "Book Antiqua",
-    "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", Georgia, serif;
+    "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", Georgia, serif;
   --math: "Asana Math", "TeX Gyre Pagella", "Palatino Linotype", Palatino, math,
     serif;
 

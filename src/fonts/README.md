@@ -1,6 +1,7 @@
 # Fonts
 
-Both families are served from this site, so pages make no third-party requests.
+All three families are served from this site, so pages make no third-party
+requests.
 
 ## TeX Gyre Pagella (text)
 
@@ -24,3 +25,18 @@ By Apostolos Syropoulos, version 000.962, from
 `asana-math.woff2` is the complete, unmodified font in WOFF2 form. It is not
 subsetted, because a subset would be a modified version and could not keep the
 reserved name.
+
+## Source Han Serif SC (Chinese)
+
+By Adobe and Google (the Noto Serif CJK build), from
+<https://github.com/notofonts/noto-cjk>, `Serif/SubsetOTF/SC/`. Licence: SIL
+Open Font License 1.1, in `OFL-Source-Han-Serif.txt`, with the Reserved Font
+Name "Source Han Serif".
+
+The two `source-han-serif-sc-*.woff2` files are **subsets**: the full font is 12
+MB a weight, and these contain only the characters the site's content uses plus
+CJK punctuation (`cjk-coverage.txt` lists them). Because the OFL reserves the
+name, the family is used here under its original name only as a `@font-face`
+alias in `fonts.css`; the files themselves are subsets and not the original
+font. Regenerate them with `scripts/subset-cjk.py` when Chinese content adds new
+characters; `deno task check` fails if that has been forgotten.

@@ -6,7 +6,7 @@
     "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",
     "build": "deno task lume",
     "dev": "deno task lume -s",
-    "check": "deno fmt --check && deno lint && deno check _config.ts"
+    "check": "deno fmt --check && deno lint && deno check _config.ts && deno run --allow-read scripts/check-cjk-coverage.ts"
   },
   "compilerOptions": {
     "types": [
