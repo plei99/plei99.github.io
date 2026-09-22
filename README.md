@@ -85,8 +85,10 @@ muted, ink, link, rule and stage. `styles.css` names no colours. To add a theme,
 add an entry to that file.
 
 With nothing chosen the page is Modus Operandi, or Modus Vivendi when the system
-is set to dark. `js/theme.js` saves a choice to `localStorage`, and a small
-inline script in `<head>` applies it before first paint.
+is set to dark. `js/theme.js` saves each choice (theme, Latin font, Chinese
+font) to `localStorage` and to a cookie of the same name that lasts a year, and
+a small inline script in `<head>` applies whichever is present before first
+paint. The cookie is only ever read by that script; the site is static.
 
 The previous design ("Open Margins") is kept on the `archive/2026-09-classic`
 branch and the `classic-2026-09` tag.

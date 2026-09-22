@@ -34,15 +34,24 @@
 </script>
 {{ /if }}
 <script>
-  // Apply a saved theme before first paint. With nothing saved, the
-  // stylesheet uses Modus and follows the system's light or dark setting.
-  try {
-    var theme = localStorage.getItem("theme");
-    if (theme) document.documentElement.dataset.theme = theme;
-    if (localStorage.getItem("cjk") === "wenkai") document.documentElement.dataset.cjk = "wenkai";
-    var latin = localStorage.getItem("latin");
-    if (latin) document.documentElement.dataset.latin = latin;
-  } catch (_) {}
+  // Apply saved preferences before first paint. Each is read from
+  // localStorage, or from the cookie of the same name (js/theme.js writes
+  // both). With nothing saved the stylesheet uses its defaults.
+  (function () {
+    function pref(key) {
+      try {
+        var v = localStorage.getItem(key);
+        if (v) return v;
+      } catch (_) {}
+      var m = document.cookie.match(new RegExp("(?:^|; )" + key + "=([^;]*)"));
+      return m ? decodeURIComponent(m[1]) : "";
+    }
+    var keys = ["theme", "latin", "cjk"];
+    for (var i = 0; i < keys.length; i++) {
+      var v = pref(keys[i]);
+      if (v) document.documentElement.dataset[keys[i]] = v;
+    }
+  })();
 </script>
 <link rel="preload" href="/fonts/tex-gyre-pagella-regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/fonts/fonts.css?v={{ rev }}">

@@ -11,13 +11,32 @@ const picker = document.querySelector(".scheme");
 const select = picker.querySelector("select");
 const system = matchMedia("(prefers-color-scheme: dark)");
 
-function save(value) {
+// Every preference (theme, latin, cjk) is kept in two places: localStorage,
+// and a cookie that lasts a year. The site is static, so nothing reads the
+// cookie on a server; it is a second copy that survives where script-only
+// storage is blocked or cleared, and the inline script in <head> reads
+// whichever is present. Both are written on a choice the visitor makes.
+const YEAR = 60 * 60 * 24 * 365;
+
+function store(key, value) {
   try {
-    if (value) localStorage.setItem("theme", value);
-    else localStorage.removeItem("theme");
+    if (value) localStorage.setItem(key, value);
+    else localStorage.removeItem(key);
+  } catch {
+    // Private browsing: the cookie may still work.
+  }
+  const secure = location.protocol === "https:" ? "; Secure" : "";
+  document.cookie = `${key}=${encodeURIComponent(value || "")}; Max-Age=${
+    value ? YEAR : 0
+  }; Path=/; SameSite=Lax${secure}`;
+}
+
+function save(value) {
+  store("theme", value);
+  try {
     localStorage.removeItem("scheme"); // from the earlier two-control design
   } catch {
-    // Private browsing: the choice lasts for this page only.
+    // Nothing to clear.
   }
 }
 
@@ -79,20 +98,12 @@ function fontPicker(selector, attr) {
     select.value = root.dataset[attr];
     if (select.selectedIndex < 0) {
       delete root.dataset[attr];
-      try {
-        localStorage.removeItem(attr);
-      } catch {
-        // Nothing to clear.
-      }
+      store(attr, "");
     }
   }
   select.addEventListener("change", () => {
     root.dataset[attr] = select.value;
-    try {
-      localStorage.setItem(attr, select.value);
-    } catch {
-      // Private browsing: the choice lasts for this page only.
-    }
+    store(attr, select.value);
     showEffective();
   });
   picker.hidden = false;
