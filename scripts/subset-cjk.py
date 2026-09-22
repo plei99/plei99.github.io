@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Subset the Chinese fonts to the CJK characters the site uses.
+"""Subset the Chinese fonts (Source Han Serif and Sans, Resource Han Rounded,
+LXGW WenKai) to the CJK characters the site uses.
 
 The full font is 12 MB a weight, so src/fonts holds a subset of only the
 characters that appear in the site's content, plus CJK punctuation. Run this
@@ -7,11 +8,15 @@ after adding Chinese text with characters the site has not used before:
 
     python3 -m venv /tmp/ft && /tmp/ft/bin/pip install fonttools brotli
     /tmp/ft/bin/python scripts/subset-cjk.py NotoSerifSC-Regular.otf \
-        NotoSerifSC-Bold.otf LXGWWenKai-Regular.ttf
+        NotoSerifSC-Bold.otf NotoSansSC-Regular.otf NotoSansSC-Bold.otf \
+        ResourceHanRoundedCN-Regular.ttf ResourceHanRoundedCN-Bold.ttf \
+        LXGWWenKai-Regular.ttf
 
 The source files are Serif/SubsetOTF/SC/NotoSerifSC-{Regular,Bold}.otf from
-https://github.com/notofonts/noto-cjk and LXGWWenKai-Regular.ttf (the only
-weight released) from https://github.com/lxgw/LxgwWenKai. The output name comes
+https://github.com/notofonts/noto-cjk (Sans/SubsetOTF/SC/NotoSansSC-* likewise),
+ResourceHanRoundedCN-* from the RHR-CN archive of
+https://github.com/CyanoHao/Resource-Han-Rounded, and LXGWWenKai-Regular.ttf
+(the only weight released) from https://github.com/lxgw/LxgwWenKai. The output name comes
 from the input name. The script also writes
 src/fonts/cjk-coverage.txt, which `deno task check` compares against the
 content, so a forgotten rerun fails the build rather than silently falling
@@ -48,7 +53,12 @@ def main(sources: list[str]) -> None:
     unicodes = subset.parse_unicodes(PUNCTUATION) + [ord(c) for c in chars]
     for source in sources:
         weight = "bold" if "Bold" in source else "regular"
-        family = "lxgw-wenkai" if "WenKai" in source else "source-han-serif-sc"
+        family = (
+            "lxgw-wenkai" if "WenKai" in source
+            else "resource-han-rounded-sc" if "ResourceHanRounded" in source
+            else "source-han-sans-sc" if "NotoSans" in source
+            else "source-han-serif-sc"
+        )
         options = subset.Options()
         options.flavor = "woff2"
         options.layout_features = ["*"]

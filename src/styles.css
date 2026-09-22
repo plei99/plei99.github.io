@@ -41,6 +41,30 @@
   --cjk: "LXGW WenKai";
 }
 
+:root[data-cjk="sans"] {
+  --cjk: "Source Han Sans SC";
+}
+
+:root[data-cjk="rounded"] {
+  --cjk: "Resource Han Rounded SC";
+}
+
+/* Sans pairs with sans until told otherwise: a Chinese sans with no Latin
+   choice brings Fira Sans and Fira Math, and a Latin sans with no Chinese
+   choice brings Source Han Sans. Explicit choices ("pagella", "serif") are
+   attributes too, so they win over these. js/theme.js mirrors these lists. */
+:root[data-cjk="sans"]:not([data-latin]),
+:root[data-cjk="rounded"]:not([data-latin]) {
+  --latin: "Fira Sans";
+  --latin-math: "Fira Math";
+}
+
+:root[data-latin="fira"]:not([data-cjk]),
+:root[data-latin="new-cm-sans"]:not([data-cjk]),
+:root[data-latin="lato"]:not([data-cjk]) {
+  --cjk: "Source Han Sans SC";
+}
+
 :root[data-latin="bonum"] {
   --latin: "TeX Gyre Bonum", "Bookman Old Style", "URW Bookman";
   --latin-math: "TeX Gyre Bonum Math";

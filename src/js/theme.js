@@ -46,26 +46,58 @@ system.addEventListener("change", () => {
 picker.hidden = false;
 
 // The font pickers: Latin text (with its math companion) on every page, and
-// the Chinese face on Chinese pages. Each sets one attribute on <html>, absent
-// for the default, and is saved under the same key.
+// the Chinese face on Chinese pages. Each sets one attribute on <html> and is
+// saved under the same key. With no attribute the stylesheet pairs sans with
+// sans (a Chinese sans brings Fira, a Latin sans brings Source Han Sans), so
+// a picker with nothing chosen shows that effective value; choosing anything,
+// including the default face, makes it explicit. The lists mirror styles.css.
+const SANS_LATIN = ["fira", "new-cm-sans", "lato"];
+const SANS_CJK = ["sans", "rounded"];
+const pickers = {};
+
+function effective(attr) {
+  if (root.dataset[attr]) return root.dataset[attr];
+  if (attr === "latin") {
+    return SANS_CJK.includes(root.dataset.cjk) ? "fira" : "pagella";
+  }
+  return SANS_LATIN.includes(root.dataset.latin) ? "sans" : "serif";
+}
+
+function showEffective() {
+  for (const [attr, select] of Object.entries(pickers)) {
+    select.value = effective(attr);
+  }
+}
+
 function fontPicker(selector, attr) {
   const picker = document.querySelector(selector);
   if (!picker) return;
   const select = picker.querySelector("select");
-  select.value = root.dataset[attr] || "";
-  if (select.selectedIndex < 0) select.value = "";
+  pickers[attr] = select;
+  // A saved value that no longer exists falls back to the default.
+  if (root.dataset[attr]) {
+    select.value = root.dataset[attr];
+    if (select.selectedIndex < 0) {
+      delete root.dataset[attr];
+      try {
+        localStorage.removeItem(attr);
+      } catch {
+        // Nothing to clear.
+      }
+    }
+  }
   select.addEventListener("change", () => {
-    if (select.value) root.dataset[attr] = select.value;
-    else delete root.dataset[attr];
+    root.dataset[attr] = select.value;
     try {
-      if (select.value) localStorage.setItem(attr, select.value);
-      else localStorage.removeItem(attr);
+      localStorage.setItem(attr, select.value);
     } catch {
       // Private browsing: the choice lasts for this page only.
     }
+    showEffective();
   });
   picker.hidden = false;
 }
 
 fontPicker(".latin", "latin");
 fontPicker(".cjk", "cjk");
+showEffective();

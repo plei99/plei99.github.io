@@ -3,7 +3,8 @@
    this site links to; the others are Pagella with Euler Math, TeX Gyre Bonum,
    TeX Gyre Schola, Latin Modern, Libertinus, EB Garamond, Fira Sans, New
    Computer Modern Sans and Lato (with Lete Sans Math), each with its own math
-   font. Chinese is Source Han Serif SC, or LXGW WenKai by choice.
+   font. Chinese is Source Han Serif SC, or by choice Source Han Sans SC, Resource Han
+   Rounded SC or LXGW WenKai.
    All are served from this site, because a third-party font request is
    blocked by some browsers' tracking protection and is slow or unreachable
    from mainland China. Sources and licences: fonts/README.md. */
@@ -374,6 +375,38 @@
   font-weight: 700;
   font-display: swap;
   src: url("/fonts/source-han-serif-sc-bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Source Han Sans SC";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/source-han-sans-sc-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Source Han Sans SC";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/source-han-sans-sc-bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Resource Han Rounded SC";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/resource-han-rounded-sc-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Resource Han Rounded SC";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/resource-han-rounded-sc-bold.woff2") format("woff2");
 }
 
 /* WenKai is released in one weight; headings in it are synthesised bold. */

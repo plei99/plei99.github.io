@@ -33,6 +33,8 @@ en:
   latin_font: Font
   cjk_font: Chinese font
   cjk_serif: Source Han Serif
+  cjk_sans: Source Han Sans
+  cjk_rounded: Resource Han Rounded
   cjk_kai: LXGW WenKai
   back_to_seminars: All seminars
   figure_label: Site map, drawn as a stable map from a genus 2 curve to a target X
@@ -68,6 +70,8 @@ zh:
   latin_font: 西文字体
   cjk_font: 中文字体
   cjk_serif: 思源宋体
+  cjk_sans: 思源黑体
+  cjk_rounded: 资源圆体
   cjk_kai: 霞鹜文楷
   back_to_seminars: 全部讨论班
   figure_label: 网站导航图，画成一个从亏格 2 曲线到 X 的稳定映射

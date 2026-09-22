@@ -88,7 +88,7 @@
       <span class="visually-hidden">{{ ui[lang].latin_font }}</span>
       <select>
         {{ for group of site.latin_fonts }}
-        <optgroup label="{{ group.group[lang] }}">
+        <optgroup label="{{ group.group[lang] }}"{{ if group.sans }} data-sans{{ /if }}>
           {{ for font of group.fonts }}
           <option value="{{ font.id }}">{{ font.name }}</option>
           {{ /for }}
@@ -96,19 +96,21 @@
         {{ /for }}
       </select>
     </label>
-    {{# Chinese pages can also choose the Chinese face: Song (the default) or Kai. #}}
+    {{# Chinese pages can also choose the Chinese face. #}}
     {{ if lang === "zh" }}
     <label class="cjk" hidden>
       <span class="visually-hidden">{{ ui[lang].cjk_font }}</span>
       <select>
-        <option value="">{{ ui[lang].cjk_serif }}</option>
+        <option value="serif">{{ ui[lang].cjk_serif }}</option>
+        <option value="sans" data-sans>{{ ui[lang].cjk_sans }}</option>
+        <option value="rounded" data-sans>{{ ui[lang].cjk_rounded }}</option>
         <option value="wenkai">{{ ui[lang].cjk_kai }}</option>
       </select>
     </label>
     {{ /if }}
     {{# The language link names the language it switches to. #}}
     {{ if lang === "zh" }}
-    <a class="langswitch" lang="en" hreflang="en" data-no-panel href="{{ altUrl || switchUrl || "/" }}">English</a>
+    <a class="langswitch" lang="en" hreflang="en" data-no-panel href="{{ altUrl || switchUrl || "/" }}">en</a>
     {{ else }}
     <a class="langswitch" lang="zh-CN" hreflang="zh-Hans" data-no-panel href="{{ altUrl || switchUrl || "/zh/" }}">中文</a>
     {{ /if }}

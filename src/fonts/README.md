@@ -117,6 +117,20 @@ alias in `fonts.css`; the files themselves are subsets and not the original
 font. Regenerate them with `scripts/subset-cjk.py` when Chinese content adds new
 characters; `deno task check` fails if that has been forgotten.
 
+## Source Han Sans SC and Resource Han Rounded SC (Chinese, by choice)
+
+Source Han Sans SC is the Noto Sans CJK build from the same repository as Source
+Han Serif, `Sans/SubsetOTF/SC/`, SIL Open Font License 1.1 with the Reserved
+Font Name "Source Han Sans", in `OFL-Source-Han-Sans.txt`; the
+`source-han-sans-sc-*.woff2` files are subsets under the same arrangement as the
+Serif. Resource Han Rounded is Cyano Hao's rounded derivative of Source Han
+Sans, version 0.990, from <https://github.com/CyanoHao/Resource-Han-Rounded>
+(the CN build), SIL Open Font License 1.1 with no reserved names, in
+`OFL-Resource-Han-Rounded.txt`; the `resource-han-rounded-sc-*.woff2` files are
+subsets. Choosing either pairs the Latin text with Fira Sans and Fira Math
+unless a Latin face has been chosen explicitly, and choosing a Latin sans pairs
+the Chinese with Source Han Sans in the same way.
+
 ## LXGW WenKai (Chinese, by choice)
 
 By LXGW, version 1.522, derived from Fontworks' Klee, from

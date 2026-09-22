@@ -42,12 +42,12 @@ pages:
     href: { en: /en/uses.html, zh: /zh/uses.html }
 
 # Latin text fonts offered in the masthead, each with its math companion. `id`
-# is the data-latin value in styles.css; Pagella has none because it is the
-# default. Names are the same in both languages.
+# is the data-latin value in styles.css. Names are the same in both languages.
+# `sans: true` on a group pairs it with the Chinese sans faces by default.
 latin_fonts:
   - group: { en: Serif, zh: 衬线 }
     fonts:
-      - { id: "", name: Pagella }
+      - { id: pagella, name: Pagella }
       - { id: euler, name: Pagella + Euler }
       - { id: bonum, name: Bonum }
       - { id: schola, name: Schola }
@@ -55,6 +55,7 @@ latin_fonts:
       - { id: libertinus, name: Libertinus }
       - { id: garamond, name: Garamond }
   - group: { en: Sans, zh: 无衬线 }
+    sans: true
     fonts:
       - { id: fira, name: Fira Sans }
       - { id: new-cm-sans, name: New CM Sans }

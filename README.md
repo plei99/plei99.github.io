@@ -70,8 +70,9 @@ The look is a page from the PDF notes: text in TeX Gyre Pagella (a free Palatino
 clone) with mathematics in Asana Math, or by a picker in the masthead one of
 nine other pairings (Pagella with Euler, Bonum, Schola, Latin Modern,
 Libertinus, Garamond, Fira Sans, New CM Sans, Lato), each with its own math
-font; Chinese in Source Han Serif SC (or LXGW WenKai, by a picker on the Chinese
-pages), the figure's outlines in the text colour, and one accent for whatever
+font; Chinese in Source Han Serif SC (or Source Han Sans, Resource Han Rounded
+or LXGW WenKai, by a picker on the Chinese pages; sans pairs with sans by
+default), the figure's outlines in the text colour, and one accent for whatever
 can be followed. Inline mathematics is MathML; the figure's labels are Unicode
 mathematical italics set in Asana Math.
 
