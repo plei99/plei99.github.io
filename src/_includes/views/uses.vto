@@ -20,6 +20,7 @@
       <div>
         <h3 class="entry-title">{{ if item.url }}<a href="{{ item.url }}">{{ item.name }}</a>{{ else }}{{ item.name }}{{ /if }}</h3>
         <p class="entry-body">{{ item.note[lang] |> md(true) }}</p>
+        {{ if item.study }}{{ include "views/subscription-study.vto" }}{{ /if }}
       </div>
     </li>
     {{ /for }}
@@ -28,3 +29,4 @@
 {{ /for }}
 
 <p class="aside"><a href="https://uses.tech/">{{ ui[lang].uses_what }}</a></p>
+<script type="module" src="/js/uses.js?v={{ rev }}"></script>

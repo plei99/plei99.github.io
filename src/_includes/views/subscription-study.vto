@@ -1,0 +1,84 @@
+{{ set study = ai_subscriptions }}
+{{ set copy = study.copy[lang] }}
+{{ set number = (value, digits = 0) => value.toLocaleString("en-US", { minimumFractionDigits: digits, maximumFractionDigits: digits }) }}
+<details class="uses-study" id="ai-subscriptions" data-uses-study>
+  <summary>{{ copy.trigger }}</summary>
+  <div class="study-content" data-study-content lang="{{ lang === "zh" ? "zh-CN" : "en" }}">
+    <button class="study-close" type="button" data-study-close hidden aria-label="{{ copy.close }}" title="{{ copy.close }}"><span aria-hidden="true">×</span></button>
+    <header class="study-head">
+      <p class="study-date">{{ copy.date }}</p>
+      <h2 id="subscription-study-title" tabindex="-1">{{ copy.title }}</h2>
+      <p>{{ copy.intro }}</p>
+    </header>
+    <div class="study-main">
+      <p class="study-reading-note">{{ copy.reading_note }}</p>
+      <form class="study-timing" data-study-timing hidden aria-labelledby="study-timing-title">
+        <div class="study-timing-head">
+          <h3 id="study-timing-title">{{ copy.timing_heading }}</h3>
+          <button type="reset">{{ copy.reset }}</button>
+        </div>
+        <p class="study-reading-note">{{ copy.timing_note }}</p>
+        <div class="study-timing-grid">
+          {{ for [id, timing] of Object.entries(study.timing) }}
+          <div class="study-timing-control">
+            <label for="study-{{ id }}-share">{{ timing.label[lang] }}</label>
+            <p id="study-{{ id }}-window" class="study-timing-window">{{ timing.window[lang] }}</p>
+            <input type="range" id="study-{{ id }}-share" name="{{ id }}" min="0" max="100" step="1" value="{{ timing.default }}" data-window-coefficient="{{ timing.window_coefficient }}" data-other-coefficient="{{ timing.other_coefficient }}" data-share-label="{{ timing.share[lang] }}" aria-describedby="study-{{ id }}-window">
+            <output for="study-{{ id }}-share" data-share-output="{{ id }}">{{ timing.share[lang].replace("{share}", timing.default).replace("{other}", 100 - timing.default) }}</output>
+            {{ for row of study.rows.filter(row => row.timing === id) }}
+            <p class="study-timing-result" data-study-values="{{ id }}" data-api="{{ row.api }}" data-cost="{{ row.cost }}" data-price="{{ row.price }}">
+              <span class="study-preview-model">{{ row.model }}</span>
+              {{ copy.preview.replace("{api}", '<span data-value="api">$' + number(row.api, 2) + "</span>").replace("{tasks}", '<strong data-value="tasks">' + number(row.api / row.cost) + "</strong>") }}
+            </p>
+            {{ /for }}
+          </div>
+          {{ /for }}
+        </div>
+        <p class="study-reading-note study-timing-limits">{{ copy.timing_limits }}</p>
+      </form>
+      <p class="study-scroll-hint">{{ copy.scroll_hint }}</p>
+      <div class="table-scroll study-comparison" tabindex="0" role="region" aria-labelledby="subscription-study-title">
+        <table>
+          <thead><tr>
+            <th scope="col">{{ copy.plan_model }}</th>
+            <th scope="col">{{ copy.price }}</th>
+            <th scope="col">{{ copy.score }}</th>
+            <th scope="col">{{ copy.api_value }}</th>
+            <th scope="col">{{ copy.cost_task }}</th>
+            <th scope="col">{{ copy.time_task }}</th>
+            <th scope="col">{{ copy.tasks }}</th>
+            <th scope="col">{{ copy.per_100 }}</th>
+          </tr></thead>
+          <tbody>
+            {{ for row of study.rows }}
+            <tr{{ if row.timing }} data-study-values="{{ row.timing }}" data-api="{{ row.api }}" data-cost="{{ row.cost }}" data-price="{{ row.price }}"{{ /if }}>
+              <th scope="row"><span class="study-plan">{{ row.plan[lang] }}</span><a href="{{ row.url }}">{{ row.model }}</a></th>
+              <td>${{ number(row.price) }}</td>
+              <td>{{ row.score }}</td>
+              <td data-value="api">${{ number(row.api, 2) }}</td>
+              <td>${{ number(row.cost, 2) }}</td>
+              <td class="study-task-time"><a href="{{ row.time_url }}" title="{{ number(row.time_seconds, 2) }} {{ copy.seconds }}">{{ number(row.time_seconds / 60, 1) }} {{ copy.minutes }}</a></td>
+              <td class="study-result" data-value="tasks">{{ number(row.api / row.cost) }}</td>
+              <td data-value="per100">{{ number(row.api / row.cost * 100 / row.price) }}</td>
+            </tr>
+            {{ /for }}
+          </tbody>
+        </table>
+      </div>
+      {{ set notes = study.notes.map(note => note[lang].trim()).filter(Boolean) }}
+      {{ if notes.length }}
+      <details class="study-method">
+        <summary>{{ copy.notes }}</summary>
+        <div class="prose prose--wide">
+          <ul>
+            {{ for note of notes }}
+            <li>{{ note |> md(true) }}</li>
+            {{ /for }}
+          </ul>
+        </div>
+      </details>
+      {{ /if }}
+      <p class="study-endnote">{{ copy.endnote }}</p>
+    </div>
+  </div>
+</details>

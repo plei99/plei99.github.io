@@ -26,6 +26,7 @@ src/
     notes.yaml          Notes catalogue
     themes.yaml         Colour themes: the picker and /themes.css come from this
     uses.yaml           Uses page: gear by category, Markdown asides (en + zh)
+    ai_subscriptions.yaml  AI subscription comparison and its notes (en + zh)
   _includes/
     layouts/base.vto    <head>, masthead, the figure, footer, the panel dialog
     layouts/seminar.vto Wrapper for seminar markdown pages
@@ -36,6 +37,7 @@ src/
   notes.vto             Top-level English page (papers.vto redirects to arXiv)
   styles.css            The whole stylesheet
   js/panel.js           Opens pages as panels over the figure
+  js/uses.js            Opens the AI comparison over Uses; inline disclosure without JS
   fonts/                All fonts, self-hosted; see fonts/README.md
   scripts/              subset-latin.py and subset-cjk.py regenerate the font files; check-cjk-coverage.ts guards the Chinese subset
   js/, images/          Static assets copied verbatim
@@ -44,6 +46,15 @@ src/
 Content lives in YAML and Markdown, not in templates. To add a seminar, drop a
 Markdown file with `title`, `pubDate`, and `description` front matter into
 `src/seminars/`.
+
+The AI tools item on Uses has a `study` flag linking it to the subscription
+comparison. `ai_subscriptions.yaml` holds its copy, table rows and notes list
+(en + zh); `views/subscription-study.vto` derives task counts from API value and
+AA task cost. `uses.js` adjusts the MiMo and GLM rows live from the timing
+coefficients and defaults in that data file, weighting credit consumption before
+inverting for capacity. The comparison opens as a second native dialog over the
+Uses panel and has its own address, `uses.html#ai-subscriptions`. Without
+JavaScript, its `details` element expands inline.
 
 ## Languages
 

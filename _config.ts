@@ -39,7 +39,11 @@ site.process([".html"], (pages) => {
       wrapper.className = "table-scroll";
       wrapper.setAttribute("tabindex", "0");
       wrapper.setAttribute("role", "region");
-      wrapper.setAttribute("aria-label", "Schedule");
+      wrapper.setAttribute(
+        "aria-label",
+        table.closest("[data-table-label]")?.getAttribute("data-table-label") ??
+          "Schedule",
+      );
       table.parentNode?.insertBefore(wrapper, table);
       wrapper.appendChild(table);
     }

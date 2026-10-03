@@ -48,11 +48,12 @@
           理想情况下，Linux 上应该有一个 Wayland 版的 XMonad，并且能和一个比 xmobar（很烂）更好的状态栏配合得当。现在 hyprland 改用 Lua 来配置，我们也许真的能有这样的东西了。我在 Linux 上还用过 i3、awesome、dwm、bspwm、sway 和 river，但 X 上的画面撕裂让我没法用；在 Wayland 上，hyprland 是我体验最好的（不过 Sway 的标签式布局实现得更好）。macOS 上没有好的方案，但我觉得 yabai 是最不糟的那个。
     - kind: { en: ai tools, zh: AI 工具 }
       name: Codex, Claude Code
+      study: true
       note:
         en: >-
-          Pure TikZ for images is a complete mystery to me, so what used to be painstaking hand-written reproduction of images post-lectures is now a prompt to a coding agent. I haven't tried Astra yet, but 5.6 Sol was a complete disaster for writing TikZ code compared to Claude models (I have tried Fable 5 and Opus 5).
+          Pure TikZ for images is a complete mystery to me, so what used to be painstaking hand-written reproduction of images post-lectures is now a prompt to a coding agent. In my earlier attempts, 5.6 Sol was a complete disaster for writing TikZ code compared to Claude models (I tried Fable 5 and Opus 5). I've since compared how much inference the subscriptions actually buy, using my usage logs and published limits.
         zh: >-
-          用纯 TikZ 画图对我来说完全是个谜，所以过去课后要费力手写复现的图，现在只要给编程智能体一句提示词就行了。我还没试过 Astra，不过和 Claude 的模型相比（我试过 Fable 5 和 Opus 5），5.6 Sol 写 TikZ 代码简直是一场灾难。
+          用纯 TikZ 画图对我来说完全是个谜，所以过去课后要费力手写复现的图，现在只要给编程智能体一句提示词就行了。在我早先的尝试中，和 Claude 的模型相比（我试过 Fable 5 和 Opus 5），5.6 Sol 写 TikZ 代码简直是一场灾难。后来我用自己的使用日志和公开额度，比较了这些订阅到底能换来多少推理用量。
     - kind: { en: pdf viewer, zh: PDF 阅读器 }
       name: Zathura (Linux), Skim (macOS)
       note:

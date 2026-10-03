@@ -1,0 +1,201 @@
+# September 23 / October 2, 2026 subscription audit; AA task times added October 3.
+# Dollar values retain calculation precision; the template derives task counts.
+# Only aggregate findings belong here, never raw logs or account information.
+copy:
+  en:
+    trigger: How much inference do these subscriptions buy?
+    close: Close subscription comparison
+    date: "Last updated October 3, 2026"
+    title: What my AI subscriptions buy
+    intro: >-
+      Someone I know (if you are reading this, you know who you are) complained about how little usage they got with their AI subscription (which cost about $100/month), so I decided to try to estimate the value of various AI subscriptions from both US and Chinese providers. All assumptions and choices are based on the nature of the aforementioned conversation.
+    reading_note: >-
+      “Tasks” means a task on one of the benchmarks used in the Artificial Analysis (AA) Intelligence Index. We are assuming for now that cost/task as measured by Artificial Analysis is close to proportional to the cost/task in the real world. The index measures overall model capabilities, whereas you may find different levels of performance in your own usage.
+    timing_heading: Adjust your usage timing
+    timing_note: >-
+      Times are Beijing time (UTC+8).
+    timing_limits: >-
+      Assuming no temporary promotions for GLM.
+    reset: Reset timing
+    preview: "{api} a month, or {tasks} tasks"
+    scroll_hint: Scroll for more columns →
+    plan_model: Plan / model
+    price: Price / month
+    score: AA score
+    api_value: API value / month
+    cost_task: AA cost / task
+    time_task: AA time / task
+    minutes: min
+    seconds: seconds
+    tasks: Tasks / month
+    per_100: Tasks / $100
+
+    notes: Notes
+    endnote: >-
+      These estimates are based on my actual usage and the subscription rules (for example session limits, weekly limits, etc).
+  zh:
+    trigger: 这些订阅能换来多少推理用量？
+    close: 关闭订阅比较
+    date: "更新于 2026 年 10 月 3 日"
+    title: 我的 AI 订阅能买到多少用量
+    intro: >-
+      我认识的某人（如果你正在读这段话，你自己心里清楚）抱怨自己每月约 100 美元的 AI 订阅用量太少，所以我试着估算了中美各家 AI 订阅的价值。所有假设和选择都取决于上述对话的性质。
+    reading_note: >-
+      “任务”指 Artificial Analysis（AA）Intelligence Index 所用某个基准测试中的一个任务。我们暂且假设 AA 测得的单任务成本与实际使用中的单任务成本大致成正比。该指数衡量的是模型的整体能力，你在自己的使用中可能会看到不同的表现。
+    timing_heading: 调整使用时段
+    timing_note: >-
+      时间均为北京时间（UTC+8）。
+    timing_limits: >-
+      假设 GLM 没有限时优惠。
+    reset: 重置时段
+    preview: "每月 {api}，即 {tasks} 个任务"
+    scroll_hint: 滑动查看完整数据 →
+    plan_model: 方案 / 模型
+    price: 月费
+    score: AA 分数
+    api_value: 每月 API 等值
+    cost_task: AA 单任务成本
+    time_task: AA 单任务用时
+    minutes: 分钟
+    seconds: 秒
+    tasks: 每月任务数
+    per_100: 每 $100 任务数
+    notes: 备注
+    endnote: >-
+      这些估算基于我的实际用量和各套餐规则（例如会话限额、周限额等）。
+
+timing:
+  mimo:
+    label: { en: "MiMo overnight usage", zh: "MiMo 夜间用量" }
+    window: {
+      en: "Daily 00:00–08:00, with 20% fewer credits",
+      zh: "每天 00:00–08:00，积分消耗八折",
+    }
+    share: {
+      en: "{share}% overnight, {other}% regular",
+      zh: "{share}% 夜间，{other}% 普通时段",
+    }
+    default: 0
+    window_coefficient: 0.8
+    other_coefficient: 1
+  glm:
+    label: { en: "GLM peak-hour usage", zh: "GLM 高峰用量" }
+    window: {
+      en: "Weekdays 14:00–18:00; off-peak usage costs half the credits",
+      zh: "周一至周五 14:00–18:00，非高峰时段积分减半",
+    }
+    share: {
+      en: "{share}% peak, {other}% off-peak",
+      zh: "{share}% 高峰，{other}% 非高峰",
+    }
+    default: 50
+    window_coefficient: 1
+    other_coefficient: 0.5
+
+rows:
+  - plan: { en: Codex Pro, zh: Codex Pro }
+    model: GPT-6 Astra (max)
+    price: 100
+    score: 53
+    api: 1665.5053786182261
+    cost: 3.26
+    time_seconds: 503.04
+    time_url: https://artificialanalysis.ai/models/comparisons/gpt-6-astra-vs-gpt-6-astra-xhigh
+    url: https://artificialanalysis.ai/models/gpt-6-astra
+  - plan: { en: Codex Pro, zh: Codex Pro }
+    model: GPT-6 Astra (xhigh)
+    price: 100
+    score: 52
+    api: 1665.5053786182261
+    cost: 2.31
+    time_seconds: 341.05
+    time_url: https://artificialanalysis.ai/models/comparisons/gpt-6-astra-vs-gpt-6-astra-xhigh
+    url: https://artificialanalysis.ai/models/comparisons/gpt-6-astra-vs-gpt-6-astra-xhigh
+  - plan: { en: Codex Pro, zh: Codex Pro }
+    model: GPT-6.1 Sol (max)
+    price: 100
+    score: 52
+    api: 1665.5053786182261
+    cost: 0.72
+    time_seconds: 731.39
+    time_url: https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-vs-gpt-6-luna
+    url: https://artificialanalysis.ai/models/gpt-6-1-sol
+  - plan: { en: Codex Pro, zh: Codex Pro }
+    model: GPT-6 Luna (max)
+    price: 100
+    score: 38
+    api: 1665.5053786182261
+    cost: 0.07
+    time_seconds: 392.22
+    time_url: https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-vs-gpt-6-luna
+    url: https://artificialanalysis.ai/models/gpt-6-luna
+  - plan: { en: Claude Max 5x, zh: Claude Max 5x }
+    model: Claude Opus 5.5 (max)
+    price: 100
+    score: 58
+    api: 4605.338690476191
+    cost: 5.98
+    time_seconds: 792.67
+    time_url: https://artificialanalysis.ai/models/comparisons/claude-opus-5-5-vs-claude-opus-5-5-xhigh
+    url: https://artificialanalysis.ai/models/claude-opus-5-5
+  - plan: { en: Claude Max 5x, zh: Claude Max 5x }
+    model: Claude Opus 5.5 (xhigh)
+    price: 100
+    score: 56
+    api: 4605.338690476191
+    cost: 3.46
+    time_seconds: 500.91
+    time_url: https://artificialanalysis.ai/models/comparisons/claude-opus-5-5-vs-claude-opus-5-5-xhigh
+    url: https://artificialanalysis.ai/models/comparisons/claude-opus-5-5-vs-claude-opus-5-5-xhigh
+  - plan: {
+      en: "Kimi Code (mainland China)",
+      zh: "Kimi Code（中国大陆）",
+    }
+    model: Kimi K3 (max)
+    price: 100
+    score: 44
+    api: 312.9208636363636
+    cost: 2
+    time_seconds: 1230.62
+    time_url: https://artificialanalysis.ai/models/comparisons/gpt-6-astra-vs-kimi-k3
+    url: https://artificialanalysis.ai/models/comparisons/gpt-6-astra-vs-kimi-k3
+  - plan: { en: MiMo Max, zh: MiMo Max }
+    model: MiMo-V2.6-Pro
+    timing: mimo
+    price: 100
+    score: 46
+    api: 118.78579656195768
+    cost: 0.13
+    time_seconds: 1518.30
+    time_url: https://artificialanalysis.ai/models/comparisons/mimo-v2-6-pro-vs-glm-5-3
+    url: https://artificialanalysis.ai/models/mimo-v2-6-pro
+  - plan: { en: GLM Coding Pro, zh: GLM Coding Pro }
+    model: GLM-5.3 (max)
+    timing: glm
+    price: 80
+    score: 45
+    api: 561.6210757634055
+    cost: 2.01
+    time_seconds: 817.10
+    time_url: https://artificialanalysis.ai/models/comparisons/glm-5-3-flash-vs-glm-5-3
+    url: https://artificialanalysis.ai/models/glm-5-3/
+  - plan: { en: GLM Coding Pro, zh: GLM Coding Pro }
+    model: GLM-5.3-Flash
+    timing: glm
+    price: 80
+    score: 42
+    api: 173.77735311326225
+    cost: 0.25
+    time_seconds: 1014.30
+    time_url: https://artificialanalysis.ai/models/comparisons/glm-5-3-flash-vs-glm-5-3
+    url: https://artificialanalysis.ai/models/comparisons/glm-5-3-flash-vs-glm-5-3
+
+# One inline-Markdown string per list item under the "Notes" toggle. Empty
+# items are skipped, and the toggle stays hidden until one has text.
+notes:
+  - en: "Calculations for ChatGPT, Claude, and Kimi were done using my actual usage. MiMo and GLM were estimated based on my token mix (cache hit vs cache miss/cache write vs output) and their published credit rules."
+    zh: "ChatGPT、Claude 和 Kimi 的数字是根据我的实际用量计算的。MiMo 和 GLM 则是根据我的 token 构成（缓存命中、缓存未命中/缓存写入与输出的比例）以及它们公布的积分规则估算的。"
+  - en: "I may or may not have actually bought a Kimi subscription just to test its usage limits. Note however that the mainland China subscription doesn't have a weekly limit (only a monthly one), unlike the overseas subscription. I am assuming that the monthly limit is the same on both subscriptions."
+    zh: "我可能真的为了测试用量限额专门买了一个 Kimi 订阅，也可能没有。不过要注意，与海外版不同，中国大陆版订阅没有周限额（只有月限额）。这里假设两个版本的月限额相同。"
+  - en: "My understanding is that it is not actually a good idea to run Astra or any Anthropic model on max, so I put in xhigh for Astra and Opus 5.5. Also, GLM-5.3 Flash benches pretty close to GLM-5.3, so it is also included. Otherwise, I included only the highest-scoring model for each subscription."
+    zh: "据我了解，用 max 跑 Astra 或任何 Anthropic 模型其实都不是好主意，所以我给 Astra 和 Opus 5.5 加上了 xhigh。另外，GLM-5.3 Flash 的跑分与 GLM-5.3 相当接近，所以也列了进来。除此之外，每个订阅只列出了得分最高的模型。"

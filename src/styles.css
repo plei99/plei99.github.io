@@ -802,6 +802,306 @@ img {
   border-top: 1px solid var(--text);
 }
 
+/* An annotated comparison sheet attached to the AI tools entry. */
+.uses-study {
+  margin-top: 0.7rem;
+  font-size: 1.04rem;
+}
+
+.uses-study > summary,
+.study-method > summary {
+  width: fit-content;
+  cursor: pointer;
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: 0.05em;
+  text-underline-offset: 0.18em;
+}
+
+.uses-study > summary:hover,
+.study-method > summary:hover {
+  color: var(--link-hover);
+}
+
+.study-dialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(72rem, 100vw - 2rem);
+  max-width: none;
+  max-height: calc(100dvh - 3rem);
+  padding: 0;
+  border: 1px solid var(--text);
+  background: var(--paper);
+  color: var(--text);
+  font: inherit;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  box-shadow: 0 1.5rem 4rem -1.5rem var(--shadow);
+}
+
+.study-dialog::backdrop {
+  background: var(--wash);
+}
+
+.study-content {
+  --study-gutter: clamp(1rem, 4vw, 3rem);
+  padding-bottom: var(--study-gutter);
+  font-size: 1.04rem;
+}
+
+.study-close {
+  position: sticky;
+  top: 0.5rem;
+  float: right;
+  z-index: 2;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin: 0.5rem 0.5rem 0 0;
+  padding: 0;
+  border: 0;
+  background: var(--paper);
+  color: var(--text);
+  font: 1.8rem/1 var(--serif);
+  cursor: pointer;
+}
+
+.study-close:hover {
+  background: var(--text);
+  color: var(--paper);
+}
+
+.study-head,
+.study-main {
+  padding-inline: var(--study-gutter);
+}
+
+.study-main {
+  padding-top: 1.25rem;
+}
+
+.study-head {
+  padding-top: clamp(1.5rem, 4vw, 2.5rem);
+  padding-bottom: 1.3rem;
+  border-bottom: 1px solid var(--text);
+}
+
+.study-date {
+  margin-right: 2.5rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.study-head h2 {
+  margin: 0.5rem 0 0.8rem;
+  font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.study-head > p:last-child {
+  max-width: 49rem;
+}
+
+.study-reading-note,
+.study-endnote {
+  max-width: 56rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.study-timing {
+  margin-block: 1.5rem;
+  padding-block: 1rem;
+  border-block: 1px solid var(--rule);
+}
+
+.study-timing-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-right: 2.5rem;
+}
+
+.study-timing-head h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.study-timing button {
+  padding: 0.4rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--link);
+  font: inherit;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+.study-timing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 2rem;
+  margin-top: 1rem;
+}
+
+.study-timing-control label {
+  display: block;
+  font-weight: 700;
+}
+
+.study-timing-window {
+  min-height: 2.8em;
+  margin-top: 0.2rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.study-timing-control input {
+  display: block;
+  width: 100%;
+  height: 2rem;
+  margin: 0.3rem 0;
+  accent-color: var(--link);
+  cursor: pointer;
+}
+
+.study-timing-control output {
+  display: block;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.study-timing-result {
+  margin-top: 0.8rem;
+  font-size: 0.95rem;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.study-preview-model {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.study-timing-limits {
+  margin-top: 1rem;
+}
+
+.study-scroll-hint {
+  display: none;
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.study-comparison {
+  margin-block: 1rem 0.8rem;
+}
+
+.study-comparison table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.96rem;
+  line-height: 1.4;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.study-comparison th,
+.study-comparison td {
+  padding: 0.7rem 0.65rem;
+  border-bottom: 1px solid var(--rule);
+  text-align: right;
+  vertical-align: top;
+}
+
+.study-comparison thead th {
+  border-block: 1px solid var(--text);
+  font-size: 0.85rem;
+}
+
+.study-comparison th:first-child {
+  min-width: 14rem;
+  padding-left: 0;
+  text-align: left;
+}
+
+.study-comparison td {
+  white-space: nowrap;
+}
+
+.study-comparison tbody th {
+  font-weight: 400;
+}
+
+.study-plan {
+  display: block;
+  font-weight: 700;
+}
+
+.study-result {
+  font-weight: 700;
+  background: var(--stage);
+}
+
+.study-method {
+  margin-top: 1.8rem;
+  padding-block: 0.8rem;
+  border-top: 1px solid var(--rule);
+}
+
+.study-method .prose {
+  margin-top: 1rem;
+}
+
+.study-method .table-scroll {
+  margin-block: 1rem;
+}
+
+.study-endnote {
+  margin-top: 1.5rem;
+}
+
+/* The no-JS disclosure remains readable in the narrower Uses entry. */
+.uses-study > .study-content {
+  margin-top: 1rem;
+  border-block: 1px solid var(--rule);
+  --study-gutter: 0rem;
+}
+
+@media (max-width: 40rem) {
+  .study-timing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .study-timing-window {
+    min-height: 0;
+  }
+
+  .study-dialog {
+    width: calc(100vw - 1rem);
+    max-height: calc(100dvh - 1rem);
+  }
+
+  .study-comparison table {
+    min-width: 54rem;
+  }
+
+  .study-scroll-hint {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .study-dialog:modal {
+    animation: panel-open 0.18s ease-out;
+  }
+}
+
 .contact {
   margin-top: 2.5rem;
 }
