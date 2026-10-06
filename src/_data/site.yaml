@@ -68,8 +68,13 @@ contact:
   arxiv: https://arxiv.org/a/0000-0003-1977-1596
   arxiv_label: arXiv
 
+# A link's href is a string, or { en, zh } when the languages differ.
 footer:
   copyright: "© 2026 Patrick Lei"
   links:
+    - label: tikz-bench
+      href:
+        en: https://plei99.github.io/tikz-bench/
+        zh: https://plei99.github.io/tikz-bench/zh/
     - label: Source
       href: https://github.com/plei99/plei99.github.io

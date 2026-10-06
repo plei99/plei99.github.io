@@ -138,7 +138,7 @@
     <p>
       {{ site.footer.copyright }}
       {{ for link of site.footer.links }}
-      <a href="{{ link.href }}">{{ link.label }}</a>
+      <a href="{{ typeof link.href === "string" ? link.href : link.href[lang] }}">{{ link.label }}</a>
       {{ /for }}
     </p>
   </footer>
