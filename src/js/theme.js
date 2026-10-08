@@ -3,8 +3,10 @@
 // themes.css defines one block per theme, selected by data-theme on <html>.
 // With nothing chosen the attribute is absent and the stylesheet shows the
 // default light or dark theme by the system setting; the picker then shows
-// whichever of the two is on screen. A choice is saved, and the inline script
-// in <head> applies it before first paint on later visits.
+// whichever of the two is on screen. A choice is saved with the system setting
+// it was made under, and the inline script in <head> applies it before first
+// paint on later visits, swapping in its counterpart of the other brightness
+// once the system setting has changed.
 
 const root = document.documentElement;
 const picker = document.querySelector(".scheme");
@@ -31,8 +33,22 @@ function store(key, value) {
   }; Path=/; SameSite=Lax${secure}`;
 }
 
+function recorded() {
+  try {
+    if (localStorage.getItem("theme-system")) return true;
+  } catch {
+    // Fall through to the cookie.
+  }
+  return /(?:^|; )theme-system=[^;]/.test(document.cookie);
+}
+
+function mode() {
+  return system.matches ? "dark" : "light";
+}
+
 function save(value) {
   store("theme", value);
+  store("theme-system", value && mode());
   try {
     localStorage.removeItem("scheme"); // from the earlier two-control design
   } catch {
@@ -51,16 +67,20 @@ select.addEventListener("change", () => {
 });
 
 // A saved theme that no longer exists (an old "dark", the removed light Nord)
-// falls back to the default.
+// falls back to the default. One saved before themes followed the system
+// setting is taken to have been chosen under the current one.
 showCurrent();
 if (select.selectedIndex < 0) {
   delete root.dataset.theme;
   save("");
   showCurrent();
+} else if (root.dataset.theme && !recorded()) {
+  store("theme-system", mode());
 }
 
 system.addEventListener("change", () => {
-  if (!root.dataset.theme) showCurrent();
+  window.applyTheme();
+  showCurrent();
 });
 picker.hidden = false;
 

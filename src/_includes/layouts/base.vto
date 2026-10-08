@@ -33,6 +33,18 @@
   } catch (_) {}
 </script>
 {{ /if }}
+{{# Each theme's brightness and its counterpart of the other brightness: the
+    theme in the same place among its family's other half (Gruvbox Dark Soft
+    for Gruvbox Light Soft, the last one if the other half is shorter), or the
+    default when the family has none. #}}
+{{ set allThemes = themes.flatMap((family) => family.themes) }}
+{{ set themePairs = Object.fromEntries(themes.flatMap((family) => family.themes.map((t) => {
+  const same = family.themes.filter((o) => o.dark === t.dark);
+  const other = family.themes.filter((o) => o.dark !== t.dark);
+  const pair = other[Math.min(same.indexOf(t), other.length - 1)] ||
+    allThemes.find((o) => o.dark !== t.dark);
+  return [t.id, [t.dark ? 1 : 0, pair.id]];
+}))) }}
 <script>
   // Apply saved preferences before first paint. Each is read from
   // localStorage, or from the cookie of the same name (js/theme.js writes
@@ -46,11 +58,32 @@
       var m = document.cookie.match(new RegExp("(?:^|; )" + key + "=([^;]*)"));
       return m ? decodeURIComponent(m[1]) : "";
     }
-    var keys = ["theme", "latin", "cjk"];
+    var root = document.documentElement;
+    var keys = ["latin", "cjk"];
     for (var i = 0; i < keys.length; i++) {
       var v = pref(keys[i]);
-      if (v) document.documentElement.dataset[keys[i]] = v;
+      if (v) root.dataset[keys[i]] = v;
     }
+
+    // The theme follows the system setting. A saved theme is stored with the
+    // setting it was chosen under ("theme-system"); once the setting differs,
+    // a theme of the wrong brightness gives way to its counterpart. The saved
+    // choice itself is kept, so switching back restores it. js/theme.js calls
+    // this again when the setting changes while a page is open.
+    var pairs = {{ JSON.stringify(themePairs) }};
+    var system = matchMedia("(prefers-color-scheme: dark)");
+    window.applyTheme = function () {
+      var theme = pref("theme");
+      var now = system.matches ? "dark" : "light";
+      var pair = pairs[theme];
+      if (pair && (pref("theme-system") || now) !== now &&
+          !!pair[0] !== system.matches) {
+        theme = pair[1];
+      }
+      if (theme) root.dataset.theme = theme;
+      else delete root.dataset.theme;
+    };
+    window.applyTheme();
   })();
 </script>
 <link rel="preload" href="/fonts/tex-gyre-pagella-regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -78,7 +111,6 @@
     <div class="controls">
     <label class="scheme" hidden>
       <span class="visually-hidden">{{ ui[lang].theme }}</span>
-      {{ set allThemes = themes.flatMap((family) => family.themes) }}
       <select data-default-light="{{ allThemes.find((t) => !t.dark).id }}" data-default-dark="{{ allThemes.find((t) => t.dark).id }}">
         {{ for family of themes }}
         {{ if family.themes.length > 1 }}
