@@ -64,8 +64,8 @@ about:
       若你知道价格合适又地道的川菜，欢迎推荐。</p>
       <ul>
         <li>在关于欧洲足球的争论中稳操胜券：
-        <a href="https://best-teams.lakebed.app/">球队</a>
-        <a href="https://best-coaches.lakebed.app/">主教练</a></li>
+        <a href="https://best-teams.lakebed.app/?lang=zh">球队</a>
+        <a href="https://best-coaches.lakebed.app/?lang=zh">主教练</a></li>
         <li><a href="https://plei99.github.io/tikz-bench/zh/">tikz-bench</a>：测试哪些编程智能体真的会写
         TikZ 的基准。</li>
       </ul>
