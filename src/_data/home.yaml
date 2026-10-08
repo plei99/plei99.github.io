@@ -39,6 +39,14 @@ about:
       <p>Besides doing math, I also enjoy running and playing the piano.
       I also like to learn about the historical evolution of Chinese dialects.
       I'm always open to suggestions for affordable but legitimately high-quality Sichuan cuisine.</p>
+      <h2>Non-math activities</h2>
+      <ul>
+        <li>Win all of your arguments about European soccer:
+        <a href="https://best-teams.lakebed.app/">teams</a>
+        <a href="https://best-coaches.lakebed.app/">coaches</a></li>
+        <li><a href="https://plei99.github.io/tikz-bench/">tikz-bench</a>, a benchmark of which
+        coding agents can actually write TikZ.</li>
+      </ul>
     zh: |
       <p>你也可能在这些地方认识我：</p>
       <ul>
@@ -53,6 +61,14 @@ about:
       了解我正在关注的一些主题。</p>
       <p>除了做数学，我平时也喜欢跑步和弹钢琴，也很喜欢了解汉语方言的历史演变。
       若你知道价格合适又地道的川菜，欢迎推荐。</p>
+      <h2>数学以外的项目</h2>
+      <ul>
+        <li>在关于欧洲足球的争论中稳操胜券：
+        <a href="https://best-teams.lakebed.app/">球队</a>
+        <a href="https://best-coaches.lakebed.app/">主教练</a></li>
+        <li><a href="https://plei99.github.io/tikz-bench/zh/">tikz-bench</a>：测试哪些编程智能体真的会写
+        TikZ 的基准。</li>
+      </ul>
 now:
   en:
     - "K-theory, allegedly"
