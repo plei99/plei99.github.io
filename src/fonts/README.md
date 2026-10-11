@@ -76,6 +76,16 @@ and `OFL-Garamond-Math.txt`. The `eb-garamond-*.woff2` and `garamond-math.woff2`
 files are subsets; the text files keep the weight axis, so bold is the font's
 own.
 
+## Hundar
+
+By Emily de Oliveira Santos (The EPL Type Foundry), version 0.001, from
+<https://github.com/The-EPL-Type-Foundry/Hundar>. Licence: SIL Open Font License
+1.1 with no reserved names, in `OFL-Hundar.txt`. Only a Regular exists so far,
+so italic and bold are synthesized by the browser, and the font does not yet
+draw accented letters, which fall back to Pagella. Hundar's own math font is
+still to come; until then it is paired with Asana Math. `hundar-regular.woff2`
+is cut by `scripts/subset-latin.py`.
+
 ## Fira Sans and Fira Math
 
 Fira Sans by Mozilla and Telefónica (Carrois Type Design), version 4.203, from

@@ -2,8 +2,8 @@
    default is TeX Gyre Pagella with Asana Math, the pairing of the PDF notes
    this site links to; the others are Pagella with Euler Math, TeX Gyre Bonum,
    TeX Gyre Schola, Latin Modern, Libertinus, EB Garamond, Fira Sans, New
-   Computer Modern Sans and Lato (with Lete Sans Math), each with its own math
-   font. Chinese is Source Han Serif SC, or by choice Source Han Sans SC, Resource Han
+   Computer Modern Sans, Lato (with Lete Sans Math) and Hundar (with Asana
+   Math), each with its own math font. Chinese is Source Han Serif SC, or by choice Source Han Sans SC, Resource Han
    Rounded SC or LXGW WenKai.
    All are served from this site, because a third-party font request is
    blocked by some browsers' tracking protection and is slow or unreachable
@@ -441,4 +441,13 @@
   font-weight: 400;
   font-display: swap;
   src: url("/fonts/lxgw-wenkai-regular.woff2") format("woff2");
+}
+
+/* Hundar has only a Regular so far; the browser slants and emboldens it. */
+@font-face {
+  font-family: "Hundar";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/hundar-regular.woff2") format("woff2");
 }

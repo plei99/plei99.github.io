@@ -54,6 +54,7 @@ latin_fonts:
       - { id: latin-modern, name: Latin Modern }
       - { id: libertinus, name: Libertinus }
       - { id: garamond, name: Garamond }
+      - { id: hundar, name: Hundar }
   - group: { en: Sans, zh: 无衬线 }
     sans: true
     fonts:

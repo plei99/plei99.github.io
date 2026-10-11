@@ -79,6 +79,7 @@ FAMILIES = {
     "lato-bold": ("lato-Bold.ttf", "whole"),
     "lato-bolditalic": ("lato-BoldItalic.ttf", "whole"),
     "lete-sans-math": ("lete-sans-math.otf", "math"),
+    "hundar-regular": ("Hundar.ttf", "text"),
 }
 
 

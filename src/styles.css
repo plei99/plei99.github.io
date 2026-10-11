@@ -110,6 +110,13 @@
   --latin-math: "Lete Sans Math";
 }
 
+/* Hundar is at version 0.001 and lacks accented letters, so Pagella fills in
+   whatever it does not yet draw. It has no math font of its own yet. */
+:root[data-latin="hundar"] {
+  --latin: Hundar, "TeX Gyre Pagella";
+  --latin-math: "Asana Math";
+}
+
 *,
 *::before,
 *::after {
