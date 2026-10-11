@@ -70,6 +70,30 @@
     date: 2022 年夏
     place: Simons 中心
 
+- name: The B-model
+  description: >
+    We know that in genus zero this is period integrals, but what really is the B-model?
+  date: Feb 2026
+  place: Bilibili
+  url: https://github.com/plei99/notes/raw/main/misc/bmodel/bmodel.pdf
+  zh:
+    name: B-模型
+    description: 我们知道在亏格零时它就是周期积分，但 B-模型到底是什么？
+    date: 2026 年 2 月
+    place: 哔哩哔哩
+
+- name: Topological cyclic homology
+  description: >
+    Don't ask me why these notes exist as I am neither an arithmetic geometer nor a homotopy theorist.
+  date: Spring 2025
+  place: YouTube
+  url: https://github.com/plei99/notes/raw/main/misc/TC/TC.pdf
+  zh:
+    name: 拓扑循环同调
+    description: 别问我为什么会有这份笔记，毕竟我既不是算术几何学家，也不是同伦论学家。
+    date: 2025 年春
+    place: YouTube
+
 - name: Good moduli spaces, positivity, and rationality
   description: >
     When does an Artin stack admit a "reasonable" moduli space and when does
