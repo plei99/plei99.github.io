@@ -66,9 +66,9 @@ export const uses: UsesCategory[] = [
         study: true,
         note: {
           en:
-            "Pure TikZ for images is a complete mystery to me, so what used to be painstaking hand-written reproduction of images post-lectures is now a prompt to a coding agent. In my earlier attempts, 5.6 Sol was a complete disaster for writing TikZ code compared to Claude models (I tried Fable 5 and Opus 5). To find out which agents are actually good at this, I built [tikz-bench](https://plei99.github.io/tikz-bench/). I've since compared how much inference the subscriptions actually buy, using my usage logs and published limits.",
+            "Pure TikZ for images is a complete mystery to me, so what used to be painstaking hand-written reproduction of images post-lectures is now a prompt to a coding agent. In my earlier attempts, 5.6 Sol was a complete disaster for writing TikZ code compared to Claude models (I tried Fable 5 and Opus 5). To find out which agents are actually good at this, I built [tikz-bench](https://plei99.github.io/tikz-bench/). In terms of value for money, see below. (**tl;dr:** use the US subscriptions if possible.)",
           zh:
-            "用纯 TikZ 画图对我来说完全是个谜，所以过去课后要费力手写复现的图，现在只要给编程智能体一句提示词就行了。在我早先的尝试中，和 Claude 的模型相比（我试过 Fable 5 和 Opus 5），5.6 Sol 写 TikZ 代码简直是一场灾难。为了知道哪些编程智能体真的会写 TikZ，我做了 [tikz-bench](https://plei99.github.io/tikz-bench/)。后来我用自己的使用日志和公开额度，比较了这些订阅到底能换来多少推理用量。",
+            "用纯 TikZ 画图对我来说完全是个谜，所以过去课后要费力手写复现的图，现在只要给编程智能体一句提示词就行了。在我早先的尝试中，和 Claude 的模型相比（我试过 Fable 5 和 Opus 5），5.6 Sol 写 TikZ 代码简直是一场灾难。为了知道哪些编程智能体真的会写 TikZ，我做了 [tikz-bench](https://plei99.github.io/tikz-bench/)。至于性价比，见下文。（**太长不看**：能用美国的订阅就用美国的。）",
         },
       },
       {
