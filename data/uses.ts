@@ -66,9 +66,9 @@ export const uses: UsesCategory[] = [
         study: true,
         note: {
           en:
-            "Pure TikZ for images is a complete mystery to me, so what used to be painstaking hand-written reproduction of images post-lectures is now a prompt to a coding agent. In my earlier attempts, 5.6 Sol was a complete disaster for writing TikZ code compared to Claude models (I tried Fable 5 and Opus 5). To find out which agents are actually good at this, I built [tikz-bench](https://plei99.github.io/tikz-bench/). In terms of value for money, see below. (**tl;dr:** use the US subscriptions if possible.)",
+            "Pure TikZ for images is a complete mystery to me, so what used to be painstaking hand-written reproduction of images post-lectures is now a prompt to a coding agent. Some models used to be terrible at this (looking at you, GPT-5.6 Sol), but [tikz-bench](https://plei99.github.io/tikz-bench/) indicates that TikZ is largely saturated at the US frontier. In terms of value for money, see below. (**tl;dr:** use the US subscriptions if possible.) I have also wanted HTML versions of my notes since I was an undergrad, and let's just say that agents made this happen in a few hours. However, LaTeX is so janky that the build pipeline for the html versions involves compiling diagrams with LaTeX into SVGs, compiling text via `tex4ht`, compiling equations into MathML via MathJax, and then post-processing the MathML because MathJax comes with an outdated version of MathML.",
           zh:
-            "用纯 TikZ 画图对我来说完全是个谜，所以过去课后要费力手写复现的图，现在只要给编程智能体一句提示词就行了。在我早先的尝试中，和 Claude 的模型相比（我试过 Fable 5 和 Opus 5），5.6 Sol 写 TikZ 代码简直是一场灾难。为了知道哪些编程智能体真的会写 TikZ，我做了 [tikz-bench](https://plei99.github.io/tikz-bench/)。至于性价比，见下文。（**太长不看**：能用美国的订阅就用美国的。）",
+            "用纯 TikZ 画图对我来说完全是个谜，所以过去课后要费力手写复现的图，现在只要给编程智能体一句提示词就行了。有些模型以前在这方面很糟糕（说的就是你，GPT-5.6 Sol），但 [tikz-bench](https://plei99.github.io/tikz-bench/) 显示，在美国的前沿模型中，TikZ 基本已经饱和。至于性价比，见下文。（**太长不看**：能用美国的订阅就用美国的。）我从本科起就一直想要笔记的 HTML 版本，结果有了智能体，几个小时就做出来了。不过 LaTeX 实在太别扭，HTML 版本的构建流程是这样的：用 LaTeX 把图编译成 SVG，用 `tex4ht` 编译正文，用 MathJax 把公式编译成 MathML，最后还得对 MathML 做后处理，因为 MathJax 自带的 MathML 版本已经过时了。",
         },
       },
       {
