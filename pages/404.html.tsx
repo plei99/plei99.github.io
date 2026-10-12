@@ -1,0 +1,29 @@
+import Base from "../components/Base";
+
+export default function NotFound() {
+  return (
+    <Base
+      page={{
+        lang: "en",
+        title: "Page not found",
+        url: "/404.html",
+        section: "none",
+        description: "This page does not exist.",
+      }}
+    >
+      <header className="panel-head">
+        <h1 id="panel-title">Page not found</h1>
+        <p className="lede">
+          This is not a good moduli space: the point you asked for does not
+          exist. Close this sheet to get back to the figure, or go to the{" "}
+          <a href="/notes.html">notes</a>.
+        </p>
+        <p className="lede" lang="zh-CN">
+          找不到这个页面。关闭此页即可回到首页的图，或者看看<a href="/zh/notes.html">
+            笔记
+          </a>。
+        </p>
+      </header>
+    </Base>
+  );
+}

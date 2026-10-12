@@ -21,21 +21,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
 
-      - name: Set up Deno
-        uses: denoland/setup-deno@v2
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          deno-version: "2.9.5"
+          bun-version: canary
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
 
       - name: Check formatting, lint, and types
-        run: deno task check
+        run: bun run check
 
       - name: Build site
-        run: deno task build
+        run: bun run build
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
         with:
-          path: _site/
+          path: dist/
 
   deploy:
     needs: build

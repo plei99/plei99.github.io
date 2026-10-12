@@ -1,0 +1,1273 @@
+/* Patrick Lei's site. One page: a figure of a stable map whose labels open
+   the other pages as sheets of paper laid over it.
+
+   The look is a page from the PDF notes: text in TeX Gyre Pagella (a Palatino
+   clone), mathematics in Asana Math, outlines in the text colour, and one
+   accent for what can be followed. Colour and line weight mean something or
+   are absent. */
+
+/* Colour comes from terminal colour schemes, not from a palette of our own.
+   The themes live in src/_data/themes.yaml, and /themes.css, generated from
+   that file, sets these roles for the chosen theme:
+
+     --paper  background            --ink   marked points and cycles
+     --text   text and outlines     --link  words that can be followed
+     --muted  dates, ledes          --rule  hairlines
+     --stage  raised surfaces (the globe's backdrop)
+
+   Nothing in this file names a colour. */
+
+/* Derived from the theme, so a new theme needs only its own block. */
+:root {
+  --link-hover: color-mix(in srgb, var(--link) 65%, var(--text));
+  --wash: color-mix(in srgb, var(--paper) 86%, transparent);
+}
+
+:root {
+  /* Pagella carries only Latin, so Chinese falls through to --cjk; Latin inside
+     Chinese text stays in Pagella, which is the intended pairing. */
+  --cjk: "Source Han Serif SC";
+  --latin: "TeX Gyre Pagella", "Palatino Linotype", Palatino, "Book Antiqua";
+  --latin-math: "Asana Math";
+  --serif:
+    var(--latin),
+    var(--cjk),
+    "Noto Serif CJK SC",
+    "Songti SC",
+    Georgia,
+    serif;
+  --mono: Iosevka, ui-monospace, SFMono-Regular, Menlo, monospace;
+  --math: var(--latin-math), var(--latin), math, serif;
+
+  --measure: 36rem;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+}
+
+:root[data-cjk="wenkai"] {
+  --cjk: "LXGW WenKai";
+}
+
+:root[data-cjk="sans"] {
+  --cjk: "Source Han Sans SC";
+}
+
+:root[data-cjk="rounded"] {
+  --cjk: "Resource Han Rounded SC";
+}
+
+/* Sans pairs with sans until told otherwise: a Chinese sans with no Latin
+   choice brings Fira Sans and Fira Math, and a Latin sans with no Chinese
+   choice brings Source Han Sans. Explicit choices ("pagella", "serif") are
+   attributes too, so they win over these. js/theme.js mirrors these lists. */
+:root[data-cjk="sans"]:not([data-latin]),
+:root[data-cjk="rounded"]:not([data-latin]) {
+  --latin: "Fira Sans";
+  --latin-math: "Fira Math";
+}
+
+:root[data-latin="fira"]:not([data-cjk]),
+:root[data-latin="new-cm-sans"]:not([data-cjk]),
+:root[data-latin="lato"]:not([data-cjk]) {
+  --cjk: "Source Han Sans SC";
+}
+
+:root[data-latin="bonum"] {
+  --latin: "TeX Gyre Bonum", "Bookman Old Style", "URW Bookman";
+  --latin-math: "TeX Gyre Bonum Math";
+}
+
+:root[data-latin="latin-modern"] {
+  --latin: "Latin Modern Roman", "Computer Modern";
+  --latin-math: "Latin Modern Math";
+}
+
+:root[data-latin="libertinus"] {
+  --latin: "Libertinus Serif", "Linux Libertine O";
+  --latin-math: "Libertinus Math";
+}
+
+:root[data-latin="euler"] {
+  --latin-math: "Euler Math";
+}
+
+:root[data-latin="schola"] {
+  --latin: "TeX Gyre Schola", "Century Schoolbook", "New Century Schoolbook";
+  --latin-math: "TeX Gyre Schola Math";
+}
+
+:root[data-latin="garamond"] {
+  --latin: "EB Garamond", Garamond;
+  --latin-math: "Garamond Math";
+}
+
+:root[data-latin="fira"] {
+  --latin: "Fira Sans";
+  --latin-math: "Fira Math";
+}
+
+:root[data-latin="new-cm-sans"] {
+  --latin: "New CM Sans", "Computer Modern Sans";
+  --latin-math: "New CM Sans Math";
+}
+
+:root[data-latin="lato"] {
+  --latin: Lato;
+  --latin-math: "Lete Sans Math";
+}
+
+/* Hundar is at version 0.001 and lacks accented letters, so Pagella fills in
+   whatever it does not yet draw. It has no math font of its own yet. */
+:root[data-latin="hundar"] {
+  --latin: Hundar, "TeX Gyre Pagella";
+  --latin-math: "Asana Math";
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--text);
+  font: 400 1.125rem/1.6 var(--serif);
+  font-variant-numeric: oldstyle-nums;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+figure {
+  margin: 0;
+}
+
+a {
+  color: var(--link);
+  text-decoration-thickness: 0.05em;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-decoration-thickness: 0.1em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: -4rem;
+  padding: 0.4rem 0.8rem;
+  background: var(--text);
+  color: var(--paper);
+  z-index: 10;
+}
+
+.skip-link:focus {
+  top: 0.75rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---- Page --------------------------------------------------- */
+.page {
+  min-height: 100dvh;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: clamp(1.5rem, 4vw, 3rem) var(--gutter) 2rem;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: clamp(1.5rem, 4vh, 3rem);
+}
+
+.masthead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+}
+
+.name {
+  font-size: clamp(1.9rem, 3.2vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.name a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.tagline {
+  margin-top: 0.35rem;
+  max-width: 34rem;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.45;
+}
+
+.controls {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.scheme,
+.cjk,
+.latin {
+  position: relative;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.scheme::after,
+.cjk::after,
+.latin::after {
+  content: "▾";
+  position: absolute;
+  right: 0;
+  top: 0;
+  pointer-events: none;
+}
+
+.scheme select,
+.cjk select,
+.latin select {
+  appearance: none;
+  /* Size to the current theme's name, not to the longest one; where that is
+     not supported, at least keep the name next to the caret. */
+  field-sizing: content;
+  text-align-last: right;
+  padding: 0 1.1rem 0 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.scheme:hover,
+.cjk:hover,
+.latin:hover {
+  color: var(--text);
+}
+
+.scheme select option,
+.cjk select option,
+.latin select option {
+  background: var(--paper);
+  color: var(--text);
+}
+
+.controls > * + * {
+  padding-left: 1rem;
+  border-left: 1px solid var(--rule);
+}
+
+.langswitch {
+  color: var(--muted);
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.langswitch:hover {
+  color: var(--text);
+  text-decoration: underline;
+}
+
+.colophon {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.4rem 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.colophon p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 1.4rem;
+}
+
+/* ---- The figure --------------------------------------------- */
+#figure {
+  display: grid;
+  align-content: center;
+  outline: none;
+}
+
+.figure {
+  display: grid;
+  justify-items: center;
+  gap: clamp(1rem, 3vh, 2rem);
+}
+
+.fig {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.fig--wide {
+  max-width: 62rem;
+}
+
+.fig--tall {
+  display: none;
+  max-width: 24rem;
+}
+
+.figure figcaption {
+  max-width: 40rem;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--text);
+}
+
+.fig path,
+.fig circle {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.fig-ink {
+  stroke: var(--text);
+  stroke-width: 2;
+}
+
+.fig-thin path {
+  stroke-width: 1.6;
+}
+
+/* The labels are Unicode mathematical italics (𝐶, 𝑥, 𝑓, 𝛼), which is where a
+   math font keeps its italic alphabet, so they are set upright in --math. */
+.fig-math {
+  font: normal 400 21px var(--math);
+  font-variant-numeric: lining-nums;
+  fill: var(--text);
+}
+
+.fig-math--lg {
+  font-size: 34px;
+}
+
+.fig-math--f {
+  font-size: 25px;
+  fill: var(--text);
+}
+
+.fig-math--sm {
+  font-size: 16px;
+}
+
+.fig .fig-image {
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.fig-sub {
+  font-size: 0.68em;
+}
+
+/* Links in the figure: a marked point, the arrow, or a cycle, joined to its
+   word by a hairline. The transparent hit path makes the hairline easy to
+   click. */
+.fig-link {
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+}
+
+.fig .fig-hit {
+  stroke: transparent;
+  stroke-width: 26;
+  pointer-events: stroke;
+}
+
+.fig .fig-leader {
+  stroke: var(--text);
+  stroke-width: 0.9;
+}
+
+.fig .fig-arrow {
+  stroke: var(--text);
+  stroke-width: 1.5;
+}
+
+.fig .fig-pt {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 1.8;
+  transition: fill 0.12s;
+}
+
+.fig .fig-cycle {
+  stroke: var(--ink);
+  stroke-width: 2.4;
+  transition: stroke-width 0.12s;
+}
+
+.fig-word {
+  font: 400 23px var(--serif);
+  fill: var(--link);
+  text-anchor: middle;
+}
+
+.fig-word--start {
+  text-anchor: start;
+}
+
+.fig-word--end {
+  text-anchor: end;
+}
+
+.fig-link:hover .fig-word,
+.fig-link:focus-visible .fig-word,
+.fig-link[aria-current] .fig-word,
+.fig-link:hover .fig-math--link,
+.fig-link:focus-visible .fig-math--link,
+.fig-link[aria-current] .fig-math--link {
+  fill: var(--link-hover);
+  text-decoration: underline;
+}
+
+.fig-link:hover .fig-pt,
+.fig-link:focus-visible .fig-pt,
+.fig-link[aria-current] .fig-pt {
+  fill: var(--ink);
+}
+
+.fig .fig-link:hover .fig-cycle,
+.fig .fig-link:focus-visible .fig-cycle,
+.fig .fig-link[aria-current] .fig-cycle {
+  stroke-width: 4;
+}
+
+.fig .fig-link:hover .fig-arrow,
+.fig .fig-link:focus-visible .fig-arrow,
+.fig .fig-link[aria-current] .fig-arrow {
+  stroke: var(--ink);
+  stroke-width: 2.4;
+}
+
+.fig .fig-link:hover .fig-leader,
+.fig .fig-link:focus-visible .fig-leader {
+  stroke: var(--ink);
+}
+
+/* The one piece of motion: on the home page the outlines draw themselves
+   once, then the labels arrive. */
+@media (prefers-reduced-motion: no-preference) {
+  /* `backwards`, not `both`: the dash pattern lives only in the keyframes, so
+     once the drawing is done the outlines are plain solid strokes. iPad WebKit
+     left a gap at the start of each path when the dash array stayed on. */
+  .is-home .fig-draw,
+  .is-home .fig-draw path {
+    animation: fig-draw 1.1s cubic-bezier(0.6, 0, 0.3, 1) backwards;
+  }
+
+  .is-home .fig-link,
+  .is-home .fig-math {
+    animation: fig-arrive 0.5s 0.9s both;
+  }
+}
+
+@keyframes fig-draw {
+  from {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fig-arrive {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 44rem) {
+  .fig--wide {
+    display: none;
+  }
+  .fig--tall {
+    display: block;
+  }
+  .figure figcaption {
+    text-align: left;
+  }
+}
+
+/* ---- The panel ---------------------------------------------- */
+.panel {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(52rem, 100vw - 2rem);
+  height: fit-content;
+  max-height: calc(100dvh - 3rem);
+  padding: 0;
+  border: 1px solid var(--text);
+  background: var(--paper);
+  color: var(--text);
+  overflow: auto;
+  overscroll-behavior: contain;
+  box-shadow: 0 1.5rem 4rem -1.5rem var(--shadow);
+}
+
+.panel:has([data-section="travel"]) {
+  width: min(68rem, 100vw - 2rem);
+}
+
+.panel::backdrop {
+  background: var(--wash);
+}
+
+/* Without JavaScript the dialog is open but not modal, so it has no backdrop;
+   wash the figure out with a shadow ring instead. */
+.panel[open]:not(:modal) {
+  box-shadow:
+    0 0 0 100vmax var(--wash),
+    0 1.5rem 4rem -1.5rem rgb(17 17 17 / 0.35);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .panel:modal {
+    animation: panel-open 0.18s ease-out;
+  }
+}
+
+@keyframes panel-open {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+}
+
+#panel-content {
+  outline: none;
+  padding: clamp(1.5rem, 4vw, 3.25rem) clamp(1.25rem, 5vw, 4rem)
+    clamp(2rem, 5vw, 3.5rem);
+}
+
+.panel-close {
+  position: sticky;
+  top: 0.6rem;
+  float: right;
+  margin: 0.6rem 0.6rem 0 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  color: var(--text);
+  font-size: 1.7rem;
+  line-height: 1;
+  text-decoration: none;
+  z-index: 3;
+}
+
+.panel-close:hover {
+  background: var(--text);
+  color: var(--paper);
+}
+
+.panel-head {
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--text);
+}
+
+.panel-head h1 {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.lede {
+  margin-top: 0.6rem;
+  max-width: var(--measure);
+  color: var(--muted);
+}
+
+.panel-back {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.panel-head--portrait {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.portrait {
+  flex: none;
+  width: clamp(5.5rem, 16vw, 8.5rem);
+  border-radius: 50%;
+}
+
+.aside {
+  margin-top: 2rem;
+  font-size: 0.98rem;
+}
+
+/* ---- Prose -------------------------------------------------- */
+.prose {
+  max-width: var(--measure);
+}
+
+.prose--wide {
+  max-width: none;
+}
+
+.prose > * + * {
+  margin-top: 1rem;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.3rem;
+}
+
+.prose li + li {
+  margin-top: 0.35rem;
+}
+
+.prose h2,
+.prose h3 {
+  margin-top: 2rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.prose code {
+  font-family: var(--mono);
+  font-size: 0.92em;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  border-block: 1.5px solid var(--text);
+  font-size: 0.98rem;
+  line-height: 1.45;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.prose th {
+  border-bottom: 1px solid var(--text);
+  font-weight: 700;
+  text-align: left;
+}
+
+.prose th,
+.prose td {
+  padding: 0.5rem 1rem 0.5rem 0;
+  vertical-align: top;
+}
+
+.prose td {
+  border-top: 1px solid var(--rule);
+}
+
+.prose td:first-child,
+.prose th:first-child {
+  white-space: nowrap;
+}
+
+/* ---- Lists of things: seminars, uses ------------------------ */
+.entries {
+  list-style: none;
+  padding: 0;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: 0 1.5rem;
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.entry:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.entry-when {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.entry-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.entry-title a {
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+}
+
+.entry-title a:hover {
+  color: var(--link-hover);
+  text-decoration-color: currentColor;
+}
+
+.entry-where {
+  font-style: italic;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.entry-body {
+  margin-top: 0.3rem;
+  max-width: var(--measure);
+  font-size: 1.04rem;
+  line-height: 1.55;
+}
+
+/* ---- Now ---------------------------------------------------- */
+.now-list {
+  padding-left: 1.3rem;
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
+.now-list li + li {
+  margin-top: 0.6rem;
+}
+
+/* ---- Uses, About -------------------------------------------- */
+.uses-group + .uses-group {
+  margin-top: 3rem;
+}
+
+.uses-group h2,
+.contact h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.uses-group .prose {
+  margin-top: 0.8rem;
+}
+
+.uses-group .entries {
+  margin-top: 1.5rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--text);
+}
+
+/* An annotated comparison sheet attached to the AI tools entry. */
+.uses-study {
+  margin-top: 0.7rem;
+  font-size: 1.04rem;
+}
+
+.uses-study > summary,
+.study-method > summary {
+  width: fit-content;
+  cursor: pointer;
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: 0.05em;
+  text-underline-offset: 0.18em;
+}
+
+.uses-study > summary:hover,
+.study-method > summary:hover {
+  color: var(--link-hover);
+}
+
+.study-dialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(72rem, 100vw - 2rem);
+  max-width: none;
+  max-height: calc(100dvh - 3rem);
+  padding: 0;
+  border: 1px solid var(--text);
+  background: var(--paper);
+  color: var(--text);
+  font: inherit;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  box-shadow: 0 1.5rem 4rem -1.5rem var(--shadow);
+}
+
+.study-dialog::backdrop {
+  background: var(--wash);
+}
+
+.study-content {
+  --study-gutter: clamp(1rem, 4vw, 3rem);
+  padding-bottom: var(--study-gutter);
+  font-size: 1.04rem;
+}
+
+.study-close {
+  position: sticky;
+  top: 0.5rem;
+  float: right;
+  z-index: 2;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin: 0.5rem 0.5rem 0 0;
+  padding: 0;
+  border: 0;
+  background: var(--paper);
+  color: var(--text);
+  font: 1.8rem/1 var(--serif);
+  cursor: pointer;
+}
+
+.study-close:hover {
+  background: var(--text);
+  color: var(--paper);
+}
+
+.study-head,
+.study-main {
+  padding-inline: var(--study-gutter);
+}
+
+.study-main {
+  padding-top: 1.25rem;
+}
+
+.study-head {
+  padding-top: clamp(1.5rem, 4vw, 2.5rem);
+  padding-bottom: 1.3rem;
+  border-bottom: 1px solid var(--text);
+}
+
+.study-date {
+  margin-right: 2.5rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.study-head h2 {
+  margin: 0.5rem 0 0.8rem;
+  font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.study-head > p:last-child {
+  max-width: 49rem;
+}
+
+.study-reading-note,
+.study-endnote {
+  max-width: 56rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.study-timing {
+  margin-block: 1.5rem;
+  padding-block: 1rem;
+  border-block: 1px solid var(--rule);
+}
+
+.study-timing-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-right: 2.5rem;
+}
+
+.study-timing-head h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.study-timing button {
+  padding: 0.4rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--link);
+  font: inherit;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+.study-timing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 2rem;
+  margin-top: 1rem;
+}
+
+.study-timing-control label {
+  display: block;
+  font-weight: 700;
+}
+
+.study-timing-window {
+  min-height: 2.8em;
+  margin-top: 0.2rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.study-timing-control input {
+  display: block;
+  width: 100%;
+  height: 2rem;
+  margin: 0.3rem 0;
+  accent-color: var(--link);
+  cursor: pointer;
+}
+
+.study-timing-control output {
+  display: block;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.study-timing-result {
+  margin-top: 0.8rem;
+  font-size: 0.95rem;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.study-preview-model {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.study-timing-limits {
+  margin-top: 1rem;
+}
+
+.study-scroll-hint {
+  display: none;
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.study-comparison {
+  margin-block: 1rem 0.8rem;
+}
+
+.study-comparison table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.96rem;
+  line-height: 1.4;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.study-comparison th,
+.study-comparison td {
+  padding: 0.7rem 0.65rem;
+  border-bottom: 1px solid var(--rule);
+  text-align: right;
+  vertical-align: top;
+}
+
+.study-comparison thead th {
+  border-block: 1px solid var(--text);
+  font-size: 0.85rem;
+}
+
+.study-comparison th:first-child {
+  min-width: 14rem;
+  padding-left: 0;
+  text-align: left;
+}
+
+.study-comparison td {
+  white-space: nowrap;
+}
+
+.study-comparison tbody th {
+  font-weight: 400;
+}
+
+.study-plan {
+  display: block;
+  font-weight: 700;
+}
+
+.study-result {
+  font-weight: 700;
+  background: var(--stage);
+}
+
+.study-method {
+  margin-top: 1.8rem;
+  padding-block: 0.8rem;
+  border-top: 1px solid var(--rule);
+}
+
+.study-method .prose {
+  margin-top: 1rem;
+}
+
+.study-method .table-scroll {
+  margin-block: 1rem;
+}
+
+.study-endnote {
+  margin-top: 1.5rem;
+}
+
+/* The no-JS disclosure remains readable in the narrower Uses entry. */
+.uses-study > .study-content {
+  margin-top: 1rem;
+  border-block: 1px solid var(--rule);
+  --study-gutter: 0rem;
+}
+
+@media (max-width: 40rem) {
+  .study-timing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .study-timing-window {
+    min-height: 0;
+  }
+
+  .study-dialog {
+    width: calc(100vw - 1rem);
+    max-height: calc(100dvh - 1rem);
+  }
+
+  .study-comparison table {
+    min-width: 54rem;
+  }
+
+  .study-scroll-hint {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .study-dialog:modal {
+    animation: panel-open 0.18s ease-out;
+  }
+}
+
+.contact {
+  margin-top: 2.5rem;
+}
+
+.contact ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.6rem;
+}
+
+/* ---- Travel globe ------------------------------------------- */
+.atlas {
+  --atlas-ink: #253f4b;
+  border: 1px solid var(--text);
+  overflow: hidden;
+}
+
+.atlas-stage {
+  position: relative;
+  min-width: 0;
+  height: clamp(24rem, 62dvh, 40rem);
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--stage);
+}
+
+#globe-container {
+  position: absolute;
+  inset: 0;
+}
+
+#globe-container canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: grab;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#globe-container canvas:active {
+  cursor: grabbing;
+}
+
+#globe-container canvas:focus-visible {
+  outline-offset: -5px;
+}
+
+.atlas-fallback {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  left: 10%;
+  top: 6%;
+}
+
+#globe-container[data-ready="true"] .atlas-fallback {
+  display: none;
+}
+
+.atlas-controls {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 1px solid var(--text);
+  z-index: 2;
+}
+
+.atlas-controls button {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text);
+  font: 400 1.25rem/1 var(--serif);
+  cursor: pointer;
+}
+
+.atlas-controls button + button {
+  border-top: 1px solid var(--rule);
+}
+
+.atlas-controls button:hover:not(:disabled) {
+  background: var(--text);
+  color: var(--paper);
+}
+
+.atlas button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.atlas-motion-icon {
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 7px solid currentColor;
+}
+
+.globe-motion-toggle[aria-pressed="true"] .atlas-motion-icon {
+  width: 8px;
+  height: 11px;
+  border-block: 0;
+  border-inline: 2px solid currentColor;
+}
+
+/* ---- Narrow screens ----------------------------------------- */
+@media (max-width: 36rem) {
+  body {
+    font-size: 1.06rem;
+  }
+  .panel {
+    width: 100vw;
+    max-width: 100vw;
+    max-height: 100dvh;
+    height: 100dvh;
+    border-width: 0;
+  }
+  .entry {
+    grid-template-columns: 1fr;
+  }
+  .entry-when {
+    line-height: 1.4;
+  }
+}
+
+/* Chinese sets tighter than Latin at display sizes and has no italics. */
+:lang(zh) .name,
+:lang(zh) .panel-head h1 {
+  letter-spacing: 0;
+}
+
+:lang(zh) .entry-where {
+  font-style: normal;
+}
+
+/* Inline mathematics is MathML; the browser takes italics, spacing and
+   script positions from Asana Math's MATH table. */
+math {
+  font-family: var(--math);
+  font-size: 1em;
+  font-variant-numeric: lining-nums;
+}
+
+sup,
+sub {
+  font-size: 0.7em;
+  line-height: 0;
+  font-variant-numeric: lining-nums;
+}

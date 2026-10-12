@@ -5,7 +5,7 @@
     /tmp/ft/bin/python scripts/subset-latin.py SOURCE_DIR
 
 SOURCE_DIR holds the original fonts under the names in FAMILIES below (see
-src/fonts/README.md for where each comes from). Text fonts are cut to Latin,
+public/fonts/README.md for where each comes from). Text fonts are cut to Latin,
 Greek, punctuation and common symbols; math fonts additionally keep the
 mathematical alphanumerics, operators, arrows and their MATH table, so MathML
 still has proper italics, spacing and stretchy delimiters. Every layout
@@ -20,7 +20,7 @@ from pathlib import Path
 from fontTools import subset
 from fontTools.ttLib import TTFont
 
-OUT = Path(__file__).resolve().parent.parent / "src" / "fonts"
+OUT = Path(__file__).resolve().parent.parent / "public" / "fonts"
 TEXT = (
     "U+0020-007E,U+00A0-024F,U+02B0-02FF,U+0300-036F,U+0370-03FF,U+1E00-1EFF,"
     "U+2000-206F,U+2070-209F,U+20A0-20BF,U+2100-214F,U+2190-21FF,U+2200-222F,"

@@ -2,7 +2,7 @@
 """Subset the Chinese fonts (Source Han Serif and Sans, Resource Han Rounded,
 LXGW WenKai) to the CJK characters the site uses.
 
-The full font is 12 MB a weight, so src/fonts holds a subset of only the
+The full font is 12 MB a weight, so public/fonts holds a subset of only the
 characters that appear in the site's content, plus CJK punctuation. Run this
 after adding Chinese text with characters the site has not used before:
 
@@ -18,7 +18,7 @@ ResourceHanRoundedCN-* from the RHR-CN archive of
 https://github.com/CyanoHao/Resource-Han-Rounded, and LXGWWenKai-Regular.ttf
 (the only weight released) from https://github.com/lxgw/LxgwWenKai. The output name comes
 from the input name. The script also writes
-src/fonts/cjk-coverage.txt, which `deno task check` compares against the
+public/fonts/cjk-coverage.txt, which `bun run check` compares against the
 content, so a forgotten rerun fails the build rather than silently falling
 back to a system font.
 """
@@ -31,7 +31,6 @@ from pathlib import Path
 from fontTools import subset
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / "src"
 CJK = re.compile(
     r"[⺀-⿟　-〿぀-ヿ㐀-䶿一-鿿"
     r"豈-﫿＀-￯]"
@@ -42,8 +41,10 @@ PUNCTUATION = "U+3000-303F,U+FF01-FF0F,U+FF1A-FF20,U+FF3B-FF40,U+FF5B-FF65"
 
 def site_characters() -> set[str]:
     chars: set[str] = set()
-    for path in glob.glob(str(SRC / "**" / "*"), recursive=True):
-        if path.endswith((".yaml", ".vto", ".md")):
+    for folder in ("data", "content", "pages", "components"):
+        for path in glob.glob(str(ROOT / folder / "**" / "*"), recursive=True):
+            if not path.endswith((".yaml", ".md", ".tsx")):
+                continue
             chars |= set(CJK.findall(Path(path).read_text(encoding="utf8")))
     return chars
 
@@ -68,10 +69,10 @@ def main(sources: list[str]) -> None:
         subsetter = subset.Subsetter(options)
         subsetter.populate(unicodes=unicodes)
         subsetter.subset(font)
-        out = SRC / "fonts" / f"{family}-{weight}.woff2"
+        out = ROOT / "public" / "fonts" / f"{family}-{weight}.woff2"
         subset.save_font(font, str(out), options)
         print(f"{out.name}: {out.stat().st_size // 1024} KB, {len(chars)} characters")
-    (SRC / "fonts" / "cjk-coverage.txt").write_text(
+    (ROOT / "public" / "fonts" / "cjk-coverage.txt").write_text(
         "".join(sorted(chars)) + "\n", encoding="utf8"
     )
 

@@ -1,55 +1,62 @@
 # plei99.github.io
 
-Patrick Lei's personal site, built with [Lume](https://lume.land) on Deno and
-deployed to GitHub Pages.
+Patrick Lei's personal site, written as React components and rendered to static
+HTML by [Bun Bake](https://bun.com) (`bun build --app`), then deployed to GitHub
+Pages. No React reaches the browser: the pages have no client components, so the
+output is plain HTML plus the site's own scripts.
 
 ## Running it
 
-Requires Deno 2.x (developed against 2.9.5).
+Bake is experimental and only in Bun's canary builds (developed against
+1.4.4-canary.1). Put a canary `bun` first on your `PATH`, since package scripts
+call `bun` again, then run `bun install`.
 
 ```sh
-deno task dev     # local server with live reload, http://localhost:3000
-deno task build   # write the site to _site/
-deno task check   # deno fmt --check, deno lint, deno check
+bun run dev     # build, serve dist/ at http://localhost:3000, rebuild on save
+bun run build   # bun build --app, then scripts/finish.ts; writes dist/
+bun run check   # dprint check, oxlint, bun check, CJK font coverage
 ```
 
 ## Layout
 
 ```
-_config.ts              Lume config: plugins, static file copies, table wrapping
-src/
-  _data.yaml            Site-wide defaults (lang, layout)
-  _data/
-    site.yaml           Name, the page map the figure links to, contact, footer
-    ui.yaml             Interface strings for en + zh
-    home.yaml           Tagline, bio, About prose, Now list (en + zh)
-    themes.yaml         Colour themes: the picker and /themes.css come from this
-    uses.yaml           Uses page: gear by category, Markdown asides (en + zh)
-    ai_subscriptions.yaml  AI subscription comparison and its notes (en + zh)
-  _includes/
-    layouts/base.vto    <head>, masthead, the figure, footer, the panel dialog
-    layouts/seminar.vto Wrapper for seminar markdown pages
-    figure/*.vto        The home page figure: curve, map and target partials
-    views/*.vto         Panel bodies, shared between languages
-  en/, zh/              Per-language pages; each one includes a shared view
-  seminars/*.md         Seminar pages, one Markdown file each
-  notes.vto, papers.vto Redirects: to the notes site (/notes/, its own repo) and to arXiv
-  styles.css            The whole stylesheet
-  js/panel.js           Opens pages as panels over the figure
-  js/uses.js            Opens the AI comparison over Uses; inline disclosure without JS
-  fonts/                All fonts, self-hosted; see fonts/README.md
-  scripts/              subset-latin.py and subset-cjk.py regenerate the font files; check-cjk-coverage.ts guards the Chinese subset
-  js/, images/          Static assets copied verbatim
+bun.app.ts              Bake config: the built-in React framework
+pages/                  One file per route; en/about.html.tsx serves /en/about.html
+  seminars/[slug].tsx   One page per Markdown file in content/seminars/
+components/
+  Base.tsx              <head>, masthead, the figure, footer, the panel dialog
+  Figure.tsx            The home page figure: curve, map and target
+  views.tsx             Panel bodies, shared between languages
+  SubscriptionStudy.tsx The AI subscription comparison on Uses
+  Redirect.tsx          Old URLs: /en/, the notes and papers pages
+lib/site.ts             Data imports, Markdown, dates, theme pairs, the seminar list
+data/
+  site.yaml             Name, the page map the figure links to, contact, footer
+  ui.yaml               Interface strings for en + zh
+  home.yaml             Tagline, bio, About prose, Now list (en + zh)
+  themes.yaml           Colour themes: the picker and /themes.css come from this
+  uses.yaml             Uses page: gear by category, Markdown asides (en + zh)
+  ai_subscriptions.yaml AI subscription comparison and its notes (en + zh)
+content/seminars/*.md   Seminar pages, one Markdown file each
+public/                 Copied verbatim: styles.css, js/, images/, fonts/ (see fonts/README.md)
+scripts/
+  finish.ts             After Bake: <html>/<body> attributes, .html URLs, themes.css, sitemap
+  serve.ts              The dev server
+  subset-*.py           Regenerate the font files; check-cjk-coverage.ts guards the Chinese subset
 ```
+
+Bake's React shell owns `<html>` and `<body>` and has its own `<title>`, so each
+page renders a `<template data-shell>` carrying its language and the attributes
+`panel.js` reads, and `scripts/finish.ts` moves them into place.
 
 Content lives in YAML and Markdown, not in templates. To add a seminar, drop a
 Markdown file with `title`, `pubDate`, and `description` front matter into
-`src/seminars/`.
+`content/seminars/`.
 
 The AI tools item on Uses has a `study` flag linking it to the subscription
 comparison. `ai_subscriptions.yaml` holds its copy, table rows and notes list
-(en + zh); `views/subscription-study.vto` derives task counts from API value and
-AA task cost. `uses.js` adjusts the MiMo and GLM rows live from the timing
+(en + zh); `components/SubscriptionStudy.tsx` derives task counts from API value
+and AA task cost. `uses.js` adjusts the MiMo and GLM rows live from the timing
 coefficients and defaults in that data file, weighting credit consumption before
 inverting for capacity. The comparison opens as a second native dialog over the
 Uses panel and has its own address, `uses.html#ai-subscriptions`. Without
@@ -89,8 +96,8 @@ labels are Unicode mathematical italics set in Asana Math.
 Colours come from terminal colour schemes, chosen by name from one picker in the
 masthead: Modus, Ayu, Solarized, Rosé Pine, Catppuccin, Monokai, Gruvbox, Nord,
 Everforest, Dracula, Tokyo Night and One, 32 themes in all. They live in
-`src/_data/themes.yaml`, the single source for both the picker and `/themes.css`
-(generated by `src/themes.css.vto`). Each theme gives seven roles: paper, text,
+`data/themes.yaml`, the single source for both the picker and `/themes.css`
+(generated by `scripts/finish.ts`). Each theme gives seven roles: paper, text,
 muted, ink, link, rule and stage. `styles.css` names no colours. To add a theme,
 add an entry to that file.
 

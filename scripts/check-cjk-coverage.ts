@@ -6,30 +6,26 @@ const CJK = /[⺀-⿟　-〿぀-ヿ㐀-䶿一-鿿豈-﫿＀-￯]/g;
 const PUNCTUATION = /[　-〿！-／：-＠［-｀｛-･]/;
 
 const covered = new Set(
-  (await Deno.readTextFile("src/fonts/cjk-coverage.txt")).trim(),
+  (await Bun.file("public/fonts/cjk-coverage.txt").text()).trim(),
 );
 const missing = new Set<string>();
 
-async function walk(dir: string) {
-  for await (const entry of Deno.readDir(dir)) {
-    const path = `${dir}/${entry.name}`;
-    if (entry.isDirectory) await walk(path);
-    else if (/\.(yaml|vto|md)$/.test(entry.name)) {
-      const text = await Deno.readTextFile(path);
-      for (const ch of text.match(CJK) ?? []) {
-        if (!covered.has(ch) && !PUNCTUATION.test(ch)) missing.add(ch);
-      }
-    }
+for (
+  const path of new Bun.Glob(
+    "{data,content,pages,components}/**/*.{yaml,md,tsx}",
+  ).scanSync()
+) {
+  const text = await Bun.file(path).text();
+  for (const ch of text.match(CJK) ?? []) {
+    if (!covered.has(ch) && !PUNCTUATION.test(ch)) missing.add(ch);
   }
 }
-
-await walk("src");
 if (missing.size) {
   console.error(
     `${missing.size} CJK character(s) are not in the subsetted font: ${
       [...missing].join("")
     }\nRerun scripts/subset-cjk.py (see its docstring).`,
   );
-  Deno.exit(1);
+  process.exit(1);
 }
 console.log(`CJK font covers all ${covered.size} characters in use.`);
