@@ -23,7 +23,6 @@ src/
     site.yaml           Name, the page map the figure links to, contact, footer
     ui.yaml             Interface strings for en + zh
     home.yaml           Tagline, bio, About prose, Now list (en + zh)
-    notes.yaml          Notes catalogue
     themes.yaml         Colour themes: the picker and /themes.css come from this
     uses.yaml           Uses page: gear by category, Markdown asides (en + zh)
     ai_subscriptions.yaml  AI subscription comparison and its notes (en + zh)
@@ -34,7 +33,7 @@ src/
     views/*.vto         Panel bodies, shared between languages
   en/, zh/              Per-language pages; each one includes a shared view
   seminars/*.md         Seminar pages, one Markdown file each
-  notes.vto             Top-level English page (papers.vto redirects to arXiv)
+  notes.vto, papers.vto Redirects: to the notes site (/notes/, its own repo) and to arXiv
   styles.css            The whole stylesheet
   js/panel.js           Opens pages as panels over the figure
   js/uses.js            Opens the AI comparison over Uses; inline disclosure without JS

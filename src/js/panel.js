@@ -25,6 +25,8 @@ function panelTarget(link) {
   if (link.hasAttribute("data-no-panel")) return null;
   const url = new URL(link.getAttribute("href"), location.href);
   if (url.origin !== location.origin) return null;
+  // The notes are their own site (plei99/notes), published at /notes/.
+  if (url.pathname.startsWith("/notes/")) return null;
   if (!/(\/|\.html)$/.test(url.pathname)) return null;
   if (url.pathname === location.pathname && url.hash) return null;
   return url;

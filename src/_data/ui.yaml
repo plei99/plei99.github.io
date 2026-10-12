@@ -4,17 +4,10 @@
 en:
   skip_to_content: Skip to content
   sections: Sections
-  notes: Notes
-  all_notes: All notes
   seminars: Seminars
   travel: Travel
   now: Now
   about: About
-  pdf: PDF
-  zh_translation: Chinese translation
-  notes_lede: >-
-    Notes I typed up from courses and seminars, mostly at Columbia, UMass, Boston
-    College, and the Simons Center. All are PDFs.
   seminars_lede: >-
     Seminars I have organized, with schedules and abstracts.
   travel_lede: Countries I have visited.
@@ -42,16 +35,10 @@ en:
 zh:
   skip_to_content: 跳到正文
   sections: 栏目
-  notes: 笔记
-  all_notes: 全部笔记
   seminars: 讨论班
   travel: 旅行
   now: 最近
   about: 关于
-  pdf: PDF
-  zh_translation: 中文译本
-  notes_lede: >-
-    我在课程与讨论班上整理的笔记，主要来自哥伦比亚大学、马萨诸塞大学、波士顿学院和 Simons 中心，均为 PDF。
   seminars_lede: >-
     我组织过的讨论班，含日程与摘要。
   travel_lede: 去过的国家。

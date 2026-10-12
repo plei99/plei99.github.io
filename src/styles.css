@@ -718,7 +718,7 @@ img {
   white-space: nowrap;
 }
 
-/* ---- Lists of things: notes, seminars, uses ------------------ */
+/* ---- Lists of things: seminars, uses ------------------------ */
 .entries {
   list-style: none;
   padding: 0;
@@ -769,11 +769,6 @@ img {
   max-width: var(--measure);
   font-size: 1.04rem;
   line-height: 1.55;
-}
-
-.entry-extra {
-  margin-top: 0.3rem;
-  font-size: 1rem;
 }
 
 /* ---- Now ---------------------------------------------------- */

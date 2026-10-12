@@ -18,9 +18,10 @@ pages:
   seminars:
     label: { en: seminars, zh: 讨论班 }
     href: { en: /seminars/, zh: /zh/seminars/ }
+  # The notes are their own site, https://github.com/plei99/notes.
   notes:
     label: { en: notes, zh: 笔记 }
-    href: { en: /notes.html, zh: /zh/notes.html }
+    href: { en: /notes/, zh: /notes/zh/ }
   travel:
     label: { en: travel, zh: 旅行 }
     href: { en: /en/travel.html, zh: /zh/travel.html }

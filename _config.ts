@@ -24,7 +24,8 @@ site.copy("fonts");
 site.use(date());
 site.use(
   sitemap({
-    query: "url!=/en/ url!=/404.html url!=/papers.html url!=/zh/papers.html",
+    query:
+      "url!=/en/ url!=/404.html url!=/papers.html url!=/zh/papers.html url!=/notes.html url!=/zh/notes.html",
   }),
 );
 
