@@ -1,0 +1,112 @@
+import type { Site } from "./types";
+
+export const site: Site = {
+  name: "Patrick Lei",
+  description: {
+    en:
+      "Patrick Lei is a postdoc at the Shanghai Center for Mathematical Sciences at Fudan University, working in algebraic geometry and higher-genus Gromov-Witten theory.",
+    zh:
+      "Patrick Lei 是复旦大学上海数学中心的博士后，研究代数几何与高亏格 Gromov-Witten 理论。",
+  },
+
+  // Every destination on the site, keyed by the id the figure uses. In the figure
+  // the marked points of C are about, seminars and notes; the map f is travel; the
+  // insertions on X are arxiv, now and cv. The letter f is uses. `arxiv` and `cv`
+  // leave the site, so they open in a new tab and not in a panel.
+  pages: {
+    about: {
+      label: { en: "about me", zh: "关于我" },
+      href: { en: "/en/about.html", zh: "/zh/about.html" },
+    },
+    seminars: {
+      label: { en: "seminars", zh: "讨论班" },
+      href: { en: "/seminars/", zh: "/zh/seminars/" },
+    },
+    // The notes are their own site, https://github.com/plei99/notes.
+    notes: {
+      label: { en: "notes", zh: "笔记" },
+      href: { en: "/notes/", zh: "/notes/zh/" },
+    },
+    travel: {
+      label: { en: "travel", zh: "旅行" },
+      href: { en: "/en/travel.html", zh: "/zh/travel.html" },
+    },
+    // Links to `contact.arxiv` below, so the address is written once.
+    arxiv: {
+      label: { en: "arXiv", zh: "arXiv" },
+      external: true,
+    },
+    now: {
+      label: { en: "now", zh: "最近" },
+      href: { en: "/en/now.html", zh: "/zh/now.html" },
+    },
+    cv: {
+      label: { en: "CV", zh: "简历" },
+      external: true,
+      href: {
+        en:
+          "https://github.com/plei99/cv/releases/latest/download/Patrick_Lei_CV.pdf",
+        zh:
+          "https://github.com/plei99/cv/releases/latest/download/Patrick_Lei_CV.pdf",
+      },
+    },
+    uses: {
+      label: { en: "uses", zh: "装备" },
+      href: { en: "/en/uses.html", zh: "/zh/uses.html" },
+    },
+  },
+
+  // Latin text fonts offered in the masthead, each with its math companion. `id`
+  // is the data-latin value in styles.css. Names are the same in both languages.
+  // `sans: true` on a group pairs it with the Chinese sans faces by default.
+  latin_fonts: [
+    {
+      group: { en: "Serif", zh: "衬线" },
+      fonts: [
+        { id: "pagella", name: "Pagella" },
+        { id: "euler", name: "Pagella + Euler" },
+        { id: "bonum", name: "Bonum" },
+        { id: "schola", name: "Schola" },
+        { id: "latin-modern", name: "Latin Modern" },
+        { id: "libertinus", name: "Libertinus" },
+        { id: "garamond", name: "Garamond" },
+        { id: "hundar", name: "Hundar" },
+      ],
+    },
+    {
+      group: { en: "Sans", zh: "无衬线" },
+      sans: true,
+      fonts: [
+        { id: "fira", name: "Fira Sans" },
+        { id: "new-cm-sans", name: "New CM Sans" },
+        { id: "lato", name: "Lato" },
+      ],
+    },
+  ],
+
+  contact: {
+    email: "plei@fudan.edu.cn",
+    github: "https://github.com/plei99",
+    github_label: "gh/plei99",
+    arxiv: "https://arxiv.org/a/0000-0003-1977-1596",
+    arxiv_label: "arXiv",
+  },
+
+  // A link's href is a string, or { en, zh } when the languages differ.
+  footer: {
+    copyright: "© 2026 Patrick Lei",
+    links: [
+      {
+        label: "tikz-bench",
+        href: {
+          en: "https://plei99.github.io/tikz-bench/",
+          zh: "https://plei99.github.io/tikz-bench/zh/",
+        },
+      },
+      {
+        label: "Source",
+        href: "https://github.com/plei99/plei99.github.io",
+      },
+    ],
+  },
+};

@@ -1,6 +1,11 @@
 // The AI subscription comparison that opens over the Uses panel. uses.js reads
 // the data-* attributes to adjust the timed rows live.
-import { aiSubscriptions as study, type Lang, mdInline } from "../lib/site";
+import {
+  aiSubscriptions as study,
+  type Lang,
+  mdInline,
+  type StudyRow,
+} from "../lib/site";
 
 const number = (value: number, digits = 0) =>
   value.toLocaleString("en-US", {
@@ -8,29 +13,8 @@ const number = (value: number, digits = 0) =>
     maximumFractionDigits: digits,
   });
 
-type Row = {
-  model: string;
-  url: string;
-  plan: Record<Lang, string>;
-  price: number;
-  score: number;
-  api: number;
-  cost: number;
-  time_seconds: number;
-  time_url: string;
-  timing?: string;
-};
-type Timing = {
-  label: Record<Lang, string>;
-  window: Record<Lang, string>;
-  share: Record<Lang, string>;
-  default: number;
-  window_coefficient: number;
-  other_coefficient: number;
-};
-
 /** The data attributes uses.js recomputes a timed row from. */
-const values = (row: Row) => ({
+const values = (row: StudyRow) => ({
   "data-study-values": row.timing,
   "data-api": row.api,
   "data-cost": row.cost,
@@ -39,11 +23,9 @@ const values = (row: Row) => ({
 
 export default function SubscriptionStudy({ lang }: { lang: Lang }) {
   const copy = study.copy[lang];
-  const rows: Row[] = study.rows;
-  const timings = Object.entries(study.timing as Record<string, Timing>);
-  const notes = (study.notes as Record<Lang, string>[]).map((note) =>
-    note[lang].trim()
-  ).filter(Boolean);
+  const rows = study.rows;
+  const timings = Object.entries(study.timing);
+  const notes = study.notes.map((note) => note[lang].trim()).filter(Boolean);
 
   return (
     <details className="uses-study" id="ai-subscriptions" data-uses-study="">

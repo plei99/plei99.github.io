@@ -5,25 +5,26 @@
 // that to a modal dialog, and turns internal links into content swaps so the
 // figure never reloads. Without it, the links and the close button are plain
 // navigation and everything still works.
+import { byId, query } from "./dom.js";
 
-const panel = document.getElementById("panel");
-const content = document.getElementById("panel-content");
-const home = document.body.dataset.home;
-const homeTitle = document.body.dataset.homeTitle;
+const panel = byId("panel", HTMLDialogElement);
+const content = byId("panel-content", HTMLElement);
+const home = document.body.dataset.home ?? "/";
+const homeTitle = document.body.dataset.homeTitle ?? "";
 const parser = new DOMParser();
 let request = 0;
 
-function isHome(url) {
+function isHome(url: URL) {
   return url.pathname === "/" || url.pathname === "/zh/";
 }
 
 // A link opens in the panel when it points at another HTML page of this site.
-function panelTarget(link) {
+function panelTarget(link: Element) {
   // Read attributes, not properties: on the SVG links in the figure, `href`
   // and `target` are SVGAnimatedString objects rather than strings.
   if (link.hasAttribute("target") || link.hasAttribute("download")) return null;
   if (link.hasAttribute("data-no-panel")) return null;
-  const url = new URL(link.getAttribute("href"), location.href);
+  const url = new URL(link.getAttribute("href") ?? "", location.href);
   if (url.origin !== location.origin) return null;
   // The notes are their own site (plei99/notes), published at /notes/.
   if (url.pathname.startsWith("/notes/")) return null;
@@ -32,8 +33,12 @@ function panelTarget(link) {
   return url;
 }
 
-function markCurrent(section) {
-  for (const link of document.querySelectorAll(".fig-link")) {
+function markCurrent(section: string | null) {
+  for (
+    const link of document.querySelectorAll<HTMLElement | SVGElement>(
+      ".fig-link",
+    )
+  ) {
     if (link.dataset.id === section) link.setAttribute("aria-current", "page");
     else link.removeAttribute("aria-current");
   }
@@ -43,11 +48,11 @@ function markCurrent(section) {
 // seminar page opened from the Chinese site is English, so its link must offer
 // 中文. Closing the panel restores the link the home page started with.
 const homeLanguageLink = document.body.classList.contains("is-home")
-  ? document.querySelector(".langswitch").cloneNode(true)
+  ? query(".langswitch", HTMLAnchorElement).cloneNode(true) as HTMLAnchorElement
   : null;
 
-function setLanguageLinks(doc) {
-  const current = document.querySelector(".langswitch");
+function setLanguageLinks(doc: Document | null) {
+  const current = query(".langswitch", HTMLAnchorElement);
   const fresh = doc?.querySelector(".langswitch") ?? homeLanguageLink;
   if (fresh) {
     current.replaceWith(document.importNode(fresh, true));
@@ -65,7 +70,7 @@ function setLanguageLinks(doc) {
 // re-imported under a fresh query string each time its panel opens.
 function runScripts() {
   for (const script of content.querySelectorAll("script[src]")) {
-    const src = script.getAttribute("src");
+    const src = script.getAttribute("src")!;
     import(`${src}${src.includes("?") ? "&" : "?"}open=${Date.now()}`);
   }
 }
@@ -78,7 +83,7 @@ function show() {
   content.focus({ preventScroll: true });
 }
 
-function closePanel({ push }) {
+function closePanel({ push }: { push: boolean }) {
   document.dispatchEvent(new Event("panel:close"));
   if (panel.open) panel.close();
   content.replaceChildren();
@@ -87,7 +92,11 @@ function closePanel({ push }) {
   document.body.classList.add("is-home");
   // Hand focus back to the label this panel was opened from. Two copies of
   // the figure exist; only the one laid out for this screen is rendered.
-  const opener = [...document.querySelectorAll(".fig-link[aria-current]")]
+  const opener = [
+    ...document.querySelectorAll<HTMLElement | SVGElement>(
+      ".fig-link[aria-current]",
+    ),
+  ]
     .find((link) => link.getClientRects().length);
   markCurrent(null);
   opener?.focus({ preventScroll: true });
@@ -95,15 +104,15 @@ function closePanel({ push }) {
   if (push) history.pushState({}, "", home);
 }
 
-async function openPanel(url, { push }) {
+async function openPanel(url: URL, { push }: { push: boolean }) {
   const id = ++request;
-  let doc;
+  let doc: Document;
   try {
     const response = await fetch(url);
     if (!response.ok) throw new Error(response.statusText);
     doc = parser.parseFromString(await response.text(), "text/html");
   } catch {
-    location.href = url;
+    location.href = url.href;
     return;
   }
   if (id !== request) return;
@@ -117,9 +126,9 @@ async function openPanel(url, { push }) {
   document.dispatchEvent(new Event("panel:close"));
   content.replaceChildren(...next.childNodes);
   content.dataset.section = next.dataset.section;
-  document.title = next.dataset.title;
+  document.title = next.dataset.title ?? homeTitle;
   document.body.classList.remove("is-home");
-  markCurrent(next.dataset.section);
+  markCurrent(next.dataset.section ?? null);
   setLanguageLinks(doc);
   if (push) history.pushState({}, "", url);
   show();
@@ -129,7 +138,8 @@ async function openPanel(url, { push }) {
 // Remember a deliberate language choice, so the root page's first-visit
 // language detection never overrides it.
 document.addEventListener("click", (event) => {
-  const link = event.target.closest?.(".langswitch");
+  if (!(event.target instanceof Element)) return;
+  const link = event.target.closest<HTMLAnchorElement>(".langswitch");
   if (!link) return;
   try {
     localStorage.setItem("lang", link.lang.startsWith("zh") ? "zh" : "en");
@@ -141,6 +151,7 @@ document.addEventListener("click", (event) => {
 document.addEventListener("click", (event) => {
   if (event.defaultPrevented || event.button !== 0) return;
   if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  if (!(event.target instanceof Element)) return;
   const link = event.target.closest("a[href]");
   if (!link) return;
   const url = panelTarget(link);

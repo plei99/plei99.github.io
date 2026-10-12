@@ -7,10 +7,11 @@
 // it was made under, and the inline script in <head> applies it before first
 // paint on later visits, swapping in its counterpart of the other brightness
 // once the system setting has changed.
+import { query } from "./dom.js";
 
 const root = document.documentElement;
-const picker = document.querySelector(".scheme");
-const select = picker.querySelector("select");
+const picker = query(".scheme", HTMLLabelElement);
+const select = query("select", HTMLSelectElement, picker);
 const system = matchMedia("(prefers-color-scheme: dark)");
 
 // Every preference (theme, latin, cjk) is kept in two places: localStorage,
@@ -20,7 +21,9 @@ const system = matchMedia("(prefers-color-scheme: dark)");
 // whichever is present. Both are written on a choice the visitor makes.
 const YEAR = 60 * 60 * 24 * 365;
 
-function store(key, value) {
+type Preference = "theme" | "theme-system" | FontAttribute;
+
+function store(key: Preference, value: string) {
   try {
     if (value) localStorage.setItem(key, value);
     else localStorage.removeItem(key);
@@ -46,7 +49,7 @@ function mode() {
   return system.matches ? "dark" : "light";
 }
 
-function save(value) {
+function save(value: string) {
   store("theme", value);
   store("theme-system", value && mode());
   try {
@@ -58,7 +61,10 @@ function save(value) {
 
 function showCurrent() {
   select.value = root.dataset.theme ||
-    (system.matches ? select.dataset.defaultDark : select.dataset.defaultLight);
+    (system.matches
+      ? select.dataset.defaultDark
+      : select.dataset.defaultLight) ||
+    "";
 }
 
 select.addEventListener("change", () => {
@@ -90,32 +96,40 @@ picker.hidden = false;
 // sans (a Chinese sans brings Fira, a Latin sans brings Source Han Sans), so
 // a picker with nothing chosen shows that effective value; choosing anything,
 // including the default face, makes it explicit. The lists mirror styles.css.
+type FontAttribute = "latin" | "cjk";
 const SANS_LATIN = ["fira", "new-cm-sans", "lato"];
 const SANS_CJK = ["sans", "rounded"];
-const pickers = {};
+const pickers: Partial<Record<FontAttribute, HTMLSelectElement>> = {};
 
-function effective(attr) {
-  if (root.dataset[attr]) return root.dataset[attr];
+function effective(attr: FontAttribute) {
+  const chosen = root.dataset[attr];
+  if (chosen) return chosen;
   if (attr === "latin") {
-    return SANS_CJK.includes(root.dataset.cjk) ? "fira" : "pagella";
+    return SANS_CJK.includes(root.dataset.cjk ?? "") ? "fira" : "pagella";
   }
-  return SANS_LATIN.includes(root.dataset.latin) ? "sans" : "serif";
+  return SANS_LATIN.includes(root.dataset.latin ?? "") ? "sans" : "serif";
 }
 
 function showEffective() {
-  for (const [attr, select] of Object.entries(pickers)) {
+  for (
+    const [attr, select] of Object.entries(pickers) as [
+      FontAttribute,
+      HTMLSelectElement,
+    ][]
+  ) {
     select.value = effective(attr);
   }
 }
 
-function fontPicker(selector, attr) {
-  const picker = document.querySelector(selector);
+function fontPicker(selector: string, attr: FontAttribute) {
+  const picker = document.querySelector<HTMLLabelElement>(selector);
   if (!picker) return;
-  const select = picker.querySelector("select");
+  const select = query("select", HTMLSelectElement, picker);
   pickers[attr] = select;
   // A saved value that no longer exists falls back to the default.
-  if (root.dataset[attr]) {
-    select.value = root.dataset[attr];
+  const saved = root.dataset[attr];
+  if (saved) {
+    select.value = saved;
     if (select.selectedIndex < 0) {
       delete root.dataset[attr];
       store(attr, "");

@@ -12,7 +12,7 @@ const missing = new Set<string>();
 
 for (
   const path of new Bun.Glob(
-    "{data,content,pages,components}/**/*.{yaml,md,tsx}",
+    "{data,content,pages,components,client}/**/*.{ts,tsx,md}",
   ).scanSync()
 ) {
   const text = await Bun.file(path).text();

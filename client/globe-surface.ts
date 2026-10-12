@@ -1,4 +1,14 @@
-export const colors = {
+export const colors: Record<
+  | "ocean"
+  | "graticule"
+  | "land"
+  | "border"
+  | "visited"
+  | "visitedBorder"
+  | "ice"
+  | "iceBorder",
+  string
+> = {
   ocean: "#347dce",
   graticule: "#b0d0f344",
   land: "#cfddd3",

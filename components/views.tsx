@@ -216,7 +216,7 @@ export function Uses({ lang }: { lang: Lang }) {
         <h1 id="panel-title">{t.uses}</h1>
         <p className="lede">{t.uses_lede}</p>
       </header>
-      {uses.map((category: any) => (
+      {uses.map((category) => (
         <section
           className="uses-group"
           key={category.id}
@@ -227,7 +227,7 @@ export function Uses({ lang }: { lang: Lang }) {
             <div className="prose" {...html(md(category.body[lang]))} />
           )}
           <ul className="entries">
-            {category.items.map((item: any) => (
+            {category.items.map((item) => (
               <li className="entry" key={item.name}>
                 <p className="entry-when">{item.kind[lang]}</p>
                 <div>

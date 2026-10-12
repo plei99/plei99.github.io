@@ -1,15 +1,19 @@
+import type { FeatureCollection, Geometry } from "geojson";
+import { byId } from "./dom.js";
 import { arcticIce, colors } from "./globe-surface.js";
 
-// The template supplies the visited countries without adding visible labels.
-const container = document.getElementById("globe-container");
-const motion = document.getElementById("globe-motion-toggle");
-const zoomIn = document.getElementById("globe-zoom-in");
-const zoomOut = document.getElementById("globe-zoom-out");
-const reset = document.getElementById("globe-reset");
-const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
-const visited = new Set(container.dataset.visited.split("|"));
+type World = FeatureCollection<Geometry, { name: string }>;
 
-function showFallback(error) {
+// The page supplies the visited countries without adding visible labels.
+const container = byId("globe-container", HTMLElement);
+const motion = byId("globe-motion-toggle", HTMLButtonElement);
+const zoomIn = byId("globe-zoom-in", HTMLButtonElement);
+const zoomOut = byId("globe-zoom-out", HTMLButtonElement);
+const reset = byId("globe-reset", HTMLButtonElement);
+const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+const visited = new Set((container.dataset.visited ?? "").split("|"));
+
+function showFallback(error: unknown) {
   console.warn(
     "The interactive atlas is unavailable; using its illustration.",
     error,
@@ -17,8 +21,8 @@ function showFallback(error) {
   container.dataset.ready = "false";
   container.querySelector("canvas")?.remove();
   for (const button of [motion, zoomIn, zoomOut, reset]) button.disabled = true;
-  document.getElementById("globe-status").textContent =
-    container.dataset.fallbackLabel;
+  byId("globe-status", HTMLElement).textContent =
+    container.dataset.fallbackLabel ?? "";
 }
 
 async function init() {
@@ -27,7 +31,7 @@ async function init() {
     fetch("/js/world.json"),
   ]);
   if (!response.ok) throw new Error(`Map request failed: ${response.status}`);
-  const world = await response.json();
+  const world: World = await response.json();
   const renderer = new T.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.setClearColor(0x000000, 0);
@@ -37,7 +41,7 @@ async function init() {
   const canvas = renderer.domElement;
   canvas.tabIndex = 0;
   canvas.setAttribute("role", "img");
-  canvas.setAttribute("aria-label", container.getAttribute("aria-label"));
+  canvas.setAttribute("aria-label", container.getAttribute("aria-label") ?? "");
   canvas.setAttribute("aria-describedby", "globe-keyboard-help");
   container.prepend(canvas);
 
@@ -91,6 +95,7 @@ async function init() {
   const relief = makeCanvas();
   const ctx = surface.getContext("2d");
   const bump = relief.getContext("2d");
+  if (!ctx || !bump) throw new Error("No 2D canvas for the globe's textures");
   const projection = T.geoEquirectangular()
     .translate([surface.width / 2, surface.height / 2])
     .scale(surface.width / (2 * Math.PI));
@@ -159,14 +164,14 @@ async function init() {
   let latitude = 25;
   let longitude = 78;
   let zoom = 1;
-  let target = null;
+  let target: { lat: number; lon: number } | null = null;
   let rotating = !reducedMotion.matches;
   let inView = true;
   let frame = 0;
   let previousTime = 0;
   let disposed = false;
   const clamp = T.MathUtils.clamp;
-  const normalize = (angle) => ((angle + 180) % 360 + 360) % 360 - 180;
+  const normalize = (angle: number) => ((angle + 180) % 360 + 360) % 360 - 180;
 
   function schedule() {
     if (!frame && !disposed && !document.hidden && inView) {
@@ -176,9 +181,8 @@ async function init() {
 
   function updateMotion() {
     motion.setAttribute("aria-pressed", String(rotating));
-    const label = rotating
-      ? motion.dataset.pauseLabel
-      : motion.dataset.startLabel;
+    const label =
+      (rotating ? motion.dataset.pauseLabel : motion.dataset.startLabel) ?? "";
     motion.setAttribute("aria-label", label);
     motion.title = label;
   }
@@ -189,7 +193,7 @@ async function init() {
     updateMotion();
   }
 
-  function draw(now) {
+  function draw(now: number) {
     frame = 0;
     const delta = Math.min(now - (previousTime || now), 48);
     previousTime = now;
@@ -235,7 +239,7 @@ async function init() {
     schedule();
   }
 
-  function changeZoom(amount) {
+  function changeZoom(amount: number) {
     zoom = clamp(zoom + amount, 0.85, 1.25);
     zoomIn.disabled = zoom >= 1.25;
     zoomOut.disabled = zoom <= 0.85;
@@ -263,7 +267,7 @@ async function init() {
   };
   reducedMotion.addEventListener("change", onMotionChange);
 
-  let drag = null;
+  let drag: { id: number; x: number; y: number } | null = null;
   canvas.addEventListener("pointerdown", (event) => {
     if (!event.isPrimary || event.button !== 0) return;
     pause();
@@ -366,8 +370,9 @@ async function init() {
     reducedMotion.removeEventListener("change", onMotionChange);
     document.removeEventListener("visibilitychange", onVisibility);
     scene.traverse((object) => {
-      object.geometry?.dispose();
-      object.material?.dispose();
+      if (!(object instanceof T.Mesh)) return;
+      object.geometry.dispose();
+      for (const material of [object.material].flat()) material.dispose();
     });
     map.dispose();
     bumpMap.dispose();

@@ -41,9 +41,9 @@ PUNCTUATION = "U+3000-303F,U+FF01-FF0F,U+FF1A-FF20,U+FF3B-FF40,U+FF5B-FF65"
 
 def site_characters() -> set[str]:
     chars: set[str] = set()
-    for folder in ("data", "content", "pages", "components"):
+    for folder in ("data", "content", "pages", "components", "client"):
         for path in glob.glob(str(ROOT / folder / "**" / "*"), recursive=True):
-            if not path.endswith((".yaml", ".md", ".tsx")):
+            if not path.endswith((".ts", ".tsx", ".md")):
                 continue
             chars |= set(CJK.findall(Path(path).read_text(encoding="utf8")))
     return chars

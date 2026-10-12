@@ -1,15 +1,16 @@
 // Data and helpers shared by the pages. Everything here runs at build time.
-import aiSubscriptions from "../data/ai_subscriptions.yaml";
-import home from "../data/home.yaml";
-import site from "../data/site.yaml";
-import themes from "../data/themes.yaml";
-import travel from "../data/travel.yaml";
-import ui from "../data/ui.yaml";
-import uses from "../data/uses.yaml";
+import { themes } from "../data/themes";
+import type { Lang, Theme } from "../data/types";
 
-export { aiSubscriptions, home, site, themes, travel, ui, uses };
+export { aiSubscriptions } from "../data/ai-subscriptions";
+export { home } from "../data/home";
+export { site } from "../data/site";
+export { themes } from "../data/themes";
+export { travel } from "../data/travel";
+export type * from "../data/types";
+export { ui } from "../data/ui";
+export { uses } from "../data/uses";
 
-export type Lang = "en" | "zh";
 export const SITE_URL = "https://plei99.github.io";
 
 // Appended to stylesheet and script URLs. scripts/finish.ts replaces it with
@@ -53,25 +54,19 @@ export function formatDate(date: string | Date, lang: Lang, long = false) {
   }).format(d);
 }
 
-export type Theme =
-  & { id: string; name: string; dark?: boolean }
-  & Record<string, string>;
-export type ThemeFamily = { family: string; themes: Theme[] };
-export const allThemes: Theme[] = (themes as ThemeFamily[]).flatMap((f) =>
-  f.themes
-);
+export const allThemes: Theme[] = themes.flatMap((f) => f.themes);
 
 // Each theme's brightness and its counterpart of the other brightness: the
 // theme in the same place among its family's other half (Gruvbox Dark Soft for
 // Gruvbox Light Soft, the last one if the other half is shorter), or the
 // default when the family has none.
-export const themePairs = Object.fromEntries(
-  (themes as ThemeFamily[]).flatMap((family) =>
+export const themePairs: Record<string, [0 | 1, string]> = Object.fromEntries(
+  themes.flatMap((family) =>
     family.themes.map((t) => {
-      const same = family.themes.filter((o) => !!o.dark === !!t.dark);
-      const other = family.themes.filter((o) => !!o.dark !== !!t.dark);
+      const same = family.themes.filter((o) => o.dark === t.dark);
+      const other = family.themes.filter((o) => o.dark !== t.dark);
       const pair = other[Math.min(same.indexOf(t), other.length - 1)] ??
-        allThemes.find((o) => !!o.dark !== !!t.dark)!;
+        allThemes.find((o) => o.dark !== t.dark)!;
       return [t.id, [t.dark ? 1 : 0, pair.id]];
     })
   ),
@@ -88,6 +83,41 @@ export type Seminar = {
   body: string;
 };
 
+// Markdown front matter is not type checked, so each seminar's is checked
+// here: a missing or misspelled field fails the build and names the file.
+function seminarFields(file: string, front: unknown) {
+  const data = (front ?? {}) as Record<string, unknown>;
+  const fail = (problem: string) => {
+    throw new Error(`${file}: ${problem}`);
+  };
+  const known = [
+    "title",
+    "title_zh",
+    "description",
+    "description_zh",
+    "pubDate",
+  ];
+  for (const key of Object.keys(data)) {
+    if (!known.includes(key)) fail(`unknown front matter field "${key}"`);
+  }
+  for (const key of ["title", "description"]) {
+    if (typeof data[key] !== "string") fail(`"${key}" must be a string`);
+  }
+  for (const key of ["title_zh", "description_zh"]) {
+    if (data[key] !== undefined && typeof data[key] !== "string") {
+      fail(`"${key}" must be a string`);
+    }
+  }
+  const pubDate = String(data.pubDate);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(pubDate)) {
+    fail(`"pubDate" must be a YYYY-MM-DD date`);
+  }
+  return {
+    ...(data as Omit<Seminar, "slug" | "url" | "body" | "pubDate">),
+    pubDate,
+  };
+}
+
 // The seminar pages, newest first. Each is a Markdown file with YAML front
 // matter in content/seminars/.
 export async function seminars(): Promise<Seminar[]> {
@@ -97,17 +127,8 @@ export async function seminars(): Promise<Seminar[]> {
     const [, front = "", body = ""] =
       text.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/) ?? [];
     const slug = file.slice("content/seminars/".length, -".md".length);
-    const data = Bun.YAML.parse(front) as Omit<
-      Seminar,
-      "slug" | "url" | "body"
-    >;
-    list.push({
-      ...data,
-      pubDate: String(data.pubDate),
-      slug,
-      url: `/seminars/${slug}/`,
-      body,
-    });
+    const fields = seminarFields(file, Bun.YAML.parse(front));
+    list.push({ ...fields, slug, url: `/seminars/${slug}/`, body });
   }
   return list.sort((a, b) => b.pubDate.localeCompare(a.pubDate));
 }

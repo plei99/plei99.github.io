@@ -18,5 +18,8 @@
     "components",
     "lib",
     "scripts/*.ts"
+  ],
+  "exclude": [
+    "client"
   ]
 }

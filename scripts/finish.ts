@@ -7,7 +7,8 @@
 //   inlined RSC payload and the .rsc files that only it would read go too.
 // - A route like pages/en/about.html.tsx is written to en/about.html/index.html;
 //   it moves to en/about.html, the URL the site has always used.
-// - public/ is copied, and themes.css and sitemap.xml are written.
+// - public/ is copied, the browser scripts in client/ are compiled into js/,
+//   and themes.css and sitemap.xml are written.
 import { cp, rename, rm, rmdir } from "node:fs/promises";
 import path from "node:path";
 import { allThemes, SITE_URL, type Theme } from "../lib/site";
@@ -72,9 +73,9 @@ function themesCss() {
   const block = (t: Theme, indent: string) =>
     [
       `color-scheme: ${t.dark ? "dark" : "light"};`,
-      ...["paper", "text", "muted", "ink", "link", "rule"].map((role) =>
-        `--${role}: ${t[role]};`
-      ),
+      ...(["paper", "text", "muted", "ink", "link", "rule"] as const).map((
+        role,
+      ) => `--${role}: ${t[role]};`),
       `--stage: ${
         t.stage || "color-mix(in srgb, var(--paper) 92%, var(--text))"
       };`,
@@ -118,6 +119,18 @@ for (const dir of new Bun.Glob("**/*.html/index.html").scanSync(OUT)) {
 await rm(`${OUT}/_bun`, { recursive: true, force: true });
 
 await cp("public", OUT, { recursive: true });
+
+// Each browser script is compiled on its own, keeping its imports, so the
+// pages load the same modules at the same URLs as before: client/panel.ts
+// becomes js/panel.js. client/inline/ is built into the pages instead.
+const transpiler = new Bun.Transpiler({ loader: "ts", target: "browser" });
+for (const file of new Bun.Glob("*.ts").scanSync("client")) {
+  if (file.endsWith(".d.ts")) continue;
+  const code = transpiler.transformSync(
+    await Bun.file(`client/${file}`).text(),
+  );
+  await Bun.write(`${OUT}/js/${file.replace(/\.ts$/, ".js")}`, code);
+}
 await Bun.write(`${OUT}/themes.css`, themesCss());
 await Bun.write(
   `${OUT}/sitemap.xml`,

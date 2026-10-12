@@ -3,7 +3,10 @@
 Patrick Lei's personal site, written as React components and rendered to static
 HTML by [Bun Bake](https://bun.com) (`bun build --app`), then deployed to GitHub
 Pages. No React reaches the browser: the pages have no client components, so the
-output is plain HTML plus the site's own scripts.
+output is plain HTML plus the site's own scripts. Everything that is code is
+TypeScript and type checked, including the data and the browser scripts; the
+exceptions are the stylesheets, the prebuilt globe engine, and the Python font
+tools, which need fontTools.
 
 ## Running it
 
@@ -29,16 +32,25 @@ components/
   views.tsx             Panel bodies, shared between languages
   SubscriptionStudy.tsx The AI subscription comparison on Uses
   Redirect.tsx          Old URLs: /en/, the notes and papers pages
-lib/site.ts             Data imports, Markdown, dates, theme pairs, the seminar list
+lib/
+  site.ts               Data, Markdown, dates, theme pairs, the seminar list
+  inline.ts             Builds client/inline/*.ts into the scripts inlined in <head>
 data/
-  site.yaml             Name, the page map the figure links to, contact, footer
-  ui.yaml               Interface strings for en + zh
-  home.yaml             Tagline, bio, About prose, Now list (en + zh)
-  themes.yaml           Colour themes: the picker and /themes.css come from this
-  uses.yaml             Uses page: gear by category, Markdown asides (en + zh)
-  ai_subscriptions.yaml AI subscription comparison and its notes (en + zh)
-content/seminars/*.md   Seminar pages, one Markdown file each
-public/                 Copied verbatim: styles.css, js/, images/, fonts/ (see fonts/README.md)
+  types.ts              The shape of everything below; both languages are required
+  site.ts               Name, the page map the figure links to, contact, footer
+  ui.ts                 Interface strings for en + zh
+  home.ts               Tagline, bio, About prose, Now list (en + zh)
+  themes.ts             Colour themes: the picker and /themes.css come from this
+  uses.ts               Uses page: gear by category, Markdown asides (en + zh)
+  ai-subscriptions.ts   AI subscription comparison and its notes (en + zh)
+content/seminars/*.md   Seminar pages, one Markdown file each; front matter checked at build
+client/                 Browser scripts, compiled one to one into /js/ (own tsconfig: DOM only)
+  panel.ts              Opens pages as panels over the figure
+  theme.ts              The theme and font pickers
+  uses.ts               Opens the AI comparison over Uses; inline disclosure without JS
+  globe.ts              The travel globe, drawn with vendor/atlas-engine.js
+  inline/               Head scripts: saved preferences, language detection, redirects
+public/                 Copied verbatim: styles.css, js/vendor/, js/world.json, images/, fonts/
 scripts/
   finish.ts             After Bake: <html>/<body> attributes, .html URLs, themes.css, sitemap
   serve.ts              The dev server
@@ -47,20 +59,20 @@ scripts/
 
 Bake's React shell owns `<html>` and `<body>` and has its own `<title>`, so each
 page renders a `<template data-shell>` carrying its language and the attributes
-`panel.js` reads, and `scripts/finish.ts` moves them into place.
+`panel.ts` reads, and `scripts/finish.ts` moves them into place.
 
-Content lives in YAML and Markdown, not in templates. To add a seminar, drop a
-Markdown file with `title`, `pubDate`, and `description` front matter into
+Content lives in `data/` and Markdown, not in components. To add a seminar, drop
+a Markdown file with `title`, `pubDate`, and `description` front matter into
 `content/seminars/`.
 
 The AI tools item on Uses has a `study` flag linking it to the subscription
-comparison. `ai_subscriptions.yaml` holds its copy, table rows and notes list
+comparison. `data/ai-subscriptions.ts` holds its copy, table rows and notes list
 (en + zh); `components/SubscriptionStudy.tsx` derives task counts from API value
-and AA task cost. `uses.js` adjusts the MiMo and GLM rows live from the timing
-coefficients and defaults in that data file, weighting credit consumption before
-inverting for capacity. The comparison opens as a second native dialog over the
-Uses panel and has its own address, `uses.html#ai-subscriptions`. Without
-JavaScript, its `details` element expands inline.
+and AA task cost. `client/uses.ts` adjusts the MiMo and GLM rows live from the
+timing coefficients and defaults in that data file, weighting credit consumption
+before inverting for capacity. The comparison opens as a second native dialog
+over the Uses panel and has its own address, `uses.html#ai-subscriptions`.
+Without JavaScript, its `details` element expands inline.
 
 ## Languages
 
@@ -79,7 +91,7 @@ Uses. Every other page is a panel laid over the figure.
 
 Each page is still built at its own URL, with the figure behind it and its
 content inside `<dialog id="panel">`, already open in the static HTML.
-`js/panel.js` upgrades that to a modal dialog and turns internal links into
+`client/panel.ts` upgrades that to a modal dialog and turns internal links into
 content swaps with `pushState`, so the figure never reloads. Without JavaScript
 the labels and the close button are plain links.
 
@@ -96,13 +108,13 @@ labels are Unicode mathematical italics set in Asana Math.
 Colours come from terminal colour schemes, chosen by name from one picker in the
 masthead: Modus, Ayu, Solarized, Rosé Pine, Catppuccin, Monokai, Gruvbox, Nord,
 Everforest, Dracula, Tokyo Night and One, 32 themes in all. They live in
-`data/themes.yaml`, the single source for both the picker and `/themes.css`
+`data/themes.ts`, the single source for both the picker and `/themes.css`
 (generated by `scripts/finish.ts`). Each theme gives seven roles: paper, text,
 muted, ink, link, rule and stage. `styles.css` names no colours. To add a theme,
 add an entry to that file.
 
 With nothing chosen the page is Modus Operandi, or Modus Vivendi when the system
-is set to dark. `js/theme.js` saves each choice (theme, Latin font, Chinese
+is set to dark. `client/theme.ts` saves each choice (theme, Latin font, Chinese
 font) to `localStorage` and to a cookie of the same name that lasts a year, and
 a small inline script in `<head>` applies whichever is present before first
 paint. The cookie is only ever read by that script; the site is static.

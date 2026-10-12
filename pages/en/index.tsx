@@ -1,5 +1,6 @@
 import Redirect from "../../components/Redirect";
 
+// The English home page used to live here; it is now the site root.
 export default function Page() {
   return (
     <Redirect
@@ -7,8 +8,7 @@ export default function Page() {
       to="/"
       label="Patrick Lei"
       canonical="https://plei99.github.io/"
-      script={'"/" + window.location.hash'}
-      reason="The English home page used to live here; it is now the site root."
+      keepHash
     />
   );
 }

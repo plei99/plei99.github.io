@@ -7,7 +7,15 @@ import { rm } from "node:fs/promises";
 import path from "node:path";
 
 const OUT = "dist";
-const SOURCES = ["pages", "components", "lib", "data", "content", "public"];
+const SOURCES = [
+  "pages",
+  "components",
+  "lib",
+  "data",
+  "content",
+  "client",
+  "public",
+];
 
 async function build() {
   const started = performance.now();

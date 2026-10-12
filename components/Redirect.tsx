@@ -1,17 +1,17 @@
+import { inlineScript } from "../lib/inline";
 import type { Lang } from "../lib/site";
 
 /**
  * A page that used to exist and now sends visitors elsewhere: a meta refresh,
- * a script for the hash-preserving case, and a plain link without either.
+ * a script that can keep the URL's hash, and a plain link without either.
  */
-export default function Redirect(
-  { lang, to, label, canonical, script, reason }: {
+export default async function Redirect(
+  { lang, to, label, canonical, keepHash = false }: {
     lang: Lang;
     to: string;
     label: string;
     canonical?: string;
-    script?: string;
-    reason: string;
+    keepHash?: boolean;
   },
 ) {
   return (
@@ -25,9 +25,10 @@ export default function Redirect(
       <link rel="icon" href="/favicon.ico" sizes="any" />
       <script
         dangerouslySetInnerHTML={{
-          __html: `// ${reason}\nwindow.location.replace(${
-            script ?? JSON.stringify(to)
-          });`,
+          __html: await inlineScript("redirect", {
+            TARGET: to,
+            KEEP_HASH: keepHash,
+          }),
         }}
       />
       <p>
