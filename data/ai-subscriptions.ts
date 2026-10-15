@@ -1,14 +1,14 @@
 import type { AiSubscriptions } from "./types";
 
 export const aiSubscriptions: AiSubscriptions = {
-  // September 23 / October 2, 2026 subscription audit; AA task times added October 3.
+  // September 23 / October 2, 2026 subscription audit; Google added October 15.
   // Dollar values retain calculation precision; SubscriptionStudy derives task counts.
   // Only aggregate findings belong here, never raw logs or account information.
   copy: {
     en: {
       trigger: "How much inference do these subscriptions buy?",
       close: "Close subscription comparison",
-      date: "Last updated October 3, 2026",
+      date: "Last updated October 15, 2026",
       title: "What my AI subscriptions buy",
       intro:
         "Someone I know (if you are reading this, you know who you are) complained about how little usage they got with their AI subscription (which cost about $100/month), so I decided to try to estimate the value of various AI subscriptions from both US and Chinese providers. All assumptions and choices are based on the nature of the aforementioned conversation.",
@@ -26,6 +26,7 @@ export const aiSubscriptions: AiSubscriptions = {
       api_value: "API value / month",
       cost_task: "AA cost / task",
       time_task: "AA time / task",
+      time_unavailable: "AA has not published a time per task for this model.",
       minutes: "min",
       seconds: "seconds",
       tasks: "Tasks / month",
@@ -38,7 +39,7 @@ export const aiSubscriptions: AiSubscriptions = {
     zh: {
       trigger: "这些订阅能换来多少推理用量？",
       close: "关闭订阅比较",
-      date: "更新于 2026 年 10 月 3 日",
+      date: "更新于 2026 年 10 月 15 日",
       title: "我的 AI 订阅能买到多少用量",
       intro:
         "我认识的某人（如果你正在读这段话，你自己心里清楚）抱怨自己每月约 100 美元的 AI 订阅用量太少，所以我试着估算了中美各家 AI 订阅的价值。所有假设和选择都取决于上述对话的性质。",
@@ -56,6 +57,7 @@ export const aiSubscriptions: AiSubscriptions = {
       api_value: "每月 API 等值",
       cost_task: "AA 单任务成本",
       time_task: "AA 单任务用时",
+      time_unavailable: "AA 尚未公布这个模型的单任务用时。",
       minutes: "分钟",
       seconds: "秒",
       tasks: "每月任务数",
@@ -173,6 +175,20 @@ export const aiSubscriptions: AiSubscriptions = {
         "https://artificialanalysis.ai/models/comparisons/claude-opus-5-5-vs-claude-opus-5-5-xhigh",
     },
     {
+      plan: {
+        en: "Google AI Ultra (Antigravity)",
+        zh: "Google AI Ultra（Antigravity）",
+      },
+      model: "Gemini 4 Argon (high)",
+      price: 100,
+      score: 53,
+      api: 420.7042474323477,
+      cost: 1.99,
+      time_seconds: null,
+      time_url: "https://artificialanalysis.ai/models/gemini-4-argon",
+      url: "https://artificialanalysis.ai/models/gemini-4-argon",
+    },
+    {
       plan: { en: "Kimi Code (mainland China)", zh: "Kimi Code（中国大陆）" },
       model: "Kimi K3 (max)",
       price: 100,
@@ -232,9 +248,21 @@ export const aiSubscriptions: AiSubscriptions = {
   notes: [
     {
       en:
-        "Calculations for ChatGPT, Claude, and Kimi were done using my actual usage. MiMo and GLM were estimated based on my token mix (cache hit vs cache miss/cache write vs output) and their published credit rules.",
+        "Calculations for ChatGPT, Claude, Google, and Kimi were done using my actual usage. MiMo and GLM were estimated based on my token mix (cache hit vs cache miss/cache write vs output) and their published credit rules.",
       zh:
-        "ChatGPT、Claude 和 Kimi 的数字是根据我的实际用量计算的。MiMo 和 GLM 则是根据我的 token 构成（缓存命中、缓存未命中/缓存写入与输出的比例）以及它们公布的积分规则估算的。",
+        "ChatGPT、Claude、Google 和 Kimi 的数字是根据我的实际用量计算的。MiMo 和 GLM 则是根据我的 token 构成（缓存命中、缓存未命中/缓存写入与输出的比例）以及它们公布的积分规则估算的。",
+    },
+    {
+      en:
+        "Google AI Ultra ($100/month): on October 15, 2026, $53.075 of Gemini API-equivalent usage had consumed 54.856% of my weekly Antigravity Gemini limit. That includes $50.835 from tikz-bench's current attempts, $2.115 from four archived attempts, and $0.126 from 74,719 tokens in small CLI calls elsewhere. Native conversation records matched the benchmark totals exactly. $53.075 ÷ 0.548563 × (365.25 ÷ 12 ÷ 7) gives about $421/month, or 211 [Gemini 4 Argon (high) AA task equivalents at $1.99/task](https://artificialanalysis.ai/models/gemini-4-argon). At my observed TikZ workload and retry rate, the same allowance would instead cover about 740 TikZ tasks with status “ok”; these are different units from AA tasks.",
+      zh:
+        "Google AI Ultra（每月 $100）：截至 2026 年 10 月 15 日，$53.075 的 Gemini API 等值用量消耗了我的 Antigravity Gemini 周限额的 54.856%。其中，tikz-bench 当前尝试为 $50.835，四次已存档尝试为 $2.115，其他地方的小型 CLI 调用共 74,719 个 token，为 $0.126。本机会话记录与基准测试的用量总数完全一致。$53.075 ÷ 0.548563 ×（365.25 ÷ 12 ÷ 7）约为每月 $421，按 [Gemini 4 Argon（high）的 AA 单任务成本 $1.99](https://artificialanalysis.ai/models/gemini-4-argon) 计算，约为 211 个 AA 任务等值。按我这次 TikZ 测试的用量和重试比例，同样的额度约能完成 740 个状态为“ok”的 TikZ 任务；它与 AA 任务的单位不同。",
+    },
+    {
+      en:
+        "The Google estimate extrapolates one observed weekly window to full weekly usage; five-hour limits still constrain bursts. [Gemini models share a cost-weighted pool; Claude/GPT have a separate limit](https://antigravity.google/blog/changes-to-antigravity-plans/), which is excluded here along with Google's other subscription benefits. [Current Argon Standard API prices](https://ai.google.dev/gemini-api/docs/pricing) are $2/M uncached input, $0.10/M cached input and $10/M output, including thinking. These introductory prices double on December 1, 2026; the subscription estimate needs to be measured again then. AA has not published Argon's time per task, shown as “—”.",
+      zh:
+        "Google 的估算根据一个已观察的周窗口推算，并假设每周用完额度；五小时限额仍会限制短时间内的大量使用。[Gemini 模型共享按成本计算的额度，Claude/GPT 另有限额](https://antigravity.google/blog/changes-to-antigravity-plans/)，这里不包含后者及 Google 订阅的其他权益。[目前 Argon Standard API 的价格](https://ai.google.dev/gemini-api/docs/pricing)为每百万未缓存输入 token $2、缓存输入 $0.10、输出 $10，输出已包含思考 token。这些初期价格将于 2026 年 12 月 1 日翻倍，届时需要重新测量订阅价值。AA 尚未公布 Argon 的单任务用时，表中以“—”表示。",
     },
     {
       en:

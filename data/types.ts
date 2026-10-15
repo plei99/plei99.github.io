@@ -146,6 +146,7 @@ export type StudyKey =
   | "api_value"
   | "cost_task"
   | "time_task"
+  | "time_unavailable"
   | "minutes"
   | "seconds"
   | "tasks"
@@ -171,7 +172,7 @@ export type StudyRow = {
   score: number;
   api: number;
   cost: number;
-  time_seconds: number;
+  time_seconds: number | null;
   time_url: string;
   url: string;
 };

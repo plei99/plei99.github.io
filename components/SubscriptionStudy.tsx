@@ -160,12 +160,27 @@ export default function SubscriptionStudy({ lang }: { lang: Lang }) {
                     <td data-value="api">${number(row.api, 2)}</td>
                     <td>${number(row.cost, 2)}</td>
                     <td className="study-task-time">
-                      <a
-                        href={row.time_url}
-                        title={`${number(row.time_seconds, 2)} ${copy.seconds}`}
-                      >
-                        {number(row.time_seconds / 60, 1)} {copy.minutes}
-                      </a>
+                      {row.time_seconds === null
+                        ? (
+                          <span
+                            title={copy.time_unavailable}
+                          >
+                            <span aria-hidden="true">—</span>
+                            <span className="visually-hidden">
+                              {copy.time_unavailable}
+                            </span>
+                          </span>
+                        )
+                        : (
+                          <a
+                            href={row.time_url}
+                            title={`${
+                              number(row.time_seconds, 2)
+                            } ${copy.seconds}`}
+                          >
+                            {number(row.time_seconds / 60, 1)} {copy.minutes}
+                          </a>
+                        )}
                     </td>
                     <td className="study-result" data-value="tasks">
                       {number(row.api / row.cost)}
