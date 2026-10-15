@@ -1,7 +1,7 @@
 import type { AiSubscriptions } from "./types";
 
 export const aiSubscriptions: AiSubscriptions = {
-  // September 23 / October 2, 2026 subscription audit; Google added October 15.
+  // September 23 / October 2 audit; Google and mainland Kimi updated October 15.
   // Dollar values retain calculation precision; SubscriptionStudy derives task counts.
   // Only aggregate findings belong here, never raw logs or account information.
   copy: {
@@ -193,7 +193,7 @@ export const aiSubscriptions: AiSubscriptions = {
       model: "Kimi K3 (max)",
       price: 100,
       score: 44,
-      api: 312.9208636363636,
+      api: 482.53775950668035,
       cost: 2,
       time_seconds: 1230.62,
       time_url:
@@ -266,9 +266,21 @@ export const aiSubscriptions: AiSubscriptions = {
     },
     {
       en:
-        "I may or may not have actually bought a Kimi subscription just to test its usage limits. Note however that the mainland China subscription doesn't have a weekly limit (only a monthly one), unlike the overseas subscription. I am assuming that the monthly limit is the same on both subscriptions.",
+        "I bought a mainland Kimi subscription to measure its monthly limit directly. It started at 0% used on October 12, 2026; by October 15, $281.705544 of K3 API-equivalent inference had consumed 58.38% of the monthly pool. The max run accounted for $173.67 and the high run for $108.03 across 5,816 model calls, including retries and archived attempts. I matched the benchmark logs with native CLI records, removed duplicate copies, and selected requests by their actual timestamps to exclude the older billing cycle. $281.705544 ÷ 0.5838 gives $482.54/month, or about 241 AA K3 (max) task equivalents at $2/task.",
       zh:
-        "我可能真的为了测试用量限额专门买了一个 Kimi 订阅，也可能没有。不过要注意，与海外版不同，中国大陆版订阅没有周限额（只有月限额）。这里假设两个版本的月限额相同。",
+        "我买了一个中国大陆版 Kimi 订阅，直接测量它的月度限额。2026 年 10 月 12 日开始时已用额度为 0%；截至 10 月 15 日，$281.705544 的 K3 API 等值推理消耗了月度额度的 58.38%。其中 max 测试为 $173.67，high 测试为 $108.03，共 5,816 次模型调用，包含重试和已存档尝试。我将基准测试日志与本机 CLI 记录核对，去除重复副本，并按请求的实际时间排除上一计费周期的用量。$281.705544 ÷ 0.5838 得到每月 $482.54，按 AA K3（max）每任务 $2 计算，约为 241 个 AA 任务等值。",
+    },
+    {
+      en:
+        "The Kimi calls used 12.86M uncached input, 403.00M cached input and 8.15M output tokens. At [K3's international API prices](https://platform.kimi.ai/docs/pricing/chat) of $3/M uncached input, $0.30/M cached input and $15/M output, the full monthly allowance projects to about 22M uncached input, 690M cached input and 14M output tokens at the same mix. [Mainland API prices](https://platform.kimi.com/docs/pricing/chat) of ¥20/M, ¥2/M and ¥100/M put the same allowance near ¥3,200; that uses the published yuan rates rather than a currency conversion. No additional current-cycle Kimi calls were found in the host CLI, Hermes, pi or OpenCode logs.",
+      zh:
+        "这些 Kimi 调用使用了 12.86M 未缓存输入、403.00M 缓存输入和 8.15M 输出 token。按 [K3 国际 API 价格](https://platform.kimi.ai/docs/pricing/chat)，每百万未缓存输入 $3、缓存输入 $0.30、输出 $15，同样的构成下，完整月度额度约能提供 22M 未缓存输入、690M 缓存输入和 14M 输出 token。[中国大陆 API 价格](https://platform.kimi.com/docs/pricing/chat)分别为每百万 ¥20、¥2 和 ¥100，对应约 ¥3,200；这里使用公布的人民币价格，并非汇率换算。在本机 CLI、Hermes、pi 和 OpenCode 日志中，没有找到这个周期内的其他 Kimi 调用。",
+    },
+    {
+      en:
+        "The Kimi max and high batches separately imply monthly API values of $458 and $527, so I use about $480 as the working estimate, with $460–530 as an observed workload range. Token capacity depends on the cache and output mix; this range describes workload variation rather than a statistical confidence interval. [New mainland plans have no weekly quota, retain a rolling five-hour limit, and share the monthly pool across membership features](https://www.kimi.com/help/membership/membership-update-rules). The monthly allowance is extrapolated directly, without a weekly-to-monthly multiplier or an assumption that it matches the overseas plan. Cloud-only activity without local records could not be independently checked.",
+      zh:
+        "Kimi 的 max 与 high 两批测试分别推算出每月 $458 和 $527 的 API 等值，因此这里采用约 $480 的估计，并将 $460–530 作为观察到的用量构成变化范围。可用 token 数取决于缓存和输出的比例；这个范围反映用法差异，并非统计置信区间。[中国大陆新套餐没有周额度限制，保留滚动五小时限额，且各项会员功能共享月度额度](https://www.kimi.com/help/membership/membership-update-rules)。这里直接推算月度总量，没有把周额度换算成月额度，也没有假设它与海外版相同。没有本地记录的纯云端用量无法独立核查。",
     },
     {
       en:
