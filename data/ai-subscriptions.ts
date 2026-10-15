@@ -1,7 +1,7 @@
 import type { AiSubscriptions } from "./types";
 
 export const aiSubscriptions: AiSubscriptions = {
-  // September 23 / October 2 audit; Google and mainland Kimi updated October 15, Codex October 16.
+  // September 23 / October 2 audit; Google and mainland Kimi updated October 15, Codex October 16 (Oct 11–13 quota window excluded: failed judge calls went unrecorded).
   // Dollar values retain calculation precision; SubscriptionStudy derives task counts.
   // Only aggregate findings belong here, never raw logs or account information.
   copy: {
@@ -105,7 +105,7 @@ export const aiSubscriptions: AiSubscriptions = {
       model: "GPT-6 Astra (max)",
       price: 100,
       score: 53,
-      api: 1335.7323961556795,
+      api: 1416.6097175377747,
       cost: 3.26,
       time_seconds: 503.04,
       time_url:
@@ -117,7 +117,7 @@ export const aiSubscriptions: AiSubscriptions = {
       model: "GPT-6 Astra (xhigh)",
       price: 100,
       score: 52,
-      api: 1335.7323961556795,
+      api: 1416.6097175377747,
       cost: 2.31,
       time_seconds: 341.05,
       time_url:
@@ -130,7 +130,7 @@ export const aiSubscriptions: AiSubscriptions = {
       model: "GPT-6.1 Sol (max)",
       price: 100,
       score: 52,
-      api: 1335.7323961556795,
+      api: 1416.6097175377747,
       cost: 0.72,
       time_seconds: 731.39,
       time_url:
@@ -142,7 +142,7 @@ export const aiSubscriptions: AiSubscriptions = {
       model: "GPT-6 Luna (max)",
       price: 100,
       score: 38,
-      api: 1335.7323961556795,
+      api: 1416.6097175377747,
       cost: 0.07,
       time_seconds: 392.22,
       time_url:
