@@ -182,7 +182,7 @@ export const aiSubscriptions: AiSubscriptions = {
       model: "Gemini 4 Argon (high)",
       price: 100,
       score: 53,
-      api: 420.7042474323477,
+      api: 426.05901063035714,
       cost: 1.99,
       time_seconds: null,
       time_url: "https://artificialanalysis.ai/models/gemini-4-argon",
@@ -254,15 +254,15 @@ export const aiSubscriptions: AiSubscriptions = {
     },
     {
       en:
-        "Google AI Ultra ($100/month): on October 15, 2026, $53.075 of Gemini API-equivalent usage had consumed 54.856% of my weekly Antigravity Gemini limit. That includes $50.835 from tikz-bench's current attempts, $2.115 from four archived attempts, and $0.126 from 74,719 tokens in small CLI calls elsewhere. Native conversation records matched the benchmark totals exactly. $53.075 ÷ 0.548563 × (365.25 ÷ 12 ÷ 7) gives about $421/month, or 211 [Gemini 4 Argon (high) AA task equivalents at $1.99/task](https://artificialanalysis.ai/models/gemini-4-argon). At my observed TikZ workload and retry rate, the same allowance would instead cover about 740 TikZ tasks with status “ok”; these are different units from AA tasks.",
+        "Google AI Ultra ($100/month): I exhausted the Antigravity Gemini weekly allowance on October 15, 2026. It delivered $97.9848238 of API-equivalent inference: $52.949 from the Argon high run, $34.651 from medium, $10.259 from low, and $0.126 from small CLI calls elsewhere. The final task stopped with a weekly-quota error; its partial usage is included. All three benchmark totals, including archived attempts, matched the native conversation records exactly. $97.9848238 × (365.25 ÷ 12 ÷ 7) projects to $426.06/month at full weekly utilization, or about 214 [Gemini 4 Argon (high) AA task equivalents at $1.99/task](https://artificialanalysis.ai/models/gemini-4-argon). The weekly amount is measured through exhaustion; the monthly amount is an extrapolation.",
       zh:
-        "Google AI Ultra（每月 $100）：截至 2026 年 10 月 15 日，$53.075 的 Gemini API 等值用量消耗了我的 Antigravity Gemini 周限额的 54.856%。其中，tikz-bench 当前尝试为 $50.835，四次已存档尝试为 $2.115，其他地方的小型 CLI 调用共 74,719 个 token，为 $0.126。本机会话记录与基准测试的用量总数完全一致。$53.075 ÷ 0.548563 ×（365.25 ÷ 12 ÷ 7）约为每月 $421，按 [Gemini 4 Argon（high）的 AA 单任务成本 $1.99](https://artificialanalysis.ai/models/gemini-4-argon) 计算，约为 211 个 AA 任务等值。按我这次 TikZ 测试的用量和重试比例，同样的额度约能完成 740 个状态为“ok”的 TikZ 任务；它与 AA 任务的单位不同。",
+        "Google AI Ultra（每月 $100）：我于 2026 年 10 月 15 日用尽了 Antigravity Gemini 的周额度，实际获得 $97.9848238 的 API 等值推理。其中 Argon high 测试为 $52.949，medium 为 $34.651，low 为 $10.259，其他地方的小型 CLI 调用为 $0.126。最后一个任务因周额度耗尽而停止，它已经使用的部分也计算在内。三批基准测试的用量总数（含已存档尝试）与本机会话记录完全一致。$97.9848238 ×（365.25 ÷ 12 ÷ 7）推算为每月 $426.06，假设每周都用完额度；按 [Gemini 4 Argon（high）的 AA 单任务成本 $1.99](https://artificialanalysis.ai/models/gemini-4-argon) 计算，约为 214 个 AA 任务等值。周用量已测量至额度耗尽，月用量仍是推算值。",
     },
     {
       en:
-        "The Google estimate extrapolates one observed weekly window to full weekly usage; five-hour limits still constrain bursts. [Gemini models share a cost-weighted pool; Claude/GPT have a separate limit](https://antigravity.google/blog/changes-to-antigravity-plans/), which is excluded here along with Google's other subscription benefits. [Current Argon Standard API prices](https://ai.google.dev/gemini-api/docs/pricing) are $2/M uncached input, $0.10/M cached input and $10/M output, including thinking. These introductory prices double on December 1, 2026; the subscription estimate needs to be measured again then. AA has not published Argon's time per task, shown as “—”.",
+        "That exhausted Gemini week contained 1,608 model calls: 14.15M uncached input, 31.32M cached input and 6.66M output tokens, with thinking already included in output. Requests were counted once by conversation and step. This is one measured weekly allowance; future capacity can change, and five-hour limits still constrain bursts. [Gemini models share a cost-weighted pool; Claude/GPT have a separate limit](https://antigravity.google/blog/changes-to-antigravity-plans/), which is excluded here along with Google's other subscription benefits. [Current Argon Standard API prices](https://ai.google.dev/gemini-api/docs/pricing) are $2/M uncached input, $0.10/M cached input and $10/M output. These introductory prices double on December 1, 2026; the subscription estimate needs to be measured again then. AA has not published Argon's time per task, shown as “—”.",
       zh:
-        "Google 的估算根据一个已观察的周窗口推算，并假设每周用完额度；五小时限额仍会限制短时间内的大量使用。[Gemini 模型共享按成本计算的额度，Claude/GPT 另有限额](https://antigravity.google/blog/changes-to-antigravity-plans/)，这里不包含后者及 Google 订阅的其他权益。[目前 Argon Standard API 的价格](https://ai.google.dev/gemini-api/docs/pricing)为每百万未缓存输入 token $2、缓存输入 $0.10、输出 $10，输出已包含思考 token。这些初期价格将于 2026 年 12 月 1 日翻倍，届时需要重新测量订阅价值。AA 尚未公布 Argon 的单任务用时，表中以“—”表示。",
+        "这次用尽的 Gemini 周额度包含 1,608 次模型调用：14.15M 未缓存输入、31.32M 缓存输入和 6.66M 输出 token，思考 token 已包含在输出中。请求按会话和步骤去重。这是一个实际测量的周额度，未来可用量可能变化，五小时限额仍会限制短时间内的大量使用。[Gemini 模型共享按成本计算的额度，Claude/GPT 另有限额](https://antigravity.google/blog/changes-to-antigravity-plans/)，这里不包含后者及 Google 订阅的其他权益。[目前 Argon Standard API 的价格](https://ai.google.dev/gemini-api/docs/pricing)为每百万未缓存输入 token $2、缓存输入 $0.10、输出 $10。这些初期价格将于 2026 年 12 月 1 日翻倍，届时需要重新测量订阅价值。AA 尚未公布 Argon 的单任务用时，表中以“—”表示。",
     },
     {
       en:
