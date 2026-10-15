@@ -51,7 +51,7 @@ I'm always open to suggestions for affordable but legitimately high-quality Sich
   <li>Win all of your arguments about European soccer:
   <a href="https://best-teams.lakebed.app/">teams</a>
   <a href="https://best-coaches.lakebed.app/">coaches</a></li>
-  <li><a href="https://plei99.github.io/tikz-bench/">tikz-bench</a>, a benchmark of which
+  <li><a href="https://plei99.github.io/tikz-bench/" target="_blank" rel="noopener">tikz-bench</a>, a benchmark of which
   coding agents can actually write TikZ.</li>
 </ul>
 `,
@@ -73,7 +73,7 @@ I'm always open to suggestions for affordable but legitimately high-quality Sich
   <li>在关于欧洲足球的争论中稳操胜券：
   <a href="https://best-teams.lakebed.app/?lang=zh">球队</a>
   <a href="https://best-coaches.lakebed.app/?lang=zh">主教练</a></li>
-  <li><a href="https://plei99.github.io/tikz-bench/zh/">tikz-bench</a>：测试哪些编程智能体真的会写
+  <li><a href="https://plei99.github.io/tikz-bench/zh/" target="_blank" rel="noopener">tikz-bench</a>：测试哪些编程智能体真的会写
   TikZ 的基准。</li>
 </ul>
 `,

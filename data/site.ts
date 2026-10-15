@@ -98,6 +98,7 @@ export const site: Site = {
     links: [
       {
         label: "tikz-bench",
+        external: true,
         href: {
           en: "https://plei99.github.io/tikz-bench/",
           zh: "https://plei99.github.io/tikz-bench/zh/",

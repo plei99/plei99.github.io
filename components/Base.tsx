@@ -228,6 +228,8 @@ export default async function Base(
                   href={typeof link.href === "string"
                     ? link.href
                     : link.href[lang]}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noopener" : undefined}
                 >
                   {link.label}
                 </a>

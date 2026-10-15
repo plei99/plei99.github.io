@@ -38,7 +38,7 @@ export type Site = {
   };
   footer: {
     copyright: string;
-    links: { label: string; href: string | Localized }[];
+    links: { label: string; href: string | Localized; external?: true }[];
   };
 };
 

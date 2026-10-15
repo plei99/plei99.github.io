@@ -118,7 +118,12 @@ async function openPanel(url: URL, { push }: { push: boolean }) {
   if (id !== request) return;
 
   const next = doc.getElementById("panel-content");
-  if (!next || !next.children.length) {
+  // Other projects on this origin (such as tikz-bench) have their own layout.
+  if (!next) {
+    location.href = url.href;
+    return;
+  }
+  if (!next.children.length) {
     closePanel({ push });
     return;
   }
