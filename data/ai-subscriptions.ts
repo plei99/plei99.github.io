@@ -1,14 +1,14 @@
 import type { AiSubscriptions } from "./types";
 
 export const aiSubscriptions: AiSubscriptions = {
-  // September 23 / October 2 audit; Google and mainland Kimi updated October 15.
+  // September 23 / October 2 audit; Google and mainland Kimi updated October 15, Codex October 16.
   // Dollar values retain calculation precision; SubscriptionStudy derives task counts.
   // Only aggregate findings belong here, never raw logs or account information.
   copy: {
     en: {
       trigger: "How much inference do these subscriptions buy?",
       close: "Close subscription comparison",
-      date: "Last updated October 15, 2026",
+      date: "Last updated October 16, 2026",
       title: "What my AI subscriptions buy",
       intro:
         "Someone I know (if you are reading this, you know who you are) complained about how little usage they got with their AI subscription (which cost about $100/month), so I decided to try to estimate the value of various AI subscriptions from both US and Chinese providers. All assumptions and choices are based on the nature of the aforementioned conversation.",
@@ -39,7 +39,7 @@ export const aiSubscriptions: AiSubscriptions = {
     zh: {
       trigger: "这些订阅能换来多少推理用量？",
       close: "关闭订阅比较",
-      date: "更新于 2026 年 10 月 15 日",
+      date: "更新于 2026 年 10 月 16 日",
       title: "我的 AI 订阅能买到多少用量",
       intro:
         "我认识的某人（如果你正在读这段话，你自己心里清楚）抱怨自己每月约 100 美元的 AI 订阅用量太少，所以我试着估算了中美各家 AI 订阅的价值。所有假设和选择都取决于上述对话的性质。",
@@ -105,7 +105,7 @@ export const aiSubscriptions: AiSubscriptions = {
       model: "GPT-6 Astra (max)",
       price: 100,
       score: 53,
-      api: 1665.5053786182261,
+      api: 1335.7323961556795,
       cost: 3.26,
       time_seconds: 503.04,
       time_url:
@@ -117,7 +117,7 @@ export const aiSubscriptions: AiSubscriptions = {
       model: "GPT-6 Astra (xhigh)",
       price: 100,
       score: 52,
-      api: 1665.5053786182261,
+      api: 1335.7323961556795,
       cost: 2.31,
       time_seconds: 341.05,
       time_url:
@@ -130,7 +130,7 @@ export const aiSubscriptions: AiSubscriptions = {
       model: "GPT-6.1 Sol (max)",
       price: 100,
       score: 52,
-      api: 1665.5053786182261,
+      api: 1335.7323961556795,
       cost: 0.72,
       time_seconds: 731.39,
       time_url:
@@ -142,7 +142,7 @@ export const aiSubscriptions: AiSubscriptions = {
       model: "GPT-6 Luna (max)",
       price: 100,
       score: 38,
-      api: 1665.5053786182261,
+      api: 1335.7323961556795,
       cost: 0.07,
       time_seconds: 392.22,
       time_url:
