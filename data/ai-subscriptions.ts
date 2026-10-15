@@ -254,36 +254,6 @@ export const aiSubscriptions: AiSubscriptions = {
     },
     {
       en:
-        "Google AI Ultra ($100/month): I exhausted the Antigravity Gemini weekly allowance on October 15, 2026. It delivered $97.9848238 of API-equivalent inference: $52.949 from the Argon high run, $34.651 from medium, $10.259 from low, and $0.126 from small CLI calls elsewhere. The final task stopped with a weekly-quota error; its partial usage is included. All three benchmark totals, including archived attempts, matched the native conversation records exactly. $97.9848238 × (365.25 ÷ 12 ÷ 7) projects to $426.06/month at full weekly utilization, or about 214 [Gemini 4 Argon (high) AA task equivalents at $1.99/task](https://artificialanalysis.ai/models/gemini-4-argon). The weekly amount is measured through exhaustion; the monthly amount is an extrapolation.",
-      zh:
-        "Google AI Ultra（每月 $100）：我于 2026 年 10 月 15 日用尽了 Antigravity Gemini 的周额度，实际获得 $97.9848238 的 API 等值推理。其中 Argon high 测试为 $52.949，medium 为 $34.651，low 为 $10.259，其他地方的小型 CLI 调用为 $0.126。最后一个任务因周额度耗尽而停止，它已经使用的部分也计算在内。三批基准测试的用量总数（含已存档尝试）与本机会话记录完全一致。$97.9848238 ×（365.25 ÷ 12 ÷ 7）推算为每月 $426.06，假设每周都用完额度；按 [Gemini 4 Argon（high）的 AA 单任务成本 $1.99](https://artificialanalysis.ai/models/gemini-4-argon) 计算，约为 214 个 AA 任务等值。周用量已测量至额度耗尽，月用量仍是推算值。",
-    },
-    {
-      en:
-        "That exhausted Gemini week contained 1,608 model calls: 14.15M uncached input, 31.32M cached input and 6.66M output tokens, with thinking already included in output. Requests were counted once by conversation and step. This is one measured weekly allowance; future capacity can change, and five-hour limits still constrain bursts. [Gemini models share a cost-weighted pool; Claude/GPT have a separate limit](https://antigravity.google/blog/changes-to-antigravity-plans/), which is excluded here along with Google's other subscription benefits. [Current Argon Standard API prices](https://ai.google.dev/gemini-api/docs/pricing) are $2/M uncached input, $0.10/M cached input and $10/M output. These introductory prices double on December 1, 2026; the subscription estimate needs to be measured again then. AA has not published Argon's time per task, shown as “—”.",
-      zh:
-        "这次用尽的 Gemini 周额度包含 1,608 次模型调用：14.15M 未缓存输入、31.32M 缓存输入和 6.66M 输出 token，思考 token 已包含在输出中。请求按会话和步骤去重。这是一个实际测量的周额度，未来可用量可能变化，五小时限额仍会限制短时间内的大量使用。[Gemini 模型共享按成本计算的额度，Claude/GPT 另有限额](https://antigravity.google/blog/changes-to-antigravity-plans/)，这里不包含后者及 Google 订阅的其他权益。[目前 Argon Standard API 的价格](https://ai.google.dev/gemini-api/docs/pricing)为每百万未缓存输入 token $2、缓存输入 $0.10、输出 $10。这些初期价格将于 2026 年 12 月 1 日翻倍，届时需要重新测量订阅价值。AA 尚未公布 Argon 的单任务用时，表中以“—”表示。",
-    },
-    {
-      en:
-        "I bought a mainland Kimi subscription to measure its monthly limit directly. It started at 0% used on October 12, 2026; by October 15, $281.705544 of K3 API-equivalent inference had consumed 58.38% of the monthly pool. The max run accounted for $173.67 and the high run for $108.03 across 5,816 model calls, including retries and archived attempts. I matched the benchmark logs with native CLI records, removed duplicate copies, and selected requests by their actual timestamps to exclude the older billing cycle. $281.705544 ÷ 0.5838 gives $482.54/month, or about 241 AA K3 (max) task equivalents at $2/task.",
-      zh:
-        "我买了一个中国大陆版 Kimi 订阅，直接测量它的月度限额。2026 年 10 月 12 日开始时已用额度为 0%；截至 10 月 15 日，$281.705544 的 K3 API 等值推理消耗了月度额度的 58.38%。其中 max 测试为 $173.67，high 测试为 $108.03，共 5,816 次模型调用，包含重试和已存档尝试。我将基准测试日志与本机 CLI 记录核对，去除重复副本，并按请求的实际时间排除上一计费周期的用量。$281.705544 ÷ 0.5838 得到每月 $482.54，按 AA K3（max）每任务 $2 计算，约为 241 个 AA 任务等值。",
-    },
-    {
-      en:
-        "The Kimi calls used 12.86M uncached input, 403.00M cached input and 8.15M output tokens. At [K3's international API prices](https://platform.kimi.ai/docs/pricing/chat) of $3/M uncached input, $0.30/M cached input and $15/M output, the full monthly allowance projects to about 22M uncached input, 690M cached input and 14M output tokens at the same mix. [Mainland API prices](https://platform.kimi.com/docs/pricing/chat) of ¥20/M, ¥2/M and ¥100/M put the same allowance near ¥3,200; that uses the published yuan rates rather than a currency conversion. No additional current-cycle Kimi calls were found in the host CLI, Hermes, pi or OpenCode logs.",
-      zh:
-        "这些 Kimi 调用使用了 12.86M 未缓存输入、403.00M 缓存输入和 8.15M 输出 token。按 [K3 国际 API 价格](https://platform.kimi.ai/docs/pricing/chat)，每百万未缓存输入 $3、缓存输入 $0.30、输出 $15，同样的构成下，完整月度额度约能提供 22M 未缓存输入、690M 缓存输入和 14M 输出 token。[中国大陆 API 价格](https://platform.kimi.com/docs/pricing/chat)分别为每百万 ¥20、¥2 和 ¥100，对应约 ¥3,200；这里使用公布的人民币价格，并非汇率换算。在本机 CLI、Hermes、pi 和 OpenCode 日志中，没有找到这个周期内的其他 Kimi 调用。",
-    },
-    {
-      en:
-        "The Kimi max and high batches separately imply monthly API values of $458 and $527, so I use about $480 as the working estimate, with $460–530 as an observed workload range. Token capacity depends on the cache and output mix; this range describes workload variation rather than a statistical confidence interval. [New mainland plans have no weekly quota, retain a rolling five-hour limit, and share the monthly pool across membership features](https://www.kimi.com/help/membership/membership-update-rules). The monthly allowance is extrapolated directly, without a weekly-to-monthly multiplier or an assumption that it matches the overseas plan. Cloud-only activity without local records could not be independently checked.",
-      zh:
-        "Kimi 的 max 与 high 两批测试分别推算出每月 $458 和 $527 的 API 等值，因此这里采用约 $480 的估计，并将 $460–530 作为观察到的用量构成变化范围。可用 token 数取决于缓存和输出的比例；这个范围反映用法差异，并非统计置信区间。[中国大陆新套餐没有周额度限制，保留滚动五小时限额，且各项会员功能共享月度额度](https://www.kimi.com/help/membership/membership-update-rules)。这里直接推算月度总量，没有把周额度换算成月额度，也没有假设它与海外版相同。没有本地记录的纯云端用量无法独立核查。",
-    },
-    {
-      en:
         "My understanding is that it is not actually a good idea to run Astra or any Anthropic model on max, so I put in xhigh for Astra and Opus 5.5. Also, GLM-5.3 Flash benches pretty close to GLM-5.3, so it is also included. Otherwise, I included only the highest-scoring model for each subscription.",
       zh:
         "据我了解，用 max 跑 Astra 或任何 Anthropic 模型其实都不是好主意，所以我给 Astra 和 Opus 5.5 加上了 xhigh。另外，GLM-5.3 Flash 的跑分与 GLM-5.3 相当接近，所以也列了进来。除此之外，每个订阅只列出了得分最高的模型。",
