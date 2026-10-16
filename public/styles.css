@@ -56,43 +56,17 @@
 }
 
 /* Sans pairs with sans until told otherwise: a Chinese sans with no Latin
-   choice brings Fira Sans and Fira Math, and a Latin sans with no Chinese
-   choice brings Source Han Sans. Explicit choices ("pagella", "serif") are
+   choice brings Lato and Lete Sans Math, and Lato with no Chinese choice
+   brings Source Han Sans. Explicit choices ("pagella", "serif") are
    attributes too, so they win over these. js/theme.js mirrors these lists. */
 :root[data-cjk="sans"]:not([data-latin]),
 :root[data-cjk="rounded"]:not([data-latin]) {
-  --latin: "Fira Sans";
-  --latin-math: "Fira Math";
+  --latin: Lato;
+  --latin-math: "Lete Sans Math";
 }
 
-:root[data-latin="fira"]:not([data-cjk]),
-:root[data-latin="new-cm-sans"]:not([data-cjk]),
 :root[data-latin="lato"]:not([data-cjk]) {
   --cjk: "Source Han Sans SC";
-}
-
-:root[data-latin="bonum"] {
-  --latin: "TeX Gyre Bonum", "Bookman Old Style", "URW Bookman";
-  --latin-math: "TeX Gyre Bonum Math";
-}
-
-:root[data-latin="latin-modern"] {
-  --latin: "Latin Modern Roman", "Computer Modern";
-  --latin-math: "Latin Modern Math";
-}
-
-:root[data-latin="libertinus"] {
-  --latin: "Libertinus Serif", "Linux Libertine O";
-  --latin-math: "Libertinus Math";
-}
-
-:root[data-latin="euler"] {
-  --latin-math: "Euler Math";
-}
-
-:root[data-latin="schola"] {
-  --latin: "TeX Gyre Schola", "Century Schoolbook", "New Century Schoolbook";
-  --latin-math: "TeX Gyre Schola Math";
 }
 
 :root[data-latin="garamond"] {
@@ -100,26 +74,9 @@
   --latin-math: "Garamond Math";
 }
 
-:root[data-latin="fira"] {
-  --latin: "Fira Sans";
-  --latin-math: "Fira Math";
-}
-
-:root[data-latin="new-cm-sans"] {
-  --latin: "New CM Sans", "Computer Modern Sans";
-  --latin-math: "New CM Sans Math";
-}
-
 :root[data-latin="lato"] {
   --latin: Lato;
   --latin-math: "Lete Sans Math";
-}
-
-/* Hundar is at version 0.001 and lacks accented letters, so Pagella fills in
-   whatever it does not yet draw. It has no math font of its own yet. */
-:root[data-latin="hundar"] {
-  --latin: Hundar, "TeX Gyre Pagella";
-  --latin-math: "Asana Math";
 }
 
 *,

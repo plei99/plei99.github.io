@@ -96,14 +96,13 @@ content swaps with `pushState`, so the figure never reloads. Without JavaScript
 the labels and the close button are plain links.
 
 The look is a page from the PDF notes: text in TeX Gyre Pagella (a free Palatino
-clone) with mathematics in Asana Math, or by a picker in the masthead one of
-nine other pairings (Pagella with Euler, Bonum, Schola, Latin Modern,
-Libertinus, Garamond, Fira Sans, New CM Sans, Lato), each with its own math
-font; code in Iosevka; Chinese in Source Han Serif SC (or Source Han Sans,
-Resource Han Rounded or LXGW WenKai, by a picker on the Chinese pages; sans
-pairs with sans by default), the figure's outlines in the text colour, and one
-accent for whatever can be followed. Inline mathematics is MathML; the figure's
-labels are Unicode mathematical italics set in Asana Math.
+clone) with mathematics in Asana Math, or by a picker in the masthead EB
+Garamond with Garamond Math or Lato with Lete Sans Math; code in Iosevka;
+Chinese in Source Han Serif SC (or Source Han Sans, Resource Han Rounded or LXGW
+WenKai, by a picker on the Chinese pages; sans pairs with sans by default), the
+figure's outlines in the text colour, and one accent for whatever can be
+followed. Inline mathematics is MathML; the figure's labels are Unicode
+mathematical italics set in Asana Math.
 
 Colours come from terminal colour schemes, chosen by name from one picker in the
 masthead: Modus, Ayu, Solarized, Rosé Pine, Catppuccin, Monokai, Gruvbox, Nord,

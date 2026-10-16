@@ -27,44 +27,6 @@ By Apostolos Syropoulos, version 000.962, from
 subsetted, because a subset would be a modified version and could not keep the
 reserved name.
 
-## TeX Gyre Bonum and TeX Gyre Bonum Math
-
-A free Bookman clone, by the same TeX Gyre project as Pagella, text version
-2.004 and math version 1.005, from <https://ctan.org/pkg/tex-gyre-bonum> and
-<https://ctan.org/pkg/tex-gyre-math>. Licence: GUST Font License, as for
-Pagella. The `tex-gyre-bonum-*.woff2` files are **modified**: converted to WOFF2
-and subsetted as described for Pagella; the math font keeps its MATH table and
-the mathematical alphanumerics, operators and arrows.
-
-## Latin Modern Roman and Latin Modern Math
-
-The OpenType Computer Modern, by the same project, text version 2.004 (the 10 pt
-design) and math version 1.959, from <https://ctan.org/pkg/lm> and
-<https://ctan.org/pkg/lm-math>. Licence: GUST Font License. The
-`latin-modern-*.woff2` files are **modified** in the same way.
-
-## Libertinus Serif and Libertinus Math
-
-By the Libertinus Project (Khaled Hosny, Caleb Maclennan and others), version
-7.051, from <https://github.com/alerque/libertinus>. Licence: SIL Open Font
-License 1.1, in `OFL-Libertinus.txt`. Its Reserved Font Names are "Linux
-Libertine", "Biolinum" and "STIX Fonts", none of which these files use, so the
-`libertinus-*.woff2` subsets keep the Libertinus name.
-
-## TeX Gyre Schola and TeX Gyre Schola Math
-
-A free Century Schoolbook clone by the TeX Gyre project, text version 2.005 and
-math version 1.533, from <https://ctan.org/pkg/tex-gyre-schola> and
-<https://ctan.org/pkg/tex-gyre-math>. Licence: GUST Font License. The
-`tex-gyre-schola-*.woff2` files are **modified** as described for Pagella.
-
-## Euler Math (with Pagella)
-
-Hermann Zapf's Euler as an OpenType math font, by Khaled Hosny and Daniel Flipo
-from the AMS originals, version 0.75, from <https://ctan.org/pkg/euler-math>.
-Licence: SIL Open Font License 1.1, no reserved names, in `OFL-Euler-Math.txt`.
-`euler-math.woff2` is a subset.
-
 ## EB Garamond and Garamond-Math
 
 EB Garamond by Georg Duffner and Octavio Pardo, version 1.003 (the variable
@@ -75,31 +37,6 @@ Both SIL Open Font License 1.1 with no reserved names, in `OFL-EB-Garamond.txt`
 and `OFL-Garamond-Math.txt`. The `eb-garamond-*.woff2` and `garamond-math.woff2`
 files are subsets; the text files keep the weight axis, so bold is the font's
 own.
-
-## Hundar
-
-By Emily de Oliveira Santos (The EPL Type Foundry), version 0.001, from
-<https://github.com/The-EPL-Type-Foundry/Hundar>. Licence: SIL Open Font License
-1.1 with no reserved names, in `OFL-Hundar.txt`. Only a Regular exists so far,
-so italic and bold are synthesized by the browser, and the font does not yet
-draw accented letters, which fall back to Pagella. Hundar's own math font is
-still to come; until then it is paired with Asana Math. `hundar-regular.woff2`
-is cut by `scripts/subset-latin.py`.
-
-## Fira Sans and Fira Math
-
-Fira Sans by Mozilla and Telefónica (Carrois Type Design), version 4.203, from
-Google Fonts; Fira Math by Xiangdong Zeng, version 0.3.4, from
-<https://ctan.org/pkg/firamath>. Both SIL Open Font License 1.1 with no reserved
-names, in `OFL-Fira-Sans.txt` and `OFL-Fira-Math.txt`. The `fira-*.woff2` files
-are subsets.
-
-## New Computer Modern Sans and Sans Math
-
-By Antonis Tsolomitis, text version 8.1.1 (the 10 pt design; the "Oblique"
-styles serve as italic) and math version 4.0, from
-<https://ctan.org/pkg/newcomputermodern>. Licence: GUST Font License. The
-`new-cm-sans-*.woff2` files are **modified** as described for Pagella.
 
 ## Lato and Lete Sans Math
 
@@ -145,7 +82,7 @@ Serif. Resource Han Rounded is Cyano Hao's rounded derivative of Source Han
 Sans, version 0.990, from <https://github.com/CyanoHao/Resource-Han-Rounded>
 (the CN build), SIL Open Font License 1.1 with no reserved names, in
 `OFL-Resource-Han-Rounded.txt`; the `resource-han-rounded-sc-*.woff2` files are
-subsets. Choosing either pairs the Latin text with Fira Sans and Fira Math
+subsets. Choosing either pairs the Latin text with Lato and Lete Sans Math
 unless a Latin face has been chosen explicitly, and choosing a Latin sans pairs
 the Chinese with Source Han Sans in the same way.
 
