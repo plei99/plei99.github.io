@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Route · Patrick Lei</title>
+<style>
+/* Candidate 2: Route. One long page read top to bottom. A schematic route
+   from Amherst to Shanghai is pinned beside the text and draws itself as the
+   chapters pass; the marker sits at the stop you are reading about. The
+   structure is the biography; everything else hangs off a stop. */
+
+@font-face { font-family: "EB Garamond"; font-weight: 400 700; src: url("../public/fonts/eb-garamond-roman.woff2") format("woff2"); }
+@font-face { font-family: "EB Garamond"; font-style: italic; font-weight: 400 700; src: url("../public/fonts/eb-garamond-italic.woff2") format("woff2"); }
+
+:root {
+  --paper: #e7ecef;      /* survey-map blue grey */
+  --paper-deep: #d9e0e5;
+  --ink: #15232b;
+  --ink-soft: #4a5a64;
+  --route: #1e4fd8;      /* cobalt */
+  --route-faint: #b7c6ee;
+  --stop: #15232b;
+  --serif: "EB Garamond", Garamond, "Iowan Old Style", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 1.25rem/1.5 var(--serif);
+  font-variant-numeric: oldstyle-nums;
+}
+a { color: var(--route); text-decoration-thickness: .06em; text-underline-offset: .15em; }
+a:hover { color: var(--ink); }
+:focus-visible { outline: 2px solid var(--route); outline-offset: 3px; }
+
+.frame {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  max-width: 84rem;
+  margin: 0 auto;
+}
+
+/* ---- The pinned map ---- */
+.map-col { position: relative; }
+.map {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 2rem 1rem 2rem 3rem;
+}
+.map header { display: flex; justify-content: space-between; align-items: baseline; }
+.map .brand { font-size: 1.1rem; margin: 0; }
+.map .brand a { color: inherit; text-decoration: none; }
+.map .brand small { display: block; color: var(--ink-soft); font-size: .95rem; font-style: italic; }
+.stops { list-style: none; margin: 0; padding: 0; font-size: 1rem; text-align: right; }
+.stops a { color: var(--ink-soft); text-decoration: none; }
+.stops li[aria-current] a { color: var(--ink); font-weight: 600; }
+.stops a:hover { color: var(--route); }
+.map > * { min-height: 0; }
+.map svg { width: 100%; height: 100%; min-height: 0; overflow: visible; }
+.map figcaption { color: var(--ink-soft); font-size: 1rem; font-style: italic; }
+
+.track { fill: none; stroke: var(--route-faint); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.drawn { fill: none; stroke: var(--route); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.stop circle { fill: var(--paper); stroke: var(--stop); stroke-width: 2.5; }
+.stop.passed circle { fill: var(--stop); }
+.stop text { font: 400 15px var(--serif); fill: var(--ink-soft); }
+.stop.here text { fill: var(--ink); font-weight: 600; }
+.stop .yr { font-size: 12px; fill: var(--ink-soft); font-style: italic; }
+.marker { fill: var(--route); stroke: var(--paper); stroke-width: 3; }
+.compass { font: italic 13px var(--serif); fill: var(--ink-soft); }
+.grid line { stroke: var(--paper-deep); stroke-width: 1; }
+
+/* ---- The chapters ---- */
+.text-col { padding: 0 3rem 0 2rem; }
+.chapter {
+  min-height: 100vh;
+  display: grid;
+  align-content: center;
+  padding: 6rem 0;
+  max-width: 34rem;
+}
+.chapter h2 {
+  margin: 0 0 1.5rem;
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  line-height: .98;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+.chapter h2 em { font-weight: 400; color: var(--ink-soft); }
+.chapter .dateline { margin: 0 0 .6rem; color: var(--ink-soft); font-style: italic; font-size: 1.05rem; }
+.chapter p { margin: 0 0 1rem; }
+.chapter p + p { text-indent: 1.6em; margin-top: -1rem; }
+.chapter ul { margin: 0 0 1rem; padding-left: 1.2rem; }
+.chapter li { margin-bottom: .35rem; }
+.chapter li small { color: var(--ink-soft); }
+.chapter h3 { margin: 2rem 0 .5rem; font-size: 1.2rem; font-weight: 600; }
+.chapter .portrait { width: 7rem; height: 7rem; border-radius: 50%; float: right; margin: .3rem 0 .5rem 1.5rem; shape-outside: circle(); }
+
+.end {
+  padding: 4rem 0 6rem;
+  max-width: 34rem;
+  border-top: 1px solid var(--route-faint);
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+}
+.end dl { display: grid; grid-template-columns: max-content 1fr; gap: .25rem 1.5rem; margin: 1rem 0; }
+.end dt { font-style: italic; }
+.end dd { margin: 0; }
+
+@media (max-width: 860px) {
+  .frame { grid-template-columns: 1fr; }
+  .map { height: auto; position: sticky; top: 0; padding: 1rem 1rem .5rem; background: var(--paper); z-index: 1; grid-template-rows: auto auto; }
+  .map svg { height: 240px; width: auto; justify-self: center; }
+  .map figcaption, .stops { display: none; }
+  .text-col { padding: 0 1.25rem; }
+  .chapter { min-height: 0; padding: 4rem 0; }
+  .chapter h2 { font-size: 2.4rem; }
+  body { font-size: 1.1rem; }
+}
+</style>
+</head>
+<body>
+<div class="frame">
+  <aside class="map-col">
+    <figure class="map">
+      <header>
+        <p class="brand"><a href="#top">Patrick Lei</a><small>Algebraic geometer</small></p>
+        <ol class="stops" id="stops">
+          <li><a href="#amherst">Amherst</a></li>
+          <li><a href="#new-york">New York</a></li>
+          <li><a href="#boston">Boston</a></li>
+          <li><a href="#shanghai">Shanghai</a></li>
+          <li><a href="#elsewhere">Elsewhere</a></li>
+        </ol>
+      </header>
+      <svg viewBox="0 0 400 520" role="img" aria-label="A route from Amherst through New York and Boston to Shanghai">
+        <g class="grid" aria-hidden="true">
+          <line x1="40" y1="40" x2="40" y2="480"/><line x1="130" y1="40" x2="130" y2="480"/><line x1="220" y1="40" x2="220" y2="480"/><line x1="310" y1="40" x2="310" y2="480"/>
+          <line x1="40" y1="130" x2="360" y2="130"/><line x1="40" y1="220" x2="360" y2="220"/><line x1="40" y1="310" x2="360" y2="310"/><line x1="40" y1="400" x2="360" y2="400"/>
+        </g>
+        <text class="compass" x="356" y="30" text-anchor="end">N ↑</text>
+        <path class="track" id="track" d="M 70 90 C 60 160, 110 170, 120 210 C 132 255, 90 265, 110 300 C 128 332, 240 300, 260 340 C 282 384, 180 420, 230 450 C 262 470, 320 460, 330 470"/>
+        <path class="drawn" id="drawn" d="M 70 90 C 60 160, 110 170, 120 210 C 132 255, 90 265, 110 300 C 128 332, 240 300, 260 340 C 282 384, 180 420, 230 450 C 262 470, 320 460, 330 470" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+        <g class="stop" data-stop="amherst"><circle cx="70" cy="90" r="6"/><text x="86" y="86">Amherst</text><text class="yr" x="86" y="103">UMass</text></g>
+        <g class="stop" data-stop="new-york"><circle cx="120" cy="210" r="6"/><text x="136" y="206">New York</text><text class="yr" x="136" y="223">Columbia</text></g>
+        <g class="stop" data-stop="boston"><circle cx="110" cy="300" r="6"/><text x="126" y="296">Boston</text><text class="yr" x="126" y="313">Boston College</text></g>
+        <g class="stop" data-stop="shanghai"><circle cx="260" cy="340" r="6"/><text x="276" y="336">Shanghai</text><text class="yr" x="276" y="353">Fudan, SCMS</text></g>
+        <g class="stop" data-stop="elsewhere"><circle cx="330" cy="470" r="6"/><text x="326" y="500" text-anchor="end">Elsewhere</text></g>
+        <circle class="marker" id="marker" cx="70" cy="90" r="7"/>
+      </svg>
+      <figcaption>Scroll, and the route follows.</figcaption>
+    </figure>
+  </aside>
+
+  <main class="text-col" id="top">
+    <section class="chapter" id="amherst" data-t="0">
+      <p class="dateline">Western Massachusetts</p>
+      <h2>I started in <em>Amherst.</em></h2>
+      <img class="portrait" src="../public/images/me.webp" alt="Patrick Lei" width="112" height="112">
+      <p>At <a href="https://www.umass.edu/mathematics-statistics/">UMass Amherst</a> I was advised by <a href="https://paulhacking.github.io/">Paul Hacking</a>, and also majored in <a href="https://www.cics.umass.edu/">computer science</a>. Both habits stuck: I study geometric and computational aspects of enumerative geometry, and I still write a lot of code.</p>
+      <p>If you don't know me from Amherst, we may have met at a conference or a seminar.</p>
+    </section>
+
+    <section class="chapter" id="new-york" data-t="0.3">
+      <p class="dateline">Columbia University</p>
+      <h2>A PhD in <em>New York,</em></h2>
+      <p>advised by <a href="https://www.math.columbia.edu/~ccliu/">Melissa Liu</a>. My research is in algebraic geometry, particularly higher-genus Gromov–Witten theory. For an introduction to some of its themes, see <a href="https://plei99.github.io/notes/higher-genus-gw/">these notes</a> or <a href="https://scgp.stonybrook.edu/archives/42649">this SCGP program</a>.</p>
+      <h3>Seminars I ran there</h3>
+      <ul>
+        <li><a href="#">Geometric invariant theory</a> <small>autumn 2020</small></li>
+        <li><a href="#">Intersection theory</a> <small>spring 2021</small></li>
+        <li><a href="#">Category O</a> <small>autumn 2021</small></li>
+        <li><a href="#">Geometric representation theory</a> <small>spring 2022, D-modules and localization</small></li>
+      </ul>
+    </section>
+
+    <section class="chapter" id="boston" data-t="0.52">
+      <p class="dateline">Boston College</p>
+      <h2>Then a postdoc in <em>Boston,</em></h2>
+      <p>as a Visiting Assistant Professor in mathematics, mentored by <a href="https://sites.google.com/bc.edu/qile-chen/">Qile Chen</a>.</p>
+      <h3>Seminars</h3>
+      <ul>
+        <li><a href="#">Toric varieties</a> <small>undergraduate, autumn 2023</small></li>
+        <li><a href="#">Quantum information</a> <small>undergraduate, spring 2024</small></li>
+        <li><a href="#">The blowup formula</a> <small>in Gromov–Witten theory, spring 2024</small></li>
+        <li><a href="#">Calculations</a> <small>in enumerative geometry, spring 2025</small></li>
+      </ul>
+      <p>Along the way, my live-TeXed <a href="https://plei99.github.io/notes/">notes</a> grew into a site of their own, with HTML versions that an undergraduate me would have wanted.</p>
+    </section>
+
+    <section class="chapter" id="shanghai" data-t="0.74">
+      <p class="dateline">Shanghai Center for Mathematical Sciences</p>
+      <h2>Now, <em>Shanghai.</em></h2>
+      <p>I am a postdoc at the <a href="https://scms.fudan.edu.cn/">Shanghai Center for Mathematical Sciences</a> at Fudan University.</p>
+      <h3>These days</h3>
+      <ul>
+        <li>K-theory, allegedly</li>
+        <li>Am I a good moduli space?</li>
+        <li>Running the Shanghai Marathon</li>
+        <li>broke 3 on the first try</li>
+      </ul>
+      <p>Besides doing math, I also enjoy running and playing the piano, and learning about the historical evolution of Chinese dialects. I'm always open to suggestions for affordable but legitimately high-quality Sichuan cuisine.</p>
+    </section>
+
+    <section class="chapter" id="elsewhere" data-t="1">
+      <p class="dateline">And in between</p>
+      <h2>Elsewhere.</h2>
+      <p>Places I've been: China, Japan, England, Canada and the United States. The full site has a globe you can spin.</p>
+      <h3>What I use</h3>
+      <p>A 14 inch MacBook Pro, neovim, hyprland on Linux, Zathura, and lately Codex and Claude Code for the TikZ I never learned to write by hand. On the road: Saucony Endorphin Pro 4 and Speed 5, Adidas Evo SL, Asics Metaspeed Edge Tokyo, Maurten gels, a Garmin Forerunner 970.</p>
+      <h3>Arguments</h3>
+      <p>Win all of yours about European soccer: <a href="https://best-teams.lakebed.app/">teams</a>, <a href="https://best-coaches.lakebed.app/">coaches</a>. And <a href="https://plei99.github.io/tikz-bench/">tikz-bench</a> settles which coding agents can actually write TikZ.</p>
+    </section>
+
+    <footer class="end">
+      <dl>
+        <dt>email</dt><dd><a href="mailto:plei@fudan.edu.cn">plei@fudan.edu.cn</a></dd>
+        <dt>github</dt><dd><a href="https://github.com/plei99">gh/plei99</a></dd>
+        <dt>arXiv</dt><dd><a href="https://arxiv.org/a/0000-0003-1977-1596">papers</a></dd>
+        <dt>CV</dt><dd><a href="https://github.com/plei99/cv/releases/latest/download/Patrick_Lei_CV.pdf">PDF</a></dd>
+      </dl>
+      <p>© 2026 Patrick Lei</p>
+    </footer>
+  </main>
+</div>
+
+<script>
+(() => {
+  const track = document.getElementById("track");
+  const drawn = document.getElementById("drawn");
+  const marker = document.getElementById("marker");
+  const chapters = [...document.querySelectorAll(".chapter")];
+  const stopEls = [...document.querySelectorAll(".stop")];
+  const navItems = [...document.querySelectorAll("#stops li")];
+  const total = track.getTotalLength();
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Progress 0..1 along the route is interpolated between chapters: each
+  // chapter owns a parameter t (data-t) and the scroll position within the
+  // chapter column maps linearly between consecutive stops.
+  function progress() {
+    const mid = innerHeight * 0.5;
+    for (let i = 0; i < chapters.length; i++) {
+      const r = chapters[i].getBoundingClientRect();
+      const next = chapters[i + 1];
+      if (!next) return 1;
+      const nr = next.getBoundingClientRect();
+      const a = r.top + r.height / 2, b = nr.top + nr.height / 2;
+      if (mid < a) return i === 0 ? 0 : Number(chapters[i].dataset.t);
+      if (mid >= a && mid < b) {
+        const u = (mid - a) / (b - a);
+        const ta = Number(chapters[i].dataset.t), tb = Number(next.dataset.t);
+        return ta + (tb - ta) * u;
+      }
+    }
+    return 1;
+  }
+
+  let current = -1;
+  function paint() {
+    const t = Math.min(1, Math.max(0, progress()));
+    drawn.style.strokeDashoffset = String(1 - t);
+    const p = track.getPointAtLength(t * total);
+    marker.setAttribute("cx", p.x.toFixed(1));
+    marker.setAttribute("cy", p.y.toFixed(1));
+    // The chapter nearest the middle of the window is the one we're at.
+    const mid = innerHeight * 0.5;
+    let best = 0, bestD = Infinity;
+    chapters.forEach((c, i) => {
+      const r = c.getBoundingClientRect();
+      const d = Math.abs(r.top + r.height / 2 - mid);
+      if (d < bestD) { bestD = d; best = i; }
+    });
+    if (best !== current) {
+      current = best;
+      stopEls.forEach((s, i) => {
+        s.classList.toggle("here", i === best);
+        s.classList.toggle("passed", Number(chapters[i].dataset.t) <= t + 1e-6 && i <= best);
+      });
+      navItems.forEach((li, i) => {
+        if (i === best) li.setAttribute("aria-current", "location"); else li.removeAttribute("aria-current");
+      });
+    }
+  }
+  let raf = 0;
+  const onScroll = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; paint(); }); };
+  addEventListener("scroll", onScroll, { passive: true });
+  addEventListener("resize", onScroll);
+  if (!reduce) drawn.style.transition = "stroke-dashoffset .15s linear";
+  paint();
+})();
+</script>
+</body>
+</html>
