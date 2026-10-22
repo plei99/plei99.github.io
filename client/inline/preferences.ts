@@ -21,7 +21,11 @@ function pref(key: string) {
   const match = document.cookie.match(
     new RegExp("(?:^|; )" + key + "=([^;]*)"),
   );
-  return match ? decodeURIComponent(match[1]!) : "";
+  try {
+    return match ? decodeURIComponent(match[1]!) : "";
+  } catch {
+    return "";
+  }
 }
 
 const root = document.documentElement;

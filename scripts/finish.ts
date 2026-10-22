@@ -12,6 +12,7 @@
 import { cp, rename, rm, rmdir } from "node:fs/promises";
 import path from "node:path";
 import { allThemes, SITE_URL, type Theme } from "../lib/site";
+import { scriptHash, securePage } from "../lib/security";
 
 const OUT = "dist";
 const rev = Date.now().toString(36);
@@ -124,12 +125,19 @@ await cp("public", OUT, { recursive: true });
 // pages load the same modules at the same URLs as before: client/panel.ts
 // becomes js/panel.js. client/inline/ is built into the pages instead.
 const transpiler = new Bun.Transpiler({ loader: "ts", target: "browser" });
+const scripts = new Map<string, string>();
 for (const file of new Bun.Glob("*.ts").scanSync("client")) {
   if (file.endsWith(".d.ts")) continue;
   const code = transpiler.transformSync(
     await Bun.file(`client/${file}`).text(),
   );
-  await Bun.write(`${OUT}/js/${file.replace(/\.ts$/, ".js")}`, code);
+  const url = `/js/${file.replace(/\.ts$/, ".js")}`;
+  await Bun.write(`${OUT}${url}`, code);
+  scripts.set(url, scriptHash(code));
+}
+for (const file of new Bun.Glob("**/*.html").scanSync(OUT)) {
+  const page = `${OUT}/${file}`;
+  await Bun.write(page, securePage(await Bun.file(page).text(), scripts));
 }
 await Bun.write(`${OUT}/themes.css`, themesCss());
 await Bun.write(

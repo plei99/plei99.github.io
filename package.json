@@ -5,7 +5,7 @@
   "scripts": {
     "build": "rm -rf dist && bun build --app && bun scripts/finish.ts",
     "dev": "bun scripts/serve.ts",
-    "check": "dprint check && oxlint && bun check && bun check -p client && bun scripts/check-cjk-coverage.ts"
+    "check": "dprint check && oxlint && bun --check && bun --cwd client --check && bun scripts/check-cjk-coverage.ts && bun test"
   },
   "dependencies": {
     "react": "^0.0.0-experimental-b618bbb4-20261007",

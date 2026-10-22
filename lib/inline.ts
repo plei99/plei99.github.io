@@ -31,5 +31,7 @@ async function build(name: string, define: Record<string, unknown>) {
       `Building client/inline/${name}.ts failed`,
     );
   }
-  return (await result.outputs[0]!.text()).trim();
+  // Escape after bundling: the compiler may turn Unicode escapes back into
+  // literal '<'. A closing HTML tag in a constant must stay inside the script.
+  return (await result.outputs[0]!.text()).trim().replaceAll("</", "<\\/");
 }

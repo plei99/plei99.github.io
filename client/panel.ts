@@ -13,9 +13,19 @@ const home = document.body.dataset.home ?? "/";
 const homeTitle = document.body.dataset.homeTitle ?? "";
 const parser = new DOMParser();
 let request = 0;
+let activation = 0;
 
 function isHome(url: URL) {
   return url.pathname === "/" || url.pathname === "/zh/";
+}
+
+// Other GitHub Pages projects share this origin. Their HTML must be opened as
+// a new document, never transplanted into this site's trusted script context.
+function isPanelPage(url: URL) {
+  return url.origin === location.origin && (
+    /^\/(en|zh)\/(about|now|travel|uses)\.html$/.test(url.pathname) ||
+    /^\/(?:zh\/)?seminars\/(?:[a-z0-9-]+\/)?$/.test(url.pathname)
+  );
 }
 
 // A link opens in the panel when it points at another HTML page of this site.
@@ -26,9 +36,7 @@ function panelTarget(link: Element) {
   if (link.hasAttribute("data-no-panel")) return null;
   const url = new URL(link.getAttribute("href") ?? "", location.href);
   if (url.origin !== location.origin) return null;
-  // The notes are their own site (plei99/notes), published at /notes/.
-  if (url.pathname.startsWith("/notes/")) return null;
-  if (!/(\/|\.html)$/.test(url.pathname)) return null;
+  if (!isHome(url) && !isPanelPage(url)) return null;
   if (url.pathname === location.pathname && url.hash) return null;
   return url;
 }
@@ -66,13 +74,17 @@ function setLanguageLinks(doc: Document | null) {
   current.hreflang = toEnglish ? "en" : "zh-Hans";
 }
 
-// Module scripts only run once per URL, so a page script (the globe) is
-// re-imported under a fresh query string each time its panel opens.
+// Module scripts only run once per URL. Reload the two known enhancements
+// when their panel opens, without treating script URLs in fetched HTML as code.
 function runScripts() {
-  for (const script of content.querySelectorAll("script[src]")) {
-    const src = script.getAttribute("src")!;
-    import(`${src}${src.includes("?") ? "&" : "?"}open=${Date.now()}`);
-  }
+  const section = content.dataset.section;
+  if (section !== "travel" && section !== "uses") return;
+  const src = new URL(
+    section === "travel" ? "./globe.js" : "./uses.js",
+    import.meta.url,
+  );
+  src.searchParams.set("open", String(++activation));
+  import(src.href);
 }
 
 function show() {
@@ -105,11 +117,21 @@ function closePanel({ push }: { push: boolean }) {
 }
 
 async function openPanel(url: URL, { push }: { push: boolean }) {
+  if (!isPanelPage(url)) {
+    location.href = url.href;
+    return;
+  }
   const id = ++request;
   let doc: Document;
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      mode: "same-origin",
+      redirect: "error",
+    });
     if (!response.ok) throw new Error(response.statusText);
+    if (!response.headers.get("content-type")?.startsWith("text/html")) {
+      throw new Error("Panel response is not HTML");
+    }
     doc = parser.parseFromString(await response.text(), "text/html");
   } catch {
     location.href = url.href;
@@ -129,6 +151,7 @@ async function openPanel(url: URL, { push }: { push: boolean }) {
   }
 
   document.dispatchEvent(new Event("panel:close"));
+  for (const script of next.querySelectorAll("script")) script.remove();
   content.replaceChildren(...next.childNodes);
   content.dataset.section = next.dataset.section;
   document.title = next.dataset.title ?? homeTitle;

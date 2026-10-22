@@ -17,7 +17,7 @@ call `bun` again, then run `bun install`.
 ```sh
 bun run dev     # build, serve dist/ at http://localhost:3000, rebuild on save
 bun run build   # bun build --app, then scripts/finish.ts; writes dist/
-bun run check   # dprint check, oxlint, bun check, CJK font coverage
+bun run check   # formatting, lint, types, CJK font coverage, security tests
 ```
 
 ## Layout
@@ -35,6 +35,7 @@ components/
 lib/
   site.ts               Data, Markdown, dates, theme pairs, the seminar list
   inline.ts             Builds client/inline/*.ts into the scripts inlined in <head>
+  security.ts           Hash-based browser policy and integrity-checked module loaders
 data/
   types.ts              The shape of everything below; both languages are required
   site.ts               Name, the page map the figure links to, contact, footer
@@ -73,6 +74,28 @@ timing coefficients and defaults in that data file, weighting credit consumption
 before inverting for capacity. The comparison opens as a second native dialog
 over the Uses panel and has its own address, `uses.html#ai-subscriptions`.
 Without JavaScript, its `details` element expands inline.
+
+## Browser security
+
+`scripts/finish.ts` puts a
+[Content Security Policy](https://web.dev/articles/strict-csp) at the start of
+every generated page's head, including redirects and 404. Only hashed inline
+scripts can start JavaScript. Small hashed loaders wait for the document to be
+ready, then load the known module entries with Subresource Integrity; their
+imports are allowed by `strict-dynamic`. The policy blocks inline event
+handlers, `javascript:` URLs, `eval`, embedded documents, form submissions, and
+unapproved resource requests. Hashes and integrity values are regenerated with
+each build; no runtime CDN is needed.
+
+The panel loader accepts only this site's page routes, refuses redirected or
+non-HTML fetch responses, removes fetched script elements, and loads the Travel
+and Uses enhancements from fixed module URLs. A new interactive panel needs an
+explicit route and module entry in `client/panel.ts`. Markdown and data files
+remain trusted repository content, not an interface for untrusted HTML.
+
+These protections cover this site's documents. Other projects under
+`plei99.github.io` still share the browser origin and its storage; apps that
+need isolation should use a separate origin.
 
 ## Languages
 
