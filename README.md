@@ -127,14 +127,14 @@ followed, as a growing circle, and folds back into it on close. The drawing
 animates once per visit to the home page (`body.intro`), never on returning from
 a panel.
 
-The look is a page from the PDF notes: text in TeX Gyre Pagella (a free Palatino
-clone) with mathematics in Asana Math, or by a picker in the footer EB Garamond
-with Garamond Math or Lato with Lete Sans Math; code in Iosevka; Chinese in
-Source Han Serif SC (or Source Han Sans, Resource Han Rounded or LXGW WenKai, by
-a picker on the Chinese pages; sans pairs with sans by default), the figure's
-outlines in the text colour, and one accent for whatever can be followed. Inline
-mathematics is MathML; the figure's labels are Unicode mathematical italics set
-in Asana Math.
+Text is in Lato with mathematics in Lete Sans Math, or by a picker in the footer
+TeX Gyre Pagella (a free Palatino clone, as in the PDF notes) with Asana Math or
+EB Garamond with Garamond Math; code in Iosevka; Chinese in Source Han Sans SC
+(or Resource Han Rounded, LXGW WenKai or Source Han Serif, by a picker on the
+Chinese pages; a Latin serif brings LXGW WenKai by default, and a Chinese serif
+brings Pagella), the figure's outlines in the text colour, and one accent for
+whatever can be followed. Inline mathematics is MathML; the figure's labels are
+Unicode mathematical italics set in Asana Math.
 
 There are two themes, Light and Dark, chosen from a picker in the footer: Modus
 Operandi and Modus Vivendi from the Modus themes. They live in `data/themes.ts`,

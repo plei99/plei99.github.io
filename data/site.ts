@@ -96,21 +96,21 @@ export const site: Site = {
     },
   },
 
-  // Latin text fonts offered in the masthead, each with its math companion. `id`
+  // Latin text fonts offered in the footer, each with its math companion. `id`
   // is the data-latin value in styles.css. Names are the same in both languages.
-  // `sans: true` on a group pairs it with the Chinese sans faces by default.
+  // `serif: true` on a group pairs it with LXGW WenKai by default.
   latin_fonts: [
     {
+      group: { en: "Sans", zh: "无衬线" },
+      fonts: [{ id: "lato", name: "Lato" }],
+    },
+    {
       group: { en: "Serif", zh: "衬线" },
+      serif: true,
       fonts: [
         { id: "pagella", name: "Pagella" },
         { id: "garamond", name: "Garamond" },
       ],
-    },
-    {
-      group: { en: "Sans", zh: "无衬线" },
-      sans: true,
-      fonts: [{ id: "lato", name: "Lato" }],
     },
   ],
 

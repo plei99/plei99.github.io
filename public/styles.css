@@ -1,10 +1,9 @@
 /* Patrick Lei's site. One page: a figure of a stable map whose labels open
    the other pages as sheets of paper laid over it.
 
-   The look is a page from the PDF notes: text in TeX Gyre Pagella (a Palatino
-   clone), mathematics in Asana Math, outlines in the text colour, and one
-   accent for what can be followed. Colour and line weight mean something or
-   are absent. */
+   Text is in Lato with Source Han Sans for Chinese, mathematics in Lete Sans
+   Math, outlines in the text colour, and one accent for what can be
+   followed. Colour and line weight mean something or are absent. */
 
 /* Colour comes from the Modus themes, light and dark, not from a palette of
    our own. They live in data/themes.ts, and /themes.css, generated from that
@@ -24,18 +23,18 @@
 }
 
 :root {
-  /* Pagella carries only Latin, so Chinese falls through to --cjk; Latin inside
-     Chinese text stays in Pagella, which is the intended pairing. */
-  --cjk: "Source Han Serif SC";
-  --latin: "TeX Gyre Pagella", "Palatino Linotype", Palatino, "Book Antiqua";
-  --latin-math: "Asana Math";
-  --serif:
+  /* Lato carries only Latin, so Chinese falls through to --cjk; Latin inside
+     Chinese text stays in Lato, which is the intended pairing. */
+  --cjk: "Source Han Sans SC";
+  --latin: Lato;
+  --latin-math: "Lete Sans Math";
+  --face:
     var(--latin),
     var(--cjk),
-    "Noto Serif CJK SC",
-    "Songti SC",
-    Georgia,
-    serif;
+    "Noto Sans CJK SC",
+    "PingFang SC",
+    system-ui,
+    sans-serif;
   --mono: Iosevka, ui-monospace, SFMono-Regular, Menlo, monospace;
   --math: var(--latin-math), var(--latin), math, serif;
 
@@ -43,40 +42,38 @@
   --gutter: clamp(1.25rem, 4vw, 3rem);
 }
 
-:root[data-cjk="wenkai"] {
-  --cjk: "LXGW WenKai";
+:root[data-cjk="serif"] {
+  --cjk: "Source Han Serif SC";
 }
 
-:root[data-cjk="sans"] {
-  --cjk: "Source Han Sans SC";
+:root[data-cjk="wenkai"] {
+  --cjk: "LXGW WenKai";
 }
 
 :root[data-cjk="rounded"] {
   --cjk: "Resource Han Rounded SC";
 }
 
-/* Sans pairs with sans until told otherwise: a Chinese sans with no Latin
-   choice brings Lato and Lete Sans Math, and Lato with no Chinese choice
-   brings Source Han Sans. Explicit choices ("pagella", "serif") are
-   attributes too, so they win over these. js/theme.js mirrors these lists. */
-:root[data-cjk="sans"]:not([data-latin]),
-:root[data-cjk="rounded"]:not([data-latin]) {
-  --latin: Lato;
-  --latin-math: "Lete Sans Math";
+/* Serif pairs with serif until told otherwise: a Chinese serif with no Latin
+   choice brings Pagella and Asana Math, and a Latin serif with no Chinese
+   choice brings LXGW WenKai. Explicit choices ("lato", "sans") are
+   attributes too, so they win over these. client/theme.ts mirrors these
+   lists. */
+:root[data-cjk="serif"]:not([data-latin]),
+:root[data-cjk="wenkai"]:not([data-latin]),
+:root[data-latin="pagella"] {
+  --latin: "TeX Gyre Pagella", "Palatino Linotype", Palatino, "Book Antiqua";
+  --latin-math: "Asana Math";
 }
 
-:root[data-latin="lato"]:not([data-cjk]) {
-  --cjk: "Source Han Sans SC";
+:root[data-latin="pagella"]:not([data-cjk]),
+:root[data-latin="garamond"]:not([data-cjk]) {
+  --cjk: "LXGW WenKai";
 }
 
 :root[data-latin="garamond"] {
   --latin: "EB Garamond", Garamond;
   --latin-math: "Garamond Math";
-}
-
-:root[data-latin="lato"] {
-  --latin: Lato;
-  --latin-math: "Lete Sans Math";
 }
 
 *,
@@ -94,7 +91,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--text);
-  font: 400 1.125rem/1.6 var(--serif);
+  font: 400 1.125rem/1.6 var(--face);
   font-variant-numeric: oldstyle-nums;
   text-rendering: optimizeLegibility;
 }
@@ -505,7 +502,7 @@ img {
 }
 
 .fig-word {
-  font: 400 21px var(--serif);
+  font: 400 21px var(--face);
   fill: var(--link);
   text-anchor: middle;
 }
@@ -1114,7 +1111,7 @@ img {
   border: 0;
   background: var(--paper);
   color: var(--text);
-  font: 1.8rem/1 var(--serif);
+  font: 1.8rem/1 var(--face);
   cursor: pointer;
 }
 
@@ -1487,7 +1484,7 @@ img {
   border-radius: 0;
   background: transparent;
   color: var(--text);
-  font: 400 1.25rem/1 var(--serif);
+  font: 400 1.25rem/1 var(--face);
   cursor: pointer;
 }
 

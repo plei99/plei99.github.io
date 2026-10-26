@@ -140,7 +140,9 @@ export async function Seminars({ lang }: { lang: Lang }) {
                 {!echo && <p className="entry-body">{description}</p>}
                 {s.coOrganizers.length > 0 && (
                   <p className="entry-where">
-                    {t.organized_with} {s.coOrganizers.join(zh ? "、" : ", ")}
+                    {t.organized_with}
+                    {zh ? "" : " "}
+                    {s.coOrganizers.join(zh ? "、" : ", ")}
                   </p>
                 )}
               </div>

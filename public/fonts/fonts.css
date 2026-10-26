@@ -1,8 +1,8 @@
 /* Latin text and mathematics come in three pairings, chosen from the font
-   picker. The default is TeX Gyre Pagella with Asana Math, the pairing of the
-   PDF notes this site links to; the others are EB Garamond with Garamond Math
-   and Lato with Lete Sans Math. Chinese is Source Han Serif SC, or by choice
-   Source Han Sans SC, Resource Han Rounded SC or LXGW WenKai.
+   picker. The default is Lato with Lete Sans Math; the others are TeX Gyre
+   Pagella with Asana Math, the pairing of the PDF notes this site links to,
+   and EB Garamond with Garamond Math. Chinese is Source Han Sans SC, or by
+   choice Resource Han Rounded SC, LXGW WenKai or Source Han Serif SC.
    All are served from this site, because a third-party font request is
    blocked by some browsers' tracking protection and is slow or unreachable
    from mainland China. Sources and licences: fonts/README.md. */

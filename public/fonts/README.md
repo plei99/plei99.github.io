@@ -1,7 +1,7 @@
 # Fonts
 
 Every family is served from this site, so pages make no third-party requests.
-The Latin pairings are chosen from the masthead; Pagella with Asana Math is the
+The Latin pairings are chosen from the footer; Lato with Lete Sans Math is the
 default. `scripts/subset-latin.py` regenerates the Latin files.
 
 ## TeX Gyre Pagella (text)
@@ -57,7 +57,7 @@ no reserved names, in `OFL-Iosevka.txt`. The `iosevka-*.woff2` files (Regular,
 Italic, Bold) are subsets cut by `scripts/subset-latin.py` from the unhinted
 TTFs; the site uses them for `code`.
 
-## Source Han Serif SC (Chinese)
+## Source Han Serif SC (Chinese, by choice)
 
 By Adobe and Google (the Noto Serif CJK build), from
 <https://github.com/notofonts/noto-cjk>, `Serif/SubsetOTF/SC/`. Licence: SIL
@@ -72,7 +72,7 @@ alias in `fonts.css`; the files themselves are subsets and not the original
 font. Regenerate them with `scripts/subset-cjk.py` when Chinese content adds new
 characters; `bun run check` fails if that has been forgotten.
 
-## Source Han Sans SC and Resource Han Rounded SC (Chinese, by choice)
+## Source Han Sans SC and Resource Han Rounded SC (Chinese)
 
 Source Han Sans SC is the Noto Sans CJK build from the same repository as Source
 Han Serif, `Sans/SubsetOTF/SC/`, SIL Open Font License 1.1 with the Reserved
@@ -82,9 +82,7 @@ Serif. Resource Han Rounded is Cyano Hao's rounded derivative of Source Han
 Sans, version 0.990, from <https://github.com/CyanoHao/Resource-Han-Rounded>
 (the CN build), SIL Open Font License 1.1 with no reserved names, in
 `OFL-Resource-Han-Rounded.txt`; the `resource-han-rounded-sc-*.woff2` files are
-subsets. Choosing either pairs the Latin text with Lato and Lete Sans Math
-unless a Latin face has been chosen explicitly, and choosing a Latin sans pairs
-the Chinese with Source Han Sans in the same way.
+subsets. Source Han Sans is the default Chinese face.
 
 ## LXGW WenKai (Chinese, by choice)
 
@@ -92,6 +90,9 @@ By LXGW, version 1.522, derived from Fontworks' Klee, from
 <https://github.com/lxgw/LxgwWenKai>. Licence: SIL Open Font License 1.1, in
 `OFL-LXGW-WenKai.txt`. Its reserved names come with an additional permission
 that expressly allows subsets converted to WOFF2 for web delivery to keep the
-name, which `lxgw-wenkai-regular.woff2` relies on. It is cut by the same script
-and to the same characters as Source Han Serif. Only a Regular weight is
-released, so bold text in it is synthesised by the browser.
+name, which `lxgw-wenkai-regular.woff2` relies on. It is the Chinese face that
+goes with the Latin serifs: choosing Pagella or Garamond brings it unless a
+Chinese face has been chosen explicitly, and choosing it or Source Han Serif
+brings Pagella in the same way. It is cut by the same script and to the same
+characters as Source Han Serif. Only a Regular weight is released, so bold text
+in it is synthesised by the browser.

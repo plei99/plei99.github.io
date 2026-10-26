@@ -31,7 +31,7 @@ export type Site = {
   };
   latin_fonts: {
     group: Localized;
-    sans?: true;
+    serif?: true;
     fonts: { id: string; name: string }[];
   }[];
   contact: {
