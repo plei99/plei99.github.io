@@ -1,7 +1,6 @@
 import { Fragment, type ReactNode } from "react";
 import {
   absolute,
-  allThemes,
   home,
   type Lang,
   rev,
@@ -129,29 +128,14 @@ export default async function Base(
             <label className="scheme" hidden>
               <span className="visually-hidden">{t.theme}</span>
               <select
-                data-default-light={allThemes.find((x) => !x.dark)!.id}
-                data-default-dark={allThemes.find((x) => x.dark)!.id}
+                data-default-light={themes.find((x) => !x.dark)!.id}
+                data-default-dark={themes.find((x) => x.dark)!.id}
               >
-                {themes.map((family) =>
-                  family.themes.length > 1
-                    ? (
-                      <optgroup key={family.family} label={family.family}>
-                        {family.themes.map((theme) => (
-                          <option key={theme.id} value={theme.id}>
-                            {theme.name}
-                          </option>
-                        ))}
-                      </optgroup>
-                    )
-                    : (
-                      <option
-                        key={family.themes[0].id}
-                        value={family.themes[0].id}
-                      >
-                        {family.themes[0].name}
-                      </option>
-                    )
-                )}
+                {themes.map((theme) => (
+                  <option key={theme.id} value={theme.id}>
+                    {theme.name[lang]}
+                  </option>
+                ))}
               </select>
             </label>
             <label className="latin" hidden>

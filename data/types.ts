@@ -85,9 +85,8 @@ export type Home = {
 
 export type ThemeRole = "paper" | "text" | "muted" | "ink" | "link" | "rule";
 export type Theme =
-  & { id: string; name: string; dark: boolean; stage?: string }
+  & { id: string; name: Localized; dark: boolean; stage?: string }
   & Record<ThemeRole, string>;
-export type ThemeFamily = { family: string; themes: Theme[] };
 
 export type TravelKey =
   | "title"

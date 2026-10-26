@@ -11,7 +11,7 @@
 //   and themes.css and sitemap.xml are written.
 import { cp, rename, rm, rmdir } from "node:fs/promises";
 import path from "node:path";
-import { allThemes, SITE_URL, type Theme } from "../lib/site";
+import { SITE_URL, type Theme, themes } from "../lib/site";
 import { scriptHash, securePage } from "../lib/security";
 
 const OUT = "dist";
@@ -63,13 +63,13 @@ function finishPage(html: string) {
     .replaceAll("__REV__", rev);
 }
 
-// Generated from data/themes.yaml: one block per theme, selected by data-theme
+// Generated from data/themes.ts: one block per theme, selected by data-theme
 // on <html>. The defaults also apply with no data-theme: the light one always,
 // the dark one when the system is set to dark.
 function themesCss() {
   const [light, dark] = [
-    allThemes.find((t) => !t.dark)!,
-    allThemes.find((t) => t.dark)!,
+    themes.find((t) => !t.dark)!,
+    themes.find((t) => t.dark)!,
   ];
   const block = (t: Theme, indent: string) =>
     [
@@ -87,7 +87,7 @@ function themesCss() {
   }\n}\n\n@media (prefers-color-scheme: dark) {\n  :root:not([data-theme]) {\n${
     block(dark, "    ")
   }\n  }\n}\n`;
-  for (const t of allThemes) {
+  for (const t of themes) {
     if (t !== light) {
       css += `\n:root[data-theme="${t.id}"] {\n${block(t, "  ")}\n}\n`;
     }

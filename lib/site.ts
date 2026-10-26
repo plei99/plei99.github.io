@@ -1,6 +1,6 @@
 // Data and helpers shared by the pages. Everything here runs at build time.
 import { themes } from "../data/themes";
-import type { Lang, Theme } from "../data/types";
+import type { Lang } from "../data/types";
 
 export { aiSubscriptions } from "../data/ai-subscriptions";
 export { home } from "../data/home";
@@ -54,22 +54,12 @@ export function formatDate(date: string | Date, lang: Lang, long = false) {
   }).format(d);
 }
 
-export const allThemes: Theme[] = themes.flatMap((f) => f.themes);
-
-// Each theme's brightness and its counterpart of the other brightness: the
-// theme in the same place among its family's other half (Gruvbox Dark Soft for
-// Gruvbox Light Soft, the last one if the other half is shorter), or the
-// default when the family has none.
+// Each theme's brightness and the other theme, its counterpart.
 export const themePairs: Record<string, [0 | 1, string]> = Object.fromEntries(
-  themes.flatMap((family) =>
-    family.themes.map((t) => {
-      const same = family.themes.filter((o) => o.dark === t.dark);
-      const other = family.themes.filter((o) => o.dark !== t.dark);
-      const pair = other[Math.min(same.indexOf(t), other.length - 1)] ??
-        allThemes.find((o) => o.dark !== t.dark)!;
-      return [t.id, [t.dark ? 1 : 0, pair.id]];
-    })
-  ),
+  themes.map((t) => [
+    t.id,
+    [t.dark ? 1 : 0, themes.find((o) => o.dark !== t.dark)!.id],
+  ]),
 );
 
 export type Seminar = {

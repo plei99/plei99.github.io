@@ -6,9 +6,9 @@
    accent for what can be followed. Colour and line weight mean something or
    are absent. */
 
-/* Colour comes from terminal colour schemes, not from a palette of our own.
-   The themes live in src/_data/themes.yaml, and /themes.css, generated from
-   that file, sets these roles for the chosen theme:
+/* Colour comes from the Modus themes, light and dark, not from a palette of
+   our own. They live in data/themes.ts, and /themes.css, generated from that
+   file, sets these roles for the chosen theme:
 
      --paper  background            --ink   marked points and cycles
      --text   text and outlines     --link  words that can be followed
