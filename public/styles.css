@@ -2,12 +2,13 @@
    the other pages as sheets of paper laid over it.
 
    Text is in Lato with Source Han Sans for Chinese, mathematics in Lete Sans
-   Math, outlines in the text colour, and one accent for what can be
-   followed. Colour and line weight mean something or are absent. */
+   Math, outlines in the text colour, one accent for what can be followed and
+   another for marked points. Colour and line weight mean something or are
+   absent. */
 
-/* Colour comes from the Modus themes, light and dark, not from a palette of
-   our own. They live in data/themes.ts, and /themes.css, generated from that
-   file, sets these roles for the chosen theme:
+/* Colour comes from the two themes, light and dark, in data/themes.ts, not
+   from this file; /themes.css, generated from that file, sets these roles for
+   the chosen theme:
 
      --paper  background            --ink   marked points and cycles
      --text   text and outlines     --link  words that can be followed

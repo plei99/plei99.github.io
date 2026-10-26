@@ -36,7 +36,7 @@ export const ui: Ui = {
     organized_with: "With",
     figure_label:
       "Site map, drawn as a stable map from a genus 2 curve to a target X",
-    figure_hint: "Every blue label in the figure opens a page.",
+    figure_hint: "Each label in the figure opens a page.",
     index: "Pages",
   },
   zh: {
