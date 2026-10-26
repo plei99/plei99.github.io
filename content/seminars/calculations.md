@@ -1,7 +1,7 @@
 ---
 title: Calculations seminar
 pubDate: 2025-01-20
-description: This is a seminar on calculations in enumerative geometry.
+description: Calculations in enumerative geometry.
 title_zh: 计算讨论班
 description_zh: 关于计数几何中各种计算的讨论班。
 ---

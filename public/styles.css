@@ -20,7 +20,7 @@
 /* Derived from the theme, so a new theme needs only its own block. */
 :root {
   --link-hover: color-mix(in srgb, var(--link) 65%, var(--text));
-  --wash: color-mix(in srgb, var(--paper) 86%, transparent);
+  --wash: color-mix(in srgb, var(--paper) 96%, transparent);
 }
 
 :root {
@@ -111,13 +111,15 @@ figure {
 
 a {
   color: var(--link);
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
   text-decoration-thickness: 0.05em;
   text-underline-offset: 0.18em;
 }
 
 a:hover {
   color: var(--link-hover);
-  text-decoration-thickness: 0.1em;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 0.08em;
 }
 
 :focus-visible {
@@ -158,27 +160,26 @@ img {
 /* ---- Page --------------------------------------------------- */
 .page {
   min-height: 100dvh;
-  max-width: 72rem;
+  max-width: 92rem;
   margin-inline: auto;
-  padding: clamp(1.5rem, 4vw, 3rem) var(--gutter) 2rem;
+  padding: clamp(1.25rem, 3vw, 2.5rem) var(--gutter) 1.25rem;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  gap: clamp(1.5rem, 4vh, 3rem);
+  gap: clamp(1rem, 3vh, 2rem);
 }
 
 .masthead {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
+  align-items: start;
   justify-content: space-between;
-  gap: 0.5rem 2rem;
+  gap: 1rem 2rem;
 }
 
 .name {
-  font-size: clamp(1.9rem, 3.2vw, 2.5rem);
+  font-size: clamp(2.3rem, 4.6vw, 4rem);
   font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  line-height: 1;
+  letter-spacing: -0.025em;
 }
 
 .name a {
@@ -187,11 +188,12 @@ img {
 }
 
 .tagline {
-  margin-top: 0.35rem;
+  margin-top: 0.75rem;
   max-width: 34rem;
   color: var(--muted);
-  font-size: 1.05rem;
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
   line-height: 1.45;
+  text-wrap: pretty;
 }
 
 .controls {
@@ -254,8 +256,10 @@ img {
 }
 
 .langswitch {
+  flex: none;
+  padding-block: 0.4rem;
   color: var(--muted);
-  font-size: 1rem;
+  font-size: 1.05rem;
   text-decoration: none;
 }
 
@@ -267,8 +271,9 @@ img {
 .colophon {
   display: flex;
   flex-wrap: wrap;
+  align-items: baseline;
   justify-content: space-between;
-  gap: 0.4rem 2rem;
+  gap: 0.6rem 2rem;
   padding-top: 1rem;
   border-top: 1px solid var(--rule);
   font-size: 0.95rem;
@@ -279,6 +284,30 @@ img {
   display: flex;
   flex-wrap: wrap;
   gap: 0.2rem 1.4rem;
+}
+
+.colophon a {
+  color: inherit;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+
+.colophon a:hover {
+  color: var(--text);
+  text-decoration-color: currentColor;
+}
+
+.colophon .controls {
+  margin-right: auto;
+}
+
+.colophon p:last-child {
+  margin-left: auto;
+}
+
+.colophon .scheme,
+.colophon .latin,
+.colophon .cjk {
+  font-size: 0.95rem;
 }
 
 /* ---- The figure --------------------------------------------- */
@@ -300,20 +329,74 @@ img {
   overflow: visible;
 }
 
+/* The figure is the page: as wide as the column allows, but never so tall
+   that the caption under it leaves the first screen. */
 .fig--wide {
-  max-width: 62rem;
+  width: min(100%, (100dvh - 19rem) * 940 / 345);
+  min-width: min(100%, 40rem);
 }
 
 .fig--tall {
   display: none;
-  max-width: 24rem;
+  width: min(100%, (100dvh - 15rem) * 420 / 835);
+  min-width: min(100%, 17rem);
 }
 
 .figure figcaption {
-  max-width: 40rem;
-  font-size: 0.98rem;
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+  max-width: 46rem;
+  font-size: 1.05rem;
   line-height: 1.5;
   text-align: center;
+  color: var(--text);
+}
+
+/* Under the caption, one line names where the pointed-at label leads. All of
+   them share one grid cell, so swapping them never moves the page. */
+.fig-hints {
+  display: grid;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.fig-hint {
+  grid-area: 1 / 1;
+  opacity: 0;
+}
+
+.fig-hint--idle {
+  opacity: 1;
+}
+
+/* Inline-block, so a link's underline runs under its word and not its
+   symbol. */
+.symbol {
+  display: inline-block;
+  font-family: var(--math);
+  font-variant-numeric: lining-nums;
+}
+
+.fig-hint .symbol {
+  margin-right: 0.35em;
+  color: var(--ink);
+}
+
+.figure:has(.fig-link:is(:hover, :focus-visible)) .fig-hint--idle {
+  opacity: 0;
+}
+
+.figure:has([data-id="about"]:is(:hover, :focus-visible)) [data-for="about"],
+.figure:has([data-id="seminars"]:is(:hover, :focus-visible))
+  [data-for="seminars"],
+.figure:has([data-id="notes"]:is(:hover, :focus-visible)) [data-for="notes"],
+.figure:has([data-id="travel"]:is(:hover, :focus-visible)) [data-for="travel"],
+.figure:has([data-id="arxiv"]:is(:hover, :focus-visible)) [data-for="arxiv"],
+.figure:has([data-id="now"]:is(:hover, :focus-visible)) [data-for="now"],
+.figure:has([data-id="cv"]:is(:hover, :focus-visible)) [data-for="cv"],
+.figure:has([data-id="uses"]:is(:hover, :focus-visible)) [data-for="uses"] {
+  opacity: 1;
   color: var(--text);
 }
 
@@ -324,9 +407,11 @@ img {
   stroke-linejoin: round;
 }
 
+/* Three weights: the spaces C and X, then the image f(C) and the handles,
+   then the hairline leaders. */
 .fig-ink {
   stroke: var(--text);
-  stroke-width: 2;
+  stroke-width: 2.4;
 }
 
 .fig-thin path {
@@ -392,7 +477,25 @@ img {
   fill: var(--paper);
   stroke: var(--ink);
   stroke-width: 1.8;
-  transition: fill 0.12s;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: fill 0.15s, transform 0.25s cubic-bezier(0.3, 0, 0.2, 1.6);
+}
+
+.fig-link {
+  transition: opacity 0.2s;
+}
+
+/* Pointing at one label quiets the others, so the eye follows one leader
+   from the word to its place in the figure. */
+@media (hover: hover) {
+  .fig:has(.fig-link:hover) .fig-link:not(:hover) {
+    opacity: 0.5;
+  }
+
+  .fig-link:hover .fig-pt {
+    transform: scale(1.45);
+  }
 }
 
 .fig .fig-cycle {
@@ -402,7 +505,7 @@ img {
 }
 
 .fig-word {
-  font: 400 23px var(--serif);
+  font: 400 21px var(--serif);
   fill: var(--link);
   text-anchor: middle;
 }
@@ -449,20 +552,38 @@ img {
   stroke: var(--ink);
 }
 
-/* The one piece of motion: on the home page the outlines draw themselves
-   once, then the labels arrive. */
+/* On arriving at the home page the outlines draw themselves once, then the
+   labels arrive. Closing a panel later shows the figure as it was. */
 @media (prefers-reduced-motion: no-preference) {
   /* `backwards`, not `both`: the dash pattern lives only in the keyframes, so
      once the drawing is done the outlines are plain solid strokes. iPad WebKit
      left a gap at the start of each path when the dash array stayed on. */
-  .is-home .fig-draw,
-  .is-home .fig-draw path {
-    animation: fig-draw 1.1s cubic-bezier(0.6, 0, 0.3, 1) backwards;
+  /* In the order of the statement: C, then the map f, then X with the
+     image f(C), then the cycles through it; the words come last. */
+  .intro .fig-draw,
+  .intro .fig-draw path {
+    animation: fig-draw 1s cubic-bezier(0.6, 0, 0.3, 1) backwards;
   }
 
-  .is-home .fig-link,
-  .is-home .fig-math {
-    animation: fig-arrive 0.5s 0.9s both;
+  .intro .fig-target .fig-draw,
+  .intro .fig-target .fig-draw path {
+    animation-delay: 0.55s;
+  }
+
+  .intro .fig-arrow {
+    animation: fig-draw 0.6s 0.4s cubic-bezier(0.6, 0, 0.3, 1) backwards;
+  }
+
+  .intro .fig-cycle {
+    animation: fig-draw 0.5s 1.25s ease-out backwards;
+  }
+
+  .intro .fig-pt,
+  .intro .fig-math,
+  .intro .fig-word,
+  .intro .fig-leader,
+  .intro figcaption {
+    animation: fig-arrive 0.5s 1.35s both;
   }
 }
 
@@ -496,11 +617,13 @@ img {
 }
 
 /* ---- The panel ---------------------------------------------- */
+/* One sheet for every page: the same width and the same top edge, so moving
+   between pages changes only what is written on it and how far it reaches. */
 .panel {
   position: fixed;
   inset: 0;
-  margin: auto;
-  width: min(52rem, 100vw - 2rem);
+  margin: 1.5rem auto auto;
+  width: min(60rem, 100vw - 2rem);
   height: fit-content;
   max-height: calc(100dvh - 3rem);
   padding: 0;
@@ -509,11 +632,7 @@ img {
   color: var(--text);
   overflow: auto;
   overscroll-behavior: contain;
-  box-shadow: 0 1.5rem 4rem -1.5rem var(--shadow);
-}
-
-.panel:has([data-section="travel"]) {
-  width: min(68rem, 100vw - 2rem);
+  scrollbar-gutter: stable;
 }
 
 .panel::backdrop {
@@ -529,8 +648,14 @@ img {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .panel:modal {
-    animation: panel-open 0.18s ease-out;
+  .panel::backdrop {
+    animation: fade-in 0.3s ease-out;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
   }
 }
 
@@ -542,26 +667,80 @@ img {
 }
 
 #panel-content {
+  --inset: clamp(1.25rem, 5vw, 4rem);
   outline: none;
-  padding: clamp(1.5rem, 4vw, 3.25rem) clamp(1.25rem, 5vw, 4rem)
-    clamp(2rem, 5vw, 3.5rem);
+  padding: clamp(1.75rem, 4vw, 3rem) var(--inset) clamp(2rem, 5vw, 3.5rem);
+}
+
+/* The sheet's own masthead: every page of the figure by its name there, and
+   the way back. It stays put while the sheet scrolls. */
+.panel-bar::after {
+  content: "";
+  position: absolute;
+  inset: 100% 0 auto;
+  height: 1.25rem;
+  background: linear-gradient(var(--paper), transparent);
+  pointer-events: none;
+}
+
+.panel-bar {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.35rem 0.4rem 0.35rem clamp(1.25rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.panel-nav {
+  flex: 1;
+  display: flex;
+  /* Scrolls sideways on narrow screens; the fade says there is more. */
+  mask-image: linear-gradient(to left, transparent, #000 1.5rem);
+  padding-right: 1.5rem;
+  gap: 0 clamp(0.9rem, 2.2vw, 1.6rem);
+  overflow-x: auto;
+  scrollbar-width: none;
+  white-space: nowrap;
+  font-size: 0.98rem;
+}
+
+.panel-nav a {
+  padding-block: 0.55rem;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.panel-nav .symbol {
+  margin-right: 0.3em;
+  color: var(--ink);
+  font-size: 0.95em;
+}
+
+.panel-nav a:hover {
+  color: var(--text);
+}
+
+.panel-nav a[aria-current] {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.4em;
 }
 
 .panel-close {
-  position: sticky;
-  top: 0.6rem;
-  float: right;
-  margin: 0.6rem 0.6rem 0 0;
+  flex: none;
   width: 2.5rem;
   height: 2.5rem;
   display: grid;
   place-items: center;
-  background: var(--paper);
   color: var(--text);
   font-size: 1.7rem;
   line-height: 1;
   text-decoration: none;
-  z-index: 3;
 }
 
 .panel-close:hover {
@@ -576,11 +755,30 @@ img {
 }
 
 .panel-head h1 {
-  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  position: relative;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
   font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
   text-wrap: balance;
+}
+
+/* The page's name in the figure hangs in the margin beside its title, as an
+   equation number would. */
+.panel-head h1 .symbol {
+  position: absolute;
+  right: calc(100% + 0.8rem);
+  top: 0.15em;
+  color: var(--ink);
+  font-size: 0.5em;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.panel-date {
+  margin-top: 0.4rem;
+  color: var(--muted);
+  font-size: 0.95rem;
 }
 
 .lede {
@@ -594,17 +792,31 @@ img {
   font-size: 0.95rem;
 }
 
-.panel-head--portrait {
-  display: flex;
-  align-items: center;
+/* Prose with a narrow column beside it, like a margin note. */
+.with-side {
+  display: grid;
+  grid-template-columns: minmax(0, var(--measure)) minmax(10rem, 13rem);
   justify-content: space-between;
+  gap: 2rem 3rem;
+}
+
+.side {
+  display: grid;
+  align-content: start;
   gap: 1.5rem;
 }
 
 .portrait {
-  flex: none;
-  width: clamp(5.5rem, 16vw, 8.5rem);
+  width: 100%;
+  max-width: 13rem;
   border-radius: 50%;
+}
+
+.contents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.4rem;
+  margin-top: 1rem;
 }
 
 .aside {
@@ -706,6 +918,56 @@ img {
   line-height: 1.75;
 }
 
+.entry-when::first-letter {
+  text-transform: uppercase;
+}
+
+/* Seminars as a curve with a marked point at each term, like the figure:
+   the hairline runs down the gap between date and title. */
+.timeline .entry {
+  position: relative;
+  border-top: 0;
+  padding-block: 0 2rem;
+}
+
+.timeline .entry::before,
+.timeline .entry::after {
+  content: "";
+  position: absolute;
+  left: calc(8.5rem + 0.75rem);
+}
+
+.timeline .entry::before {
+  top: 0;
+  bottom: 0;
+  border-left: 1px solid var(--text);
+}
+
+.timeline .entry:first-child::before {
+  top: 0.6rem;
+}
+
+.timeline .entry:last-child::before {
+  bottom: auto;
+  height: 0.6rem;
+}
+
+.timeline .entry::after {
+  top: 0.6rem;
+  width: 0.65rem;
+  height: 0.65rem;
+  margin: -0.325rem 0 0 -0.325rem;
+  border: 1.6px solid var(--ink);
+  border-radius: 50%;
+  background: var(--paper);
+  transition: background 0.15s, transform 0.25s cubic-bezier(0.3, 0, 0.2, 1.6);
+}
+
+.timeline .entry:has(a:hover)::after {
+  background: var(--ink);
+  transform: scale(1.3);
+}
+
 .entry-title {
   font-size: 1.25rem;
   font-weight: 700;
@@ -713,7 +975,12 @@ img {
 }
 
 .entry-title a {
-  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-decoration: none;
+}
+
+.entry-title a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 0.06em;
 }
 
 .entry-title a:hover {
@@ -735,10 +1002,21 @@ img {
 }
 
 /* ---- Now ---------------------------------------------------- */
+.now-group + .now-group {
+  margin-top: 2.25rem;
+}
+
+.now-group h2 {
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
 .now-list {
+  margin-top: 0.6rem;
   padding-left: 1.3rem;
-  font-size: 1.3rem;
-  line-height: 1.4;
+  font-size: clamp(1.35rem, 2.6vw, 1.75rem);
+  line-height: 1.35;
 }
 
 .now-list li + li {
@@ -750,11 +1028,19 @@ img {
   margin-top: 3rem;
 }
 
-.uses-group h2,
-.contact h2 {
+.uses-group h2 {
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 1.25;
+}
+
+.uses-group {
+  scroll-margin-top: 4rem;
+}
+
+.contact h2 {
+  font-size: 1rem;
+  font-weight: 700;
 }
 
 .uses-group .prose {
@@ -1067,30 +1353,80 @@ img {
   }
 }
 
-.contact {
-  margin-top: 2.5rem;
-}
-
 .contact ul {
   list-style: none;
   padding: 0;
-  margin-top: 0.6rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem 1.6rem;
+  margin-top: 0.4rem;
+  display: grid;
+  gap: 0.25rem;
 }
 
 /* ---- Travel globe ------------------------------------------- */
 .atlas {
-  --atlas-ink: #253f4b;
+  display: grid;
+}
+
+.atlas-stage {
   border: 1px solid var(--text);
-  overflow: hidden;
+}
+
+.atlas-places {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 2rem;
+  padding-top: 1rem;
+}
+
+.atlas-count {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.atlas-places ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.4rem;
+  list-style: none;
+  padding: 0;
+}
+
+.atlas-places button {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  padding: 0.3rem 0;
+  border: 0;
+  background: none;
+  color: var(--link);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.atlas-places button::before {
+  content: "";
+  flex: none;
+  width: 0.6rem;
+  height: 0.6rem;
+  border: 1px solid var(--link);
+  background: color-mix(in srgb, var(--link) 72%, var(--paper));
+}
+
+.atlas-places button:hover:not(:disabled) {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+.atlas-places button:disabled {
+  color: var(--text);
+  cursor: default;
 }
 
 .atlas-stage {
   position: relative;
   min-width: 0;
-  height: clamp(24rem, 62dvh, 40rem);
+  height: clamp(20rem, 58dvh, 36rem);
   overflow: hidden;
   isolation: isolate;
   background: var(--stage);
@@ -1185,15 +1521,55 @@ img {
 }
 
 /* ---- Narrow screens ----------------------------------------- */
+@media (max-width: 44rem) {
+  .panel-head h1 .symbol {
+    position: static;
+    margin-right: 0.4em;
+    vertical-align: 0.4em;
+  }
+  .with-side {
+    grid-template-columns: 1fr;
+  }
+  .side {
+    order: -1;
+    grid-template-columns: 6rem 1fr;
+    align-items: start;
+  }
+}
+
 @media (max-width: 36rem) {
   body {
     font-size: 1.06rem;
+  }
+  .panel-bar {
+    align-items: start;
+    padding-left: 1.25rem;
+  }
+  .panel-nav {
+    flex-wrap: wrap;
+    gap: 0 1rem;
+    padding-right: 0;
+    mask-image: none;
+  }
+  .panel-nav a {
+    padding-block: 0.3rem;
+  }
+  .timeline .entry {
+    padding-left: 1.6rem;
+  }
+  .timeline .entry::before,
+  .timeline .entry::after {
+    left: 0.35rem;
+  }
+  .atlas-stage {
+    height: clamp(16rem, 48dvh, 22rem);
   }
   .panel {
     width: 100vw;
     max-width: 100vw;
     max-height: 100dvh;
     height: 100dvh;
+    margin: 0;
     border-width: 0;
   }
   .entry {

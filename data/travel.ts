@@ -2,7 +2,8 @@ import type { Travel } from "./types";
 
 export const travel: Travel = {
   en: {
-    title: "Places I’ve been.",
+    title: "Places I’ve been",
+    count: "{n} countries so far",
     globe_label: "Interactive globe of places I have visited",
     controls: "Globe controls",
     keyboard: "Drag or use arrow keys to rotate. Use + or − to zoom.",
@@ -15,7 +16,8 @@ export const travel: Travel = {
       "Showing the illustrated globe. Interactive controls are unavailable.",
   },
   zh: {
-    title: "我去过的地方。",
+    title: "我去过的地方",
+    count: "目前去过 {n} 个国家",
     globe_label: "展示我去过的地方的交互式地球仪",
     controls: "地球仪控制",
     keyboard: "拖动或使用方向键旋转，按 + 或 − 缩放。",

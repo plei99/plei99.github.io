@@ -10,7 +10,17 @@ import {
   ui,
 } from "../lib/site";
 import { inlineScript } from "../lib/inline";
-import Figure from "./Figure";
+import Figure, { Symbol } from "./Figure";
+
+// The pages that open in the panel, plus the notes, in the figure's order.
+const panelPages = [
+  "about",
+  "seminars",
+  "notes",
+  "travel",
+  "now",
+  "uses",
+] as const;
 
 export type PageInfo = {
   lang: Lang;
@@ -48,7 +58,7 @@ export default async function Base(
         data-lang={lang === "zh" ? "zh-CN" : "en"}
         data-home={homeUrl}
         data-home-title={site.name}
-        data-body-class={isHome ? "is-home" : undefined}
+        data-body-class={isHome ? "is-home intro" : undefined}
       />
       <meta charSet="utf-8" />
       <title>{fullTitle(title)}</title>
@@ -114,7 +124,7 @@ export default async function Base(
 
       <div className="page">
         <header className="masthead">
-          <div>
+          <div className="ident">
             {isHome
               ? <h1 className="name">{site.name}</h1>
               : (
@@ -124,6 +134,42 @@ export default async function Base(
               )}
             <p className="tagline">{home.tagline[lang]}</p>
           </div>
+          {/* The language link names the language it switches to. */}
+          {lang === "zh"
+            ? (
+              <a
+                className="langswitch"
+                lang="en"
+                hrefLang="en"
+                data-no-panel=""
+                href={altUrl || switchUrl || "/"}
+              >
+                English
+              </a>
+            )
+            : (
+              <a
+                className="langswitch"
+                lang="zh-CN"
+                hrefLang="zh-Hans"
+                data-no-panel=""
+                href={altUrl || switchUrl || "/zh/"}
+              >
+                中文
+              </a>
+            )}
+        </header>
+
+        <main id="figure" tabIndex={-1}>
+          <Figure lang={lang} section={section} />
+        </main>
+
+        <footer className="colophon">
+          <p>
+            <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
+            {" "}
+            <a href={site.contact.github}>GitHub</a>
+          </p>
           <div className="controls">
             <label className="scheme" hidden>
               <span className="visually-hidden">{t.theme}</span>
@@ -166,43 +212,7 @@ export default async function Base(
                 </select>
               </label>
             )}
-            {/* The language link names the language it switches to. */}
-            {lang === "zh"
-              ? (
-                <a
-                  className="langswitch"
-                  lang="en"
-                  hrefLang="en"
-                  data-no-panel=""
-                  href={altUrl || switchUrl || "/"}
-                >
-                  en
-                </a>
-              )
-              : (
-                <a
-                  className="langswitch"
-                  lang="zh-CN"
-                  hrefLang="zh-Hans"
-                  data-no-panel=""
-                  href={altUrl || switchUrl || "/zh/"}
-                >
-                  中文
-                </a>
-              )}
           </div>
-        </header>
-
-        <main id="figure" tabIndex={-1}>
-          <Figure lang={lang} section={section} />
-        </main>
-
-        <footer className="colophon">
-          <p>
-            <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
-            {" "}
-            <a href={site.contact.github}>GitHub</a>
-          </p>
           <p>
             {site.footer.copyright}
             {site.footer.links.map((link) => (
@@ -234,14 +244,33 @@ export default async function Base(
         aria-labelledby="panel-title"
         open={!isHome}
       >
-        <a
-          className="panel-close"
-          href={homeUrl}
-          aria-label={t.close}
-          title={t.close}
-        >
-          <span aria-hidden="true">×</span>
-        </a>
+        {
+          /* The bar stays at the top of the sheet: the pages of the figure,
+            each under its name there, and the way back to it. */
+        }
+        <div className="panel-bar">
+          <nav className="panel-nav" aria-label={t.sections}>
+            {panelPages.map((id) => (
+              <a
+                key={id}
+                href={site.pages[id].href[lang]}
+                data-id={id}
+                aria-current={section === id ? "page" : undefined}
+              >
+                <Symbol symbol={site.pages[id].symbol} />
+                {site.pages[id].label[lang]}
+              </a>
+            ))}
+          </nav>
+          <a
+            className="panel-close"
+            href={homeUrl}
+            aria-label={t.close}
+            title={t.close}
+          >
+            <span aria-hidden="true">×</span>
+          </a>
+        </div>
         <article
           id="panel-content"
           tabIndex={-1}

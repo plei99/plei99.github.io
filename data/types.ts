@@ -9,6 +9,11 @@ export type Destination = {
   label: Localized;
   href: Localized;
   external?: true;
+  /** The figure's name for it, such as x₁ or α₂: a math italic letter and an
+   * optional subscript. Shown beside its hint and in the panel's margin. */
+  symbol: { base: string; n?: number };
+  /** What the link leads to, shown under the figure while it is pointed at. */
+  hint: Localized;
 };
 
 export type Site = {
@@ -55,6 +60,7 @@ export type UiKey =
   | "globe_pause"
   | "now_lede"
   | "now_what"
+  | "updated"
   | "uses"
   | "uses_lede"
   | "uses_what"
@@ -70,7 +76,9 @@ export type UiKey =
   | "cjk_rounded"
   | "cjk_kai"
   | "back_to_seminars"
+  | "organized_with"
   | "figure_label"
+  | "figure_hint"
   | "index";
 export type Ui = Localized<Record<UiKey, string>>;
 
@@ -80,7 +88,12 @@ export type Home = {
   bio: Localized;
   /** `body` is HTML. */
   about: { title: Localized; body: Localized };
-  now: Localized<string[]>;
+  /** The Now page: when it was last revised (YYYY-MM), and its items in
+   * groups. */
+  now: {
+    updated: string;
+    groups: { title: Localized; items: Localized<string[]> }[];
+  };
 };
 
 export type ThemeRole = "paper" | "text" | "muted" | "ink" | "link" | "rule";
@@ -90,6 +103,7 @@ export type Theme =
 
 export type TravelKey =
   | "title"
+  | "count"
   | "globe_label"
   | "controls"
   | "keyboard"

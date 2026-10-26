@@ -4,9 +4,9 @@ export const site: Site = {
   name: "Patrick Lei",
   description: {
     en:
-      "Patrick Lei is a postdoc at the Shanghai Center for Mathematical Sciences at Fudan University, working in algebraic geometry and higher-genus Gromov-Witten theory.",
+      "Patrick Lei is a postdoc at the Shanghai Center for Mathematical Sciences at Fudan University, working in algebraic geometry and higher-genus Gromov–Witten theory.",
     zh:
-      "Patrick Lei 是复旦大学上海数学中心的博士后，研究代数几何与高亏格 Gromov-Witten 理论。",
+      "Patrick Lei 是复旦大学上海数学中心的博士后，研究代数几何与高亏格 Gromov–Witten 理论。",
   },
 
   // Every destination on the site, keyed by the id the figure uses. In the figure
@@ -16,32 +16,67 @@ export const site: Site = {
   pages: {
     about: {
       label: { en: "about me", zh: "关于我" },
+      symbol: { base: "𝑥", n: 1 },
+      hint: {
+        en: "Who I am, where I have worked, and how to reach me.",
+        zh: "我的经历，以及如何联系我。",
+      },
       href: { en: "/en/about.html", zh: "/zh/about.html" },
     },
     seminars: {
       label: { en: "seminars", zh: "讨论班" },
+      symbol: { base: "𝑥", n: 2 },
+      hint: {
+        en: "Seminars I have organized, with schedules, abstracts and notes.",
+        zh: "我组织过的讨论班，含日程、摘要与笔记。",
+      },
       href: { en: "/seminars/", zh: "/zh/seminars/" },
     },
     // The notes are their own site, https://github.com/plei99/notes.
     notes: {
       label: { en: "notes", zh: "笔记" },
+      symbol: { base: "𝑥", n: 3 },
+      hint: {
+        en: "My lecture and reading notes, on a site of their own.",
+        zh: "我的课程笔记，在另一个网站上。",
+      },
       href: { en: "/notes/", zh: "/notes/zh/" },
     },
     travel: {
       label: { en: "travel", zh: "旅行" },
+      symbol: { base: "→" },
+      hint: {
+        en: "A globe of the countries I have been to.",
+        zh: "一个标出我去过的国家的地球仪。",
+      },
       href: { en: "/en/travel.html", zh: "/zh/travel.html" },
     },
     // Links to `contact.arxiv` below, so the address is written once.
     arxiv: {
       label: { en: "arXiv", zh: "arXiv" },
+      symbol: { base: "𝛼", n: 1 },
+      hint: {
+        en: "My papers on arXiv, in a new tab.",
+        zh: "我在 arXiv 上的论文。",
+      },
       external: true,
     },
     now: {
       label: { en: "now", zh: "最近" },
+      symbol: { base: "𝛼", n: 2 },
+      hint: {
+        en: "What I am working on and thinking about right now.",
+        zh: "我最近在做的事和在想的事。",
+      },
       href: { en: "/en/now.html", zh: "/zh/now.html" },
     },
     cv: {
       label: { en: "CV", zh: "简历" },
+      symbol: { base: "𝛼", n: 3 },
+      hint: {
+        en: "My CV, as a PDF in a new tab.",
+        zh: "我的简历，PDF 格式。",
+      },
       external: true,
       href: {
         en:
@@ -52,6 +87,11 @@ export const site: Site = {
     },
     uses: {
       label: { en: "uses", zh: "装备" },
+      symbol: { base: "𝑓" },
+      hint: {
+        en: "The tools I use for mathematics and for running.",
+        zh: "我做数学和跑步时用的东西。",
+      },
       href: { en: "/en/uses.html", zh: "/zh/uses.html" },
     },
   },

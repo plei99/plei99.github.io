@@ -14,6 +14,40 @@ const homeTitle = document.body.dataset.homeTitle ?? "";
 const parser = new DOMParser();
 let request = 0;
 let activation = 0;
+// Where the sheet opens from and closes back into: the marked point of the
+// label that was followed, in viewport coordinates.
+let origin: { x: number; y: number } | null = null;
+let closing = 0;
+const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+
+// The home figure draws itself once per visit to the page, not every time a
+// panel closes over it.
+function endIntro() {
+  document.body.classList.remove("intro");
+}
+
+/** The centre of a label's marked point, or of the label itself. */
+function pointOf(link: Element) {
+  const box = (link.querySelector(".fig-pt") ?? link).getBoundingClientRect();
+  if (!box.width && !box.height) return null;
+  return { x: box.x + box.width / 2, y: box.y + box.height / 2 };
+}
+
+/** A circle at the origin, in the panel's own coordinates, as a clip path. */
+function circle(radius: number) {
+  const box = panel.getBoundingClientRect();
+  const x = (origin?.x ?? box.x + box.width / 2) - box.x;
+  const y = (origin?.y ?? box.y + box.height / 2) - box.y;
+  const far = Math.hypot(
+    Math.max(x, box.width - x),
+    Math.max(y, box.height - y),
+  );
+  return `circle(${radius < 0 ? far : radius}px at ${x}px ${y}px)`;
+}
+
+function animated() {
+  return !reducedMotion.matches && typeof panel.animate === "function";
+}
 
 function isHome(url: URL) {
   return url.pathname === "/" || url.pathname === "/zh/";
@@ -44,11 +78,19 @@ function panelTarget(link: Element) {
 function markCurrent(section: string | null) {
   for (
     const link of document.querySelectorAll<HTMLElement | SVGElement>(
-      ".fig-link",
+      ".fig-link, .panel-nav a",
     )
   ) {
     if (link.dataset.id === section) link.setAttribute("aria-current", "page");
     else link.removeAttribute("aria-current");
+  }
+  // On a narrow screen the bar scrolls sideways; keep the current page in it.
+  const here = document.querySelector<HTMLElement>(
+    ".panel-nav a[aria-current]",
+  );
+  const bar = here?.parentElement;
+  if (here && bar && bar.scrollWidth > bar.clientWidth) {
+    bar.scrollLeft = here.offsetLeft - bar.offsetLeft - bar.clientWidth / 3;
   }
 }
 
@@ -89,27 +131,65 @@ function runScripts() {
 
 function show() {
   if (panel.open && !panel.matches(":modal")) panel.close();
-  if (!panel.open) panel.showModal();
+  const opening = !panel.open;
+  if (opening) panel.showModal();
   panel.scrollTop = 0;
+  if (animated()) {
+    // A new sheet opens out of the point that was followed; moving between
+    // pages on an open sheet only settles the new text into place.
+    if (opening && origin) {
+      // It also swells slightly from the point, so a point outside the sheet
+      // still reads as where it came from.
+      const box = panel.getBoundingClientRect();
+      panel.style.transformOrigin = `${origin.x - box.x}px ${
+        origin.y - box.y
+      }px`;
+      panel.animate([
+        { clipPath: circle(0), transform: "scale(0.92)" },
+        { clipPath: circle(-1), transform: "none" },
+      ], { duration: 520, easing: "cubic-bezier(0.7, 0, 0.2, 1)" });
+    } else if (!opening) {
+      content.animate([{ opacity: 0, transform: "translateY(0.4rem)" }, {
+        opacity: 1,
+        transform: "none",
+      }], { duration: 220, easing: "ease-out" });
+    }
+  }
   // Start reading at the top of the sheet rather than on the close button.
   content.focus({ preventScroll: true });
 }
 
 function closePanel({ push }: { push: boolean }) {
+  endIntro();
+  request++;
   document.dispatchEvent(new Event("panel:close"));
-  if (panel.open) panel.close();
-  content.replaceChildren();
-  content.dataset.section = "home";
-  document.title = homeTitle;
-  document.body.classList.add("is-home");
-  // Hand focus back to the label this panel was opened from. Two copies of
-  // the figure exist; only the one laid out for this screen is rendered.
   const opener = [
     ...document.querySelectorAll<HTMLElement | SVGElement>(
       ".fig-link[aria-current]",
     ),
   ]
     .find((link) => link.getClientRects().length);
+  // Fold the sheet back into the point it came from, then put it away.
+  const token = ++closing;
+  const finish = () => {
+    if (token !== closing) return;
+    if (panel.open) panel.close();
+    content.replaceChildren();
+  };
+  if (panel.open && animated() && panel.matches(":modal")) {
+    origin = opener ? pointOf(opener) : null;
+    panel.animate([{ clipPath: circle(-1) }, { clipPath: circle(0) }], {
+      duration: 340,
+      easing: "cubic-bezier(0.6, 0, 0.4, 1)",
+    }).finished.then(finish, finish);
+  } else {
+    finish();
+  }
+  content.dataset.section = "home";
+  document.title = homeTitle;
+  document.body.classList.add("is-home");
+  // Hand focus back to the label this panel was opened from. Two copies of
+  // the figure exist; only the one laid out for this screen is rendered.
   markCurrent(null);
   opener?.focus({ preventScroll: true });
   setLanguageLinks(null);
@@ -150,6 +230,8 @@ async function openPanel(url: URL, { push }: { push: boolean }) {
     return;
   }
 
+  endIntro();
+  closing++;
   document.dispatchEvent(new Event("panel:close"));
   for (const script of next.querySelectorAll("script")) script.remove();
   content.replaceChildren(...next.childNodes);
@@ -185,6 +267,7 @@ document.addEventListener("click", (event) => {
   const url = panelTarget(link);
   if (!url) return;
   event.preventDefault();
+  origin = link.closest(".fig-link") ? pointOf(link) : null;
   if (isHome(url)) closePanel({ push: true });
   else openPanel(url, { push: true });
 });
@@ -201,9 +284,13 @@ panel.addEventListener("click", (event) => {
 });
 
 addEventListener("popstate", () => {
+  origin = null;
   const url = new URL(location.href);
   if (isHome(url)) closePanel({ push: false });
   else openPanel(url, { push: false });
 });
 
-if (panel.open) show();
+if (panel.open) {
+  markCurrent(content.dataset.section ?? null);
+  show();
+}

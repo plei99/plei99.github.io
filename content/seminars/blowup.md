@@ -1,9 +1,9 @@
 ---
 title: Blowup formula seminar
 pubDate: 2024-01-20
-description: This is a seminar on the blowup formula in Gromov-Witten theory.
+description: The blowup formula in Gromov–Witten theory.
 title_zh: 爆破公式讨论班
-description_zh: 关于 Gromov-Witten 理论中爆破公式的讨论班。
+description_zh: 关于 Gromov–Witten 理论中爆破公式的讨论班。
 ---
 
 ## About this seminar

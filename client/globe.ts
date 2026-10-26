@@ -1,6 +1,6 @@
 import type { FeatureCollection, Geometry } from "geojson";
 import { byId } from "./dom.js";
-import { arcticIce, colors } from "./globe-surface.js";
+import { arcticIce, surfaceColors } from "./globe-surface.js";
 
 type World = FeatureCollection<Geometry, { name: string }>;
 
@@ -12,6 +12,20 @@ const zoomOut = byId("globe-zoom-out", HTMLButtonElement);
 const reset = byId("globe-reset", HTMLButtonElement);
 const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
 const visited = new Set((container.dataset.visited ?? "").split("|"));
+const places = [
+  ...document.querySelectorAll<HTMLButtonElement>(".atlas-places button"),
+];
+
+function themeColors() {
+  const style = getComputedStyle(container);
+  const role = (name: string) => style.getPropertyValue(`--${name}`).trim();
+  return surfaceColors({
+    paper: role("paper"),
+    text: role("text"),
+    link: role("link"),
+    rule: role("rule"),
+  });
+}
 
 function showFallback(error: unknown) {
   console.warn(
@@ -20,7 +34,9 @@ function showFallback(error: unknown) {
   );
   container.dataset.ready = "false";
   container.querySelector("canvas")?.remove();
-  for (const button of [motion, zoomIn, zoomOut, reset]) button.disabled = true;
+  for (const button of [motion, zoomIn, zoomOut, reset, ...places]) {
+    button.disabled = true;
+  }
   byId("globe-status", HTMLElement).textContent =
     container.dataset.fallbackLabel ?? "";
 }
@@ -75,10 +91,8 @@ async function init() {
   rim.position.set(3, 1, -3);
   scene.add(rim);
 
-  const floor = new T.Mesh(
-    new T.PlaneGeometry(20, 20),
-    new T.ShadowMaterial({ color: 0x23364d, opacity: 0.36 }),
-  );
+  const shadow = new T.ShadowMaterial({ opacity: 0.16 });
+  const floor = new T.Mesh(new T.PlaneGeometry(20, 20), shadow);
   floor.rotation.x = -Math.PI / 2;
   floor.position.y = -1.16;
   floor.receiveShadow = true;
@@ -101,45 +115,55 @@ async function init() {
     .scale(surface.width / (2 * Math.PI));
   const path = T.geoPath(projection, ctx);
   const bumpPath = T.geoPath(projection, bump);
-  ctx.fillStyle = colors.ocean;
-  ctx.fillRect(0, 0, surface.width, surface.height);
   bump.fillStyle = "#202020";
   bump.fillRect(0, 0, relief.width, relief.height);
-  ctx.beginPath();
-  path(T.geoGraticule10());
-  ctx.strokeStyle = colors.graticule;
-  ctx.lineWidth = surface.width / 4096;
-  ctx.stroke();
-  ctx.beginPath();
-  path(arcticIce);
-  ctx.fillStyle = colors.ice;
-  ctx.fill();
   bump.beginPath();
   bumpPath(arcticIce);
   bump.fillStyle = "#666666";
   bump.fill();
   for (const feature of world.features) {
-    ctx.beginPath();
-    path(feature);
-    const polarLand = feature.properties.name === "Antarctica";
-    ctx.fillStyle = polarLand
-      ? colors.ice
-      : visited.has(feature.properties.name)
-      ? colors.visited
-      : colors.land;
-    ctx.fill();
-    ctx.strokeStyle = polarLand
-      ? colors.iceBorder
-      : visited.has(feature.properties.name)
-      ? colors.visitedBorder
-      : colors.border;
-    ctx.lineWidth = 1.1 * surface.width / 4096;
-    ctx.stroke();
     bump.beginPath();
     bumpPath(feature);
     bump.fillStyle = "#999999";
     bump.fill();
   }
+
+  // The map in the current theme's colours; drawn again when it changes.
+  const paint = () => {
+    const colors = themeColors();
+    shadow.color.set(colors.shadow);
+    ctx.fillStyle = colors.ocean;
+    ctx.fillRect(0, 0, surface.width, surface.height);
+    ctx.beginPath();
+    path(T.geoGraticule10());
+    ctx.strokeStyle = colors.graticule;
+    ctx.lineWidth = surface.width / 4096;
+    ctx.stroke();
+    ctx.beginPath();
+    path(arcticIce);
+    ctx.fillStyle = colors.ice;
+    ctx.fill();
+    for (const feature of world.features) {
+      ctx.beginPath();
+      path(feature);
+      const polarLand = feature.properties.name === "Antarctica";
+      const seen = visited.has(feature.properties.name);
+      ctx.fillStyle = polarLand
+        ? colors.ice
+        : seen
+        ? colors.visited
+        : colors.land;
+      ctx.fill();
+      ctx.strokeStyle = polarLand
+        ? colors.iceBorder
+        : seen
+        ? colors.visitedBorder
+        : colors.border;
+      ctx.lineWidth = 1.1 * surface.width / 4096;
+      ctx.stroke();
+    }
+  };
+  paint();
   const map = new T.CanvasTexture(surface);
   map.colorSpace = T.SRGBColorSpace;
   map.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
@@ -152,8 +176,8 @@ async function init() {
       map,
       bumpMap,
       bumpScale: 0.012,
-      specular: new T.Color("#34445a"),
-      shininess: 22,
+      specular: new T.Color("#1c2230"),
+      shininess: 14,
     }),
   );
   earth.castShadow = true;
@@ -252,6 +276,30 @@ async function init() {
     updateMotion();
     schedule();
   });
+  for (const place of places) {
+    place.addEventListener("click", () => {
+      pause();
+      target = {
+        lat: Number(place.dataset.lat),
+        lon: Number(place.dataset.lon),
+      };
+      schedule();
+    });
+  }
+  // The theme picker and the system setting both change the page's colours.
+  const repaint = () => {
+    paint();
+    map.needsUpdate = true;
+    sun.shadow.needsUpdate = true;
+    schedule();
+  };
+  const themeObserver = new MutationObserver(repaint);
+  themeObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+  const scheme = matchMedia("(prefers-color-scheme: dark)");
+  scheme.addEventListener("change", repaint);
   zoomIn.addEventListener("click", () => changeZoom(0.1));
   zoomOut.addEventListener("click", () => changeZoom(-0.1));
   reset.addEventListener("click", () => {
@@ -354,7 +402,7 @@ async function init() {
   observer.observe(container);
   const resizeObserver = new ResizeObserver(resize);
   resizeObserver.observe(container);
-  for (const button of [motion, zoomIn, zoomOut, reset]) {
+  for (const button of [motion, zoomIn, zoomOut, reset, ...places]) {
     button.disabled = false;
   }
   container.dataset.ready = "true";
@@ -367,6 +415,8 @@ async function init() {
     cancelAnimationFrame(frame);
     resizeObserver.disconnect();
     observer.disconnect();
+    themeObserver.disconnect();
+    scheme.removeEventListener("change", repaint);
     reducedMotion.removeEventListener("change", onMotionChange);
     document.removeEventListener("visibilitychange", onVisibility);
     scene.traverse((object) => {

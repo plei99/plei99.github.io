@@ -1,4 +1,5 @@
 // Data and helpers shared by the pages. Everything here runs at build time.
+import { site } from "../data/site";
 import { themes } from "../data/themes";
 import type { Lang } from "../data/types";
 
@@ -19,8 +20,15 @@ export const rev = "__REV__";
 
 export const absolute = (url: string) => SITE_URL + url;
 
+// Apostrophes between letters become ’ in text, never inside tags or code.
+const curl = (html: string) =>
+  html.replace(
+    /(<(?:code|pre)[\s\S]*?<\/(?:code|pre)>|<[^>]*>)|(?<=[A-Za-z])'(?=[a-z])/g,
+    (match, kept: string | undefined) => kept ?? "’",
+  );
+
 export const md = (text: string) =>
-  Bun.markdown.html(text, { tables: true } as never).trim();
+  curl(Bun.markdown.html(text, { tables: true } as never).trim());
 export const mdInline = (text: string) =>
   md(text).replace(/^<p>([\s\S]*)<\/p>$/, "$1");
 
@@ -71,7 +79,23 @@ export type Seminar = {
   description_zh?: string;
   pubDate: string;
   body: string;
+  /** From the "Organizers" line of the body, as plain text, without me. */
+  coOrganizers: string[];
 };
+
+// The "- **Organizers:** A, B" line at the top of a seminar's body.
+function bodyField(body: string, names: string[]) {
+  const line = body.match(
+    new RegExp(
+      `^- (?:\\*\\*)?(?:${names.join("|")}):?(?:\\*\\*)?:? (.+)$`,
+      "m",
+    ),
+  );
+  return line?.[1]
+    ?.replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")
+    .replace(/\*\*/g, "")
+    .trim();
+}
 
 // Markdown front matter is not type checked, so each seminar's is checked
 // here: a missing or misspelled field fails the build and names the file.
@@ -118,7 +142,16 @@ export async function seminars(): Promise<Seminar[]> {
       text.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/) ?? [];
     const slug = file.slice("content/seminars/".length, -".md".length);
     const fields = seminarFields(file, Bun.YAML.parse(front));
-    list.push({ ...fields, slug, url: `/seminars/${slug}/`, body });
+    const organizers = bodyField(body, ["Organizers", "Organizer"]) ?? "";
+    list.push({
+      ...fields,
+      slug,
+      url: `/seminars/${slug}/`,
+      body,
+      coOrganizers: organizers.split(/,\s*/).filter((name) =>
+        name && name !== site.name
+      ),
+    });
   }
   return list.sort((a, b) => b.pubDate.localeCompare(a.pubDate));
 }

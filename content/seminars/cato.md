@@ -1,7 +1,7 @@
 ---
 title: Category O
 pubDate: 2021-09-05
-description: This is a seminar on category O for semisimple Lie algebras.
+description: Category O for semisimple Lie algebras.
 title_zh: 范畴 O
 description_zh: 关于半单李代数的范畴 O 的讨论班。
 ---

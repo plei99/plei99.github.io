@@ -1,7 +1,7 @@
 ---
 title: Quantum information undergrad seminar
 pubDate: 2024-01-18
-description: This is an undergraduate seminar on quantum information theory.
+description: An undergraduate seminar on quantum information theory.
 title_zh: 量子信息本科生讨论班
 description_zh: 面向本科生的量子信息论讨论班。
 ---

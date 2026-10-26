@@ -1,7 +1,7 @@
 ---
 title: Geometric invariant theory
 pubDate: 2020-09-05
-description: This is a seminar on geometric invariant theory.
+description: Geometric invariant theory.
 title_zh: 几何不变量理论
 description_zh: 关于几何不变量理论的讨论班。
 ---

@@ -1,7 +1,7 @@
 ---
 title: Toric varieties undergrad seminar
 pubDate: 2023-09-05
-description: This is an undergraduate seminar on toric varieties.
+description: An undergraduate seminar on toric varieties.
 title_zh: 环面簇本科生讨论班
 description_zh: 面向本科生的环面簇讨论班。
 ---

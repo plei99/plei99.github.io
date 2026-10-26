@@ -1,7 +1,7 @@
 ---
 title: Geometric rep theory
 pubDate: 2022-01-20
-description: This is a seminar on geometric representation theory with a focus on D-modules and localization.
+description: Geometric representation theory with a focus on D-modules and localization.
 title_zh: 几何表示论
 description_zh: 关于几何表示论的讨论班，侧重 D-模与局部化。
 ---

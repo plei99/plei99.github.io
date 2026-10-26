@@ -1,7 +1,7 @@
 ---
 title: Intersection theory
 pubDate: 2021-01-20
-description: This is a seminar on intersection theory.
+description: Intersection theory.
 title_zh: 相交理论
 description_zh: 关于相交理论的讨论班。
 ---

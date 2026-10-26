@@ -1,7 +1,17 @@
 import type { ReactNode } from "react";
-import { type Lang, site, ui } from "../lib/site";
+import { type Destination, type Lang, site, ui } from "../lib/site";
 
 type Props = { lang: Lang; section: string };
+
+/** A destination's name in the figure, such as x₁, set in the math font. */
+export function Symbol({ symbol }: { symbol: Destination["symbol"] }) {
+  return (
+    <span className="symbol" aria-hidden="true">
+      {symbol.base}
+      {symbol.n && <sub>{symbol.n}</sub>}
+    </span>
+  );
+}
 
 /** A label in the figure that links to a page. */
 function FigLink({ id, href, current, external, children }: {
@@ -82,10 +92,10 @@ function Curve({ lang, section }: Props) {
         href={pages.seminars.href[lang]}
         current={section === "seminars"}
       >
-        <path className="fig-hit" d="M 236 195 L 236 70" />
-        <path className="fig-leader" d="M 236 186 L 236 100" />
+        <path className="fig-hit" d="M 236 195 L 236 54" />
+        <path className="fig-leader" d="M 236 186 L 236 84" />
         <circle className="fig-pt" cx="236" cy="195" r="5" />
-        <text className="fig-word" x="236" y="88">
+        <text className="fig-word" x="236" y="72">
           {pages.seminars.label[lang]}
         </text>
       </FigLink>
@@ -122,6 +132,7 @@ function MapArrow({ lang, section, vertical }: Props & { vertical: boolean }) {
               />
               <path
                 className="fig-arrow"
+                pathLength={1}
                 d="M 210 335 L 210 488 M 204 477 L 210 489 L 216 477"
               />
               <path className="fig-leader" d="M 219 412 L 282 412" />
@@ -134,14 +145,15 @@ function MapArrow({ lang, section, vertical }: Props & { vertical: boolean }) {
             <>
               <path
                 className="fig-hit"
-                d="M 430 208 L 602 208 M 515 208 L 515 350"
+                d="M 430 208 L 602 208 M 515 208 L 515 368"
               />
               <path
                 className="fig-arrow"
+                pathLength={1}
                 d="M 430 208 L 600 208 M 589 202 L 601 208 L 589 214"
               />
-              <path className="fig-leader" d="M 515 217 L 515 318" />
-              <text className="fig-word" x="515" y="345">
+              <path className="fig-leader" d="M 515 217 L 515 336" />
+              <text className="fig-word" x="515" y="362">
                 {pages.travel.label[lang]}
               </text>
             </>
@@ -173,8 +185,8 @@ function MapArrow({ lang, section, vertical }: Props & { vertical: boolean }) {
           )
           : (
             <>
-              <path className="fig-hit" d="M 515 196 L 515 76" />
-              <path className="fig-leader" d="M 515 170 L 515 100" />
+              <path className="fig-hit" d="M 515 196 L 515 54" />
+              <path className="fig-leader" d="M 515 170 L 515 84" />
               <text
                 className="fig-math fig-math--f fig-math--link"
                 x="515"
@@ -184,7 +196,7 @@ function MapArrow({ lang, section, vertical }: Props & { vertical: boolean }) {
               >
                 𝑓
               </text>
-              <text className="fig-word" x="515" y="88">
+              <text className="fig-word" x="515" y="72">
                 {pages.uses.label[lang]}
               </text>
             </>
@@ -254,7 +266,11 @@ function Target({ lang, section }: Props) {
           d="M 708 60 L 708 201 M 692 252 Q 724 201 692 150"
         />
         <path className="fig-leader" d="M 708 84 L 708 193" />
-        <path className="fig-cycle" d="M 692 252 Q 724 201 692 150" />
+        <path
+          className="fig-cycle"
+          pathLength={1}
+          d="M 692 252 Q 724 201 692 150"
+        />
         <circle className="fig-pt" cx="708" cy="201" r="4.5" />
         <text className="fig-word" x="708" y="72">
           {pages.arxiv.label[lang]}
@@ -266,19 +282,27 @@ function Target({ lang, section }: Props) {
           d="M 873 60 L 873 199 M 890 148 Q 856 199 890 250"
         />
         <path className="fig-leader" d="M 873 84 L 873 191" />
-        <path className="fig-cycle" d="M 890 148 Q 856 199 890 250" />
+        <path
+          className="fig-cycle"
+          pathLength={1}
+          d="M 890 148 Q 856 199 890 250"
+        />
         <circle className="fig-pt" cx="873" cy="199" r="4.5" />
         <text className="fig-word" x="873" y="72">{pages.now.label[lang]}</text>
       </FigLink>
       <FigLink id="cv" href={pages.cv.href[lang]} external>
         <path
           className="fig-hit"
-          d="M 814 282 L 814 376 M 774 294 Q 814 270 854 294"
+          d="M 814 282 L 814 368 M 774 294 Q 814 270 854 294"
         />
-        <path className="fig-leader" d="M 814 290 L 814 346" />
-        <path className="fig-cycle" d="M 774 294 Q 814 270 854 294" />
+        <path className="fig-leader" d="M 814 290 L 814 336" />
+        <path
+          className="fig-cycle"
+          pathLength={1}
+          d="M 774 294 Q 814 270 854 294"
+        />
         <circle className="fig-pt" cx="814" cy="282" r="4.5" />
-        <text className="fig-word" x="814" y="372">{pages.cv.label[lang]}</text>
+        <text className="fig-word" x="814" y="362">{pages.cv.label[lang]}</text>
       </FigLink>
     </>
   );
@@ -311,11 +335,11 @@ export default function Figure({ lang, section }: Props) {
         role="group"
         aria-label={ui[lang].figure_label}
       >
-        <g>
+        <g className="fig-source">
           <Curve lang={lang} section={section} />
         </g>
         <MapArrow lang={lang} section={section} vertical={false} />
-        <g>
+        <g className="fig-target">
           <Target lang={lang} section={section} />
         </g>
       </svg>
@@ -325,15 +349,32 @@ export default function Figure({ lang, section }: Props) {
         role="group"
         aria-label={ui[lang].figure_label}
       >
-        <g transform="translate(-30 -45)">
+        <g className="fig-source" transform="translate(-30 -45)">
           <Curve lang={lang} section={section} />
         </g>
         <MapArrow lang={lang} section={section} vertical />
-        <g transform="translate(-585 450)">
+        <g className="fig-target" transform="translate(-585 450)">
           <Target lang={lang} section={section} />
         </g>
       </svg>
-      <figcaption dangerouslySetInnerHTML={{ __html: caption[lang] }} />
+      <figcaption>
+        <span dangerouslySetInnerHTML={{ __html: caption[lang] }} />
+        {
+          /* One line under the caption says where the label being pointed at
+            leads; styles.css shows the matching one with :has(). Screen
+            readers get the link text itself, so these are hidden from them. */
+        }
+        <span className="fig-hints" aria-hidden="true">
+          <span className="fig-hint fig-hint--idle">
+            {ui[lang].figure_hint}
+          </span>
+          {Object.entries(site.pages).map(([id, page]) => (
+            <span className="fig-hint" data-for={id} key={id}>
+              <Symbol symbol={page.symbol} /> {page.hint[lang]}
+            </span>
+          ))}
+        </span>
+      </figcaption>
     </figure>
   );
 }

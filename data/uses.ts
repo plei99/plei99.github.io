@@ -35,7 +35,7 @@ export const uses: UsesCategory[] = [
         name: "14 inch MacBook Pro (M4 Pro)",
         note: {
           en:
-            "I didn't realize it would take so much effort to get macOS to behave like my old Linux setup. I used to use a System76 Lemur Pro (running either Arch Linux or NixOS), which I liked a lot. Before that, I used a 2015-era MacBook Air, but I hate its keyboard.",
+            "I didn’t realize it would take so much effort to get macOS to behave like my old Linux setup. I used to use a System76 Lemur Pro (running either Arch Linux or NixOS), which I liked a lot. Before that, I used a 2015-era MacBook Air, but I hate its keyboard.",
           zh:
             "没想到要让 macOS 用起来像我以前的 Linux 环境，得费这么大劲。我以前用的是 System76 Lemur Pro（装的是 Arch Linux 或 NixOS），我很喜欢它。再之前用的是一台 2015 年前后的 MacBook Air，但我很讨厌它的键盘。",
         },
@@ -55,24 +55,24 @@ export const uses: UsesCategory[] = [
         name: "none (macOS), hyprland (Linux)",
         note: {
           en:
-            "Ideally, Linux would have a Wayland version of XMonad which plays well with a status bar better than xmobar (which sucks). With hyprland now being configured in Lua, we might actually have something like that. I also used i3, awesome, dwm, bspwm, sway, and river on Linux, but screen tearing on X makes it not usable for me and I found hyprland to be the best experience on Wayland for me (but Sway's tabbed layout implementation was better). I've tried Yabai, AeroSpace, and Paneru on macOS, but using them is like fighting the OS, so I switched to a single virtual desktop and just using Command+Tab to switch windows and Raycast to lay them out",
+            "Ideally, Linux would have a Wayland version of XMonad which plays well with a status bar better than xmobar (which sucks). With hyprland now being configured in Lua, we might actually have something like that. I also used i3, awesome, dwm, bspwm, sway, and river on Linux, but screen tearing on X makes it not usable for me and I found hyprland to be the best experience on Wayland for me (but Sway’s tabbed layout implementation was better). I’ve tried Yabai, AeroSpace, and Paneru on macOS, but using them is like fighting the OS, so I switched to a single virtual desktop and just using Command+Tab to switch windows and Raycast to lay them out.",
           zh:
             "理想情况下，Linux 上应该有一个 Wayland 版的 XMonad，并且能和一个比 xmobar（很烂）更好的状态栏配合得当。现在 hyprland 改用 Lua 来配置，我们也许真的能有这样的东西了。我在 Linux 上还用过 i3、awesome、dwm、bspwm、sway 和 river，但 X 上的画面撕裂让我没法用；在 Wayland 上，hyprland 是我体验最好的（不过 Sway 的标签式布局实现得更好）。我在 macOS 上试过 Yabai、AeroSpace 和 Paneru，但用它们就像在跟系统作对，所以我改成只用一个虚拟桌面，用 Command+Tab 切换窗口，再用 Raycast 排布窗口。",
         },
       },
       {
-        kind: { en: "ai tools", zh: "AI 工具" },
+        kind: { en: "AI tools", zh: "AI 工具" },
         name: "Codex, Claude Code",
         study: true,
         note: {
           en:
-            'Pure TikZ for images is a complete mystery to me, so what used to be painstaking hand-written reproduction of images post-lectures is now a prompt to a coding agent. Some models used to be terrible at this (looking at you, GPT-5.6 Sol), but <a href="https://plei99.github.io/tikz-bench/" target="_blank" rel="noopener">tikz-bench</a> indicates that TikZ is largely saturated at the US frontier. In terms of value for money, see below. (**tl;dr:** use the US subscriptions if possible.) I have also wanted HTML versions of my notes since I was an undergrad, and let\'s just say that agents made this happen in a few hours. However, LaTeX is so janky that the build pipeline for the html versions involves compiling diagrams with LaTeX into SVGs, compiling text via `tex4ht`, compiling equations into MathML via MathJax, and then post-processing the MathML because MathJax comes with an outdated version of MathML.',
+            'Pure TikZ for images is a complete mystery to me, so what used to be painstaking hand-written reproduction of images post-lectures is now a prompt to a coding agent. Some models used to be terrible at this (looking at you, GPT-5.6 Sol), but <a href="https://plei99.github.io/tikz-bench/" target="_blank" rel="noopener">tikz-bench</a> indicates that TikZ is largely saturated at the US frontier. In terms of value for money, see below. (**tl;dr:** use the US subscriptions if possible.) I have also wanted HTML versions of my notes since I was an undergrad, and let’s just say that agents made this happen in a few hours. However, LaTeX is so janky that the build pipeline for the html versions involves compiling diagrams with LaTeX into SVGs, compiling text via `tex4ht`, compiling equations into MathML via MathJax, and then post-processing the MathML because MathJax comes with an outdated version of MathML.',
           zh:
             '用纯 TikZ 画图对我来说完全是个谜，所以过去课后要费力手写复现的图，现在只要给编程智能体一句提示词就行了。有些模型以前在这方面很糟糕（说的就是你，GPT-5.6 Sol），但 <a href="https://plei99.github.io/tikz-bench/" target="_blank" rel="noopener">tikz-bench</a> 显示，在美国的前沿模型中，TikZ 基本已经饱和。至于性价比，见下文。（**太长不看**：能用美国的订阅就用美国的。）我从本科起就一直想要笔记的 HTML 版本，结果有了智能体，几个小时就做出来了。不过 LaTeX 实在太别扭，HTML 版本的构建流程是这样的：用 LaTeX 把图编译成 SVG，用 `tex4ht` 编译正文，用 MathJax 把公式编译成 MathML，最后还得对 MathML 做后处理，因为 MathJax 自带的 MathML 版本已经过时了。',
         },
       },
       {
-        kind: { en: "pdf viewer", zh: "PDF 阅读器" },
+        kind: { en: "PDF viewer", zh: "PDF 阅读器" },
         name: "Zathura (Linux), Skim (macOS)",
         note: {
           en:
@@ -119,7 +119,7 @@ There is a lot of misinformation in running shoe reviews (for example [this arti
         name: "Saucony Endorphin Speed 5",
         note: {
           en:
-            "This is possibly the favorite model of running shoe I have ever worn, is extremely durable, and has grown on me with time. The only flaw is that it isn't so cushioned for longer runs. With [78% energy return in the forefoot](https://runrepeat.com/saucony-endorphin-speed-5#energy-return) and a low stack height, it works very well for things that resemble track sessions.",
+            "This is possibly the favorite model of running shoe I have ever worn, is extremely durable, and has grown on me with time. The only flaw is that it isn’t so cushioned for longer runs. With [78% energy return in the forefoot](https://runrepeat.com/saucony-endorphin-speed-5#energy-return) and a low stack height, it works very well for things that resemble track sessions.",
           zh:
             "这大概是我穿过最喜欢的一款跑鞋，非常耐用，而且越穿越喜欢。唯一的缺点是跑长距离时缓震不太够。它的[前掌能量回馈达到 78%](https://runrepeat.com/saucony-endorphin-speed-5#energy-return)，鞋底又比较薄，很适合类似田径场训练的课表。",
         },
@@ -129,7 +129,7 @@ There is a lot of misinformation in running shoe reviews (for example [this arti
         name: "Adidas Adizero Evo SL",
         note: {
           en:
-            "Another nearly perfect shoe. The only flaw with this shoe is that the foam is only responsive for something like 300 miles. It's also completely fine for extremely cold weather despite the breathability, is already very comfortable, and grips well in wet conditions, so I don't get why Adidas introduced the ATR or woven versions.",
+            "Another nearly perfect shoe. The only flaw with this shoe is that the foam is only responsive for something like 300 miles. It’s also completely fine for extremely cold weather despite the breathability, is already very comfortable, and grips well in wet conditions, so I don’t get why Adidas introduced the ATR or woven versions.",
           zh:
             "又是一双近乎完美的鞋。唯一的缺点是中底大概只能保持 300 英里（约 480 公里）的弹性。虽然透气，极冷的天气也完全没问题；本身已经很舒服，湿滑路面抓地也好，所以我不明白 Adidas 为什么还要出 ATR 和编织鞋面的版本。",
         },
@@ -139,7 +139,7 @@ There is a lot of misinformation in running shoe reviews (for example [this arti
         name: "Asics Metaspeed Edge Tokyo",
         note: {
           en:
-            "I went to Marathon Sports, tried on a bunch of race shoes, and this one felt best. Weight is unfortunately not so competitive with the Adios Pro Evo 3 (but which non-Adidas shoe is?) and even with Asics is not so competitive with the Metaspeed Ray, but that shoe didn't exist when I bought this one. I did break 3 in it, so I am quite happy with the shoe.",
+            "I went to Marathon Sports, tried on a bunch of race shoes, and this one felt best. Weight is unfortunately not so competitive with the Adios Pro Evo 3 (but which non-Adidas shoe is?) and even with Asics is not so competitive with the Metaspeed Ray, but that shoe didn’t exist when I bought this one. I did break 3 in it, so I am quite happy with the shoe.",
           zh:
             "我去 Marathon Sports 试了一堆竞速鞋，这双脚感最好。可惜重量比不过 Adios Pro Evo 3（不过哪双非 Adidas 的鞋比得过呢？），就算在 Asics 自家也比不过 Metaspeed Ray，但我买的时候那双鞋还没出。我穿着它破了三，所以对它相当满意。",
         },
@@ -149,7 +149,7 @@ There is a lot of misinformation in running shoe reviews (for example [this arti
         name: "Maurten Gel 100",
         note: {
           en:
-            "Goes down easily in situations where water is limited, doesn't upset the stomach, and no weird taste.",
+            "Goes down easily in situations where water is limited, doesn’t upset the stomach, and no weird taste.",
           zh: "在没什么水的情况下也容易咽下去，不伤胃，也没有奇怪的味道。",
         },
       },

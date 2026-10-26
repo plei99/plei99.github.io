@@ -4,8 +4,10 @@ export const home: Home = {
   // `tagline` sits under the name on every page. `bio` and `about` make up the
   // About me panel.
   tagline: {
-    en: "Algebraic geometer",
-    zh: "代数几何学家",
+    en:
+      "Algebraic geometer at the Shanghai Center for Mathematical Sciences, Fudan University, working on higher-genus Gromov–\u2060Witten theory.",
+    zh:
+      "代数几何学家，在复旦大学上海数学中心研究高亏格 Gromov–\u2060Witten 理论。",
   },
   bio: {
     en:
@@ -15,14 +17,14 @@ Assistant Professor (postdoc) in mathematics at Boston College, mentored by
 <a href="https://sites.google.com/bc.edu/qile-chen/">Qile Chen</a>. I completed
 my PhD at Columbia University, advised by
 <a href="https://www.math.columbia.edu/~ccliu/">Melissa Liu</a>.
-My research is in algebraic geometry, particularly higher-genus Gromov-Witten theory.
+My research is in algebraic geometry, particularly higher-genus Gromov–Witten theory.
 `,
     zh:
       `我目前在复旦大学<a href="https://scms.fudan.edu.cn/">上海数学中心</a>从事博士后研究。
 此前，我在波士顿学院担任数学方向的访问助理教授（博士后），导师是
 <a href="https://sites.google.com/bc.edu/qile-chen/">陈琪乐</a>。我在哥伦比亚大学完成了博士学位，导师是
 <a href="https://www.math.columbia.edu/~ccliu/">刘秋菊</a>。
-我的研究方向是代数几何，尤其是高亏格 Gromov-Witten 理论。
+我的研究方向是代数几何，尤其是高亏格 Gromov–Witten 理论。
 `,
   },
   about: {
@@ -46,7 +48,7 @@ for an introduction to some themes in enumerative geometry.</p>
 <h2>Non-math activities</h2>
 <p>Besides doing math, I also enjoy running and playing the piano.
 I also like to learn about the historical evolution of Chinese dialects.
-I'm always open to suggestions for affordable but legitimately high-quality Sichuan cuisine.</p>
+I’m always open to suggestions for affordable but legitimately high-quality Sichuan cuisine.</p>
 <ul>
   <li>Win all of your arguments about European soccer:
   <a href="https://best-teams.lakebed.app/">teams</a>
@@ -80,17 +82,23 @@ I'm always open to suggestions for affordable but legitimately high-quality Sich
     },
   },
   now: {
-    en: [
-      "K-theory, allegedly",
-      "Am I a good moduli space?",
-      "Running the Shanghai Marathon",
-      "broke 3 on the first try",
-    ],
-    zh: [
-      "K-理论（据说）",
-      "我到底是不是一个好模空间？",
-      "参加上海马拉松",
-      "首马破三",
+    // Change this whenever the list changes.
+    updated: "2026-10",
+    groups: [
+      {
+        title: { en: "Mathematics", zh: "数学" },
+        items: {
+          en: ["K-theory, allegedly", "Am I a good moduli space?"],
+          zh: ["K-理论（据说）", "我到底是不是一个好模空间？"],
+        },
+      },
+      {
+        title: { en: "Running", zh: "跑步" },
+        items: {
+          en: ["Running the Shanghai Marathon", "broke 3 on the first try"],
+          zh: ["参加上海马拉松", "首马破三"],
+        },
+      },
     ],
   },
 };
