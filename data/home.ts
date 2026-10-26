@@ -4,10 +4,8 @@ export const home: Home = {
   // `tagline` sits under the name on every page. `bio` and `about` make up the
   // About me panel.
   tagline: {
-    en:
-      "Algebraic geometer at the Shanghai Center for Mathematical Sciences, Fudan University, working on higher-genus Gromov–\u2060Witten theory.",
-    zh:
-      "代数几何学家，在复旦大学上海数学中心研究高亏格 Gromov–\u2060Witten 理论。",
+    en: "Algebraic geometer at the Shanghai Center for Mathematical Sciences.",
+    zh: "上海数学中心的代数几何学家。",
   },
   bio: {
     en:
