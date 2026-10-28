@@ -20,7 +20,9 @@ import type { Theme } from "./types";
 //          Anthropic's rust in lightness, not below: protanopia darkens reds,
 //          so a lighter orange would slide back toward a dark green. The
 //          light ochre and pink fall under 3:1 on the paper, so every line
-//          also carries a text label.
+//          also carries a text label. On the dark paper every series clears
+//          3:1 as protan and deutan readers see it too, since dimmed reds
+//          there sink into the background.
 // `dark: true` sets color-scheme, so scrollbars and form controls follow.
 //
 // Visitors who have not chosen get light or dark by system setting.
@@ -57,12 +59,12 @@ export const themes: Theme[] = [
     rule: "#433b33",
     stage: "#2b251f",
     series: {
-      codex: "#24805a",
-      claude: "#c2451a",
-      google: "#3a90ea",
-      kimi: "#8248e8",
-      mimo: "#b08d2f",
-      glm: "#d44da8",
+      codex: "#16ad93",
+      claude: "#c25634",
+      google: "#3d92ed",
+      kimi: "#8045e4",
+      mimo: "#b09303",
+      glm: "#c1429a",
     },
   },
 ];
