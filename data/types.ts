@@ -98,7 +98,14 @@ export type Home = {
 
 export type ThemeRole = "paper" | "text" | "muted" | "ink" | "link" | "rule";
 export type Theme =
-  & { id: string; name: Localized; dark: boolean; stage?: string }
+  & {
+    id: string;
+    name: Localized;
+    dark: boolean;
+    stage?: string;
+    /** One mark colour per subscription in the quota chart. */
+    series: Record<PlanId, string>;
+  }
   & Record<ThemeRole, string>;
 
 export type TravelKey =
@@ -165,7 +172,25 @@ export type StudyKey =
   | "tasks"
   | "per_100"
   | "notes"
-  | "endnote";
+  | "endnote"
+  | "chart_title"
+  | "chart_note"
+  | "chart_x"
+  | "chart_y"
+  | "chart_scale"
+  | "chart_log"
+  | "chart_linear"
+  | "chart_frontier"
+  | "chart_reasoning"
+  | "chart_models"
+  | "chart_reset"
+  | "chart_quota"
+  | "chart_tasks"
+  | "chart_cost"
+  | "chart_empty"
+  | "chart_table"
+  | "chart_effort"
+  | "chart_quota_task";
 /** A usage window that uses.js lets the reader weight with a slider. */
 export type Timing = {
   label: Localized;
@@ -176,22 +201,46 @@ export type Timing = {
   window_coefficient: number;
   other_coefficient: number;
 };
-export type StudyRow = {
-  plan: Localized;
-  model: string;
-  /** A key of AiSubscriptions["timing"], for rows the sliders adjust. */
-  timing?: string;
+export type PlanId = "codex" | "claude" | "google" | "kimi" | "mimo" | "glm";
+export type Plan = {
+  name: Localized;
   price: number;
-  score: number;
+  /** The allowance's monthly worth at API prices, in dollars. */
   api: number;
+  /** A key of AiSubscriptions["timing"], for plans the sliders adjust. */
+  timing?: string;
+};
+/** AA's reasoning settings; "none" is a non-reasoning mode. */
+export type Effort = "none" | "low" | "medium" | "high" | "xhigh" | "max";
+/** One model at one reasoning setting, as AA's Intelligence Index ran it. */
+export type ModelLevel = {
+  /** Absent for a model AA runs at a single setting. */
+  effort?: Effort;
+  score: number;
+  /** Dollars per task at API prices. */
   cost: number;
   time_seconds: number | null;
+};
+/** A model with every reasoning setting AA has measured, lowest first. */
+export type ModelLine = {
+  id: string;
+  name: string;
+  plan: PlanId;
+  url: string;
+  levels: ModelLevel[];
+};
+/** A table row: one level of a model line. */
+export type StudyRow = {
+  line: string;
+  effort?: Effort;
   time_url: string;
   url: string;
 };
 export type AiSubscriptions = {
   copy: Localized<Record<StudyKey, string>>;
   timing: Record<string, Timing>;
+  plans: Record<PlanId, Plan>;
+  lines: ModelLine[];
   rows: StudyRow[];
   /** Inline Markdown, one per list item. */
   notes: Localized[];

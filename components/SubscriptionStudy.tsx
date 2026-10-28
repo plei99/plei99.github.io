@@ -1,29 +1,12 @@
 // The AI subscription comparison that opens over the Uses panel. uses.js reads
 // the data-* attributes to adjust the timed rows live.
-import {
-  aiSubscriptions as study,
-  type Lang,
-  mdInline,
-  type StudyRow,
-} from "../lib/site";
-
-const number = (value: number, digits = 0) =>
-  value.toLocaleString("en-US", {
-    minimumFractionDigits: digits,
-    maximumFractionDigits: digits,
-  });
-
-/** The data attributes uses.js recomputes a timed row from. */
-const values = (row: StudyRow) => ({
-  "data-study-values": row.timing,
-  "data-api": row.api,
-  "data-cost": row.cost,
-  "data-price": row.price,
-});
+import { aiSubscriptions as study, type Lang, mdInline } from "../lib/site";
+import QuotaChart from "./QuotaChart";
+import { number, resolve, values } from "./study";
 
 export default function SubscriptionStudy({ lang }: { lang: Lang }) {
   const copy = study.copy[lang];
-  const rows = study.rows;
+  const rows = study.rows.map(resolve);
   const timings = Object.entries(study.timing);
   const notes = study.notes.map((note) => note[lang].trim()).filter(Boolean);
 
@@ -91,28 +74,28 @@ export default function SubscriptionStudy({ lang }: { lang: Lang }) {
                       .replace("{other}", String(100 - timing.default))}
                   </output>
                   {rows.filter((row) =>
-                    row.timing === id
+                    row.plan.timing === id
                   ).map((row) => (
                     <p
                       className="study-timing-result"
-                      key={row.model}
+                      key={row.label}
                       {...values(row)}
                       dangerouslySetInnerHTML={{
                         __html:
                           `<span class="study-preview-model">${
-                            Bun.escapeHTML(row.model)
+                            Bun.escapeHTML(row.label)
                           }</span> ` +
                           copy.preview
                             .replace(
                               "{api}",
                               `<span data-value="api">$${
-                                number(row.api, 2)
+                                number(row.plan.api, 2)
                               }</span>`,
                             )
                             .replace(
                               "{tasks}",
                               `<strong data-value="tasks">${
-                                number(row.api / row.cost)
+                                number(row.plan.api / row.level.cost)
                               }</strong>`,
                             ),
                       }}
@@ -148,19 +131,19 @@ export default function SubscriptionStudy({ lang }: { lang: Lang }) {
               <tbody>
                 {rows.map((row) => (
                   <tr
-                    key={row.model + row.plan.en}
-                    {...(row.timing ? values(row) : {})}
+                    key={row.label}
+                    {...(row.plan.timing ? values(row) : {})}
                   >
                     <th scope="row">
-                      <span className="study-plan">{row.plan[lang]}</span>
-                      <a href={row.url}>{row.model}</a>
+                      <span className="study-plan">{row.plan.name[lang]}</span>
+                      <a href={row.url}>{row.label}</a>
                     </th>
-                    <td>${number(row.price)}</td>
-                    <td>{row.score}</td>
-                    <td data-value="api">${number(row.api, 2)}</td>
-                    <td>${number(row.cost, 2)}</td>
+                    <td>${number(row.plan.price)}</td>
+                    <td>{number(row.level.score)}</td>
+                    <td data-value="api">${number(row.plan.api, 2)}</td>
+                    <td>${number(row.level.cost, 2)}</td>
                     <td className="study-task-time">
-                      {row.time_seconds === null
+                      {row.level.time_seconds === null
                         ? (
                           <span
                             title={copy.time_unavailable}
@@ -175,24 +158,28 @@ export default function SubscriptionStudy({ lang }: { lang: Lang }) {
                           <a
                             href={row.time_url}
                             title={`${
-                              number(row.time_seconds, 2)
+                              number(row.level.time_seconds, 2)
                             } ${copy.seconds}`}
                           >
-                            {number(row.time_seconds / 60, 1)} {copy.minutes}
+                            {number(row.level.time_seconds / 60, 1)}{" "}
+                            {copy.minutes}
                           </a>
                         )}
                     </td>
                     <td className="study-result" data-value="tasks">
-                      {number(row.api / row.cost)}
+                      {number(row.plan.api / row.level.cost)}
                     </td>
                     <td data-value="per100">
-                      {number((row.api / row.cost) * 100 / row.price)}
+                      {number(
+                        (row.plan.api / row.level.cost) * 100 / row.plan.price,
+                      )}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
+          <QuotaChart lang={lang} />
           {notes.length > 0 && (
             <details className="study-method">
               <summary>{copy.notes}</summary>

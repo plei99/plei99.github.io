@@ -1315,6 +1315,323 @@ img {
   margin-top: 1.5rem;
 }
 
+/* The quota chart: one line per model through its reasoning settings, in its
+   subscription's series colour from themes.css. quota-chart.js draws it. */
+.quota-chart {
+  margin-top: 2.2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+}
+
+.quota-chart [data-plan="codex"],
+.quota-chart-tip [data-plan="codex"] {
+  --series: var(--series-codex);
+}
+.quota-chart [data-plan="claude"],
+.quota-chart-tip [data-plan="claude"] {
+  --series: var(--series-claude);
+}
+.quota-chart [data-plan="google"],
+.quota-chart-tip [data-plan="google"] {
+  --series: var(--series-google);
+}
+.quota-chart [data-plan="kimi"],
+.quota-chart-tip [data-plan="kimi"] {
+  --series: var(--series-kimi);
+}
+.quota-chart [data-plan="mimo"],
+.quota-chart-tip [data-plan="mimo"] {
+  --series: var(--series-mimo);
+}
+.quota-chart [data-plan="glm"],
+.quota-chart-tip [data-plan="glm"] {
+  --series: var(--series-glm);
+}
+
+.quota-chart-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+}
+
+.quota-chart-head h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.quota-chart-options {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  font-size: 0.88rem;
+}
+
+.quota-chart-options label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+}
+
+.quota-chart-options input {
+  margin: 0;
+  accent-color: var(--link);
+}
+
+.quota-chart-switch {
+  display: flex;
+  gap: 0.9rem;
+}
+
+.quota-chart button {
+  padding: 0.2rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.quota-chart button:hover {
+  color: var(--link-hover);
+}
+
+.quota-chart button[aria-pressed="false"] {
+  color: var(--muted);
+}
+
+.quota-chart-switch button[aria-pressed="true"] {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+}
+
+.quota-chart-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 14rem;
+  gap: 1.5rem 2rem;
+  margin-top: 1.2rem;
+}
+
+.quota-chart-plot {
+  position: relative;
+  min-width: 0;
+}
+
+.quota-chart-svg {
+  display: block;
+  overflow: visible;
+  font-size: 12px;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.quota-chart-svg text {
+  fill: var(--muted);
+}
+
+.quota-chart-svg .quota-chart-title {
+  fill: var(--text);
+}
+
+.quota-chart-grid,
+.quota-chart-tick {
+  stroke: var(--rule);
+}
+
+.quota-chart-baseline {
+  stroke: var(--muted);
+}
+
+.quota-chart-frontier {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+  pointer-events: none;
+}
+
+.quota-chart-line,
+.quota-chart-label {
+  transition: opacity 0.12s;
+}
+
+.quota-chart-svg[data-focus] .quota-chart-line:not(.is-focus),
+.quota-chart-svg[data-focus] .quota-chart-label:not(.is-focus) {
+  opacity: 0.18;
+}
+
+.quota-chart-path {
+  fill: none;
+  stroke: var(--series);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.quota-chart-hit {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 14;
+}
+
+.quota-chart-dot {
+  fill: var(--series);
+  stroke: var(--paper);
+  stroke-width: 2;
+}
+
+.quota-chart-target {
+  fill: transparent;
+  outline: none;
+}
+
+.quota-chart-target:focus-visible {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.quota-chart-label polyline {
+  fill: none;
+  stroke: var(--series);
+  stroke-width: 1;
+  opacity: 0.55;
+}
+
+.quota-chart-svg .quota-chart-label text {
+  fill: var(--text);
+  font-size: 13px;
+}
+
+.quota-chart-svg .quota-chart-empty {
+  font-size: 14px;
+}
+
+.quota-chart-tip {
+  position: absolute;
+  z-index: 1;
+  min-width: 12.5rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--text);
+  background: var(--paper);
+  box-shadow: 0 0.6rem 1.6rem -0.9rem var(--shadow);
+  font-size: 0.82rem;
+  line-height: 1.4;
+  font-variant-numeric: lining-nums;
+  pointer-events: none;
+}
+
+.quota-chart-tip p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.quota-chart-tip strong {
+  color: var(--text);
+}
+
+.quota-chart-tip .quota-chart-tip-name {
+  margin-bottom: 0.25rem;
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* Mirrors the marks: a short stroke of the series colour. */
+.quota-chart-key {
+  display: inline-block;
+  flex: none;
+  width: 0.95rem;
+  height: 2px;
+  margin-right: 0.5rem;
+  border-radius: 1px;
+  background: var(--series);
+  vertical-align: middle;
+}
+
+.quota-chart-panel {
+  display: grid;
+  align-content: start;
+  gap: 1.3rem;
+  font-size: 0.88rem;
+}
+
+.quota-chart-panel h4 {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.quota-chart-efforts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.6rem;
+}
+
+.quota-chart-efforts h4 {
+  flex-basis: 100%;
+  margin-bottom: 0.2rem;
+}
+
+.quota-chart-efforts button[aria-pressed="false"] {
+  text-decoration: line-through;
+}
+
+.quota-chart-models-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
+}
+
+.quota-chart .quota-chart-models-head button {
+  color: var(--link);
+  font-size: 0.8rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.quota-chart-plan ul {
+  margin: 0 0 0.6rem;
+  padding: 0;
+  list-style: none;
+}
+
+.quota-chart .quota-chart-plan-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.quota-chart-plan li button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-block: 0.15rem;
+}
+
+.quota-chart-plan li button[aria-pressed="false"] .quota-chart-key {
+  opacity: 0.25;
+}
+
+.quota-chart-table {
+  margin-top: 1.2rem;
+}
+
+.quota-chart-table td:nth-child(2) {
+  text-align: left;
+}
+
+@media (max-width: 52rem) {
+  .quota-chart-body {
+    grid-template-columns: 1fr;
+  }
+
+  .quota-chart-panel {
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  }
+}
+
 /* The no-JS disclosure remains readable in the narrower Uses entry. */
 .uses-study > .study-content {
   margin-top: 1rem;

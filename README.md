@@ -31,6 +31,8 @@ components/
   Figure.tsx            The home page figure: curve, map and target
   views.tsx             Panel bodies, shared between languages
   SubscriptionStudy.tsx The AI subscription comparison on Uses
+  QuotaChart.tsx        Its chart of AA score against quota, and every level as a table
+  study.ts              Row lookups and formatting the two share
   Redirect.tsx          Old URLs: /en/, the notes and papers pages
 lib/
   site.ts               Data, Markdown, dates, theme pairs, the seminar list
@@ -49,6 +51,7 @@ client/                 Browser scripts, compiled one to one into /js/ (own tsco
   panel.ts              Opens pages as panels over the figure
   theme.ts              The theme and font pickers
   uses.ts               Opens the AI comparison over Uses; inline disclosure without JS
+  quota-chart.ts        Draws the comparison's chart and wires its controls
   globe.ts              The travel globe, drawn with vendor/atlas-engine.js
   inline/               Head scripts: saved preferences, language detection, redirects
 public/                 Copied verbatim: styles.css, js/vendor/, js/world.json, images/, fonts/

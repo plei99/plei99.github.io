@@ -81,6 +81,9 @@ function themesCss() {
         t.stage || "color-mix(in srgb, var(--paper) 92%, var(--text))"
       };`,
       `--shadow: ${t.dark ? "rgb(0 0 0 / 0.6)" : "rgb(17 17 17 / 0.35)"};`,
+      ...Object.entries(t.series).map(([plan, colour]) =>
+        `--series-${plan}: ${colour};`
+      ),
     ].map((line) => indent + line).join("\n");
   let css = `:root {\n${
     block(light, "  ")

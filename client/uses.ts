@@ -1,6 +1,7 @@
 // The comparison is an ordinary disclosure without JS. Move its content into
 // a native modal when enhanced, retaining one copy and the Uses page beneath it.
 import { query } from "./dom.js";
+import { percent, quotaChart } from "./quota-chart.js";
 
 const disclosure = document.querySelector<HTMLDetailsElement>(
   "[data-uses-study]",
@@ -15,6 +16,9 @@ if (disclosure) {
   const canShowModal = typeof HTMLDialogElement !== "undefined" &&
     typeof HTMLDialogElement.prototype.showModal === "function";
   let dialog: HTMLDialogElement | null = null;
+
+  const chartRoot = body.querySelector<HTMLElement>("[data-quota-chart]");
+  const chart = chartRoot ? quotaChart(chartRoot, controller.signal) : null;
 
   const timingForm = body.querySelector<HTMLFormElement>("[data-study-timing]");
   if (timingForm) {
@@ -42,6 +46,7 @@ if (disclosure) {
         .replace("{share}", String(share))
         .replace("{other}", String(100 - share));
       slider.setAttribute("aria-valuetext", label);
+      chart?.setFactor(slider.name, factor);
       query(`[data-share-output="${slider.name}"]`, HTMLOutputElement, form)
         .value = label;
 
@@ -54,6 +59,7 @@ if (disclosure) {
         const tasks = api / Number(row.dataset.cost);
         const values: Record<string, string> = {
           api: amounts.format(api),
+          quota: percent(100 / tasks),
           tasks: counts.format(tasks),
           per100: counts.format(tasks * 100 / Number(row.dataset.price)),
         };

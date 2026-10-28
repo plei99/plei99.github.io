@@ -13,6 +13,11 @@ import type { Theme } from "./types";
 //   muted  dates, ledes           rule   hairlines
 //   stage  raised surfaces, such as the globe's backdrop (optional; when absent
 //          it is the paper colour nudged toward the text colour)
+//   series one colour per subscription in the AI quota chart, each near its
+//          maker's own hue. Every pair stays distinct with full colour vision
+//          (OKLab ΔE ≥ 16) and under protan/deutan simulation (≥ 8), since any
+//          two lines in a scatter can cross. The light ochre and pink fall
+//          under 3:1 on the paper, so every line also carries a text label.
 // `dark: true` sets color-scheme, so scrollbars and form controls follow.
 //
 // Visitors who have not chosen get light or dark by system setting.
@@ -28,6 +33,14 @@ export const themes: Theme[] = [
     link: "#18666f",
     rule: "#cfc4b2",
     stage: "#ece5d7",
+    series: {
+      codex: "#1a8a5a",
+      claude: "#a83f04",
+      google: "#2456a2",
+      kimi: "#8543d6",
+      mimo: "#dba11f",
+      glm: "#e0609f",
+    },
   },
   {
     id: "dark",
@@ -40,5 +53,13 @@ export const themes: Theme[] = [
     link: "#82b8c7",
     rule: "#433b33",
     stage: "#2b251f",
+    series: {
+      codex: "#24805a",
+      claude: "#c2451a",
+      google: "#3a90ea",
+      kimi: "#8248e8",
+      mimo: "#b08d2f",
+      glm: "#d44da8",
+    },
   },
 ];
