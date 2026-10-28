@@ -9,6 +9,8 @@
 //   it moves to en/about.html, the URL the site has always used.
 // - public/ is copied, the browser scripts in client/ are compiled into js/,
 //   and themes.css and sitemap.xml are written.
+// - Font URLs carry a hash of the file and script imports the build's rev, so
+//   a browser never pairs a new page with a cached font subset or module.
 import { cp, rename, rm, rmdir } from "node:fs/promises";
 import path from "node:path";
 import { SITE_URL, type Theme, themes } from "../lib/site";
@@ -24,6 +26,22 @@ const SITEMAP_EXCLUDE = new Set([
   "/notes.html",
   "/zh/notes.html",
 ]);
+
+// Unchanged fonts keep their URL, and so stay cached across deploys; a
+// regenerated Chinese subset gets a new one.
+const fontUrls = new Map<string, string>();
+for (const file of new Bun.Glob("*.woff2").scanSync("public/fonts")) {
+  const bytes = await Bun.file(`public/fonts/${file}`).bytes();
+  fontUrls.set(
+    `/fonts/${file}`,
+    `/fonts/${file}?v=${Bun.hash(bytes).toString(36)}`,
+  );
+}
+const versionFonts = (text: string) =>
+  text.replace(
+    /\/fonts\/[\w-]+\.woff2(?=")/g,
+    (url) => fontUrls.get(url) ?? url,
+  );
 
 function finishPage(html: string) {
   const shell: Record<string, string> = {};
@@ -60,7 +78,11 @@ function finishPage(html: string) {
       /<script>\(self\.__bun_f\|\|=\[\]\)\.push\([\s\S]*?<\/script>/g,
       "",
     )
-    .replaceAll("__REV__", rev);
+    .replaceAll("__REV__", rev)
+    .replace(
+      /(?<=<link[^>]*href=")\/fonts\/[\w-]+\.woff2(?=")/g,
+      (url) => fontUrls.get(url) ?? url,
+    );
 }
 
 // Generated from data/themes.ts: one block per theme, selected by data-theme
@@ -123,6 +145,10 @@ for (const dir of new Bun.Glob("**/*.html/index.html").scanSync(OUT)) {
 await rm(`${OUT}/_bun`, { recursive: true, force: true });
 
 await cp("public", OUT, { recursive: true });
+await Bun.write(
+  `${OUT}/fonts/fonts.css`,
+  versionFonts(await Bun.file(`${OUT}/fonts/fonts.css`).text()),
+);
 
 // Each browser script is compiled on its own, keeping its imports, so the
 // pages load the same modules at the same URLs as before: client/panel.ts
@@ -131,9 +157,10 @@ const transpiler = new Bun.Transpiler({ loader: "ts", target: "browser" });
 const scripts = new Map<string, string>();
 for (const file of new Bun.Glob("*.ts").scanSync("client")) {
   if (file.endsWith(".d.ts")) continue;
+  // Relative imports drop the importer's ?v=, so give them the rev too.
   const code = transpiler.transformSync(
     await Bun.file(`client/${file}`).text(),
-  );
+  ).replace(/(from\s*"\.\/[\w-]+\.js)"/g, `$1?v=${rev}"`);
   const url = `/js/${file.replace(/\.ts$/, ".js")}`;
   await Bun.write(`${OUT}${url}`, code);
   scripts.set(url, scriptHash(code));
