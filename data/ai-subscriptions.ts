@@ -2,13 +2,14 @@ import type { AiSubscriptions } from "./types";
 
 export const aiSubscriptions: AiSubscriptions = {
   // September 23 / October 2 audit; Google and mainland Kimi updated October 15, Codex October 16 (Oct 11–13 quota window excluded: failed judge calls went unrecorded).
+  // AA figures from Intelligence Index v5.0, October 28.
   // Dollar values retain calculation precision; SubscriptionStudy derives task counts.
   // Only aggregate findings belong here, never raw logs or account information.
   copy: {
     en: {
       trigger: "How much inference do these subscriptions buy?",
       close: "Close subscription comparison",
-      date: "Last updated October 16, 2026",
+      date: "Last updated October 28, 2026",
       title: "What my AI subscriptions buy",
       intro:
         "Someone I know (if you are reading this, you know who you are) complained about how little usage they got with their AI subscription (which cost about $100/month), so I decided to try to estimate the value of various AI subscriptions from both US and Chinese providers. All assumptions and choices are based on the nature of the aforementioned conversation.",
@@ -39,7 +40,7 @@ export const aiSubscriptions: AiSubscriptions = {
     zh: {
       trigger: "这些订阅能换来多少推理用量？",
       close: "关闭订阅比较",
-      date: "更新于 2026 年 10 月 16 日",
+      date: "更新于 2026 年 10 月 28 日",
       title: "我的 AI 订阅能买到多少用量",
       intro:
         "我认识的某人（如果你正在读这段话，你自己心里清楚）抱怨自己每月约 100 美元的 AI 订阅用量太少，所以我试着估算了中美各家 AI 订阅的价值。所有假设和选择都取决于上述对话的性质。",
@@ -104,10 +105,10 @@ export const aiSubscriptions: AiSubscriptions = {
       plan: { en: "Codex Pro", zh: "Codex Pro" },
       model: "GPT-6 Astra (max)",
       price: 100,
-      score: 53,
+      score: 57,
       api: 1416.6097175377747,
-      cost: 3.26,
-      time_seconds: 503.04,
+      cost: 6.24,
+      time_seconds: 711.14,
       time_url:
         "https://artificialanalysis.ai/models/comparisons/gpt-6-astra-vs-gpt-6-astra-xhigh",
       url: "https://artificialanalysis.ai/models/gpt-6-astra",
@@ -116,10 +117,10 @@ export const aiSubscriptions: AiSubscriptions = {
       plan: { en: "Codex Pro", zh: "Codex Pro" },
       model: "GPT-6 Astra (xhigh)",
       price: 100,
-      score: 52,
+      score: 55,
       api: 1416.6097175377747,
-      cost: 2.31,
-      time_seconds: 341.05,
+      cost: 3.66,
+      time_seconds: 390.94,
       time_url:
         "https://artificialanalysis.ai/models/comparisons/gpt-6-astra-vs-gpt-6-astra-xhigh",
       url:
@@ -129,22 +130,33 @@ export const aiSubscriptions: AiSubscriptions = {
       plan: { en: "Codex Pro", zh: "Codex Pro" },
       model: "GPT-6.1 Sol (max)",
       price: 100,
-      score: 52,
+      score: 55,
       api: 1416.6097175377747,
-      cost: 0.72,
-      time_seconds: 731.39,
+      cost: 1.27,
+      time_seconds: 858.41,
       time_url:
         "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-vs-gpt-6-luna",
       url: "https://artificialanalysis.ai/models/gpt-6-1-sol",
     },
     {
       plan: { en: "Codex Pro", zh: "Codex Pro" },
+      model: "GPT-6.1 Terra (max)",
+      price: 100,
+      score: 51,
+      api: 1416.6097175377747,
+      cost: 0.96,
+      time_seconds: 656.65,
+      time_url: "https://artificialanalysis.ai/models/gpt-6-1-terra",
+      url: "https://artificialanalysis.ai/models/gpt-6-1-terra",
+    },
+    {
+      plan: { en: "Codex Pro", zh: "Codex Pro" },
       model: "GPT-6 Luna (max)",
       price: 100,
-      score: 38,
+      score: 28,
       api: 1416.6097175377747,
-      cost: 0.07,
-      time_seconds: 392.22,
+      cost: 0.15,
+      time_seconds: 597.31,
       time_url:
         "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-vs-gpt-6-luna",
       url: "https://artificialanalysis.ai/models/gpt-6-luna",
@@ -155,8 +167,8 @@ export const aiSubscriptions: AiSubscriptions = {
       price: 100,
       score: 58,
       api: 4605.338690476191,
-      cost: 5.98,
-      time_seconds: 792.67,
+      cost: 10.04,
+      time_seconds: 1132.59,
       time_url:
         "https://artificialanalysis.ai/models/comparisons/claude-opus-5-5-vs-claude-opus-5-5-xhigh",
       url: "https://artificialanalysis.ai/models/claude-opus-5-5",
@@ -165,14 +177,39 @@ export const aiSubscriptions: AiSubscriptions = {
       plan: { en: "Claude Max 5x", zh: "Claude Max 5x" },
       model: "Claude Opus 5.5 (xhigh)",
       price: 100,
-      score: 56,
+      score: 57,
       api: 4605.338690476191,
-      cost: 3.46,
-      time_seconds: 500.91,
+      cost: 6.05,
+      time_seconds: 778.91,
       time_url:
         "https://artificialanalysis.ai/models/comparisons/claude-opus-5-5-vs-claude-opus-5-5-xhigh",
       url:
         "https://artificialanalysis.ai/models/comparisons/claude-opus-5-5-vs-claude-opus-5-5-xhigh",
+    },
+    {
+      plan: { en: "Claude Max 5x", zh: "Claude Max 5x" },
+      model: "Claude Sonnet 5.5 (max)",
+      price: 100,
+      score: 54,
+      api: 4605.338690476191,
+      cost: 10.02,
+      time_seconds: 1325.71,
+      time_url:
+        "https://artificialanalysis.ai/models/comparisons/claude-sonnet-5-5-vs-claude-sonnet-5-5-xhigh",
+      url: "https://artificialanalysis.ai/models/claude-sonnet-5-5",
+    },
+    {
+      plan: { en: "Claude Max 5x", zh: "Claude Max 5x" },
+      model: "Claude Sonnet 5.5 (xhigh)",
+      price: 100,
+      score: 50,
+      api: 4605.338690476191,
+      cost: 4.09,
+      time_seconds: 690.72,
+      time_url:
+        "https://artificialanalysis.ai/models/comparisons/claude-sonnet-5-5-vs-claude-sonnet-5-5-xhigh",
+      url:
+        "https://artificialanalysis.ai/models/comparisons/claude-sonnet-5-5-vs-claude-sonnet-5-5-xhigh",
     },
     {
       plan: {
@@ -181,35 +218,33 @@ export const aiSubscriptions: AiSubscriptions = {
       },
       model: "Gemini 4 Argon (high)",
       price: 100,
-      score: 53,
+      score: 50,
       api: 426.05901063035714,
-      cost: 1.99,
-      time_seconds: null,
+      cost: 3.84,
+      time_seconds: 1366.79,
       time_url: "https://artificialanalysis.ai/models/gemini-4-argon",
       url: "https://artificialanalysis.ai/models/gemini-4-argon",
     },
     {
       plan: { en: "Kimi Code (mainland China)", zh: "Kimi Code（中国大陆）" },
-      model: "Kimi K3 (max)",
+      model: "Kimi K3.1 Pro",
       price: 100,
-      score: 44,
+      score: 46,
       api: 482.53775950668035,
-      cost: 2,
-      time_seconds: 1230.62,
-      time_url:
-        "https://artificialanalysis.ai/models/comparisons/gpt-6-astra-vs-kimi-k3",
-      url:
-        "https://artificialanalysis.ai/models/comparisons/gpt-6-astra-vs-kimi-k3",
+      cost: 3.68,
+      time_seconds: 1504.11,
+      time_url: "https://artificialanalysis.ai/models/kimi-k3-1-pro",
+      url: "https://artificialanalysis.ai/models/kimi-k3-1-pro",
     },
     {
       plan: { en: "MiMo Max", zh: "MiMo Max" },
       model: "MiMo-V2.6-Pro",
       timing: "mimo",
       price: 100,
-      score: 46,
+      score: 30,
       api: 118.78579656195768,
-      cost: 0.13,
-      time_seconds: 1518.3,
+      cost: 0.26,
+      time_seconds: 1828.4,
       time_url:
         "https://artificialanalysis.ai/models/comparisons/mimo-v2-6-pro-vs-glm-5-3",
       url: "https://artificialanalysis.ai/models/mimo-v2-6-pro",
@@ -219,27 +254,13 @@ export const aiSubscriptions: AiSubscriptions = {
       model: "GLM-5.3 (max)",
       timing: "glm",
       price: 80,
-      score: 45,
+      score: 32,
       api: 561.6210757634055,
-      cost: 2.01,
-      time_seconds: 817.1,
+      cost: 5.01,
+      time_seconds: 1060.86,
       time_url:
-        "https://artificialanalysis.ai/models/comparisons/glm-5-3-flash-vs-glm-5-3",
+        "https://artificialanalysis.ai/models/comparisons/mimo-v2-6-pro-vs-glm-5-3",
       url: "https://artificialanalysis.ai/models/glm-5-3/",
-    },
-    {
-      plan: { en: "GLM Coding Pro", zh: "GLM Coding Pro" },
-      model: "GLM-5.3-Flash",
-      timing: "glm",
-      price: 80,
-      score: 42,
-      api: 173.77735311326225,
-      cost: 0.25,
-      time_seconds: 1014.3,
-      time_url:
-        "https://artificialanalysis.ai/models/comparisons/glm-5-3-flash-vs-glm-5-3",
-      url:
-        "https://artificialanalysis.ai/models/comparisons/glm-5-3-flash-vs-glm-5-3",
     },
   ],
 
@@ -248,15 +269,15 @@ export const aiSubscriptions: AiSubscriptions = {
   notes: [
     {
       en:
-        "Calculations for ChatGPT, Claude, Google, and Kimi were done using my actual usage. MiMo and GLM were estimated based on my token mix (cache hit vs cache miss/cache write vs output) and their published credit rules.",
+        "Calculations for ChatGPT, Claude, Google, and Kimi were done using my actual usage. MiMo and GLM were estimated based on my token mix (cache hit vs cache miss/cache write vs output) and their published credit rules. The Kimi allowance was measured with K3; K3.1 Pro is assumed to get the same API-dollar value.",
       zh:
-        "ChatGPT、Claude、Google 和 Kimi 的数字是根据我的实际用量计算的。MiMo 和 GLM 则是根据我的 token 构成（缓存命中、缓存未命中/缓存写入与输出的比例）以及它们公布的积分规则估算的。",
+        "ChatGPT、Claude、Google 和 Kimi 的数字是根据我的实际用量计算的。MiMo 和 GLM 则是根据我的 token 构成（缓存命中、缓存未命中/缓存写入与输出的比例）以及它们公布的积分规则估算的。Kimi 的额度是用 K3 测量的，这里假设 K3.1 Pro 也有相同的 API 等值。",
     },
     {
       en:
-        "My understanding is that it is not actually a good idea to run Astra or any Anthropic model on max, so I put in xhigh for Astra and Opus 5.5. Also, GLM-5.3 Flash benches pretty close to GLM-5.3, so it is also included. Otherwise, I included only the highest-scoring model for each subscription.",
+        "My understanding is that it is not actually a good idea to run Astra or any Anthropic model on max, so I put in xhigh for Astra, Opus 5.5 and Sonnet 5.5. I also included GPT-6.1 Terra and Sonnet 5.5, whose API prices are half those of Sol and Opus. Otherwise, I included only the highest-scoring model for each subscription. GLM-5.3 Flash is not listed because AA has not scored it on Intelligence Index v5.",
       zh:
-        "据我了解，用 max 跑 Astra 或任何 Anthropic 模型其实都不是好主意，所以我给 Astra 和 Opus 5.5 加上了 xhigh。另外，GLM-5.3 Flash 的跑分与 GLM-5.3 相当接近，所以也列了进来。除此之外，每个订阅只列出了得分最高的模型。",
+        "据我了解，用 max 跑 Astra 或任何 Anthropic 模型其实都不是好主意，所以我给 Astra、Opus 5.5 和 Sonnet 5.5 加上了 xhigh。我还列出了 GPT-6.1 Terra 和 Sonnet 5.5，它们的 API 价格只有 Sol 和 Opus 的一半。除此之外，每个订阅只列出了得分最高的模型。AA 尚未在 Intelligence Index v5 上为 GLM-5.3 Flash 打分，所以没有列出。",
     },
   ],
 };
