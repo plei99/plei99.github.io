@@ -16,8 +16,11 @@ import type { Theme } from "./types";
 //   series one colour per subscription in the AI quota chart, each near its
 //          maker's own hue. Every pair stays distinct with full colour vision
 //          (OKLab ΔE ≥ 16) and under protan/deutan simulation (≥ 8), since any
-//          two lines in a scatter can cross. The light ochre and pink fall
-//          under 3:1 on the paper, so every line also carries a text label.
+//          two lines in a scatter can cross. OpenAI's green sits well above
+//          Anthropic's rust in lightness, not below: protanopia darkens reds,
+//          so a lighter orange would slide back toward a dark green. The
+//          light ochre and pink fall under 3:1 on the paper, so every line
+//          also carries a text label.
 // `dark: true` sets color-scheme, so scrollbars and form controls follow.
 //
 // Visitors who have not chosen get light or dark by system setting.
@@ -34,8 +37,8 @@ export const themes: Theme[] = [
     rule: "#cfc4b2",
     stage: "#ece5d7",
     series: {
-      codex: "#1a8a5a",
-      claude: "#a83f04",
+      codex: "#0a9e5b",
+      claude: "#932605",
       google: "#2456a2",
       kimi: "#8543d6",
       mimo: "#dba11f",
