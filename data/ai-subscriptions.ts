@@ -2,6 +2,7 @@ import type { AiSubscriptions } from "./types";
 
 export const aiSubscriptions: AiSubscriptions = {
   // September 23 / October 2 audit; Google and mainland Kimi updated October 15, Codex October 16 (Oct 11–13 quota window excluded: failed judge calls went unrecorded).
+  // Codex Pro 100 extrapolated to twice the measured allowance after the October 29 increase.
   // AA figures from Intelligence Index v5.0, October 28.
   // Dollar values retain calculation precision; SubscriptionStudy derives task counts.
   // Only aggregate findings belong here, never raw logs or account information.
@@ -9,7 +10,7 @@ export const aiSubscriptions: AiSubscriptions = {
     en: {
       trigger: "How much inference do these subscriptions buy?",
       close: "Close subscription comparison",
-      date: "Last updated October 28, 2026",
+      date: "Last updated October 31, 2026",
       title: "What my AI subscriptions buy",
       intro:
         "Someone I know (if you are reading this, you know who you are) complained about how little usage they got with their AI subscription (which cost about $100/month), so I decided to try to estimate the value of various AI subscriptions from both US and Chinese providers. All assumptions and choices are based on the nature of the aforementioned conversation.",
@@ -59,7 +60,7 @@ export const aiSubscriptions: AiSubscriptions = {
     zh: {
       trigger: "这些订阅能换来多少推理用量？",
       close: "关闭订阅比较",
-      date: "更新于 2026 年 10 月 28 日",
+      date: "更新于 2026 年 10 月 31 日",
       title: "我的 AI 订阅能买到多少用量",
       intro:
         "我认识的某人（如果你正在读这段话，你自己心里清楚）抱怨自己每月约 100 美元的 AI 订阅用量太少，所以我试着估算了中美各家 AI 订阅的价值。所有假设和选择都取决于上述对话的性质。",
@@ -143,9 +144,9 @@ export const aiSubscriptions: AiSubscriptions = {
   // theirs hold for MiMo-V2.6-Pro and GLM-5.3 at the sliders' defaults.
   plans: {
     codex: {
-      name: { en: "Codex Pro", zh: "Codex Pro" },
+      name: { en: "Codex Pro 100", zh: "Codex Pro 100" },
       price: 100,
-      api: 1416.6097175377747,
+      api: 2833.2194350755494,
     },
     claude: {
       name: { en: "Claude Max 5x", zh: "Claude Max 5x" },
@@ -439,6 +440,12 @@ export const aiSubscriptions: AiSubscriptions = {
         "Calculations for ChatGPT, Claude, Google, and Kimi were done using my actual usage. MiMo and GLM were estimated based on my token mix (cache hit vs cache miss/cache write vs output) and their published credit rules. The Kimi allowance was measured with K3; K3.1 Pro is assumed to get the same API-dollar value.",
       zh:
         "ChatGPT、Claude、Google 和 Kimi 的数字是根据我的实际用量计算的。MiMo 和 GLM 则是根据我的 token 构成（缓存命中、缓存未命中/缓存写入与输出的比例）以及它们公布的积分规则估算的。Kimi 的额度是用 K3 测量的，这里假设 K3.1 Pro 也有相同的 API 等值。",
+    },
+    {
+      en:
+        "Codex Pro 100 uses twice the October 16 measured API value, following [OpenAI's October 29 allowance increase](https://x.com/thsottiaux/status/2115850175868727621). This assumes API value scales with the allowance; I have not measured it again since the increase.",
+      zh:
+        "根据 [OpenAI 10 月 29 日的额度更新](https://x.com/thsottiaux/status/2115850175868727621)，Codex Pro 100 的 API 等值按 10 月 16 日实测值的 200% 计算。这里假设 API 等值与额度成正比；额度更新后尚未重新测量。",
     },
     {
       en:
