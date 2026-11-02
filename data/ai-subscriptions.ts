@@ -4,13 +4,14 @@ export const aiSubscriptions: AiSubscriptions = {
   // September 23 / October 2 audit; Google and mainland Kimi updated October 15, Codex October 16 (Oct 11–13 quota window excluded: failed judge calls went unrecorded).
   // Codex Pro 100 extrapolated to twice the measured allowance after the October 29 increase.
   // AA figures from Intelligence Index v5.0, October 28.
+  // Kimi K3.1 Pro allowance measured November 2 from the October 28–29 runs.
   // Dollar values retain calculation precision; SubscriptionStudy derives task counts.
   // Only aggregate findings belong here, never raw logs or account information.
   copy: {
     en: {
       trigger: "How much inference do these subscriptions buy?",
       close: "Close subscription comparison",
-      date: "Last updated October 31, 2026",
+      date: "Last updated November 2, 2026",
       title: "What my AI subscriptions buy",
       intro:
         "Someone I know (if you are reading this, you know who you are) complained about how little usage they got with their AI subscription (which cost about $100/month), so I decided to try to estimate the value of various AI subscriptions from both US and Chinese providers. All assumptions and choices are based on the nature of the aforementioned conversation.",
@@ -60,7 +61,7 @@ export const aiSubscriptions: AiSubscriptions = {
     zh: {
       trigger: "这些订阅能换来多少推理用量？",
       close: "关闭订阅比较",
-      date: "更新于 2026 年 10 月 31 日",
+      date: "更新于 2026 年 11 月 2 日",
       title: "我的 AI 订阅能买到多少用量",
       intro:
         "我认识的某人（如果你正在读这段话，你自己心里清楚）抱怨自己每月约 100 美元的 AI 订阅用量太少，所以我试着估算了中美各家 AI 订阅的价值。所有假设和选择都取决于上述对话的性质。",
@@ -164,7 +165,7 @@ export const aiSubscriptions: AiSubscriptions = {
     kimi: {
       name: { en: "Kimi Code (mainland China)", zh: "Kimi Code（中国大陆）" },
       price: 100,
-      api: 482.53775950668035,
+      api: 343.1819512670564,
     },
     mimo: {
       name: { en: "MiMo Max", zh: "MiMo Max" },
@@ -437,9 +438,21 @@ export const aiSubscriptions: AiSubscriptions = {
   notes: [
     {
       en:
-        "Calculations for ChatGPT, Claude, Google, and Kimi were done using my actual usage. MiMo and GLM were estimated based on my token mix (cache hit vs cache miss/cache write vs output) and their published credit rules. The Kimi allowance was measured with K3; K3.1 Pro is assumed to get the same API-dollar value.",
+        "Calculations for ChatGPT, Claude, Google, and Kimi were done using my actual usage. MiMo and GLM were estimated based on my token mix (cache hit vs cache miss/cache write vs output) and their published credit rules.",
       zh:
-        "ChatGPT、Claude、Google 和 Kimi 的数字是根据我的实际用量计算的。MiMo 和 GLM 则是根据我的 token 构成（缓存命中、缓存未命中/缓存写入与输出的比例）以及它们公布的积分规则估算的。Kimi 的额度是用 K3 测量的，这里假设 K3.1 Pro 也有相同的 API 等值。",
+        "ChatGPT、Claude、Google 和 Kimi 的数字是根据我的实际用量计算的。MiMo 和 GLM 则是根据我的 token 构成（缓存命中、缓存未命中/缓存写入与输出的比例）以及它们公布的积分规则估算的。",
+    },
+    {
+      en:
+        "Kimi K3.1 Pro was measured directly from the October 28–29, 2026 tikz-bench runs: $55.46 on max, $34.89 on high and $15.28 on low, across 300 tasks and 5,290 model calls. The runs overlapped, so I pooled their usage over one quota interval. Kimi Code's monthly meter rose from 58.49% to a settled 89.27%; the separate 0.05% used by other membership features is excluded. $105.6314046 ÷ 0.3078 gives $343.18/month, or about 93 AA K3.1 Pro task equivalents. All task token totals match the request logs; the max run's missing costs were calculated from those tokens. Earlier CLI test calls preceded the baseline, and no later calls were found outside the benchmark.",
+      zh:
+        "Kimi K3.1 Pro 的额度直接根据 2026 年 10 月 28–29 日的 tikz-bench 测试测量：max 使用 $55.46，high 使用 $34.89，low 使用 $15.28，共 300 个任务、5,290 次模型调用。这些测试同时运行，因此按同一个额度区间合并计算。Kimi Code 的月度用量从 58.49% 上升至最终的 89.27%；其他会员功能使用的 0.05% 不计入。$105.6314046 ÷ 0.3078 得到每月 $343.18，约为 93 个 AA K3.1 Pro 任务等值。所有任务的 token 总数都与请求日志一致，max 测试缺失的成本也根据这些 token 计算。此前的 CLI 测试调用发生在起点之前，之后没有发现基准测试以外的调用。",
+    },
+    {
+      en:
+        "The K3.1 Pro estimate uses [international API prices](https://platform.kimi.ai/) of $2/M uncached input, $0.20/M cached input and $10/M output. [Mainland prices](https://platform.kimi.com/) put the same measured allowance near ¥2,270/month. The previous K3 estimate was $482.54, but its API token prices were 50% higher; repricing that earlier token mix at K3.1 rates gives $321.69. Most of the dollar change therefore reflects API pricing. This is a projection from 30.78% of one monthly quota, with no weekly-to-monthly multiplier. [Membership features share the monthly pool, and the rolling five-hour limit still applies](https://www.kimi.com/help/membership/membership-update-rules).",
+      zh:
+        "K3.1 Pro 的估算采用[国际 API 价格](https://platform.kimi.ai/)：每百万未缓存输入 $2、缓存输入 $0.20、输出 $10。按[中国大陆价格](https://platform.kimi.com/)，同样的实测额度约值每月 ¥2,270。此前 K3 的估算为 $482.54，但它的 API token 单价高出 50%；将当时的 token 构成按 K3.1 价格重新计算，得到 $321.69。因此，API 金额的变化主要来自价格变化。这里根据一个月度额度中已使用的 30.78% 推算，没有将周额度换算为月额度。[会员功能共享月度额度，滚动五小时限额仍然适用](https://www.kimi.com/help/membership/membership-update-rules)。",
     },
     {
       en:
