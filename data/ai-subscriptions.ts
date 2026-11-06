@@ -194,8 +194,7 @@ export const aiSubscriptions: AiSubscriptions = {
     },
   },
 
-  // AA Intelligence Index v5.0 runs, lowest reasoning setting first. Gemini
-  // 3.8 Flash (low) is left out: AA has not published its cost per task.
+  // AA Intelligence Index v5.0 runs, lowest reasoning setting first.
   lines: [
     {
       id: "gpt-6-astra",
@@ -310,16 +309,6 @@ export const aiSubscriptions: AiSubscriptions = {
       url: "https://artificialanalysis.ai/models/gemini-4-argon",
       levels: [
         { effort: "high", score: 50.4, cost: 9.947, time_seconds: 1612.29 },
-      ],
-    },
-    {
-      id: "gemini-3-8-flash",
-      name: "Gemini 3.8 Flash",
-      plan: "google",
-      url: "https://artificialanalysis.ai/models/gemini-3-8-flash",
-      levels: [
-        { effort: "medium", score: 30.1, cost: 6.259, time_seconds: 717.24 },
-        { effort: "high", score: 30.8, cost: 7.766, time_seconds: 874.5 },
       ],
     },
     {
@@ -528,9 +517,9 @@ export const aiSubscriptions: AiSubscriptions = {
     },
     {
       en:
-        "The chart applies each subscription's API value to every model on it, so it assumes the allowance is worth the same API dollars whichever model you use. That is untested for the models I did not run, such as Haiku 5.5, Fable 5.1, Luna and Gemini 3.8 Flash. MiMo and GLM points move with the timing sliders.",
+        "Except for GLM-5.3-Flash, which has its own value, the chart applies each subscription's API value to every model on it, so it assumes the allowance is worth the same API dollars whichever model you use. That is untested for the models I did not run, such as Haiku 5.5, Fable 5.1 and Luna. MiMo and GLM points move with the timing sliders.",
       zh:
-        "图表对同一订阅下的所有模型使用相同的 API 等值，也就是假设无论使用哪个模型，额度对应的 API 金额都相同。对于我没有实际测试的模型（例如 Haiku 5.5、Fable 5.1、Luna 和 Gemini 3.8 Flash），这一点尚未验证。MiMo 和 GLM 的点会随使用时段滑块移动。",
+        "除有自己的 API 等值的 GLM-5.3-Flash 外，图表对同一订阅下的所有模型使用相同的 API 等值，也就是假设无论使用哪个模型，额度对应的 API 金额都相同。对于我没有实际测试的模型（例如 Haiku 5.5、Fable 5.1 和 Luna），这一点尚未验证。MiMo 和 GLM 的点会随使用时段滑块移动。",
     },
   ],
 };
