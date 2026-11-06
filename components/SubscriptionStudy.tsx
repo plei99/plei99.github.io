@@ -1,5 +1,6 @@
 // The AI subscription comparison that opens over the Uses panel. uses.js reads
-// the data-* attributes to adjust the timed rows live.
+// the data-* attributes to adjust the timed rows live and to hide the models a
+// reader switches off; without JS every row shows and the toggles stay hidden.
 import { aiSubscriptions as study, type Lang, mdInline } from "../lib/site";
 import QuotaChart from "./QuotaChart";
 import { number, resolve, values } from "./study";
@@ -8,6 +9,9 @@ export default function SubscriptionStudy({ lang }: { lang: Lang }) {
   const copy = study.copy[lang];
   const rows = study.rows.map(resolve);
   const timings = Object.entries(study.timing);
+  // Each model in the table once, in table order, for the visibility toggles.
+  const models = [...new Map(rows.map((row) => [row.line.id, row.line]))
+    .values()];
   const notes = study.notes.map((note) => note[lang].trim()).filter(Boolean);
 
   return (
@@ -34,6 +38,100 @@ export default function SubscriptionStudy({ lang }: { lang: Lang }) {
           <p>{copy.intro}</p>
         </header>
         <div className="study-main">
+          <div
+            className="study-models"
+            role="group"
+            aria-labelledby="study-models-title"
+            data-study-models=""
+            hidden
+          >
+            <h3 id="study-models-title">{copy.table_models}</h3>
+            {models.map((line) => (
+              <button
+                type="button"
+                key={line.id}
+                data-study-line={line.id}
+                data-plan={line.plan}
+                aria-pressed="true"
+              >
+                <span className="quota-chart-key" aria-hidden="true" />
+                {line.name}
+              </button>
+            ))}
+            <button type="button" data-study-all="">{copy.table_all}</button>
+          </div>
+          <p className="study-scroll-hint">{copy.scroll_hint}</p>
+          <div
+            className="table-scroll study-comparison"
+            tabIndex={0}
+            role="region"
+            aria-labelledby="subscription-study-title"
+          >
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">{copy.plan_model}</th>
+                  <th scope="col">{copy.price}</th>
+                  <th scope="col">{copy.score}</th>
+                  <th scope="col">{copy.api_value}</th>
+                  <th scope="col">{copy.cost_task}</th>
+                  <th scope="col">{copy.time_task}</th>
+                  <th scope="col">{copy.tasks}</th>
+                  <th scope="col">{copy.per_100}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((row) => (
+                  <tr
+                    key={row.label}
+                    data-row-line={row.line.id}
+                    {...(row.plan.timing ? values(row) : {})}
+                  >
+                    <th scope="row">
+                      <span className="study-plan">{row.plan.name[lang]}</span>
+                      <a href={row.url}>{row.label}</a>
+                    </th>
+                    <td>${number(row.plan.price)}</td>
+                    <td>{number(row.level.score)}</td>
+                    <td data-value="api">${number(row.plan.api, 2)}</td>
+                    <td>${number(row.level.cost, 2)}</td>
+                    <td className="study-task-time">
+                      {row.level.time_seconds === null
+                        ? (
+                          <span
+                            title={copy.time_unavailable}
+                          >
+                            <span aria-hidden="true">—</span>
+                            <span className="visually-hidden">
+                              {copy.time_unavailable}
+                            </span>
+                          </span>
+                        )
+                        : (
+                          <a
+                            href={row.time_url}
+                            title={`${
+                              number(row.level.time_seconds, 2)
+                            } ${copy.seconds}`}
+                          >
+                            {number(row.level.time_seconds / 60, 1)}{" "}
+                            {copy.minutes}
+                          </a>
+                        )}
+                    </td>
+                    <td className="study-result" data-value="tasks">
+                      {number(row.plan.api / row.level.cost)}
+                    </td>
+                    <td data-value="per100">
+                      {number(
+                        (row.plan.api / row.level.cost) * 100 / row.plan.price,
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
           <p className="study-reading-note">{copy.reading_note}</p>
           <form
             className="study-timing"
@@ -108,77 +206,6 @@ export default function SubscriptionStudy({ lang }: { lang: Lang }) {
               {copy.timing_limits}
             </p>
           </form>
-          <p className="study-scroll-hint">{copy.scroll_hint}</p>
-          <div
-            className="table-scroll study-comparison"
-            tabIndex={0}
-            role="region"
-            aria-labelledby="subscription-study-title"
-          >
-            <table>
-              <thead>
-                <tr>
-                  <th scope="col">{copy.plan_model}</th>
-                  <th scope="col">{copy.price}</th>
-                  <th scope="col">{copy.score}</th>
-                  <th scope="col">{copy.api_value}</th>
-                  <th scope="col">{copy.cost_task}</th>
-                  <th scope="col">{copy.time_task}</th>
-                  <th scope="col">{copy.tasks}</th>
-                  <th scope="col">{copy.per_100}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map((row) => (
-                  <tr
-                    key={row.label}
-                    {...(row.plan.timing ? values(row) : {})}
-                  >
-                    <th scope="row">
-                      <span className="study-plan">{row.plan.name[lang]}</span>
-                      <a href={row.url}>{row.label}</a>
-                    </th>
-                    <td>${number(row.plan.price)}</td>
-                    <td>{number(row.level.score)}</td>
-                    <td data-value="api">${number(row.plan.api, 2)}</td>
-                    <td>${number(row.level.cost, 2)}</td>
-                    <td className="study-task-time">
-                      {row.level.time_seconds === null
-                        ? (
-                          <span
-                            title={copy.time_unavailable}
-                          >
-                            <span aria-hidden="true">—</span>
-                            <span className="visually-hidden">
-                              {copy.time_unavailable}
-                            </span>
-                          </span>
-                        )
-                        : (
-                          <a
-                            href={row.time_url}
-                            title={`${
-                              number(row.level.time_seconds, 2)
-                            } ${copy.seconds}`}
-                          >
-                            {number(row.level.time_seconds / 60, 1)}{" "}
-                            {copy.minutes}
-                          </a>
-                        )}
-                    </td>
-                    <td className="study-result" data-value="tasks">
-                      {number(row.plan.api / row.level.cost)}
-                    </td>
-                    <td data-value="per100">
-                      {number(
-                        (row.plan.api / row.level.cost) * 100 / row.plan.price,
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
           <QuotaChart lang={lang} />
           {notes.length > 0 && (
             <details className="study-method">

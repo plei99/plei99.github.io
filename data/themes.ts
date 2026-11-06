@@ -19,10 +19,10 @@ import type { Theme } from "./types";
 //          two lines in a scatter can cross. OpenAI's green sits well above
 //          Anthropic's rust in lightness, not below: protanopia darkens reds,
 //          so a lighter orange would slide back toward a dark green. The
-//          light ochre and pink fall under 3:1 on the paper, so every line
-//          also carries a text label. On the dark paper every series clears
-//          3:1 as protan and deutan readers see it too, since dimmed reds
-//          there sink into the background.
+//          light ochre, pink and sky blue fall under 3:1 on the paper, so
+//          every line also carries a text label. On the dark paper every
+//          series clears 3:1 as protan and deutan readers see it too, since
+//          dimmed reds there sink into the background.
 // `dark: true` sets color-scheme, so scrollbars and form controls follow.
 //
 // Visitors who have not chosen get light or dark by system setting.
@@ -45,6 +45,7 @@ export const themes: Theme[] = [
       kimi: "#8543d6",
       mimo: "#dba11f",
       glm: "#e0609f",
+      tencent: "#5cb9ff",
     },
   },
   {
@@ -65,6 +66,7 @@ export const themes: Theme[] = [
       kimi: "#8045e4",
       mimo: "#b09303",
       glm: "#c1429a",
+      tencent: "#a3d4ff",
     },
   },
 ];

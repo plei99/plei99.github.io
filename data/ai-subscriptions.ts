@@ -3,15 +3,17 @@ import type { AiSubscriptions } from "./types";
 export const aiSubscriptions: AiSubscriptions = {
   // September 23 / October 2 audit; Google and mainland Kimi updated October 15, Codex October 16 (Oct 11–13 quota window excluded: failed judge calls went unrecorded).
   // Codex Pro 100 extrapolated to twice the measured allowance after the October 29 increase.
-  // AA figures from Intelligence Index v5.0, October 28.
+  // AA figures from Intelligence Index v5.0, refreshed November 7.
   // Kimi K3.1 Pro allowance measured November 2 from the October 28–29 runs.
+  // Google repriced November 7: the measured week's tokens at Argon's current $4/$20 prices.
+  // Tencent Token Plan Max from its published credit rules, November 7; no usage measured.
   // Dollar values retain calculation precision; SubscriptionStudy derives task counts.
   // Only aggregate findings belong here, never raw logs or account information.
   copy: {
     en: {
       trigger: "How much inference do these subscriptions buy?",
       close: "Close subscription comparison",
-      date: "Last updated November 2, 2026",
+      date: "Last updated November 7, 2026",
       title: "What my AI subscriptions buy",
       intro:
         "Someone I know (if you are reading this, you know who you are) complained about how little usage they got with their AI subscription (which cost about $100/month), so I decided to try to estimate the value of various AI subscriptions from both US and Chinese providers. All assumptions and choices are based on the nature of the aforementioned conversation.",
@@ -57,11 +59,13 @@ export const aiSubscriptions: AiSubscriptions = {
       chart_table: "Every reasoning setting as a table",
       chart_effort: "Reasoning",
       chart_quota_task: "Quota / task",
+      table_models: "Models in the table",
+      table_all: "Show all",
     },
     zh: {
       trigger: "这些订阅能换来多少推理用量？",
       close: "关闭订阅比较",
-      date: "更新于 2026 年 11 月 2 日",
+      date: "更新于 2026 年 11 月 7 日",
       title: "我的 AI 订阅能买到多少用量",
       intro:
         "我认识的某人（如果你正在读这段话，你自己心里清楚）抱怨自己每月约 100 美元的 AI 订阅用量太少，所以我试着估算了中美各家 AI 订阅的价值。所有假设和选择都取决于上述对话的性质。",
@@ -106,6 +110,8 @@ export const aiSubscriptions: AiSubscriptions = {
       chart_table: "以表格查看所有推理强度",
       chart_effort: "推理强度",
       chart_quota_task: "单任务额度占比",
+      table_models: "表中显示的模型",
+      table_all: "全部显示",
     },
   },
 
@@ -160,7 +166,7 @@ export const aiSubscriptions: AiSubscriptions = {
         zh: "Google AI Ultra（Antigravity）",
       },
       price: 100,
-      api: 426.05901063035714,
+      api: 852.0794547741071,
     },
     kimi: {
       name: { en: "Kimi Code (mainland China)", zh: "Kimi Code（中国大陆）" },
@@ -179,6 +185,11 @@ export const aiSubscriptions: AiSubscriptions = {
       api: 561.6210757634055,
       timing: "glm",
     },
+    tencent: {
+      name: { en: "Tencent Token Plan Max", zh: "腾讯云 Token Plan Max" },
+      price: 103,
+      api: 101.76,
+    },
   },
 
   // AA Intelligence Index v5.0 runs, lowest reasoning setting first. Gemini
@@ -190,11 +201,11 @@ export const aiSubscriptions: AiSubscriptions = {
       plan: "codex",
       url: "https://artificialanalysis.ai/models/gpt-6-astra",
       levels: [
-        { effort: "low", score: 43, cost: 1.424, time_seconds: 189.17 },
-        { effort: "medium", score: 51.5, cost: 2.732, time_seconds: 303.7 },
-        { effort: "high", score: 54.8, cost: 3.239, time_seconds: 372.36 },
-        { effort: "xhigh", score: 55.3, cost: 3.659, time_seconds: 390.94 },
-        { effort: "max", score: 56.9, cost: 6.245, time_seconds: 711.14 },
+        { effort: "low", score: 43.3, cost: 1.424, time_seconds: 209.68 },
+        { effort: "medium", score: 51.6, cost: 2.732, time_seconds: 387.53 },
+        { effort: "high", score: 54.8, cost: 3.239, time_seconds: 528.02 },
+        { effort: "xhigh", score: 55.3, cost: 3.659, time_seconds: 618.15 },
+        { effort: "max", score: 56.9, cost: 6.245, time_seconds: 1247.1 },
       ],
     },
     {
@@ -203,11 +214,11 @@ export const aiSubscriptions: AiSubscriptions = {
       plan: "codex",
       url: "https://artificialanalysis.ai/models/gpt-6-1-sol",
       levels: [
-        { effort: "low", score: 34.5, cost: 0.1615, time_seconds: 103.5 },
-        { effort: "medium", score: 46.1, cost: 0.3594, time_seconds: 231.15 },
-        { effort: "high", score: 50.2, cost: 0.591, time_seconds: 322.1 },
-        { effort: "xhigh", score: 52.3, cost: 0.764, time_seconds: 435.92 },
-        { effort: "max", score: 54.5, cost: 1.272, time_seconds: 858.41 },
+        { effort: "low", score: 34.8, cost: 0.1615, time_seconds: 110.56 },
+        { effort: "medium", score: 46.3, cost: 0.3594, time_seconds: 250.94 },
+        { effort: "high", score: 50.3, cost: 0.591, time_seconds: 422.62 },
+        { effort: "xhigh", score: 52.5, cost: 0.764, time_seconds: 603.73 },
+        { effort: "max", score: 54.6, cost: 1.272, time_seconds: 1315.85 },
       ],
     },
     {
@@ -216,12 +227,12 @@ export const aiSubscriptions: AiSubscriptions = {
       plan: "codex",
       url: "https://artificialanalysis.ai/models/gpt-6-1-terra",
       levels: [
-        { effort: "none", score: 30.4, cost: 0.2259, time_seconds: 103.76 },
-        { effort: "low", score: 29.2, cost: 0.07134, time_seconds: 48.27 },
-        { effort: "medium", score: 38.1, cost: 0.1688, time_seconds: 118.45 },
-        { effort: "high", score: 42.3, cost: 0.2593, time_seconds: 182.13 },
-        { effort: "xhigh", score: 45, cost: 0.4007, time_seconds: 286.95 },
-        { effort: "max", score: 51, cost: 0.9611, time_seconds: 656.65 },
+        { effort: "none", score: 30.5, cost: 0.2259, time_seconds: 134.58 },
+        { effort: "low", score: 29.4, cost: 0.07134, time_seconds: 64.03 },
+        { effort: "medium", score: 38.2, cost: 0.1688, time_seconds: 155.67 },
+        { effort: "high", score: 42.4, cost: 0.2593, time_seconds: 240.26 },
+        { effort: "xhigh", score: 45.3, cost: 0.4007, time_seconds: 368.32 },
+        { effort: "max", score: 51.3, cost: 0.9611, time_seconds: 819.95 },
       ],
     },
     {
@@ -230,12 +241,12 @@ export const aiSubscriptions: AiSubscriptions = {
       plan: "codex",
       url: "https://artificialanalysis.ai/models/gpt-6-luna",
       levels: [
-        { effort: "none", score: 9.4, cost: 0.07142, time_seconds: 86.18 },
-        { effort: "low", score: 9.7, cost: 0.005115, time_seconds: 28.07 },
-        { effort: "medium", score: 18.3, cost: 0.0422, time_seconds: null },
-        { effort: "high", score: 21.4, cost: 0.07295, time_seconds: 269.24 },
-        { effort: "xhigh", score: 23.3, cost: 0.1041, time_seconds: 357.16 },
-        { effort: "max", score: 27.8, cost: 0.152, time_seconds: 597.31 },
+        { effort: "none", score: 9.4, cost: 0.07142, time_seconds: 113.93 },
+        { effort: "low", score: 9.7, cost: 0.005115, time_seconds: 36.57 },
+        { effort: "medium", score: 18.5, cost: 0.0422, time_seconds: 198.64 },
+        { effort: "high", score: 21.4, cost: 0.07295, time_seconds: 347.99 },
+        { effort: "xhigh", score: 23.5, cost: 0.1041, time_seconds: 460.39 },
+        { effort: "max", score: 27.9, cost: 0.152, time_seconds: 751.91 },
       ],
     },
     {
@@ -244,11 +255,11 @@ export const aiSubscriptions: AiSubscriptions = {
       plan: "claude",
       url: "https://artificialanalysis.ai/models/claude-opus-5-5",
       levels: [
-        { effort: "low", score: 34.5, cost: 0.9755, time_seconds: 146.94 },
-        { effort: "medium", score: 48.1, cost: 2.451, time_seconds: 336.65 },
-        { effort: "high", score: 51.7, cost: 3.465, time_seconds: 463.62 },
-        { effort: "xhigh", score: 57, cost: 6.047, time_seconds: 778.91 },
-        { effort: "max", score: 58.4, cost: 10.04, time_seconds: 1132.59 },
+        { effort: "low", score: 34.8, cost: 0.9755, time_seconds: 180.5 },
+        { effort: "medium", score: 48.2, cost: 2.451, time_seconds: 406.66 },
+        { effort: "high", score: 51.8, cost: 3.465, time_seconds: 559.34 },
+        { effort: "xhigh", score: 57.4, cost: 6.047, time_seconds: 966.97 },
+        { effort: "max", score: 59.1, cost: 10.04, time_seconds: 1600.53 },
       ],
     },
     {
@@ -257,11 +268,11 @@ export const aiSubscriptions: AiSubscriptions = {
       plan: "claude",
       url: "https://artificialanalysis.ai/models/claude-sonnet-5-5",
       levels: [
-        { effort: "low", score: 25.3, cost: 0.5113, time_seconds: 120.54 },
-        { effort: "medium", score: 30.3, cost: 0.7807, time_seconds: 177.64 },
-        { effort: "high", score: 41.1, cost: 1.636, time_seconds: 331.57 },
-        { effort: "xhigh", score: 49.6, cost: 4.092, time_seconds: 690.72 },
-        { effort: "max", score: 54.2, cost: 10.02, time_seconds: 1325.71 },
+        { effort: "low", score: 25.6, cost: 0.5113, time_seconds: 155.42 },
+        { effort: "medium", score: 30.8, cost: 0.7807, time_seconds: 216.35 },
+        { effort: "high", score: 41.5, cost: 1.636, time_seconds: 419.14 },
+        { effort: "xhigh", score: 49.9, cost: 4.092, time_seconds: 896.18 },
+        { effort: "max", score: 54.5, cost: 10.02, time_seconds: 1887.15 },
       ],
     },
     {
@@ -270,11 +281,11 @@ export const aiSubscriptions: AiSubscriptions = {
       plan: "claude",
       url: "https://artificialanalysis.ai/models/claude-haiku-5-5",
       levels: [
-        { effort: "low", score: 18.6, cost: 0.04376, time_seconds: 97.99 },
-        { effort: "medium", score: 24.6, cost: 0.09176, time_seconds: 192.95 },
-        { effort: "high", score: 29.6, cost: 0.1586, time_seconds: 298.26 },
-        { effort: "xhigh", score: 34.3, cost: 0.2484, time_seconds: 441.28 },
-        { effort: "max", score: 36.2, cost: 0.411, time_seconds: 593.47 },
+        { effort: "low", score: 18.6, cost: 0.04376, time_seconds: 130.46 },
+        { effort: "medium", score: 24.6, cost: 0.09176, time_seconds: 244.89 },
+        { effort: "high", score: 29.9, cost: 0.1586, time_seconds: 401.63 },
+        { effort: "xhigh", score: 34.6, cost: 0.2484, time_seconds: 581.62 },
+        { effort: "max", score: 36.5, cost: 0.411, time_seconds: 945.7 },
       ],
     },
     {
@@ -283,11 +294,11 @@ export const aiSubscriptions: AiSubscriptions = {
       plan: "claude",
       url: "https://artificialanalysis.ai/models/claude-fable-5-1",
       levels: [
-        { effort: "low", score: 38.5, cost: 4.487, time_seconds: 411.15 },
-        { effort: "medium", score: 43, cost: 5.581, time_seconds: 502.53 },
-        { effort: "high", score: 47, cost: 7.561, time_seconds: 672.64 },
-        { effort: "xhigh", score: 49.7, cost: 10.89, time_seconds: 950.8 },
-        { effort: "max", score: 49, cost: 13.04, time_seconds: 1177.56 },
+        { effort: "low", score: 38.7, cost: 4.471, time_seconds: 438.7 },
+        { effort: "medium", score: 43.2, cost: 5.564, time_seconds: 567.4 },
+        { effort: "high", score: 47.2, cost: 7.54, time_seconds: 763.53 },
+        { effort: "xhigh", score: 50, cost: 10.85, time_seconds: 1127.44 },
+        { effort: "max", score: 49.2, cost: 12.99, time_seconds: 1349.13 },
       ],
     },
     {
@@ -296,7 +307,7 @@ export const aiSubscriptions: AiSubscriptions = {
       plan: "google",
       url: "https://artificialanalysis.ai/models/gemini-4-argon",
       levels: [
-        { effort: "high", score: 50.4, cost: 3.841, time_seconds: 1366.79 },
+        { effort: "high", score: 50.4, cost: 9.947, time_seconds: 1612.29 },
       ],
     },
     {
@@ -305,8 +316,8 @@ export const aiSubscriptions: AiSubscriptions = {
       plan: "google",
       url: "https://artificialanalysis.ai/models/gemini-3-8-flash",
       levels: [
-        { effort: "medium", score: 30, cost: 6.259, time_seconds: null },
-        { effort: "high", score: 30.5, cost: 7.766, time_seconds: 724.41 },
+        { effort: "medium", score: 30.1, cost: 6.259, time_seconds: 717.24 },
+        { effort: "high", score: 30.8, cost: 7.766, time_seconds: 874.5 },
       ],
     },
     {
@@ -315,7 +326,7 @@ export const aiSubscriptions: AiSubscriptions = {
       plan: "kimi",
       url: "https://artificialanalysis.ai/models/kimi-k3-1-pro",
       levels: [
-        { score: 46, cost: 3.681, time_seconds: 1504.11 },
+        { score: 46.5, cost: 3.681, time_seconds: 2197.85 },
       ],
     },
     {
@@ -324,7 +335,7 @@ export const aiSubscriptions: AiSubscriptions = {
       plan: "mimo",
       url: "https://artificialanalysis.ai/models/mimo-v2-6-pro",
       levels: [
-        { score: 29.9, cost: 0.2572, time_seconds: 1828.4 },
+        { score: 29.9, cost: 0.2572, time_seconds: 2701.27 },
       ],
     },
     {
@@ -333,8 +344,17 @@ export const aiSubscriptions: AiSubscriptions = {
       plan: "glm",
       url: "https://artificialanalysis.ai/models/glm-5-3",
       levels: [
-        { effort: "low", score: 23.1, cost: 1.575, time_seconds: 576.15 },
-        { effort: "max", score: 31.7, cost: 5.009, time_seconds: 1060.86 },
+        { effort: "low", score: 23.1, cost: 1.575, time_seconds: 1034.2 },
+        { effort: "max", score: 31.7, cost: 5.009, time_seconds: 1879.99 },
+      ],
+    },
+    {
+      id: "tencent-hy4",
+      name: "Hy4",
+      plan: "tencent",
+      url: "https://artificialanalysis.ai/models/tencent-hy4",
+      levels: [
+        { score: 34.6, cost: 1.031, time_seconds: 834.76 },
       ],
     },
   ],
@@ -431,6 +451,11 @@ export const aiSubscriptions: AiSubscriptions = {
         "https://artificialanalysis.ai/models/comparisons/mimo-v2-6-pro-vs-glm-5-3",
       url: "https://artificialanalysis.ai/models/glm-5-3/",
     },
+    {
+      line: "tencent-hy4",
+      time_url: "https://artificialanalysis.ai/models/tencent-hy4",
+      url: "https://artificialanalysis.ai/models/tencent-hy4",
+    },
   ],
 
   // One inline-Markdown string per list item under the "Notes" toggle. Empty
@@ -438,9 +463,9 @@ export const aiSubscriptions: AiSubscriptions = {
   notes: [
     {
       en:
-        "Calculations for ChatGPT, Claude, Google, and Kimi were done using my actual usage. MiMo and GLM were estimated based on my token mix (cache hit vs cache miss/cache write vs output) and their published credit rules.",
+        "Calculations for ChatGPT, Claude, Google, and Kimi were done using my actual usage. MiMo and GLM were estimated based on my token mix (cache hit vs cache miss/cache write vs output) and their published credit rules. Tencent comes from its published credit rules alone, which for Hy4 do not depend on the token mix.",
       zh:
-        "ChatGPT、Claude、Google 和 Kimi 的数字是根据我的实际用量计算的。MiMo 和 GLM 则是根据我的 token 构成（缓存命中、缓存未命中/缓存写入与输出的比例）以及它们公布的积分规则估算的。",
+        "ChatGPT、Claude、Google 和 Kimi 的数字是根据我的实际用量计算的。MiMo 和 GLM 则是根据我的 token 构成（缓存命中、缓存未命中/缓存写入与输出的比例）以及它们公布的积分规则估算的。腾讯云只根据其公布的积分规则计算；对 Hy4 而言，结果与 token 构成无关。",
     },
     {
       en:
@@ -456,15 +481,27 @@ export const aiSubscriptions: AiSubscriptions = {
     },
     {
       en:
+        "Tencent's $103/month [Token Plan Max](https://www.tencentcloud.com/act/pro/tokenhub) gives 15,900 credits a month, with no five-hour or weekly limit; unused credits expire. [Hy4 deducts](https://intl.cloud.tencent.com/document/product/1300/81316) 130.313 credits per million uncached input tokens, 390.781 per million output tokens and 6.563 per million cache hits. That is exactly 156.25 credits per dollar at [Hy4's list API prices](https://www.tencentcloud.com/document/product/1300/78937) of $0.834, $2.501 and $0.042, whatever the token mix, so the plan buys $101.76 of Hy4 a month, slightly less than its price. Two promotions are left out: until November 17, 2026, Hy4 costs about a quarter of the credits; until December 31, 2026, pay-as-you-go Hy4 is half price, so buying through the API directly gets about twice as much.",
+      zh:
+        "腾讯云每月 $103 的 [Token Plan Max](https://www.tencentcloud.com/act/pro/tokenhub) 每月提供 15,900 积分，没有五小时或周限额；未用完的积分不结转。[Hy4 的扣减标准](https://intl.cloud.tencent.com/document/product/1300/81316)是每百万未缓存输入 token 130.313 积分、每百万输出 token 390.781 积分、每百万缓存命中 6.563 积分。按 [Hy4 的 API 刊例价](https://www.tencentcloud.com/document/product/1300/78937)（$0.834、$2.501、$0.042）计算，无论 token 构成如何，都正好是每美元 156.25 积分，所以这个套餐每月能买到 $101.76 的 Hy4 用量，略低于套餐价格。这里没有计入两项优惠：2026 年 11 月 17 日前，Hy4 的积分消耗约为四分之一；2026 年 12 月 31 日前，按量付费的 Hy4 打五折，直接通过 API 购买大约能多一倍。",
+    },
+    {
+      en:
+        "Google's value now prices the measured October 15 week at [Gemini 4 Argon's current API prices](https://artificialanalysis.ai/models/gemini-4-argon) of $4/M input, $0.20/M cached input and $20/M output, twice the introductory prices the measurement originally used. The same quota is therefore worth $852.08/month instead of $426.06. AA's Argon cost per task also rose, from $3.84 to $9.95, so the task count fell from 111 to 86.",
+      zh:
+        "Google 的 API 等值现按 [Gemini 4 Argon 当前的 API 价格](https://artificialanalysis.ai/models/gemini-4-argon)（每百万输入 $4、缓存输入 $0.20、输出 $20）重新计算 10 月 15 日那一周的实测用量，是最初测量时所用首发价格的两倍。因此同样的额度每月值 $852.08，而不是 $426.06。AA 测得的 Argon 单任务成本也从 $3.84 升至 $9.95，所以任务数从 111 降至 86。",
+    },
+    {
+      en:
         "Codex Pro 100 uses twice the October 16 measured API value, following [OpenAI's October 29 allowance increase](https://x.com/thsottiaux/status/2115850175868727621). This assumes API value scales with the allowance; I have not measured it again since the increase.",
       zh:
         "根据 [OpenAI 10 月 29 日的额度更新](https://x.com/thsottiaux/status/2115850175868727621)，Codex Pro 100 的 API 等值按 10 月 16 日实测值的 200% 计算。这里假设 API 等值与额度成正比；额度更新后尚未重新测量。",
     },
     {
       en:
-        "My understanding is that it is not actually a good idea to run Astra or any Anthropic model on max, so I put in xhigh for Astra, Opus 5.5 and Sonnet 5.5, and for Sol as well. I also included GPT-6.1 Terra and Sonnet 5.5, whose API prices are half those of Sol and Opus. Otherwise, I included only the highest-scoring model for each subscription. GLM-5.3 Flash is not listed because AA has not scored it on Intelligence Index v5.",
+        "My understanding is that it is not actually a good idea to run Astra or any Anthropic model on max, so I put in xhigh for Astra, Opus 5.5 and Sonnet 5.5, and for Sol as well. I also included GPT-6.1 Terra and Sonnet 5.5, whose API prices are half those of Sol and Opus. Otherwise, I included only the highest-scoring model for each subscription. AA now scores GLM-5.3-Flash, but it is not listed because GLM charges it different credits and I have not estimated its allowance.",
       zh:
-        "据我了解，用 max 跑 Astra 或任何 Anthropic 模型其实都不是好主意，所以我给 Astra、Opus 5.5 和 Sonnet 5.5 加上了 xhigh，Sol 也一样。我还列出了 GPT-6.1 Terra 和 Sonnet 5.5，它们的 API 价格只有 Sol 和 Opus 的一半。除此之外，每个订阅只列出了得分最高的模型。AA 尚未在 Intelligence Index v5 上为 GLM-5.3 Flash 打分，所以没有列出。",
+        "据我了解，用 max 跑 Astra 或任何 Anthropic 模型其实都不是好主意，所以我给 Astra、Opus 5.5 和 Sonnet 5.5 加上了 xhigh，Sol 也一样。我还列出了 GPT-6.1 Terra 和 Sonnet 5.5，它们的 API 价格只有 Sol 和 Opus 的一半。除此之外，每个订阅只列出了得分最高的模型。AA 现已为 GLM-5.3-Flash 打分，但 GLM 对它按不同的积分计费，而我还没有估算它的额度，所以没有列出。",
     },
     {
       en:

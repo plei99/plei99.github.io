@@ -190,7 +190,9 @@ export type StudyKey =
   | "chart_empty"
   | "chart_table"
   | "chart_effort"
-  | "chart_quota_task";
+  | "chart_quota_task"
+  | "table_models"
+  | "table_all";
 /** A usage window that uses.js lets the reader weight with a slider. */
 export type Timing = {
   label: Localized;
@@ -201,7 +203,14 @@ export type Timing = {
   window_coefficient: number;
   other_coefficient: number;
 };
-export type PlanId = "codex" | "claude" | "google" | "kimi" | "mimo" | "glm";
+export type PlanId =
+  | "codex"
+  | "claude"
+  | "google"
+  | "kimi"
+  | "mimo"
+  | "glm"
+  | "tencent";
 export type Plan = {
   name: Localized;
   price: number;

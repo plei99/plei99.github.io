@@ -1241,6 +1241,57 @@ img {
   margin-top: 1rem;
 }
 
+.study-models {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.1rem 1rem;
+  margin-block: 0.5rem 0.25rem;
+  font-size: 0.88rem;
+}
+
+.study-models[hidden] {
+  display: none;
+}
+
+.study-models h3 {
+  flex-basis: 100%;
+  margin: 0 0 0.1rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.study-models button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.study-models button:hover {
+  color: var(--link-hover);
+}
+
+.study-models button[aria-pressed="false"] {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.study-models button[aria-pressed="false"] .quota-chart-key {
+  opacity: 0.25;
+}
+
+.study-models [data-study-all] {
+  color: var(--link);
+  font-size: 0.8rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
 .study-scroll-hint {
   display: none;
   margin-top: 0.75rem;
@@ -1324,28 +1375,39 @@ img {
 }
 
 .quota-chart [data-plan="codex"],
-.quota-chart-tip [data-plan="codex"] {
+.quota-chart-tip [data-plan="codex"],
+.study-models [data-plan="codex"] {
   --series: var(--series-codex);
 }
 .quota-chart [data-plan="claude"],
-.quota-chart-tip [data-plan="claude"] {
+.quota-chart-tip [data-plan="claude"],
+.study-models [data-plan="claude"] {
   --series: var(--series-claude);
 }
 .quota-chart [data-plan="google"],
-.quota-chart-tip [data-plan="google"] {
+.quota-chart-tip [data-plan="google"],
+.study-models [data-plan="google"] {
   --series: var(--series-google);
 }
 .quota-chart [data-plan="kimi"],
-.quota-chart-tip [data-plan="kimi"] {
+.quota-chart-tip [data-plan="kimi"],
+.study-models [data-plan="kimi"] {
   --series: var(--series-kimi);
 }
 .quota-chart [data-plan="mimo"],
-.quota-chart-tip [data-plan="mimo"] {
+.quota-chart-tip [data-plan="mimo"],
+.study-models [data-plan="mimo"] {
   --series: var(--series-mimo);
 }
 .quota-chart [data-plan="glm"],
-.quota-chart-tip [data-plan="glm"] {
+.quota-chart-tip [data-plan="glm"],
+.study-models [data-plan="glm"] {
   --series: var(--series-glm);
+}
+.quota-chart [data-plan="tencent"],
+.quota-chart-tip [data-plan="tencent"],
+.study-models [data-plan="tencent"] {
+  --series: var(--series-tencent);
 }
 
 .quota-chart-head {

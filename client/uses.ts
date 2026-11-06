@@ -20,6 +20,35 @@ if (disclosure) {
   const chartRoot = body.querySelector<HTMLElement>("[data-quota-chart]");
   const chart = chartRoot ? quotaChart(chartRoot, controller.signal) : null;
 
+  // Each model toggle hides or shows every table row for that model.
+  const models = body.querySelector<HTMLElement>("[data-study-models]");
+  if (models) {
+    const toggles = [
+      ...models.querySelectorAll<HTMLButtonElement>("[data-study-line]"),
+    ];
+    const show = (toggle: HTMLButtonElement, on: boolean) => {
+      toggle.setAttribute("aria-pressed", String(on));
+      for (
+        const row of body.querySelectorAll<HTMLElement>(
+          `[data-row-line="${toggle.dataset.studyLine}"]`,
+        )
+      ) row.hidden = !on;
+    };
+    for (const toggle of toggles) {
+      toggle.addEventListener("click", () => {
+        show(toggle, toggle.getAttribute("aria-pressed") !== "true");
+      }, options);
+    }
+    query("[data-study-all]", HTMLButtonElement, models).addEventListener(
+      "click",
+      () => {
+        for (const toggle of toggles) show(toggle, true);
+      },
+      options,
+    );
+    models.hidden = false;
+  }
+
   const timingForm = body.querySelector<HTMLFormElement>("[data-study-timing]");
   if (timingForm) {
     const form = timingForm;
