@@ -6,7 +6,14 @@
 import { query } from "./dom.js";
 
 type Level = { effort?: string; score: number; cost: number };
-type Line = { id: string; name: string; plan: string; levels: Level[] };
+type Line = {
+  id: string;
+  name: string;
+  plan: string;
+  /** Set when the model's API value differs from its plan's. */
+  api?: number;
+  levels: Level[];
+};
 type ChartData = {
   plans: Record<string, { api: number; timing?: string }>;
   lines: Line[];
@@ -153,7 +160,8 @@ export function quotaChart(
 
   const api = (line: Line) => {
     const plan = data.plans[line.plan]!;
-    return plan.api * (plan.timing ? factors.get(plan.timing) ?? 1 : 1);
+    return (line.api ?? plan.api) *
+      (plan.timing ? factors.get(plan.timing) ?? 1 : 1);
   };
   const visible = (level: Level) =>
     !level.effort || !hiddenEfforts.has(level.effort);

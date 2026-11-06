@@ -1374,6 +1374,17 @@ img {
   border-top: 1px solid var(--rule);
 }
 
+/* First in the study, the chart sits under the header's own rule. */
+.study-main > .quota-chart:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.quota-chart-table + .study-models {
+  margin-top: 2rem;
+}
+
 .quota-chart [data-plan="codex"],
 .quota-chart-tip [data-plan="codex"],
 .study-models [data-plan="codex"] {

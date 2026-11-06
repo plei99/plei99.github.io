@@ -7,13 +7,14 @@ export const aiSubscriptions: AiSubscriptions = {
   // Kimi K3.1 Pro allowance measured November 2 from the October 28–29 runs.
   // Google repriced November 7: the measured week's tokens at Argon's current $4/$20 prices.
   // Tencent Token Plan Max from its published credit rules, November 7; no usage measured.
+  // GLM-5.3-Flash from the September 23 token mix and GLM's credit rules, rechecked November 7.
   // Dollar values retain calculation precision; SubscriptionStudy derives task counts.
   // Only aggregate findings belong here, never raw logs or account information.
   copy: {
     en: {
       trigger: "How much inference do these subscriptions buy?",
       close: "Close subscription comparison",
-      date: "Last updated November 7, 2026",
+      date: "Last updated November 8, 2026",
       title: "What my AI subscriptions buy",
       intro:
         "Someone I know (if you are reading this, you know who you are) complained about how little usage they got with their AI subscription (which cost about $100/month), so I decided to try to estimate the value of various AI subscriptions from both US and Chinese providers. All assumptions and choices are based on the nature of the aforementioned conversation.",
@@ -42,7 +43,7 @@ export const aiSubscriptions: AiSubscriptions = {
         "These estimates are based on my actual usage and the subscription rules (for example session limits, weekly limits, etc).",
       chart_title: "Intelligence against quota",
       chart_note:
-        "Each point is one model at one reasoning setting: its AA score against the share of its subscription's monthly quota that one AA task uses, at the API values above. A model's settings are joined from lowest to highest. Hover over or focus a point for details.",
+        "Each point is one model at one reasoning setting: its AA score against the share of its subscription's monthly quota that one AA task uses, at the API values in the table below. A model's settings are joined from lowest to highest. Hover over or focus a point for details.",
       chart_x: "Share of the monthly quota per task",
       chart_y: "AA Intelligence Index",
       chart_scale: "Horizontal scale",
@@ -65,7 +66,7 @@ export const aiSubscriptions: AiSubscriptions = {
     zh: {
       trigger: "这些订阅能换来多少推理用量？",
       close: "关闭订阅比较",
-      date: "更新于 2026 年 11 月 7 日",
+      date: "更新于 2026 年 11 月 8 日",
       title: "我的 AI 订阅能买到多少用量",
       intro:
         "我认识的某人（如果你正在读这段话，你自己心里清楚）抱怨自己每月约 100 美元的 AI 订阅用量太少，所以我试着估算了中美各家 AI 订阅的价值。所有假设和选择都取决于上述对话的性质。",
@@ -93,7 +94,7 @@ export const aiSubscriptions: AiSubscriptions = {
         "这些估算基于我的实际用量和各套餐规则（例如会话限额、周限额等）。",
       chart_title: "智能水平与额度用量",
       chart_note:
-        "每个点是一个模型在一种推理强度下的结果：纵轴是 AA 分数，横轴是一个 AA 任务用掉的订阅月度额度比例，按上表的 API 等值计算。同一模型的各个推理强度从低到高连成一条线。将指针移到某个点上或聚焦它可查看详情。",
+        "每个点是一个模型在一种推理强度下的结果：纵轴是 AA 分数，横轴是一个 AA 任务用掉的订阅月度额度比例，按下表的 API 等值计算。同一模型的各个推理强度从低到高连成一条线。将指针移到某个点上或聚焦它可查看详情。",
       chart_x: "每个任务用掉的月度额度",
       chart_y: "AA Intelligence Index",
       chart_scale: "横轴刻度",
@@ -148,7 +149,8 @@ export const aiSubscriptions: AiSubscriptions = {
 
   // API values are each allowance's monthly worth at API prices, measured or
   // estimated as the notes describe. MiMo and GLM charge credits per model, so
-  // theirs hold for MiMo-V2.6-Pro and GLM-5.3 at the sliders' defaults.
+  // theirs hold for MiMo-V2.6-Pro and GLM-5.3 at the sliders' defaults; a line
+  // with its own api, such as GLM-5.3-Flash, overrides its plan's.
   plans: {
     codex: {
       name: { en: "Codex Pro 100", zh: "Codex Pro 100" },
@@ -349,6 +351,16 @@ export const aiSubscriptions: AiSubscriptions = {
       ],
     },
     {
+      id: "glm-5-3-flash",
+      name: "GLM-5.3-Flash",
+      plan: "glm",
+      api: 193.72915080693886,
+      url: "https://artificialanalysis.ai/models/glm-5-3-flash",
+      levels: [
+        { score: 27.8, cost: 0.5833, time_seconds: 2416.07 },
+      ],
+    },
+    {
       id: "tencent-hy4",
       name: "Hy4",
       plan: "tencent",
@@ -452,6 +464,11 @@ export const aiSubscriptions: AiSubscriptions = {
       url: "https://artificialanalysis.ai/models/glm-5-3/",
     },
     {
+      line: "glm-5-3-flash",
+      time_url: "https://artificialanalysis.ai/models/glm-5-3-flash",
+      url: "https://artificialanalysis.ai/models/glm-5-3-flash",
+    },
+    {
       line: "tencent-hy4",
       time_url: "https://artificialanalysis.ai/models/tencent-hy4",
       url: "https://artificialanalysis.ai/models/tencent-hy4",
@@ -493,15 +510,21 @@ export const aiSubscriptions: AiSubscriptions = {
     },
     {
       en:
+        "GLM-5.3-Flash has its own API value because [GLM charges it a third of GLM-5.3's credits](https://docs.z.ai/devpack/overview): 2.3, 0.56 and 8 credits per 10,000 cache-miss, cache-hit and output tokens, against 6.9, 1.7 and 24. Applied to the same token mix, schedule and 60,000 weekly credits as GLM-5.3, that is $193.73/month at [Flash's API prices](https://docs.z.ai/guides/overview/pricing) of $0.15/M input, $0.03/M cached input and $0.50/M output, the prices AA also uses. Flash's API prices are about a ninth of GLM-5.3's, so the same quota is worth fewer API dollars on Flash, but it buys about three times as many AA tasks.",
+      zh:
+        "GLM-5.3-Flash 有自己的 API 等值，因为 [GLM 对它只收 GLM-5.3 三分之一的积分](https://docs.z.ai/devpack/overview)：每 10,000 个缓存未命中、缓存命中和输出 token 分别扣 2.3、0.56 和 8 积分，而 GLM-5.3 是 6.9、1.7 和 24。按与 GLM-5.3 相同的 token 构成、使用时段和每周 60,000 积分计算，按 [Flash 的 API 价格](https://docs.z.ai/guides/overview/pricing)（每百万输入 $0.15、缓存输入 $0.03、输出 $0.50，与 AA 采用的价格相同）每月值 $193.73。Flash 的 API 价格约为 GLM-5.3 的九分之一，所以同样的额度换成 Flash 对应的 API 金额更少，但能完成的 AA 任务约为三倍。",
+    },
+    {
+      en:
         "Codex Pro 100 uses twice the October 16 measured API value, following [OpenAI's October 29 allowance increase](https://x.com/thsottiaux/status/2115850175868727621). This assumes API value scales with the allowance; I have not measured it again since the increase.",
       zh:
         "根据 [OpenAI 10 月 29 日的额度更新](https://x.com/thsottiaux/status/2115850175868727621)，Codex Pro 100 的 API 等值按 10 月 16 日实测值的 200% 计算。这里假设 API 等值与额度成正比；额度更新后尚未重新测量。",
     },
     {
       en:
-        "My understanding is that it is not actually a good idea to run Astra or any Anthropic model on max, so I put in xhigh for Astra, Opus 5.5 and Sonnet 5.5, and for Sol as well. I also included GPT-6.1 Terra and Sonnet 5.5, whose API prices are half those of Sol and Opus. Otherwise, I included only the highest-scoring model for each subscription. AA now scores GLM-5.3-Flash, but it is not listed because GLM charges it different credits and I have not estimated its allowance.",
+        "My understanding is that it is not actually a good idea to run Astra or any Anthropic model on max, so I put in xhigh for Astra, Opus 5.5 and Sonnet 5.5, and for Sol as well. I also included GPT-6.1 Terra and Sonnet 5.5, whose API prices are half those of Sol and Opus, and GLM-5.3-Flash, which uses a third of GLM-5.3's credits. Otherwise, I included only the highest-scoring model for each subscription.",
       zh:
-        "据我了解，用 max 跑 Astra 或任何 Anthropic 模型其实都不是好主意，所以我给 Astra、Opus 5.5 和 Sonnet 5.5 加上了 xhigh，Sol 也一样。我还列出了 GPT-6.1 Terra 和 Sonnet 5.5，它们的 API 价格只有 Sol 和 Opus 的一半。除此之外，每个订阅只列出了得分最高的模型。AA 现已为 GLM-5.3-Flash 打分，但 GLM 对它按不同的积分计费，而我还没有估算它的额度，所以没有列出。",
+        "据我了解，用 max 跑 Astra 或任何 Anthropic 模型其实都不是好主意，所以我给 Astra、Opus 5.5 和 Sonnet 5.5 加上了 xhigh，Sol 也一样。我还列出了 GPT-6.1 Terra 和 Sonnet 5.5，它们的 API 价格只有 Sol 和 Opus 的一半，以及积分消耗只有 GLM-5.3 三分之一的 GLM-5.3-Flash。除此之外，每个订阅只列出了得分最高的模型。",
     },
     {
       en:

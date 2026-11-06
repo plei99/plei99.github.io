@@ -38,6 +38,7 @@ export default function SubscriptionStudy({ lang }: { lang: Lang }) {
           <p>{copy.intro}</p>
         </header>
         <div className="study-main">
+          <QuotaChart lang={lang} />
           <div
             className="study-models"
             role="group"
@@ -206,7 +207,6 @@ export default function SubscriptionStudy({ lang }: { lang: Lang }) {
               {copy.timing_limits}
             </p>
           </form>
-          <QuotaChart lang={lang} />
           {notes.length > 0 && (
             <details className="study-method">
               <summary>{copy.notes}</summary>

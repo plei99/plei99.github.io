@@ -1,7 +1,7 @@
-// The chart under the subscription table: each model's AA score against the
+// The chart above the subscription table: each model's AA score against the
 // share of its plan's monthly allowance one AA task uses, through every
 // reasoning setting AA has run. quota-chart.js draws it from data-chart and
-// wires the controls rendered here; without JS, the table below stands in.
+// wires the controls rendered here; without JS, the tables stand in.
 import {
   aiSubscriptions as study,
   type Effort,
@@ -24,10 +24,11 @@ export default function QuotaChart({ lang }: { lang: Lang }) {
     plans: Object.fromEntries(
       plans.map(([id, plan]) => [id, { api: plan.api, timing: plan.timing }]),
     ),
-    lines: study.lines.map(({ id, name, plan, levels }) => ({
+    lines: study.lines.map(({ id, name, plan, api, levels }) => ({
       id,
       name,
       plan,
+      api,
       levels: levels.map(({ effort, score, cost }) => ({
         effort,
         score,

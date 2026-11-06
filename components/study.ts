@@ -27,7 +27,9 @@ export type Entry = {
 };
 
 export const entry = (line: ModelLine, level: ModelLevel): Entry => ({
-  plan: study.plans[line.plan],
+  plan: line.api === undefined
+    ? study.plans[line.plan]
+    : { ...study.plans[line.plan], api: line.api },
   line,
   level,
   label: level.effort ? `${line.name} (${level.effort})` : line.name,

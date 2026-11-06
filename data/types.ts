@@ -235,6 +235,10 @@ export type ModelLine = {
   id: string;
   name: string;
   plan: PlanId;
+  /** The allowance's monthly worth at API prices when used on this model
+   * alone, for a plan that charges its models different credits. Defaults to
+   * the plan's. */
+  api?: number;
   url: string;
   levels: ModelLevel[];
 };
