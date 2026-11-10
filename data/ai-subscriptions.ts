@@ -4,7 +4,7 @@ export const aiSubscriptions: AiSubscriptions = {
   // September 23 / October 2 audit; Google and mainland Kimi updated October 15, Codex October 16 (Oct 11–13 quota window excluded: failed judge calls went unrecorded).
   // Codex Pro 100 extrapolated to twice the measured allowance after the October 29 increase.
   // AA figures from Intelligence Index v5.0, refreshed November 7.
-  // Fable 5.2 from AA v5.0.1, November 10; Fable capped at half the weekly pool.
+  // Fable 5.2 from AA v5.0.1 and its own measured allowance, November 10.
   // Kimi K3.1 Pro allowance measured November 2 from the October 28–29 runs.
   // Google repriced November 7: the measured week's tokens at Argon's current $4/$20 prices.
   // Tencent Token Plan Max from its published credit rules, November 7; no usage measured.
@@ -152,7 +152,7 @@ export const aiSubscriptions: AiSubscriptions = {
   // estimated as the notes describe. MiMo and GLM charge credits per model, so
   // theirs hold for MiMo-V2.6-Pro and GLM-5.3 at the sliders' defaults; a line
   // with its own api, such as GLM-5.3-Flash, overrides its plan's. Fable's
-  // half-pool API value projects the measured Claude value through its 50% cap.
+  // 5.2 allowance is measured separately; 5.1 retains the untested half-pool projection.
   plans: {
     codex: {
       name: { en: "Codex Pro 100", zh: "Codex Pro 100" },
@@ -295,10 +295,10 @@ export const aiSubscriptions: AiSubscriptions = {
       id: "claude-fable-5-2",
       name: "Claude Fable 5.2",
       plan: "claude",
-      api: 2302.6693452380955,
+      api: 1293.6766455026454,
       quota_note: {
-        en: "50% of the shared weekly limit",
-        zh: "共享周额度的 50%",
+        en: "50% weekly cap; estimate from measured usage",
+        zh: "50% 周限额；按实测用量推算",
       },
       url: "https://artificialanalysis.ai/models/releases/claude-fable-5-2",
       levels: [
@@ -531,9 +531,15 @@ export const aiSubscriptions: AiSubscriptions = {
   notes: [
     {
       en:
-        "[Fable models can use up to 50% of Claude Max's shared weekly limit](https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan). This is part of the regular allowance, and other Claude usage can reduce what remains available for Fable. I apply that cap to the measured Claude estimate: $4,605.34 × 50% = $2,302.67/month for Fable. That API-dollar conversion is a projection; I have not measured Fable's quota consumption. The [AA Fable 5.2 results](https://artificialanalysis.ai/models/releases/claude-fable-5-2) give about 254 tasks/month on high ($9.08 and 17.9 minutes/task) or 155 on xhigh ($14.83 and 26.4 minutes/task). These are alternative ways to use the same Fable allowance, and the weekly and five-hour limits still apply. The chart includes all five reasoning levels; the main table shows high and xhigh because max burns through the allowance too quickly for my use.",
+        "Fable 5.2 now has its own measured estimate. On November 10, tikz-bench used $41.8921884 in API-equivalent inference as the Fable weekly meter rose from 0% to 17%; that includes two completed sessions and an interrupted third. Normal coding then used $38.4929796 as the meter rose from 17% to 27%, including $4.5144552 of compaction-associated usage captured by cumulative accounting. Streaming records and recovery copies were counted once. Pooling gives $80.385168 ÷ 0.27 × (365 ÷ 12 ÷ 7) = $1,293.68/month, about 143 AA high tasks or 87 xhigh tasks. The benchmark alone projects $1,070.77/month and normal use $1,672.61/month, so this is an estimate for the observed workload mix from part of one week. The previous $2,302.67 value was half the general Claude estimate, rather than a Fable measurement.",
       zh:
-        "[Fable 模型最多可使用 Claude Max 共享周额度的 50%](https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan)。这部分包含在普通额度内，其他 Claude 模型的用量也会减少 Fable 可用的余额。我将这个上限用于 Claude 的实测估算：$4,605.34 × 50% = Fable 每月 $2,302.67。这个 API 金额换算是推算，尚未实测 Fable 的额度消耗。按 [AA 的 Fable 5.2 结果](https://artificialanalysis.ai/models/releases/claude-fable-5-2)，high 每月约 254 个任务（每个 $9.08、17.9 分钟），xhigh 每月约 155 个任务（每个 $14.83、26.4 分钟）。两行是同一份 Fable 额度的不同用法，周限额和五小时限额仍然适用。图表列出全部五种推理强度；主表只列出 high 和 xhigh，因为 max 对我的用法来说消耗额度太快。",
+        "Fable 5.2 现在有单独的实测估算。11 月 10 日，tikz-bench 使用了 $41.8921884 的 API 等值推理用量，Fable 周用量表从 0% 升至 17%；包括两次完成的会话和第三次中断的会话。之后的普通编程使用 $38.4929796，用量表从 17% 升至 27%，其中包含累计记录显示的 $4.5144552 上下文压缩用量。流式记录和恢复副本只计一次。合并计算：$80.385168 ÷ 0.27 ×（365 ÷ 12 ÷ 7）= 每月 $1,293.68，约为 143 个 AA high 任务或 87 个 xhigh 任务。单看基准测试，每月推算为 $1,070.77；普通用法则为 $1,672.61。因此这个数字根据一周中部分用量的实际工作构成推算。此前的 $2,302.67 是普通 Claude 估算的一半，尚未单独测量 Fable。",
+    },
+    {
+      en:
+        "[Fable models can use up to 50% of Claude Max's shared weekly limit](https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan). The Fable-only meter is already normalized to that allowance, so I do not halve the new estimate again. Other Claude usage can reduce what remains available for Fable. The benchmark exhausted the five-hour limit with Fable's weekly meter at only 17%; using the monthly estimate requires spreading work across sessions. The meter displays whole percentages, and I cannot exclude activity on unlogged clients. Launch reset promotions are excluded. Costs use [Fable 5.2's API prices](https://platform.claude.com/docs/en/about-claude/pricing), including each cache-write TTL and output tokens counted once. The chart includes all five reasoning levels; the main table keeps high and xhigh because max burns through the allowance too quickly for my use.",
+      zh:
+        "[Fable 模型最多可使用 Claude Max 共享周额度的 50%](https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan)。Fable 专用用量表已经按这份额度计算，因此新的估算不再减半。其他 Claude 模型的用量也会减少 Fable 可用的余额。基准测试耗尽五小时限额时，Fable 周用量表只有 17%；要用到每月估算的额度，需要分散到不同会话中。用量表只显示整数百分比，也无法排除没有本地日志的客户端用量。这里不计首发重置优惠。成本采用 [Fable 5.2 的 API 价格](https://platform.claude.com/docs/en/about-claude/pricing)，按每次缓存写入的有效期计价，输出 token 只计一次。图表列出全部五种推理强度；主表保留 high 和 xhigh，因为 max 对我的用法来说消耗额度太快。",
     },
     {
       en:
@@ -585,9 +591,9 @@ export const aiSubscriptions: AiSubscriptions = {
     },
     {
       en:
-        "GLM-5.3-Flash has its own API value, and Fable uses half the Claude value for its weekly cap. Other chart models use their subscription's full API value. This assumes equal API-dollar value across models before applying any cap; that is untested for models I did not run, including Haiku 5.5, Fable and Luna. Fable 5.2's AA figures were checked November 10 on Index v5.0.1; other models retain the November 7 snapshot. MiMo and GLM points move with the timing sliders.",
+        "Fable 5.2 and GLM-5.3-Flash have their own API values. Fable 5.1 retains the untested projection of half the general Claude value for its weekly cap. Other chart models use their subscription's full API value, assuming equal API-dollar value across models; this is untested for models I did not run, including Haiku 5.5 and Luna. Fable 5.2's AA figures were checked November 10 on Index v5.0.1; other models retain the November 7 snapshot. MiMo and GLM points move with the timing sliders.",
       zh:
-        "GLM-5.3-Flash 有自己的 API 等值，Fable 则按周限额使用 Claude 等值的一半。图表中的其他模型使用各自订阅的完整 API 等值。这里假设在应用上限前，各模型的额度对应相同的 API 金额；对于没有实际测试的模型（包括 Haiku 5.5、Fable 和 Luna），这一点尚未验证。Fable 5.2 的 AA 数据于 11 月 10 日按 Index v5.0.1 核对；其他模型保留 11 月 7 日的数据。MiMo 和 GLM 的点会随使用时段滑块移动。",
+        "Fable 5.2 和 GLM-5.3-Flash 有自己的 API 等值。Fable 5.1 保留尚未验证的推算，按周限额使用普通 Claude 等值的一半。图表中的其他模型使用各自订阅的完整 API 等值，假设各模型的额度对应相同的 API 金额；对于没有实际测试的模型（包括 Haiku 5.5 和 Luna），这一点尚未验证。Fable 5.2 的 AA 数据于 11 月 10 日按 Index v5.0.1 核对；其他模型保留 11 月 7 日的数据。MiMo 和 GLM 的点会随使用时段滑块移动。",
     },
   ],
 };

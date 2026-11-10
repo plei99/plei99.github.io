@@ -55,6 +55,10 @@ Xhigh. Source: the same
 | medium  |           56.4083157101519 | 3.8026050641787634 |   500.630681837008 |
 | max     |            64.563595756626 |  26.53855780398091 | 2785.6666305511853 |
 
+The allowance projection below has been superseded by the
+[November 10 measured allowance audit](fable-allowance-2026-11-10.md). AA
+metrics remain the source for chart points and task conversions.
+
 ## What these metrics mean
 
 AA's model-page definitions describe cost as a benchmark-weighted average per
