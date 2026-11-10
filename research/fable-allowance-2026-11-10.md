@@ -12,6 +12,24 @@ submeter, not a measured month, a cash allowance, or a guaranteed subscription
 entitlement. The benchmark-only and normal-use extrapolations differ
 substantially, so the pooled figure needs a workload caveat.[^L1][^L2][^L3]
 
+## November 11 scenario selection
+
+The website now uses the normal-coding extrapolation of **$1,672.61/month**
+(`1672.6116135714285` before rounding), selected at the owner's request after
+confirming Claude Duet access. The pooled result above and the benchmark-only
+result remain unchanged as alternative workload scenarios. At the existing AA
+costs per task, the selected value gives about 184 high or 113 xhigh task
+equivalents per month. This choice changes the headline scenario, not the
+underlying measurements.
+
+[Anthropic's Duet documentation](https://support.claude.com/en/articles/17631495-get-started-with-claude-duet),
+checked November 11, says Duet runs Opus 5.5, shares the plan's five-hour and
+weekly limits, and counts background work toward usage. Duet activity is outside
+this local token ledger. Access does not establish a recurring Fable allowance
+increase or prove that Duet affected either measured interval. Its one-time
+preview reset is excluded. The choice of the higher normal-coding result is a
+preferred scenario, not a measured Duet uplift.
+
 ## Reconciled measurement
 
 | Observation                           | API-equivalent usage, USD | Fable weekly submeter | Extrapolated USD/week | Extrapolated USD/month |

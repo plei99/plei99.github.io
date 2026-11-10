@@ -4,7 +4,7 @@ export const aiSubscriptions: AiSubscriptions = {
   // September 23 / October 2 audit; Google and mainland Kimi updated October 15, Codex October 16 (Oct 11–13 quota window excluded: failed judge calls went unrecorded).
   // Codex Pro 100 extrapolated to twice the measured allowance after the October 29 increase.
   // AA figures from Intelligence Index v5.0, refreshed November 7.
-  // Fable 5.2 from AA v5.0.1 and its own measured allowance, November 10.
+  // Fable 5.2: November 10 measurement; normal-coding scenario selected November 11.
   // Kimi K3.1 Pro allowance measured November 2 from the October 28–29 runs.
   // Google repriced November 7: the measured week's tokens at Argon's current $4/$20 prices.
   // Tencent Token Plan Max from its published credit rules, November 7; no usage measured.
@@ -15,7 +15,7 @@ export const aiSubscriptions: AiSubscriptions = {
     en: {
       trigger: "How much inference do these subscriptions buy?",
       close: "Close subscription comparison",
-      date: "Last updated November 10, 2026",
+      date: "Last updated November 11, 2026",
       title: "What my AI subscriptions buy",
       intro:
         "Someone I know (if you are reading this, you know who you are) complained about how little usage they got with their AI subscription (which cost about $100/month), so I decided to try to estimate the value of various AI subscriptions from both US and Chinese providers. All assumptions and choices are based on the nature of the aforementioned conversation.",
@@ -67,7 +67,7 @@ export const aiSubscriptions: AiSubscriptions = {
     zh: {
       trigger: "这些订阅能换来多少推理用量？",
       close: "关闭订阅比较",
-      date: "更新于 2026 年 11 月 10 日",
+      date: "更新于 2026 年 11 月 11 日",
       title: "我的 AI 订阅能买到多少用量",
       intro:
         "我认识的某人（如果你正在读这段话，你自己心里清楚）抱怨自己每月约 100 美元的 AI 订阅用量太少，所以我试着估算了中美各家 AI 订阅的价值。所有假设和选择都取决于上述对话的性质。",
@@ -295,10 +295,10 @@ export const aiSubscriptions: AiSubscriptions = {
       id: "claude-fable-5-2",
       name: "Claude Fable 5.2",
       plan: "claude",
-      api: 1293.6766455026454,
+      api: 1672.6116135714285,
       quota_note: {
-        en: "50% weekly cap; estimate from measured usage",
-        zh: "50% 周限额；按实测用量推算",
+        en: "50% weekly cap; normal-coding estimate",
+        zh: "50% 周限额；按普通编程用量推算",
       },
       url: "https://artificialanalysis.ai/models/releases/claude-fable-5-2",
       levels: [
@@ -531,9 +531,15 @@ export const aiSubscriptions: AiSubscriptions = {
   notes: [
     {
       en:
-        "Fable 5.2 now has its own measured estimate. On November 10, tikz-bench used $41.8921884 in API-equivalent inference as the Fable weekly meter rose from 0% to 17%; that includes two completed sessions and an interrupted third. Normal coding then used $38.4929796 as the meter rose from 17% to 27%, including $4.5144552 of compaction-associated usage captured by cumulative accounting. Streaming records and recovery copies were counted once. Pooling gives $80.385168 ÷ 0.27 × (365 ÷ 12 ÷ 7) = $1,293.68/month, about 143 AA high tasks or 87 xhigh tasks. The benchmark alone projects $1,070.77/month and normal use $1,672.61/month, so this is an estimate for the observed workload mix from part of one week. The previous $2,302.67 value was half the general Claude estimate, rather than a Fable measurement.",
+        "Fable 5.2 now has its own measured estimate. On November 10, tikz-bench used $41.8921884 in API-equivalent inference as the Fable weekly meter rose from 0% to 17%; that includes two completed sessions and an interrupted third. Normal coding then used $38.4929796 as the meter rose from 17% to 27%, including $4.5144552 of compaction-associated usage captured by cumulative accounting. Streaming records and recovery copies were counted once. I use the higher normal-coding scenario in the table and chart: $38.4929796 ÷ 0.10 × (365 ÷ 12 ÷ 7) = $1,672.61/month, about 184 AA high tasks or 113 xhigh tasks. The benchmark alone projects $1,070.77/month; pooling both workloads gives $1,293.68/month. The selected value is an estimate for normal coding from part of one week. The previous $2,302.67 value was half the general Claude estimate, rather than a Fable measurement.",
       zh:
-        "Fable 5.2 现在有单独的实测估算。11 月 10 日，tikz-bench 使用了 $41.8921884 的 API 等值推理用量，Fable 周用量表从 0% 升至 17%；包括两次完成的会话和第三次中断的会话。之后的普通编程使用 $38.4929796，用量表从 17% 升至 27%，其中包含累计记录显示的 $4.5144552 上下文压缩用量。流式记录和恢复副本只计一次。合并计算：$80.385168 ÷ 0.27 ×（365 ÷ 12 ÷ 7）= 每月 $1,293.68，约为 143 个 AA high 任务或 87 个 xhigh 任务。单看基准测试，每月推算为 $1,070.77；普通用法则为 $1,672.61。因此这个数字根据一周中部分用量的实际工作构成推算。此前的 $2,302.67 是普通 Claude 估算的一半，尚未单独测量 Fable。",
+        "Fable 5.2 现在有单独的实测估算。11 月 10 日，tikz-bench 使用了 $41.8921884 的 API 等值推理用量，Fable 周用量表从 0% 升至 17%；包括两次完成的会话和第三次中断的会话。之后的普通编程使用 $38.4929796，用量表从 17% 升至 27%，其中包含累计记录显示的 $4.5144552 上下文压缩用量。流式记录和恢复副本只计一次。表格和图表采用较高的普通编程估算：$38.4929796 ÷ 0.10 ×（365 ÷ 12 ÷ 7）= 每月 $1,672.61，约为 184 个 AA high 任务或 113 个 xhigh 任务。单看基准测试，每月推算为 $1,070.77；合并两种工作构成则为 $1,293.68。所选数字根据一周中部分普通编程用量推算。此前的 $2,302.67 是普通 Claude 估算的一半，尚未单独测量 Fable。",
+    },
+    {
+      en:
+        "I have Claude Duet access and prefer the normal-coding scenario for this comparison. [Duet runs Opus 5.5 and shares Claude's five-hour and weekly limits](https://support.claude.com/en/articles/17631495-get-started-with-claude-duet); its background work also counts. Any Duet activity is outside this local token audit. Access alone does not establish a larger Fable allowance, and I have not measured Duet's quota use. The higher headline is a scenario choice. Duet's one-time preview reset is excluded from the recurring monthly value.",
+      zh:
+        "我有 Claude Duet 的使用权限，这次比较倾向采用普通编程的估算。[Duet 使用 Opus 5.5，与 Claude 共享五小时和周限额](https://support.claude.com/en/articles/17631495-get-started-with-claude-duet)，后台工作也计入用量。任何 Duet 活动都不在这次本地 token 审计中。获得权限本身无法证明 Fable 额度更大，我也没有测量 Duet 的额度消耗。较高的主要数值是所选使用情景的估算。Duet 预览期的一次性重置不计入每月持续额度。",
     },
     {
       en:
