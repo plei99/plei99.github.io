@@ -1,8 +1,7 @@
 # Claude Fable 5.2 research
 
-Researched 2026-11-10. Scope: primary-source evidence for the website's **high
-and xhigh** entries; no max table row. Only this research note was written. Site
-source and deployment were not changed.
+Researched 2026-11-10. The chart includes low, medium, high, xhigh and max; the
+main subscription table includes high and xhigh only.
 
 ## Exact Artificial Analysis values
 
@@ -44,16 +43,17 @@ Fields to use, without inventing precision from rounded UI text:
 ];
 ```
 
-### Optional settings captured in the same snapshot
+### Additional chart settings captured in the same snapshot
 
-Research reference only; the requested website entries remain High and Xhigh.
-Source: the same
+These settings appear in the chart; the main subscription table remains High and
+Xhigh. Source: the same
 [AA release comparison embedded data](https://artificialanalysis.ai/models/releases/claude-fable-5-2).
 
 | Setting | AA Intelligence Index, raw |  API USD/task, raw |  Seconds/task, raw |
 | ------- | -------------------------: | -----------------: | -----------------: |
 | low     |           53.9249388799182 |  3.097241904274546 | 392.53108684106064 |
 | medium  |           56.4083157101519 | 3.8026050641787634 |   500.630681837008 |
+| max     |            64.563595756626 |  26.53855780398091 | 2785.6666305511853 |
 
 ## What these metrics mean
 
