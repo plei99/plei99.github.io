@@ -4,6 +4,7 @@ export const aiSubscriptions: AiSubscriptions = {
   // September 23 / October 2 audit; Google and mainland Kimi updated October 15, Codex October 16 (Oct 11–13 quota window excluded: failed judge calls went unrecorded).
   // Codex Pro 100 extrapolated to twice the measured allowance after the October 29 increase.
   // AA figures from Intelligence Index v5.0, refreshed November 7.
+  // Fable 5.2 high/xhigh from AA v5.0.1, November 10; Fable capped at half the weekly pool.
   // Kimi K3.1 Pro allowance measured November 2 from the October 28–29 runs.
   // Google repriced November 7: the measured week's tokens at Argon's current $4/$20 prices.
   // Tencent Token Plan Max from its published credit rules, November 7; no usage measured.
@@ -14,7 +15,7 @@ export const aiSubscriptions: AiSubscriptions = {
     en: {
       trigger: "How much inference do these subscriptions buy?",
       close: "Close subscription comparison",
-      date: "Last updated November 8, 2026",
+      date: "Last updated November 10, 2026",
       title: "What my AI subscriptions buy",
       intro:
         "Someone I know (if you are reading this, you know who you are) complained about how little usage they got with their AI subscription (which cost about $100/month), so I decided to try to estimate the value of various AI subscriptions from both US and Chinese providers. All assumptions and choices are based on the nature of the aforementioned conversation.",
@@ -43,7 +44,7 @@ export const aiSubscriptions: AiSubscriptions = {
         "These estimates are based on my actual usage and the subscription rules (for example session limits, weekly limits, etc).",
       chart_title: "Intelligence against quota",
       chart_note:
-        "Each point is one model at one reasoning setting: its AA score against the share of its subscription's monthly quota that one AA task uses, at the API values in the table below. A model's settings are joined from lowest to highest. Hover over or focus a point for details.",
+        "Each point is one model at one reasoning setting: its AA score against the share of its subscription's monthly quota that one AA task uses, at the API values in the table below. Fable points use its 50% weekly cap. A model's settings are joined from lowest to highest. Hover over or focus a point for details.",
       chart_x: "Share of the monthly quota per task",
       chart_y: "AA Intelligence Index",
       chart_scale: "Horizontal scale",
@@ -66,7 +67,7 @@ export const aiSubscriptions: AiSubscriptions = {
     zh: {
       trigger: "这些订阅能换来多少推理用量？",
       close: "关闭订阅比较",
-      date: "更新于 2026 年 11 月 8 日",
+      date: "更新于 2026 年 11 月 10 日",
       title: "我的 AI 订阅能买到多少用量",
       intro:
         "我认识的某人（如果你正在读这段话，你自己心里清楚）抱怨自己每月约 100 美元的 AI 订阅用量太少，所以我试着估算了中美各家 AI 订阅的价值。所有假设和选择都取决于上述对话的性质。",
@@ -94,7 +95,7 @@ export const aiSubscriptions: AiSubscriptions = {
         "这些估算基于我的实际用量和各套餐规则（例如会话限额、周限额等）。",
       chart_title: "智能水平与额度用量",
       chart_note:
-        "每个点是一个模型在一种推理强度下的结果：纵轴是 AA 分数，横轴是一个 AA 任务用掉的订阅月度额度比例，按下表的 API 等值计算。同一模型的各个推理强度从低到高连成一条线。将指针移到某个点上或聚焦它可查看详情。",
+        "每个点是一个模型在一种推理强度下的结果：纵轴是 AA 分数，横轴是一个 AA 任务用掉的订阅月度额度比例，按下表的 API 等值计算。Fable 的点按 50% 周限额计算。同一模型的各个推理强度从低到高连成一条线。将指针移到某个点上或聚焦它可查看详情。",
       chart_x: "每个任务用掉的月度额度",
       chart_y: "AA Intelligence Index",
       chart_scale: "横轴刻度",
@@ -150,7 +151,8 @@ export const aiSubscriptions: AiSubscriptions = {
   // API values are each allowance's monthly worth at API prices, measured or
   // estimated as the notes describe. MiMo and GLM charge credits per model, so
   // theirs hold for MiMo-V2.6-Pro and GLM-5.3 at the sliders' defaults; a line
-  // with its own api, such as GLM-5.3-Flash, overrides its plan's.
+  // with its own api, such as GLM-5.3-Flash, overrides its plan's. Fable's
+  // half-pool API value projects the measured Claude value through its 50% cap.
   plans: {
     codex: {
       name: { en: "Codex Pro 100", zh: "Codex Pro 100" },
@@ -290,9 +292,39 @@ export const aiSubscriptions: AiSubscriptions = {
       ],
     },
     {
+      id: "claude-fable-5-2",
+      name: "Claude Fable 5.2",
+      plan: "claude",
+      api: 2302.6693452380955,
+      quota_note: {
+        en: "50% of the shared weekly limit",
+        zh: "共享周额度的 50%",
+      },
+      url: "https://artificialanalysis.ai/models/releases/claude-fable-5-2",
+      levels: [
+        {
+          effort: "high",
+          score: 61.8218785440284,
+          cost: 9.078414777860381,
+          time_seconds: 1076.2028073048332,
+        },
+        {
+          effort: "xhigh",
+          score: 62.2167392403357,
+          cost: 14.828587632511116,
+          time_seconds: 1582.4722991739663,
+        },
+      ],
+    },
+    {
       id: "claude-fable-5-1",
       name: "Claude Fable 5.1",
       plan: "claude",
+      api: 2302.6693452380955,
+      quota_note: {
+        en: "50% of the shared weekly limit",
+        zh: "共享周额度的 50%",
+      },
       url: "https://artificialanalysis.ai/models/claude-fable-5-1",
       levels: [
         { effort: "low", score: 38.7, cost: 4.471, time_seconds: 438.7 },
@@ -399,6 +431,18 @@ export const aiSubscriptions: AiSubscriptions = {
       url: "https://artificialanalysis.ai/models/gpt-6-1-terra",
     },
     {
+      line: "claude-fable-5-2",
+      effort: "high",
+      time_url: "https://artificialanalysis.ai/models/claude-fable-5-2-high",
+      url: "https://artificialanalysis.ai/models/claude-fable-5-2-high",
+    },
+    {
+      line: "claude-fable-5-2",
+      effort: "xhigh",
+      time_url: "https://artificialanalysis.ai/models/claude-fable-5-2-xhigh",
+      url: "https://artificialanalysis.ai/models/claude-fable-5-2-xhigh",
+    },
+    {
       line: "claude-opus-5-5",
       effort: "max",
       time_url:
@@ -469,6 +513,12 @@ export const aiSubscriptions: AiSubscriptions = {
   notes: [
     {
       en:
+        "[Fable models can use up to 50% of Claude Max's shared weekly limit](https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan). This is part of the regular allowance, and other Claude usage can reduce what remains available for Fable. I apply that cap to the measured Claude estimate: $4,605.34 × 50% = $2,302.67/month for Fable. That API-dollar conversion is a projection; I have not measured Fable's quota consumption. The [AA Fable 5.2 results](https://artificialanalysis.ai/models/releases/claude-fable-5-2) give about 254 tasks/month on high ($9.08 and 17.9 minutes/task) or 155 on xhigh ($14.83 and 26.4 minutes/task). These are alternative ways to use the same Fable allowance, and the weekly and five-hour limits still apply. I show high and xhigh for Fable 5.2 because max burns through the allowance too quickly for my use.",
+      zh:
+        "[Fable 模型最多可使用 Claude Max 共享周额度的 50%](https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan)。这部分包含在普通额度内，其他 Claude 模型的用量也会减少 Fable 可用的余额。我将这个上限用于 Claude 的实测估算：$4,605.34 × 50% = Fable 每月 $2,302.67。这个 API 金额换算是推算，尚未实测 Fable 的额度消耗。按 [AA 的 Fable 5.2 结果](https://artificialanalysis.ai/models/releases/claude-fable-5-2)，high 每月约 254 个任务（每个 $9.08、17.9 分钟），xhigh 每月约 155 个任务（每个 $14.83、26.4 分钟）。两行是同一份 Fable 额度的不同用法，周限额和五小时限额仍然适用。我给 Fable 5.2 列出 high 和 xhigh，因为 max 对我的用法来说消耗额度太快。",
+    },
+    {
+      en:
         "Calculations for ChatGPT, Claude, Google, and Kimi were done using my actual usage. MiMo and GLM were estimated based on my token mix (cache hit vs cache miss/cache write vs output) and their published credit rules. Tencent comes from its published credit rules alone, which for Hy4 do not depend on the token mix.",
       zh:
         "ChatGPT、Claude、Google 和 Kimi 的数字是根据我的实际用量计算的。MiMo 和 GLM 则是根据我的 token 构成（缓存命中、缓存未命中/缓存写入与输出的比例）以及它们公布的积分规则估算的。腾讯云只根据其公布的积分规则计算；对 Hy4 而言，结果与 token 构成无关。",
@@ -511,15 +561,15 @@ export const aiSubscriptions: AiSubscriptions = {
     },
     {
       en:
-        "My understanding is that it is not actually a good idea to run Astra or any Anthropic model on max, so I put in xhigh for Astra, Opus 5.5 and Sonnet 5.5, and for Sol as well. I also included GPT-6.1 Terra and Sonnet 5.5, whose API prices are half those of Sol and Opus, and GLM-5.3-Flash, which uses a third of GLM-5.3's credits. Otherwise, I included only the highest-scoring model for each subscription.",
+        "My understanding is that it is not actually a good idea to run Astra or any Anthropic model on max, so I put in xhigh for Astra, Opus 5.5 and Sonnet 5.5, and for Sol as well. Fable 5.2 has high and xhigh entries. I also included GPT-6.1 Terra and Sonnet 5.5, whose API prices are half those of Sol and Opus, and GLM-5.3-Flash, which uses a third of GLM-5.3's credits. Otherwise, I included only the highest-scoring model for each subscription.",
       zh:
-        "据我了解，用 max 跑 Astra 或任何 Anthropic 模型其实都不是好主意，所以我给 Astra、Opus 5.5 和 Sonnet 5.5 加上了 xhigh，Sol 也一样。我还列出了 GPT-6.1 Terra 和 Sonnet 5.5，它们的 API 价格只有 Sol 和 Opus 的一半，以及积分消耗只有 GLM-5.3 三分之一的 GLM-5.3-Flash。除此之外，每个订阅只列出了得分最高的模型。",
+        "据我了解，用 max 跑 Astra 或任何 Anthropic 模型其实都不是好主意，所以我给 Astra、Opus 5.5 和 Sonnet 5.5 加上了 xhigh，Sol 也一样。Fable 5.2 列出了 high 和 xhigh。我还列出了 GPT-6.1 Terra 和 Sonnet 5.5，它们的 API 价格只有 Sol 和 Opus 的一半，以及积分消耗只有 GLM-5.3 三分之一的 GLM-5.3-Flash。除此之外，每个订阅只列出了得分最高的模型。",
     },
     {
       en:
-        "Except for GLM-5.3-Flash, which has its own value, the chart applies each subscription's API value to every model on it, so it assumes the allowance is worth the same API dollars whichever model you use. That is untested for the models I did not run, such as Haiku 5.5, Fable 5.1 and Luna. MiMo and GLM points move with the timing sliders.",
+        "GLM-5.3-Flash has its own API value, and Fable uses half the Claude value for its weekly cap. Other chart models use their subscription's full API value. This assumes equal API-dollar value across models before applying any cap; that is untested for models I did not run, including Haiku 5.5, Fable and Luna. Fable 5.2's AA figures were checked November 10 on Index v5.0.1; other models retain the November 7 snapshot. MiMo and GLM points move with the timing sliders.",
       zh:
-        "除有自己的 API 等值的 GLM-5.3-Flash 外，图表对同一订阅下的所有模型使用相同的 API 等值，也就是假设无论使用哪个模型，额度对应的 API 金额都相同。对于我没有实际测试的模型（例如 Haiku 5.5、Fable 5.1 和 Luna），这一点尚未验证。MiMo 和 GLM 的点会随使用时段滑块移动。",
+        "GLM-5.3-Flash 有自己的 API 等值，Fable 则按周限额使用 Claude 等值的一半。图表中的其他模型使用各自订阅的完整 API 等值。这里假设在应用上限前，各模型的额度对应相同的 API 金额；对于没有实际测试的模型（包括 Haiku 5.5、Fable 和 Luna），这一点尚未验证。Fable 5.2 的 AA 数据于 11 月 10 日按 Index v5.0.1 核对；其他模型保留 11 月 7 日的数据。MiMo 和 GLM 的点会随使用时段滑块移动。",
     },
   ],
 };

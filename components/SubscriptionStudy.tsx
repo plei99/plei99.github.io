@@ -91,6 +91,11 @@ export default function SubscriptionStudy({ lang }: { lang: Lang }) {
                     <th scope="row">
                       <span className="study-plan">{row.plan.name[lang]}</span>
                       <a href={row.url}>{row.label}</a>
+                      {row.line.quota_note && (
+                        <span className="study-plan">
+                          {row.line.quota_note[lang]}
+                        </span>
+                      )}
                     </th>
                     <td>${number(row.plan.price)}</td>
                     <td>{number(row.level.score)}</td>

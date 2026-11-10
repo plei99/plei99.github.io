@@ -239,6 +239,8 @@ export type ModelLine = {
    * alone, for a plan that charges its models different credits. Defaults to
    * the plan's. */
   api?: number;
+  /** A model-specific allowance restriction, shown beside its table entries. */
+  quota_note?: Localized;
   url: string;
   levels: ModelLevel[];
 };

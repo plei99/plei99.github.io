@@ -181,6 +181,11 @@ export default function QuotaChart({ lang }: { lang: Lang }) {
                           {row.plan.name[lang]}
                         </span>
                         <a href={line.url}>{line.name}</a>
+                        {line.quota_note && (
+                          <span className="study-plan">
+                            {line.quota_note[lang]}
+                          </span>
+                        )}
                       </th>
                       <td>{level.effort ?? "—"}</td>
                       <td>{number(level.score, 1)}</td>
