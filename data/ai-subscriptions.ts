@@ -6,7 +6,7 @@ export const aiSubscriptions: AiSubscriptions = {
   // AA figures from Intelligence Index v5.0, refreshed November 7.
   // Fable 5.2: November 10 measurement; normal-coding scenario selected November 11.
   // Kimi K3.1 Pro allowance measured November 2 from the October 28–29 runs.
-  // Google Argon repriced November 7 at standard rates; Carbon measured November 12.
+  // Google uses the Carbon measurement from November 12 at standard API rates.
   // Tencent Token Plan Max from its published credit rules, November 7; no usage measured.
   // GLM-5.3-Flash from the September 23 token mix and GLM's credit rules, rechecked November 7.
   // Dollar values retain calculation precision; SubscriptionStudy derives task counts.
@@ -170,7 +170,7 @@ export const aiSubscriptions: AiSubscriptions = {
         zh: "Google AI Ultra（Antigravity）",
       },
       price: 100,
-      api: 852.0794547741071,
+      api: 1618.6969114845645,
     },
     kimi: {
       name: { en: "Kimi Code (mainland China)", zh: "Kimi Code（中国大陆）" },
@@ -356,7 +356,6 @@ export const aiSubscriptions: AiSubscriptions = {
       id: "gemini-4-carbon",
       name: "Gemini 4 Carbon",
       plan: "google",
-      api: 1618.6969114845645,
       quota_note: {
         en: "High-workload estimate; shared Gemini pool",
         zh: "按 high 用量推算；共享 Gemini 额度",
@@ -383,15 +382,7 @@ export const aiSubscriptions: AiSubscriptions = {
         },
       ],
     },
-    {
-      id: "gemini-4-argon",
-      name: "Gemini 4 Argon",
-      plan: "google",
-      url: "https://artificialanalysis.ai/models/gemini-4-argon",
-      levels: [
-        { effort: "high", score: 50.4, cost: 9.947, time_seconds: 1612.29 },
-      ],
-    },
+
     {
       id: "kimi-k3-1-pro",
       name: "Kimi K3.1 Pro",
@@ -527,12 +518,7 @@ export const aiSubscriptions: AiSubscriptions = {
       time_url: "https://artificialanalysis.ai/models/gemini-4-carbon",
       url: "https://artificialanalysis.ai/models/gemini-4-carbon",
     },
-    {
-      line: "gemini-4-argon",
-      effort: "high",
-      time_url: "https://artificialanalysis.ai/models/gemini-4-argon",
-      url: "https://artificialanalysis.ai/models/gemini-4-argon",
-    },
+
     {
       line: "kimi-k3-1-pro",
       time_url: "https://artificialanalysis.ai/models/kimi-k3-1-pro",
@@ -616,15 +602,15 @@ export const aiSubscriptions: AiSubscriptions = {
     },
     {
       en:
-        "The table uses [Google's standard global API rates](https://cloud.google.com/model-garden/pricing): $4/M uncached input, $0.20/M cache reads and $20/M output, with thinking counted once. Through November 30, 2026, Google advertises 50% credits back on eligible net API spend. At those effective promotional rates the same Carbon allowance is worth $809.35/month; halving both the allowance's API value and AA's task cost leaves the task count unchanged. The promotion changes the API-price comparison. It does not add subscription quota.",
+        "The Google plan uses [standard global API rates](https://cloud.google.com/model-garden/pricing): $4/M uncached input, $0.20/M cache reads and $20/M output, with thinking counted once. Temporary API promotions are excluded. AA's task costs use the same standard pricing basis.",
       zh:
-        "表格采用 [Google 的标准全球 API 单价](https://cloud.google.com/model-garden/pricing)：每百万未缓存输入 $4、缓存读取 $0.20、输出 $20，思考 token 只计一次。2026 年 11 月 30 日前，Google 对符合条件的 API 净支出返还 50% 积分。按这种优惠后的有效价格，同样的 Carbon 额度每月值 $809.35；额度的 API 等值和 AA 单任务成本同时减半，任务数不变。优惠改变的是 API 价格比较，不会增加订阅额度。",
+        "Google 套餐采用[标准全球 API 单价](https://cloud.google.com/model-garden/pricing)：每百万未缓存输入 $4、缓存读取 $0.20、输出 $20，思考 token 只计一次。不计限时 API 优惠，AA 单任务成本也采用相同的标准价格。",
     },
     {
       en:
-        "This Carbon estimate extrapolates part of one week and assumes the measured quota change belongs to the recorded workload. The meter peaked at 69.27155% before falling to its later stable value; the reason is unverified. Using the peak instead gives $1,574.74/month. Checked local logs supplied no other direct Gemini activity in the interval, but activity elsewhere and overage billing remain unverified. The [five-hour and shared weekly limits](https://antigravity.google/docs/cli/commands/usage) still apply. Carbon and Argon use the same Gemini pool, so their estimates are alternative workloads and cannot be added together. Argon retains the October 15 measurement, worth $852.08/month at standard rates. Different workloads and observation dates prevent interpreting the dollar difference as a measured increase in the plan's quota.",
+        "This Carbon estimate extrapolates part of one week and assumes the measured quota change belongs to the recorded workload. The meter peaked at 69.27155% before falling to its later stable value; the reason is unverified. Using the peak instead gives $1,574.74/month. Checked local logs supplied no other direct Gemini activity in the interval, but activity elsewhere and overage billing remain unverified. The [five-hour and shared weekly limits](https://antigravity.google/docs/cli/commands/usage) still apply. The Google plan now uses Carbon throughout the table and chart. The monthly value projects the observed workload.",
       zh:
-        "Carbon 的估算根据一周中的部分用量推算，并假设测量到的额度变化来自已记录的工作。用量表曾升至 69.27155%，之后回落并保持稳定，原因尚未验证；若采用最高读数，每月推算为 $1,574.74。检查的本地日志中没有发现该区间内其他直接 Gemini 调用，但其他地方的用量和超额计费仍未验证。[五小时和共享周限额](https://antigravity.google/docs/cli/commands/usage)仍然适用。Carbon 和 Argon 使用同一 Gemini 额度池，两个估算代表不同的工作构成，不能相加。Argon 保留 10 月 15 日的测量，按标准单价每月值 $852.08。工作构成和测量日期不同，因此不能把金额差异解释为套餐额度的实测增长。",
+        "Carbon 的估算根据一周中的部分用量推算，并假设测量到的额度变化来自已记录的工作。用量表曾升至 69.27155%，之后回落并保持稳定，原因尚未验证；若采用最高读数，每月推算为 $1,574.74。检查的本地日志中没有发现该区间内其他直接 Gemini 调用，但其他地方的用量和超额计费仍未验证。[五小时和共享周限额](https://antigravity.google/docs/cli/commands/usage)仍然适用。Google 套餐的表格和图表现在统一使用 Carbon。这个数字根据实际工作构成推算。",
     },
     {
       en:
@@ -640,15 +626,15 @@ export const aiSubscriptions: AiSubscriptions = {
     },
     {
       en:
-        "My understanding is that it is not actually a good idea to run Astra or any Anthropic model on max, so I put in xhigh for Astra, Opus 5.5 and Sonnet 5.5, and for Sol as well. Fable 5.2 has high and xhigh entries. I also included GPT-6.1 Terra and Sonnet 5.5, whose API prices are half those of Sol and Opus, and GLM-5.3-Flash, which uses a third of GLM-5.3's credits. Carbon is shown alongside Argon's earlier measurement for reference. Otherwise, I included only the highest-scoring model for each subscription.",
+        "My understanding is that it is not actually a good idea to run Astra or any Anthropic model on max, so I put in xhigh for Astra, Opus 5.5 and Sonnet 5.5, and for Sol as well. Fable 5.2 has high and xhigh entries. I also included GPT-6.1 Terra and Sonnet 5.5, whose API prices are half those of Sol and Opus, and GLM-5.3-Flash, which uses a third of GLM-5.3's credits. Otherwise, I included only the highest-scoring model for each subscription.",
       zh:
-        "据我了解，用 max 跑 Astra 或任何 Anthropic 模型其实都不是好主意，所以我给 Astra、Opus 5.5 和 Sonnet 5.5 加上了 xhigh，Sol 也一样。Fable 5.2 列出了 high 和 xhigh。我还列出了 GPT-6.1 Terra 和 Sonnet 5.5，它们的 API 价格只有 Sol 和 Opus 的一半，以及积分消耗只有 GLM-5.3 三分之一的 GLM-5.3-Flash。Carbon 与此前测量的 Argon 一同列出作为参考。除此之外，每个订阅只列出了得分最高的模型。",
+        "据我了解，用 max 跑 Astra 或任何 Anthropic 模型其实都不是好主意，所以我给 Astra、Opus 5.5 和 Sonnet 5.5 加上了 xhigh，Sol 也一样。Fable 5.2 列出了 high 和 xhigh。我还列出了 GPT-6.1 Terra 和 Sonnet 5.5，它们的 API 价格只有 Sol 和 Opus 的一半，以及积分消耗只有 GLM-5.3 三分之一的 GLM-5.3-Flash。除此之外，每个订阅只列出了得分最高的模型。",
     },
     {
       en:
-        "Fable 5.2, Gemini 4 Carbon and GLM-5.3-Flash have their own API values. Fable 5.1 retains the untested projection of half the general Claude value for its weekly cap. Other chart models use their subscription's full API value, assuming equal API-dollar value across models; this is untested for models I did not run, including Haiku 5.5 and Luna. Carbon's AA figures were checked November 12 and Fable 5.2's November 10 on Index v5.0.1; other models retain the November 7 snapshot. MiMo and GLM points move with the timing sliders.",
+        "Fable 5.2 and GLM-5.3-Flash have their own API values. Fable 5.1 retains the untested projection of half the general Claude value for its weekly cap. Other chart models use their subscription's full API value, assuming equal API-dollar value across models; this is untested for models I did not run, including Haiku 5.5 and Luna. Carbon's AA figures were checked November 12 and Fable 5.2's November 10 on Index v5.0.1; other models retain the November 7 snapshot. MiMo and GLM points move with the timing sliders.",
       zh:
-        "Fable 5.2、Gemini 4 Carbon 和 GLM-5.3-Flash 有自己的 API 等值。Fable 5.1 保留尚未验证的推算，按周限额使用普通 Claude 等值的一半。图表中的其他模型使用各自订阅的完整 API 等值，假设各模型的额度对应相同的 API 金额；对于没有实际测试的模型（包括 Haiku 5.5 和 Luna），这一点尚未验证。Carbon 的 AA 数据于 11 月 12 日核对，Fable 5.2 则为 11 月 10 日，均采用 Index v5.0.1；其他模型保留 11 月 7 日的数据。MiMo 和 GLM 的点会随使用时段滑块移动。",
+        "Fable 5.2 和 GLM-5.3-Flash 有自己的 API 等值。Fable 5.1 保留尚未验证的推算，按周限额使用普通 Claude 等值的一半。图表中的其他模型使用各自订阅的完整 API 等值，假设各模型的额度对应相同的 API 金额；对于没有实际测试的模型（包括 Haiku 5.5 和 Luna），这一点尚未验证。Carbon 的 AA 数据于 11 月 12 日核对，Fable 5.2 则为 11 月 10 日，均采用 Index v5.0.1；其他模型保留 11 月 7 日的数据。MiMo 和 GLM 的点会随使用时段滑块移动。",
     },
   ],
 };
