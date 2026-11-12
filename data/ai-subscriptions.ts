@@ -147,10 +147,10 @@ export const aiSubscriptions: AiSubscriptions = {
   },
 
   // API values are each allowance's monthly worth at API prices, measured or
-  // estimated as research/ai-subscriptions-notes.md describes. MiMo and GLM charge credits per model, so
-  // theirs hold for MiMo-V2.6-Pro and GLM-5.3 at the sliders' defaults; a line
-  // with its own api, such as GLM-5.3-Flash, overrides its plan's. Fable's
-  // 5.2 allowance is measured separately; 5.1 retains the untested half-pool projection.
+  // estimated as research/ai-subscriptions-notes.md describes. MiMo and GLM
+  // charge credits per model, so theirs hold for MiMo-V2.6-Pro and GLM-5.3 at
+  // the sliders' defaults; a line with its own api, such as GLM-5.3-Flash or
+  // Fable 5.2, overrides its plan's.
   plans: {
     codex: {
       name: { en: "Codex Pro 100", zh: "Codex Pro 100" },
@@ -330,24 +330,6 @@ export const aiSubscriptions: AiSubscriptions = {
           cost: 26.53855780398091,
           time_seconds: 2785.6666305511853,
         },
-      ],
-    },
-    {
-      id: "claude-fable-5-1",
-      name: "Claude Fable 5.1",
-      plan: "claude",
-      api: 2302.6693452380955,
-      quota_note: {
-        en: "50% weekly cap",
-        zh: "50% 周限额",
-      },
-      url: "https://artificialanalysis.ai/models/claude-fable-5-1",
-      levels: [
-        { effort: "low", score: 38.7, cost: 4.471, time_seconds: 438.7 },
-        { effort: "medium", score: 43.2, cost: 5.564, time_seconds: 567.4 },
-        { effort: "high", score: 47.2, cost: 7.54, time_seconds: 763.53 },
-        { effort: "xhigh", score: 50, cost: 10.85, time_seconds: 1127.44 },
-        { effort: "max", score: 49.2, cost: 12.99, time_seconds: 1349.13 },
       ],
     },
     {
