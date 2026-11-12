@@ -1,7 +1,7 @@
 // The AI subscription comparison that opens over the Uses panel. uses.js reads
 // the data-* attributes to adjust the timed rows live and to hide the models a
 // reader switches off; without JS every row shows and the toggles stay hidden.
-import { aiSubscriptions as study, type Lang, mdInline } from "../lib/site";
+import { aiSubscriptions as study, type Lang } from "../lib/site";
 import QuotaChart from "./QuotaChart";
 import { number, resolve, values } from "./study";
 
@@ -12,7 +12,6 @@ export default function SubscriptionStudy({ lang }: { lang: Lang }) {
   // Each model in the table once, in table order, for the visibility toggles.
   const models = [...new Map(rows.map((row) => [row.line.id, row.line]))
     .values()];
-  const notes = study.notes.map((note) => note[lang].trim()).filter(Boolean);
 
   return (
     <details className="uses-study" id="ai-subscriptions" data-uses-study="">
@@ -212,21 +211,6 @@ export default function SubscriptionStudy({ lang }: { lang: Lang }) {
               {copy.timing_limits}
             </p>
           </form>
-          {notes.length > 0 && (
-            <details className="study-method">
-              <summary>{copy.notes}</summary>
-              <div className="prose prose--wide">
-                <ul>
-                  {notes.map((note) => (
-                    <li
-                      key={note}
-                      dangerouslySetInnerHTML={{ __html: mdInline(note) }}
-                    />
-                  ))}
-                </ul>
-              </div>
-            </details>
-          )}
           <p className="study-endnote">{copy.endnote}</p>
         </div>
       </div>

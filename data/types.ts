@@ -171,7 +171,6 @@ export type StudyKey =
   | "seconds"
   | "tasks"
   | "per_100"
-  | "notes"
   | "endnote"
   | "chart_title"
   | "chart_note"
@@ -257,6 +256,4 @@ export type AiSubscriptions = {
   plans: Record<PlanId, Plan>;
   lines: ModelLine[];
   rows: StudyRow[];
-  /** Inline Markdown, one per list item. */
-  notes: Localized[];
 };

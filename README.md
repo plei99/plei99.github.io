@@ -70,13 +70,14 @@ a Markdown file with `title`, `pubDate`, and `description` front matter into
 `content/seminars/`.
 
 The AI tools item on Uses has a `study` flag linking it to the subscription
-comparison. `data/ai-subscriptions.ts` holds its copy, table rows and notes list
-(en + zh); `components/SubscriptionStudy.tsx` derives task counts from API value
-and AA task cost. `client/uses.ts` adjusts the MiMo and GLM rows live from the
-timing coefficients and defaults in that data file, weighting credit consumption
-before inverting for capacity. The comparison opens as a second native dialog
-over the Uses panel and has its own address, `uses.html#ai-subscriptions`.
-Without JavaScript, its `details` element expands inline.
+comparison. `data/ai-subscriptions.ts` holds its copy and table rows (en + zh),
+and `research/ai-subscriptions-notes.md` the methodology;
+`components/SubscriptionStudy.tsx` derives task counts from API value and AA
+task cost. `client/uses.ts` adjusts the MiMo and GLM rows live from the timing
+coefficients and defaults in that data file, weighting credit consumption before
+inverting for capacity. The comparison opens as a second native dialog over the
+Uses panel and has its own address, `uses.html#ai-subscriptions`. Without
+JavaScript, its `details` element expands inline.
 
 ## Browser security
 
