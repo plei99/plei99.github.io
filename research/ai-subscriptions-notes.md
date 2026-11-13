@@ -71,31 +71,43 @@ versions are in the git history of `data/ai-subscriptions.ts`.
   until November 17, 2026, Hy4 costs about a quarter of the credits; until
   December 31, 2026, pay-as-you-go Hy4 is half price, so buying through the API
   directly gets about twice as much.
-- Gemini 4 Carbon High was measured from the November 10–11 tikz-bench run. Its
-  100 task records contain 11,094,229 uncached input tokens, 20,991,410 cache
-  reads and 8,105,486 output tokens, including thinking. Those total $210.684918
-  at standard API rates. Three resumed attempts were reconciled once, and the
-  timed-out task's reported partial usage is included. The shared Gemini weekly
-  meter rose from 11.13656% to a later stable 67.69293%, a 56.55636-point
-  increase with the same reset date. $210.684918 ÷ 0.5655636489391327 × (365 ÷
-  12 ÷ 7) gives $1,618.70/month, or about 209
-  [AA Carbon High task equivalents](https://artificialanalysis.ai/models/releases/gemini-4-carbon).
-  The chart includes low and medium too, applying the High workload's API-value
-  estimate; their subscription usage was not measured separately.
+- Gemini 4 Carbon was remeasured through the November 12 weekly quota stop. The
+  high run's 100 task records used $210.684918 at standard API prices; 70 medium
+  records added $120.9846172. The medium run saved costs at half those rates, so
+  I repriced its tokens before combining them. The $331.6695352 total includes
+  five resumed records, the high timeout's reported partial usage and the medium
+  task stopped by quota. Recovery archives were counted once; 30 pending medium
+  tasks contribute no usage. Thinking is already included in output tokens.
+- The shared Gemini weekly meter started at 11.13656% and later settled at
+  99.15593%, consuming 88.01937 percentage points with the same reset date. The
+  earlier 11.14% has no matching Carbon token ledger here, so I exclude it
+  rather than assuming a full 100% denominator. $331.6695352 ÷
+  0.8801937103271484 × (365 ÷ 12 ÷ 7) gives $1,637.35/month, about 211 AA High
+  task equivalents or 249 Medium equivalents. High alone gives $1,618.70/month
+  and Medium alone $1,670.87/month; these are alternative workload estimates.
+  The chart applies the pooled value to all three reasoning levels; Low
+  subscription usage remains unmeasured.
+- The Medium terminal reports “Individual quota reached” with a reset matching
+  the weekly window, even though the later meter shows 99.16%. Its sampled
+  five-hour usage stayed below 44%. The weekly peak was 99.94846% before falling
+  to the stable reading; the cause is unverified. Using that peak instead gives
+  $1,622.74/month. This measures the usable weekly stop for that request, and
+  the
+  [five-hour and shared weekly limits](https://antigravity.google/docs/cli/commands/usage)
+  still apply. Attribution assumes the recorded Carbon work explains the
+  measured delta. Checked local sources supplied no additional direct Gemini
+  usage, but activity elsewhere and overage billing remain unverified. No
+  complete zero-to-exhaustion week or calendar month was measured.
 - The Google plan uses
   [standard global API rates](https://cloud.google.com/model-garden/pricing):
   $4/M uncached input, $0.20/M cache reads and $20/M output, with thinking
-  counted once. Temporary API promotions are excluded. AA's task costs use the
-  same standard pricing basis.
-- This Carbon estimate extrapolates part of one week and assumes the measured
-  quota change belongs to the recorded workload. The meter peaked at 69.27155%
-  before falling to its later stable value; the reason is unverified. Using the
-  peak instead gives $1,574.74/month. Checked local logs supplied no other
-  direct Gemini activity in the interval, but activity elsewhere and overage
-  billing remain unverified. The
-  [five-hour and shared weekly limits](https://antigravity.google/docs/cli/commands/usage)
-  still apply. The Google plan now uses Carbon throughout the table and chart.
-  The monthly value projects the observed workload.
+  counted once. Temporary API promotions are excluded.
+  [AA's November 13 page](https://artificialanalysis.ai/models/releases/gemini-4-carbon)
+  now uses $2 input, $0.10 cache hits and $10 output, while its cache-write
+  price remains $4. I normalize each cost component to standard rates,
+  preserving that $4 write rate. The resulting High cost is $7.75555/task,
+  matching the November 12 $7.76 breakdown; simply doubling today's $5.48478
+  total would overstate it. AA timing figures were refreshed November 13.
 - GLM-5.3-Flash has its own API value because
   [GLM charges it a third of GLM-5.3's credits](https://docs.z.ai/devpack/overview):
   2.3, 0.56 and 8 credits per 10,000 cache-miss, cache-hit and output tokens,
@@ -119,6 +131,6 @@ versions are in the git history of `data/ai-subscriptions.ts`.
   untested projection of half the general Claude value for its weekly cap. Other
   chart models use their subscription's full API value, assuming equal
   API-dollar value across models; this is untested for models I did not run,
-  including Haiku 5.5 and Luna. Carbon's AA figures were checked November 12 and
+  including Haiku 5.5 and Luna. Carbon's AA figures were checked November 13 and
   Fable 5.2's November 10 on Index v5.0.1; other models retain the November 7
   snapshot. MiMo and GLM points move with the timing sliders.

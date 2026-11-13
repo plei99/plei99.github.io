@@ -6,7 +6,7 @@ export const aiSubscriptions: AiSubscriptions = {
   // AA figures from Intelligence Index v5.0, refreshed November 7.
   // Fable 5.2: November 10 measurement; normal-coding scenario selected November 11.
   // Kimi K3.1 Pro allowance measured November 2 from the October 28–29 runs.
-  // Google uses the Carbon measurement from November 12 at standard API rates.
+  // Google Carbon: high + medium measured through the weekly quota stop, November 13; standard API rates.
   // Tencent Token Plan Max from its published credit rules, November 7; no usage measured.
   // GLM-5.3-Flash from the September 23 token mix and GLM's credit rules, rechecked November 7.
   // Dollar values retain calculation precision; SubscriptionStudy derives task counts.
@@ -15,7 +15,7 @@ export const aiSubscriptions: AiSubscriptions = {
     en: {
       trigger: "How much inference do these subscriptions buy?",
       close: "Close subscription comparison",
-      date: "Last updated November 12, 2026",
+      date: "Last updated November 13, 2026",
       title: "What my AI subscriptions buy",
       intro:
         "Someone I know (if you are reading this, you know who you are) complained about how little usage they got with their AI subscription (which cost about $100/month), so I decided to try to estimate the value of various AI subscriptions from both US and Chinese providers. All assumptions and choices are based on the nature of the aforementioned conversation.",
@@ -66,7 +66,7 @@ export const aiSubscriptions: AiSubscriptions = {
     zh: {
       trigger: "这些订阅能换来多少推理用量？",
       close: "关闭订阅比较",
-      date: "更新于 2026 年 11 月 12 日",
+      date: "更新于 2026 年 11 月 13 日",
       title: "我的 AI 订阅能买到多少用量",
       intro:
         "我认识的某人（如果你正在读这段话，你自己心里清楚）抱怨自己每月约 100 美元的 AI 订阅用量太少，所以我试着估算了中美各家 AI 订阅的价值。所有假设和选择都取决于上述对话的性质。",
@@ -168,7 +168,7 @@ export const aiSubscriptions: AiSubscriptions = {
         zh: "Google AI Ultra（Antigravity）",
       },
       price: 100,
-      api: 1618.6969114845645,
+      api: 1637.3476457191416,
     },
     kimi: {
       name: { en: "Kimi Code (mainland China)", zh: "Kimi Code（中国大陆）" },
@@ -342,19 +342,19 @@ export const aiSubscriptions: AiSubscriptions = {
           effort: "low",
           score: 54.2206114502924,
           cost: 7.186577262951972,
-          time_seconds: 1439.669771002305,
+          time_seconds: 1432.9311705999035,
         },
         {
           effort: "medium",
           score: 58.2587824022788,
           cost: 6.585776867225546,
-          time_seconds: 1382.5216422438905,
+          time_seconds: 1425.2397706296406,
         },
         {
           effort: "high",
           score: 60.025738829526,
           cost: 7.755545745286556,
-          time_seconds: 1527.3417239709174,
+          time_seconds: 1641.8914562608359,
         },
       ],
     },

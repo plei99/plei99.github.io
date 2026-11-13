@@ -1,5 +1,9 @@
 # Gemini 4 Carbon High subscription allowance audit
 
+Updated measurement: see the
+[November 13 audit through the weekly quota stop](gemini-carbon-allowance-2026-11-13.md).
+The original High-only findings below are retained.
+
 Audited 2026-11-12 using the original local generation records, quota history,
 and first-party pricing and product documentation. All times below are UTC. This
 report contains aggregate measurements only. Source paths, per-task accounting,
